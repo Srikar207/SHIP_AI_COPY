@@ -1,0 +1,69 @@
+<core:FragmentDefinition	xmlns="sap.m"    xmlns:ui="sap.ui.table"    	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"	xmlns:core="sap.ui.core">
+
+	    <Toolbar width="auto" height="15%" class="toolbarbottomborder" >
+			<Text text="Batch Shipping"  class="sapUiTinyMarginBegin sapUiMediumMarginBottom sapUiTinyMarginTop pageTitle" ></Text>
+            <ToolbarSpacer ></ToolbarSpacer>
+                <Button text="Create Batch" class="ship-req-toolbar__button sapUiMediumMarginBottom sapUiTinyMarginBottom sapUiTinyMarginEnd sapUiTinyMarginBegin" press="onCreateBatchShipPress" ></Button>
+		</Toolbar>
+		<Toolbar height="25%" >
+			<HBox width="100%">
+				<VBox class="sapUiTinyMargin" width="25%">
+					<Text text="10" class="NumberSizeTitle1"></Text>
+					<Text text="Total" class="sapUiTinyMarginBottom"></Text>
+					<Button type="Emphasized" press="onBatchShipTotalFilterPress" class="totalProgress-request-button request-button" id="idBatchShipTotalBtn" icon="false" width="100%"  ></Button>
+				</VBox>
+				<VBox class="sapUiTinyMargin" width="25%">
+					<Text text="0" class="NumberSizeTitle1"></Text>
+					<Text text="Open" class="sapUiTinyMarginBottom"></Text>
+					<Button type="Critical" press="onBatchShipopenFilterPress" class="open-request-button request-button" id="idBatchShipOpenBtn" icon="false" width="100%" ></Button>
+				</VBox>
+				<VBox class="sapUiTinyMargin" width="25%">
+					<Text text="10" class="NumberSizeTitle1"></Text>
+					<Text text="Shipped" class="sapUiTinyMarginBottom"></Text>
+					<Button type="Success" press="onBatchShipShippedFilterPress" id="idBatchShipShippedBtn" class="shipped-request-button request-button" icon="false" width="100%" ></Button>
+				</VBox>
+				<VBox class="sapUiTinyMargin" width="25%">
+					<Text text="0" class="NumberSizeTitle1"></Text>
+					<Text text="Cancelled" class="sapUiTinyMarginBottom"></Text>
+					<Button type="Negative" press="onBatchShipCancelledFilterPress" id="idBatchShipCancelledBtn" class="cancelled-request-button request-button" icon="false" width="100%" ></Button>
+				</VBox>
+			</HBox>
+		</Toolbar>
+    		<ui:Table
+                id="idBatchShipTable"
+				rows="{eshipjetModel>/BatchShipItems}"
+				class="sapUiSmallMarginTop"
+				selectionMode="None"
+				visibleRowCount="12" >
+				<ui:extension>
+					<OverflowToolbar style="Clear" height="3rem" >
+                        <Button icon="sap-icon://filter" press="onBatchShipFilterPress"></Button>
+						<ToolbarSpacer />
+							<Label text="Batch Number" class="sapUiLargeMarginEnd"></Label>
+							<ComboBox
+								width="18rem"
+							 	class="create-ship-req_input"
+								items="{}">
+								<core:Item key="{key}" text="{text}" />
+							</ComboBox>
+							<Button text="Ship Batch Now" width="12rem" class="batch-ship-table__button" press=""></Button>
+							<Button text="Viod Batch Now" type="Ghost" width="12rem" class="sapUiSmallMarginBegin batch-ship-void__button" ></Button>
+						<ToolbarSpacer />
+                        <ToolbarSpacer />
+                            <Button icon="sap-icon://action" press="onBatchShipExportToExcel"></Button>
+                            <Button icon="sap-icon://action-settings" press="openBatchShipColNamesPopover"></Button>
+					</OverflowToolbar>
+				</ui:extension>
+				<ui:footer>
+					<Toolbar >
+						<ToolbarSpacer/>
+						<Button  text="First" enabled="false" />
+						<Button  text="Previous" enabled="false"/>
+						<Text    text="1-50 of 74"/>
+						<Button  text="Next" />
+						<Button  text="Last" />
+					</Toolbar>
+				</ui:footer>
+		</ui:Table>
+</core:FragmentDefinition>

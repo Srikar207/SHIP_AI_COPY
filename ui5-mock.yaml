@@ -1,0 +1,102 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "3.1"
+metadata:
+  name: com.eshipjet.zeshipjet
+type: application
+server:
+  customMiddleware:
+    - name: fiori-tools-proxy
+      afterMiddleware: compression
+      configuration:
+        ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
+        ui5:
+          path:
+            - /resources
+            - /test-resources
+          url: https://ui5.sap.com
+        backend:
+          - path: /sap
+            url: https://sapdemo.eshipjet.com:44300
+            client: '200'
+            destination: Eshipjet-ESJ
+            authenticationType: BasicAuthentication
+          - path: /sap
+            url: https://sapdemo.eshipjet.com:44300
+            client: '200'
+            destination: Eshipjet-ESJ
+            authenticationType: BasicAuthentication
+          - path: /sap/opu/odata/ESHIPJET/MANFEST_SRV/
+            url: https://sapdemo.eshipjet.com:44300
+            client: '200'
+            destination: Eshipjet-ESJ
+            authenticationType: BasicAuthentication
+          - path: /sap/opu/odata/sap/ZSJ_SHIPPER_DATA_UPDATE_SRV_SRV/
+            url: https://sapdemo.eshipjet.com:44300
+            client: '200'
+            destination: Eshipjet-ESJ
+            authenticationType: BasicAuthentication
+          - url: https://sapdemo.eshipjet.com:44300
+            client: '200'
+            authenticationType: BasicAuthentication
+            path: /sap
+          - url: https://sapdemo.eshipjet.com:44300
+            client: '200'
+            authenticationType: BasicAuthentication
+            destination: Eshipjet-ESJ
+            path: /sap/opu/odata/ESHIPJET/CREATE_HU_SRV/
+    - name: fiori-tools-appreload
+      afterMiddleware: compression
+      configuration:
+        port: 35729
+        path: webapp
+        delay: 300
+    - name: fiori-tools-preview
+      afterMiddleware: fiori-tools-appreload
+      configuration:
+        component: com.eshipjet.zeshipjet
+        ui5Theme: sap_horizon
+    - name: sap-fe-mockserver
+      beforeMiddleware: csp
+      configuration:
+        mountPath: /
+        services:
+          - urlPath: /sap/opu/odata/ESHIPJET/SHIP_SRV
+            metadataPath: ./webapp/localService/SHIP_SRV/metadata.xml
+            mockdataPath: ./webapp/localService/SHIP_SRV/data
+            generateMockData: true
+          - urlPath: /sap/opu/odata/sap/API_OUTBOUND_DELIVERY_SRV;v=2
+            metadataPath: ./webapp/localService/API_OUTBOUND_DELIVERY_SRV;v=2/metadata.xml
+            mockdataPath: ./webapp/localService/API_OUTBOUND_DELIVERY_SRV/data
+            generateMockData: true
+          - urlPath: /sap/opu/odata/sap/API_HANDLING_UNIT
+            metadataPath: ./webapp/localService/API_HANDLING_UNIT/metadata.xml
+            mockdataPath: ./webapp/localService/API_HANDLING_UNIT/data
+            generateMockData: true
+          - urlPath: /sap/opu/odata/sap/API_SALES_ORDER_SRV
+            metadataPath: ./webapp/localService/API_SALES_ORDER_SRV/metadata.xml
+            mockdataPath: ./webapp/localService/API_SALES_ORDER_SRV/data
+            generateMockData: true
+          - urlPath: /sap/opu/odata/ESHIPJET/MANFEST_SRV
+            metadataPath: ./webapp/localService/MANFEST_SRV1/metadata.xml
+            mockdataPath: ./webapp/localService/MANFEST_SRV1/data
+            generateMockData: true
+          - urlPath: /sap/opu/odata/sap/ZSJ_SHIPPER_DATA_UPDATE_SRV_SRV
+            metadataPath: ./webapp/localService/ZSJ_SHIPPER_DATA_UPDATE_SRV_SRV/metadata.xml
+            mockdataPath: ./webapp/localService/ZSJ_SHIPPER_DATA_UPDATE_SRV_SRV/data
+            generateMockData: true
+          - urlPath: /sap/opu/odata/ESHIPJET/SHIP_READ_DATA_SRV
+            metadataPath: ./webapp/localService/SHIP_READ_DATA_SRV/metadata.xml
+            mockdataPath: ./webapp/localService/SHIP_READ_DATA_SRV/data
+            generateMockData: true
+          - urlPath: /sap/opu/odata/sap/API_PRODUCT_SRV
+            metadataPath: ./webapp/localService/API_PRODUCT_SRV/metadata.xml
+            mockdataPath: ./webapp/localService/API_PRODUCT_SRV/data
+            generateMockData: true
+          - urlPath: /sap/opu/odata/ESHIPJET/CREATE_HU_SRV
+            metadataPath: ./webapp/localService/CREATE_HU_SRV/metadata.xml
+            mockdataPath: ./webapp/localService/CREATE_HU_SRV/data
+            generateMockData: true
+        annotations:
+          - localPath: ./webapp/localService/API_PRODUCT_SRV/API_PRODUCT_ANNO_MDL.xml
+            urlPath: /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='API_PRODUCT_ANNO_MDL',Version='0001')/$value/

@@ -1,0 +1,45 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Popover id="orderColumnsPopover" contentWidth="15%" contentHeight="30%" placement="Left" showArrow="false" class="whiteBackgroundColumnConfig sapUiTinyMarginEnd packScreenPadding" >
+		<customHeader>
+			<VBox>
+				<Toolbar class="toolbarbottomborder">
+					<Title class="sapUiTinyMarginBegin sapUiTinyMarginTop" text="Columns"/>
+					<ToolbarSpacer/>
+					<Button icon="sap-icon://decline" press="onOrderColSelectClosePress" type="Transparent" class="Decline_Btn ship-now-decline_btn"/>
+				</Toolbar>
+				<SearchField  placeholder="Search Columns" liveChange="onOrderColNameSearch" class="sapUiSmallMarginEnd sapUiTinyMarginBottom columnConfigSearch" />
+			</VBox>
+		</customHeader>
+
+		<content>
+			<Table
+				id="myOrderColumnSelectId"
+				mode="MultiSelect"
+				items="{path: 'eshipjetModel>/OrderTableData/OrderColumns'}">
+				<columns>
+					<Column>
+						<header>
+							<Text text="Select All"/>
+						</header>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{eshipjetModel>label}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+
+		<footer>
+			<Toolbar class="whiteBackground">
+				<ToolbarSpacer/>
+				<Button text="Apply"  press="onOrderColSelectOkPress" class="Ship-Now-toolbar1__button_ColumnConfig"/>
+			</Toolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>

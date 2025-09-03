@@ -1,0 +1,20 @@
+<core:FragmentDefinition	xmlns="sap.m"    xmlns:ui="sap.ui.table"    	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"	xmlns:core="sap.ui.core">
+    <VBox class="scan-ship-page" >
+	    <Toolbar class="scan-ship-toolbar" >
+            
+                <Text text="Quote Now" class="sapUiTinyMargin toolBarHeader scan-ship-toolbar__title" ></Text>
+                <Input class="scan-ship-toolbar__input" value="{eshipjetModel>/commonValues/quoteNowDeliveryNumbInput}"  submit="onQuoteNowPress"   placeholder="Scan or Enter Shipment Order" ></Input>
+                <Button id="idQuoteNow" text="Quote Now" type="Accept" class="scan-ship-toolbar__button"   press="onQuoteNowPress"></Button>
+                
+            <ToolbarSpacer ></ToolbarSpacer>
+                <Button text="Clear" class="scan-ship-toolbar__button scan-ship-toolbar__button_void" type="Reject" press="onQuoteNowClearPress"></Button>
+        </Toolbar>
+
+        <!-- <Toolbar height="32rem" class="sapUiSmallMarginTop scan-ship-toolbar" >
+            <ToolbarSpacer />
+                <Text text="Enter Shipment Order to get the latest and best quote available." class="scan-ship-toolbar__title" ></Text>
+            <ToolbarSpacer />
+        </Toolbar> -->
+    </VBox>
+</core:FragmentDefinition>

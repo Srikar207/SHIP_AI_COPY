@@ -1,0 +1,72 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+	<Popover
+		contentWidth="50%"
+		showHeader="false"
+		id="idScanAndShipPopover"
+		class="sapUiResponsivePadding--header sapUiResponsivePadding--footer"
+		placement="Bottom"
+		initialFocus="email">
+		<Toolbar >
+			<ToolbarSpacer ></ToolbarSpacer>
+				<Button icon="sap-icon://decline" press="onScanShipFilterClosePress" class="Decline_Btn ship-now-decline_btn" ></Button>
+		</Toolbar>
+		<footer>
+			<OverflowToolbar>
+				
+				<Button
+					text="Reset"
+					type="Ghost"
+					press="onScanAndShipFilterResetPress" />
+					<ToolbarSpacer/>
+                <Button
+					text="Apply"
+					type="Ghost"
+					press="onScanShipFilterApplyPress" />
+			</OverflowToolbar>
+		</footer>
+		<HBox >
+			<VBox class="sapUiSmallMargin" >
+			<Label text="Location Name" width="auto" />
+					<ComboBox
+						id="scanlocationComboId"
+						width="100%"
+						class="sapUiSmallMarginBottom create-ship-req_input"
+						items="{eshipjetModel>/LocationName}"
+						selectedKey="{eshipjetModel>/ScanLoctionName}" >
+						<core:Item key="{eshipjetModel>key}" text="{eshipjetModel>text}" />
+					</ComboBox>
+			</VBox>
+			<VBox class="sapUiSmallMargin" >
+					<Label text="Carrier" width="auto" />
+					<ComboBox
+					id="scancarrierComboId"
+						class="sapUiSmallMarginBottom create-ship-req_input"
+						width="100%"
+						items="{eshipjetModel>/ForFiltercarriers}"
+						selectedKey="{eshipjetModel>/ScanCarrierFilter}" >
+						<core:Item key="{eshipjetModel>key}" text="{eshipjetModel>text}" />
+					</ComboBox>
+			</VBox>
+			<VBox class="sapUiSmallMargin" >
+					<Label text="Status" width="auto" />
+						<ComboBox
+					id="scanstatusComboId"
+						width="100%"
+						class="sapUiSmallMarginBottom create-ship-req_input"
+						items="{eshipjetModel>/shipmentStatuses}"
+						selectedKey="{eshipjetModel>/ScanShipmentStatusFilter}" >
+						<core:Item key="{eshipjetModel>key}" text="{eshipjetModel>text}" />
+					</ComboBox>
+			</VBox>
+			<VBox class="sapUiSmallMargin" >
+					<Label text="Search" width="auto" />
+					<SearchField width="10rem" class="sapUiSmallMarginBottom forsearchhigh" search="onSearchOrder" ></SearchField>
+					<!-- <Input value="{}" width="auto" class="sapUiSmallMarginBottom create-ship-req_input"></Input> -->
+			</VBox>
+		</HBox>
+	</Popover>
+</core:FragmentDefinition>

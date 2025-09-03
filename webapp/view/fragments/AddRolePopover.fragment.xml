@@ -1,0 +1,106 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    height="100%"
+    xmlns:ui="sap.ui.table"
+>
+    <Popover
+        id="idAddRolePopover"
+         placement="Bottom"
+        contentHeight="100%"
+        showHeader="false"
+        class="rightSidePopoverGare"
+    >
+        <!-- Custom Header -->
+        <customHeader>
+            <Toolbar>
+                <!-- Title -->
+                <Title text="Create Role" />
+                <!-- Spacer to push close button to the right -->
+                <ToolbarSpacer />
+                <!-- Close Button -->
+                <Button
+                    icon="sap-icon://decline"
+                    class="Decline_Btn ship-now-decline_btn"
+                    press="AddRoleClosePress" />
+            </Toolbar>
+        </customHeader>
+        <footer>
+            <OverflowToolbar class="p-sidebar-header sapMPopoverFooter1">
+                <Button
+                    text="Cancel"
+                    press="AddRoleCancelPopover"
+                />
+                <ToolbarSpacer />
+                <Button
+                    type="Emphasized"
+                    text="Save"
+                    press="AddRoleSelectPopover"
+                />
+            </OverflowToolbar>
+        </footer>
+        <content>
+           	<f:SimpleForm editable="true"
+                            class="customSimpleFormShadow"
+                            width="auto"
+							  layout="ColumnLayout"
+							  columnsM="2"
+							  columnsL="2"
+							  columnsXL="2">
+					<f:content>
+						 
+                         <Label text="Role ID" />
+                        <Input class="sapUiSmallMarginBottom create-ship-req_input"></Input>
+                          <Label text="Status" />
+                        <Switch state="true" >
+				            <layoutData>
+					            <FlexItemData growFactor="1" />
+				            </layoutData>
+			            </Switch>
+                        <Label text="Role Name" />  
+			             <Input class="sapUiSmallMarginBottom create-ship-req_input"></Input>
+					</f:content>
+				</f:SimpleForm>
+
+                <ui:TreeTable
+                    id="AddRoleTreeTable"
+                    visibleRowCount="auto"
+                    rows="{path:'eshipjetModel>/AddRoleTreeTableItems', parameters: {arrayNames:['categories']}}"
+                    selectionMode="None"
+                    enableSelectAll="false"
+                    ariaLabelledBy="title"
+                    class="customSimpleFormShadow"
+                    width="auto" >
+                <ui:columns>
+                    <ui:Column >
+                        <Label text="Name"/>
+                        <ui:template>
+                            <Text text="{eshipjetModel>name}" wrapping="false" />
+                        </ui:template>
+                    </ui:Column>
+                    <ui:Column >
+                        <Label text="View Access"/>
+                        <ui:template>
+                            <CheckBox selected="{eshipjetModel>viewAccess}" ></CheckBox>
+                        </ui:template>
+                    </ui:Column>
+                    <ui:Column >
+                        <Label text="Write Access"/>
+                        <ui:template>
+                            <CheckBox selected="{eshipjetModel>writeAccess}" ></CheckBox>
+                        </ui:template>
+                    </ui:Column>
+                    <ui:Column >
+                        <Label text="Order Flow"/>
+                        <ui:template>
+                            <Input value="{eshipjetModel>orderFlow}"></Input>
+                        </ui:template>
+                    </ui:Column>
+                </ui:columns>
+            </ui:TreeTable>
+
+        </content>
+    </Popover>
+</core:FragmentDefinition>

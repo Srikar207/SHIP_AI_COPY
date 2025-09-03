@@ -1,0 +1,63 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core" 
+    xmlns:f="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns="sap.m">
+
+    <Dialog id="_IDGenFedExEmailReturnLabelEditDialog"
+            title="ETD Detail"
+            contentWidth="60vh"
+            contentHeight="95%"
+            verticalScrolling="false"
+            horizontalScrolling="false"
+            class="rightSideDialogSpecialOptions">
+            
+            <Toolbar>
+                <Title text="Email Return Label" />
+                <ToolbarSpacer />
+                <Button icon="sap-icon://decline" press="onCloseFedexEmailReturnLabelEditDialog" />
+            </Toolbar>
+
+        <content>
+            <f:SimpleForm editable="true"
+                          class="customSimpleFormShadow"
+                          width="auto"
+                          layout="ColumnLayout"
+                          columnsM="2"
+                          columnsL="2"
+                          columnsXL="2">
+                <f:content>
+                   <!-- <Toolbar ariaLabelledBy="idShipFrom" class="customLine" >
+						<Button icon="sap-icon://customer-briefing" id="idShipFrggomAddressBtn" />
+                        <Title id="idShipFromuu" text="Address" />
+					</Toolbar> -->
+                    <Label text="Merchant Phone Number" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />      
+                    <Label text="Allowed Special Service" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="Ship Date stamp" />
+                    <Input  class="sapUiSmallMarginBottom create-ship-req_input" />
+                     <Label text="Return Type" />
+                    <Input  class="sapUiSmallMarginBottom create-ship-req_input" />
+                     <Label text="Email" />
+                    <Input  class="sapUiSmallMarginBottom create-ship-req_input" />
+                     <Label text="Reason" />
+                    <Input  class="sapUiSmallMarginBottom create-ship-req_input" />
+                     <Label text="Tracking Number" />
+                    <Input  class="sapUiSmallMarginBottom create-ship-req_input" />
+                     
+                </f:content>
+            </f:SimpleForm>
+        </content>
+
+        <footer>
+            <OverflowToolbar class="sapMPopoverFooter1">
+                <Button text="Cancel" press="onCloseFedexEmailReturnLabelEditDialog" />
+                <ToolbarSpacer />
+                <Button text="Save" type="Emphasized" press="onCloseFedexEmailReturnLabelEditDialog" />
+            </OverflowToolbar>
+        </footer>
+
+    </Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,75 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    height="100%"
+>
+    <Popover
+        id="idAddCountriesPopover"
+        placement="Bottom"
+        contentHeight="100%"
+        showHeader="false"
+        class="rightSidePopoverGare"
+    >
+        <!-- Custom Header -->
+        <customHeader>
+            <Toolbar>
+                <!-- Title -->
+                <Title text="Add Countries" />
+
+                <!-- Spacer to push close button to the right -->
+                <ToolbarSpacer />
+
+                <!-- Close Button -->
+                <Button
+                    icon="sap-icon://decline"
+                    class="Decline_Btn ship-now-decline_btn"
+                    press="AddCountriesClosePress" />
+            </Toolbar>
+        </customHeader>
+        <footer>
+            <OverflowToolbar class="p-sidebar-header">
+                <Button
+                    text="Cancel"
+                    press="AddCountriesCancelPopover"
+                />
+                <ToolbarSpacer />
+                <Button
+                    type="Emphasized"
+                    text="Save"
+                    press="AddCountriesSelectPopover"
+                />
+            </OverflowToolbar>
+        </footer>
+
+        <content>
+           	<f:SimpleForm editable="true"
+                            class="customSimpleFormShadow"
+                            width="auto"
+							  layout="ColumnLayout"
+							  columnsM="2"
+							  columnsL="2"
+							  columnsXL="2">
+					<f:content>
+						 <Label text="Country Code" />  
+			             <Input class="sapUiSmallMarginBottom create-ship-req_input" ></Input>
+                         <Label text="Region" />
+                         <ComboBox class="sapUiSmallMarginBottom create-ship-req_input" id="idLocationType1111" placeholder="Select">
+                         </ComboBox>
+                          <Label text="Status" />
+                        <Switch state="true" >
+				            <layoutData>
+					            <FlexItemData growFactor="1" />
+				            </layoutData>
+			            </Switch>
+                        <Label text="Country Description" />
+                        <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                        <Label text="Currency" />
+                        <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                       
+					</f:content>
+				</f:SimpleForm>
+        </content>
+    </Popover>
+</core:FragmentDefinition>

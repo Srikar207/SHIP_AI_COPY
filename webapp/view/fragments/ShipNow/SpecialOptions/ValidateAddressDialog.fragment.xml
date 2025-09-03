@@ -1,0 +1,55 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:layout="sap.ui.layout">
+    <Dialog
+        id="addressVerificationDialog"
+        title=""
+        draggable="true"
+        contentWidth="auto"
+        contentHeight="auto"
+        class="sapUiResponsivePadding--header sapUiResponsivePadding--content">
+<customHeader>
+        <Toolbar>
+            <Title text="ADDRESS VERIFICATION" class="sapUiSmallMarginBegin ADDRESSColorBold"/>
+            <ToolbarSpacer />
+            <Button 
+                icon="sap-icon://decline"
+                 class="Decline_Btn ship-now-decline_btn"  
+                press="onCloseValidateAddressDialog" />
+        </Toolbar>
+    </customHeader>
+        <VBox>
+            <Text text="Please verify your address to ensure a timely delivery." class="sapUiSmallMarginBottom sapUiSmallMarginBegin sapUiSmallMarginTop" />
+            <HBox justifyContent="SpaceBetween" >
+                <!-- Use As Entered -->
+                <VBox class="sapUiSmallMargin    stat-card1"  width="250px" >
+                    <HBox alignItems="Center">
+                        <CheckBox id="checkBoxUseEntered" text="Use As Entered" />
+                    </HBox>
+                    <Text id="idEnteredCOMPANY" text="{ShipNowDataModel>/ShipToAddress/BusinessPartnerName1}" />
+                    <Text id="idEnteredStreet" text="{ShipNowDataModel>/ShipToAddress/StreetName}" />
+                    <Text id="idEnteredCity" text="{ShipNowDataModel>/ShipToAddress/CityName}" class="sapUiSmallMarginTop" />
+                    
+                </VBox>
+
+                <!-- Verified Address -->
+                <VBox class="sapUiSmallMargin   stat-card1" width="250px">
+                    <HBox alignItems="Center">
+                         <CheckBox id="checkBoxUseEnteredsd" text="Verified Address" />
+                    </HBox>
+                    <Text id="idVerifiedCOMPANY" text="{ShipNowDataModel>/VerifiedAddress/COMPANY}" />
+                    <Text id="idVerifiedStreet" text="{ShipNowDataModel>/VerifiedAddress/ADDRESS_LINE1}" />
+                    <Text id="idVerifiedCity" text="{ShipNowDataModel>/VerifiedAddress/CITY}" class="sapUiSmallMarginTop" />
+                </VBox>
+            </HBox>
+        </VBox>
+
+         <footer>
+            <OverflowToolbar class="sapMPopoverFooter1">
+                <Button text="Cancel" press="onCloseValidateAddressDialog" />
+                <ToolbarSpacer />
+                <Button text="Update Address" type="Emphasized" press="onUpdateValidateAddressDialog" />
+            </OverflowToolbar>
+        </footer>
+
+        
+    </Dialog>
+</core:FragmentDefinition>

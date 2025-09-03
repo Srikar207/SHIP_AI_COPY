@@ -1,0 +1,48 @@
+<core:FragmentDefinition	xmlns="sap.m"    xmlns:ui="sap.ui.table"    	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"	xmlns:core="sap.ui.core">
+
+	    <Toolbar width="auto" height="15%" class="toolbarbottomborder fixedLayout">
+			<Text text="AES Direct" class="toolBarHeader sapUiTinyMarginBegin pageTitle" ></Text>
+				<ToolbarSpacer />
+					<Button text="Add EEI" type="Success" ></Button>
+		</Toolbar>
+
+		<Toolbar height="15%" >
+			<HBox width="100%" >
+				<VBox class="sapUiTinyMargin" width="25%">
+					<Text text="0" class="NumberSizeTitle1"></Text>
+					<Text text="Total" class="NumberSizeTitle2"></Text>
+					<Button class="totalProgress-request-button request-button" press="handleTrackNowFilterBtnPress" id="idAESDirectTotalBtn" icon="false" width="100%" ></Button>
+				</VBox>
+				<VBox class="sapUiTinyMargin" width="25%">
+					<Text text="0" class="NumberSizeTitle1"></Text>
+					<Text text="Open" class="NumberSizeTitle2"></Text>
+					<Button class="inTransit-request-button  request-button" type="Critical" press="handleTrackNowFilterBtnPress" id="idAESDirectOpenBtn" icon="false" width="100%"  ></Button>
+				</VBox>
+				<VBox class="sapUiTinyMargin" width="25%">
+					<Text text="0" class="NumberSizeTitle1"></Text>
+					<Text text="Shipped" class="NumberSizeTitle2"></Text>
+					<Button class="InWhite-request-button request-button" type="Success" press="handleTrackNowFilterBtnPress" id="idAESDirectShippedBtn" icon="false" width="100%" ></Button>
+				</VBox>
+				<VBox class="sapUiTinyMargin" width="25%">
+					<Text text="0" class="NumberSizeTitle1"></Text>
+					<Text text="Cancelled" class="NumberSizeTitle2"></Text>
+					<Button type="Negative" press="handleTrackNowFilterBtnPress" id="idAESDirectCancelledBtn" icon="false" width="100%" ></Button>
+				</VBox>
+			</HBox>
+		</Toolbar>
+    <ui:Table
+                id="idAesDirectTable"
+               class="rowRightLine ordersTableRightBorder"
+				rows="{eshipjetModel>/TrackNowItems}"
+				selectionMode="None"
+				visibleRowCount="12">
+				<ui:extension>
+					<OverflowToolbar style="Clear">
+                        <Button icon="sap-icon://filter" press="handleTrackNowFltrIconPress"></Button>
+                        <ToolbarSpacer />
+                            <Button icon="sap-icon://action"></Button>
+					</OverflowToolbar>
+				</ui:extension>
+		</ui:Table>
+</core:FragmentDefinition>

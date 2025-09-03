@@ -1,0 +1,89 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    height="100%"
+>
+    <Popover
+        id="idAddThirdPartyPopover1"
+         placement="Bottom"
+        contentHeight="100%"
+        showHeader="false"
+        class="rightSidePopoverGare"
+    >
+        <!-- Custom Header -->
+        <customHeader>
+            <Toolbar>
+                <!-- Title -->
+                <Title text="Add Third Party" />
+
+                <!-- Spacer to push close button to the right -->
+                <ToolbarSpacer />
+
+                <!-- Close Button -->
+                <Button
+                    icon="sap-icon://decline"
+                     class="Decline_Btn ship-now-decline_btn" 
+                    press="AddThirdPartyClosePress1" />
+            </Toolbar>
+        </customHeader>
+        <footer>
+            <OverflowToolbar class="p-sidebar-header">
+                <Button
+                    text="Cancel"
+                    press="AddThirdPartyCancelPress"
+                />
+                <ToolbarSpacer />
+                <Button
+                    type="Emphasized"
+                    text="Save"
+                    press="AddThirdPartySelectpress"
+                />
+            </OverflowToolbar>
+        </footer>
+
+        <content>
+            <f:SimpleForm
+                editable="true"
+                class="customSimpleFormShadow"
+                width="auto"
+                layout="ColumnLayout"
+                columnsM="2"
+                columnsL="2"
+                columnsXL="2"
+            >
+                <f:content>
+                    <Label text="Location Name" />
+                    <ComboBox class="sapUiSmallMarginBottom create-ship-req_input"  placeholder="Select">
+                        </ComboBox>
+                    <Label text="Contact Name" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="Address Line 1" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="City" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="Zip / Postal Code" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="Status" />
+                        <Switch state="true" >
+				            <layoutData>
+					            <FlexItemData growFactor="1" />
+				            </layoutData>
+			            </Switch>
+                    <Label text="Account #" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="Company Name" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="Address Line 2" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="State / Province" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input"/>
+                    <Label text="Country" />
+                    <ComboBox class="sapUiSmallMarginBottom create-ship-req_input"  placeholder="Select">
+                        </ComboBox>
+                </f:content>
+            </f:SimpleForm> 
+        </content>
+    </Popover>
+</core:FragmentDefinition>

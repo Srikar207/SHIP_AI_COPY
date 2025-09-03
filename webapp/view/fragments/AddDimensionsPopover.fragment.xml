@@ -1,0 +1,85 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    height="100%"
+>
+    <Popover
+        id="idAddDimensionsPopover"
+       placement="Bottom"
+        contentHeight="100%"
+        showHeader="false"
+        class="rightSidePopoverGare">
+        <!-- Custom Header -->
+        <customHeader>
+            <Toolbar>
+                <!-- Title -->
+                <Title text="Add Dimensions" />
+
+                <!-- Spacer to push close button to the right -->
+                <ToolbarSpacer />
+
+                <!-- Close Button -->
+                <Button
+                    icon="sap-icon://decline"
+                    class="Decline_Btn ship-now-decline_btn"
+                    press="AddDimensionsClosePress" />
+            </Toolbar>
+        </customHeader>
+        <footer>
+            <OverflowToolbar class="p-sidebar-header sapMPopoverFooter1">
+                <Button
+                    text="Cancel"
+                    press="AddDimensionsCancelPopover"
+                />
+                <ToolbarSpacer />
+                <Button
+                    type="Emphasized"
+                    text="Save"
+                    press="AddDimensionsSelectPopover"
+                />
+            </OverflowToolbar>
+        </footer>
+        <content>
+           	<f:SimpleForm editable="true"
+                            class="customSimpleFormShadow"
+                            width="auto"
+							  layout="ColumnLayout"
+							  columnsM="2"
+							  columnsL="2"
+							  columnsXL="2">
+					<f:content>
+                        <Label text="Location Name" />
+                        <ComboBox  class="sapUiSmallMarginBottom create-ship-req_input" placeholder="Select">
+                        </ComboBox>
+                        <Label text="Length (inch/cm)" />  
+			            <Input class=" create-ship-req_input" value="{}"  ></Input>
+                        <!-- <StepInput class="sapUiSmallMarginBottom create-ship-req_input" min="0" max="100" step="1"  width="100%"  valueState="None" /> -->
+                        <Label text="Height (inch/cm)" />
+                         <Input class=" create-ship-req_input" value="{}"  ></Input>
+                         <!-- <StepInput  min="0" max="100" step="1"  width="100%"  valueState="None" /> -->
+                        <Label text="Material Weight" />  
+			            <Input class=" create-ship-req_input" value="{}"  ></Input>
+                        <!-- <StepInput  min="0" max="100" step="1"  width="100%"  valueState="None" /> -->
+                        <Label text="Name" />  
+			            <Input class="sapUiSmallMarginBottom create-ship-req_input" ></Input>
+                        <Label text="Width (inch/cm)" />  
+			            <Input class=" create-ship-req_input" value="{}"  ></Input>
+                        <!-- <StepInput  min="0" max="100" step="1"  width="100%"  valueState="None" /> -->
+                        <Label text="Maximum Weight" />  
+			            <Input class=" create-ship-req_input" value="{}"  ></Input>
+                        <!-- <StepInput  min="0" max="100" step="1"  width="100%"  valueState="None" /> -->
+                        <Label text="Status" />
+                        <Switch state="true" >
+				            <layoutData>
+					            <FlexItemData growFactor="1" />
+				            </layoutData>
+			            </Switch>
+                        
+                        
+					</f:content>
+				</f:SimpleForm>
+        </content>
+    </Popover>
+</core:FragmentDefinition>

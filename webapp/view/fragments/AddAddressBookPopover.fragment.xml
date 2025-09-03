@@ -1,0 +1,142 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    height="100%"
+>
+    <Popover
+        id="idAddAddressBookPopover"
+        placement="Bottom"
+        contentHeight="100%"
+        showHeader="false"
+        class="rightSidePopoverGare"
+    >
+        <!-- Custom Header -->
+       <customHeader>
+            <Toolbar >
+                <!-- Title -->
+                <Title text="Add Address Book" />
+
+                <!-- Spacer to push close button to the right -->
+                <ToolbarSpacer />
+
+                <!-- Close Button -->
+                <Button
+                    icon="sap-icon://decline"
+                    class="Decline_Btn ship-now-decline_btn"
+                    press="AddAddressBookClosePress" />
+            </Toolbar>
+      </customHeader>
+        <footer >
+            <OverflowToolbar class="p-sidebar-header sapMPopoverFooter1" >
+                <Button
+                    text="Cancel"
+                    press="AddAddressBookCancelPopover"
+                />
+                <ToolbarSpacer />
+                <Button
+                    type="Emphasized"
+                    text="Save"
+                    press="AddAddressBookSelectPopover"
+                />
+            </OverflowToolbar>
+        </footer>
+
+        <content>
+            <f:SimpleForm
+                editable="true"
+                class="customSimpleFormShadow"
+                width="auto"
+                layout="ColumnLayout"
+                columnsM="2"
+                columnsL="2"
+                columnsXL="2"
+            >
+                <f:content>
+                    <Toolbar ariaLabelledBy="idShipFrom">
+                        <Button
+                            icon="sap-icon://customer-briefing"
+                            press="handleAddLocPress"
+                        />
+                        <Title
+                            id="idAddAddressBookFrom11"
+                            text="Name and Contact"
+                        />
+                    </Toolbar>
+                    <Label text="Contact Name" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="Phone No" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="Company Name" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="Email" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                </f:content>
+            </f:SimpleForm>
+
+            <f:SimpleForm
+                editable="true"
+                class="customSimpleFormShadow"
+                width="auto"
+                layout="ColumnLayout"
+                columnsM="2"
+                columnsL="2"
+                columnsXL="2"
+            >
+                <f:content>
+                    <Toolbar ariaLabelledBy="idShipFrom">
+                        <Button
+                            icon="sap-icon://customer-briefing"
+                            press="handleAddLocPress"
+                        />
+                        <Title
+                            id="idAddAddressBook"
+                            text="Address Info"
+                        />
+                    </Toolbar>
+                    <Label text="Address Line 1" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="Address Line 3" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="State / Province" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="Country" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="Address Type" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="Locker No" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="Locker Access Code" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="Floor No" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="Status" />
+                    <Switch state="true">
+                        <layoutData>
+                            <FlexItemData growFactor="1" />
+                        </layoutData>
+                    </Switch>
+                    <Label text="Address Line 2" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="City" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="Zip / Postal Code" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="Address Category" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="Cost Center" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="Locker Location" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="Building No" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="Mail Stop" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="RFID" />
+                    <CheckBox />
+                </f:content>
+            </f:SimpleForm>
+        </content>
+    </Popover>
+</core:FragmentDefinition>

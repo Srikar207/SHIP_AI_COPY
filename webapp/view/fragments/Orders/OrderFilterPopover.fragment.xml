@@ -1,0 +1,112 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+	<Popover
+		contentWidth="45%"
+		showArrow="false"
+		showHeader="false"
+		id="idOrdersFilterPopover"
+		class="sapUiResponsivePadding--header sapUiResponsivePadding--footer"
+		placement="Bottom"
+		initialFocus="email">
+		<Toolbar >
+			<ToolbarSpacer ></ToolbarSpacer>
+				<Button icon="sap-icon://decline" press="onOrderFilterPopoverClosePress" class="Decline_Btn ship-now-decline_btn" ></Button>
+		</Toolbar>
+		
+        <VBox >
+		<HBox >
+			<VBox class="sapUiSmallMargin" width="30%" >
+			<Label text="Location ID / Location Name" width="100%" />
+					<ComboBox
+						id="locationComboId"
+						width="100%"
+						class="sapUiSmallMarginBottom create-ship-req_input"
+						items="{eshipjetModel>/LocationName}"
+						selectedKey="{eshipjetModel>/orderLocationFilter}" >
+						<core:Item key="{eshipjetModel>key}" text="{eshipjetModel>text}" />
+					</ComboBox>
+			</VBox>
+			<VBox class="sapUiSmallMargin" width="30%" >
+					<Label text="From Date" width="100%" />
+					<DatePicker
+					id="shipFromDateId"
+					 	value="{path: 'eshipjetModel>/DateAdded', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'MM/dd/yyyy'}}"
+						width="100%"
+						placeholder="Enter Date"
+						change="handleChange"
+						class="sapUiSmallMarginBottom create-ship-req_input"/>
+			</VBox>
+			<VBox class="sapUiSmallMargin" width="30%" >
+					<Label text="To Date" width="100%" />
+					<DatePicker
+					id="shipToDateId"
+					 	value="{path: 'eshipjetModel>/ExpDelDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'MM/dd/yyyy'}}"
+						width="100%"
+						placeholder="Enter Date"
+						change="handleChange"
+						class="sapUiSmallMarginBottom create-ship-req_input"/>
+			</VBox>
+			<VBox class="sapUiSmallMargin" width="30%" >
+					<Label text="Request ID / Label ID" width="100%" />
+					<Input value="" class="sapUiSmallMarginBottom create-ship-req_input" ></Input>
+			</VBox>
+			
+		</HBox>
+
+        <HBox>
+			<VBox class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginBottom" width="30%" >
+					<Label text="Cost Center" width="100%" />
+					<ComboBox
+					id="orderTypeComboId"
+						width="100%"
+						class="sapUiSmallMarginBottom create-ship-req_input"
+						items="{eshipjetModel>/shipNowSAPDeliveryItems}"
+						selectedKey="{eshipjetModel>/orderOrderTypeFilter}" >
+						<core:Item key="{eshipjetModel>SAPDeliveryItem}" text="{eshipjetModel>SAPDeliveryItem}" />
+					</ComboBox>
+			</VBox>
+
+        	<VBox class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginBottom" width="30%" >
+					<Label text="Carrier Name" width="100%" />
+					<ComboBox
+					id="carrierComboId"
+						class="sapUiSmallMarginBottom create-ship-req_input"
+						width="100%"
+						items="{eshipjetModel>/ForFiltercarriers}"
+						selectedKey="{eshipjetModel>/orderCarrierFilter}" >
+						<core:Item key="{eshipjetModel>key}" text="{eshipjetModel>text}" />
+					</ComboBox>
+			</VBox>
+            
+            <VBox class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginBottom" width="30%" >
+					<Label text="Status" width="100%" />
+					<ComboBox
+					id="statusComboId"
+						width="100%"
+						class="sapUiSmallMarginBottom create-ship-req_input"
+						items="{eshipjetModel>/shipmentStatuses}"
+						selectedKey="{eshipjetModel>/orderShipmentStatusFilter}" >
+						<core:Item key="{eshipjetModel>key}" text="{eshipjetModel>text}" />
+					</ComboBox>
+			</VBox>
+		</HBox>
+    </VBox>
+
+	<footer>
+		<OverflowToolbar>
+			<Button
+				text="Reset"
+				type="Ghost"
+				press="onFreightQuoteOrdersFilterPopoverResetPress" />
+				<ToolbarSpacer/>
+			<Button
+				text="Apply"
+				type="Ghost"
+				press="onFreightQuoteOrdersFilterPopoverApplyPress" />
+		</OverflowToolbar>
+	</footer>
+</Popover>
+</core:FragmentDefinition>

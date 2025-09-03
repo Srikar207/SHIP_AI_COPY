@@ -1,0 +1,375 @@
+<core:FragmentDefinition	
+	xmlns="sap.m"    
+	xmlns:ui="sap.ui.table"    	
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"	
+	xmlns:core="sap.ui.core"
+	xmlns:plugins="sap.m.plugins"
+	xmlns:columnmenu="sap.m.table.columnmenu"
+    xmlns:sap.ui.fl="sap.ui.fl"
+    xmlns:sap.ui.dt="sap.ui.dt"
+    xmlns:vm="sap.ui.fl.variants"
+    xmlns:dnd="sap.ui.core.dnd"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+
+	    <!-- <Toolbar height="20%" width="100%" >
+			<VBox width="100%" >
+				<Text text="Order" class="sapUiSmallMargin textBold" ></Text>
+				<Text text="25" class="sapUiSmallMarginBegin textBold" ></Text>
+				<Text text="Total" class="sapUiSmallMarginBegin"></Text>
+				<Button type="Emphasized" width="98%" class="sapUiSmallMargin" ></Button>
+			</VBox>
+		</Toolbar> -->
+
+
+		<Toolbar width="100%" height="3rem" >
+					<!-- <Button icon="sap-icon://cart-full" class="ordersIcons" type="Transparent" enabled="false" ></Button> -->
+					<core:Icon src="sap-icon://cart" class="orderItem sapUiTinyMarginTop sapUiTinyMarginBegin" ></core:Icon>
+					<Text text="Orders" class="sapUiTinyMarginBegin sapUiTinyMarginTop Orders_PageTitle" ></Text>
+					<ToolbarSpacer></ToolbarSpacer>
+					<Button  icon="sap-icon://decline" press="onOrdersClosePress" class="Decline_Btn ship-now-decline_btn" type="Ghost" />
+				</Toolbar>
+
+
+ 
+
+						<Toolbar width="100%" height="4rem" class="toolbarbottomborder ordersDarkThemeToolbar">
+					<Text text="Orders" class="sapUiTinyMarginBegin sapUiTinyMarginTop Orders_PageTitle ordersTextColor"></Text>
+					<ToolbarSpacer></ToolbarSpacer>
+					<ComboBox id="dateFilterComboBox" class="create-ship-req_input sapUiTinyMarginEnd" 
+						placeholder="Select Date Filter"
+						items="{eshipjetModel>/ordersFilterData}"
+						selectedKey="{dateFilterModel>/ordersSelectedFilter}"
+						selectionChange="onOrdersDateFilterChange" >
+						<core:Item key="{eshipjetModel>key}" text="{eshipjetModel>text}" />
+					</ComboBox>
+				</Toolbar>
+
+
+<Panel expandable="true" expanded="true" width="auto" >
+		<content>
+		
+		
+		<Toolbar height="7rem" class="whiteBackground" >
+			<HBox width="100%">
+				<VBox class="sapUiTinyMargin" width="25%">
+					<Text text="{eshipjetModel>/allOrdersLength}" class="NumberSizeTitle1"></Text>
+					<Text text="Total" class="sapUiTinyMarginBottom"></Text>
+					<Button type="Emphasized" id="Total" press="onOrderStstusBtnFilterPress" class="total-request-button request-button" icon="false" width="100%"></Button>
+				</VBox>
+				<VBox class="sapUiTinyMargin" width="25%">
+					<Text text="{eshipjetModel>/shippedCount}" class="NumberSizeTitle1"></Text>
+					<Text text="Shipped" class="sapUiTinyMarginBottom"></Text>
+					<Button type="Success" id="Shipped" press="onOrderStstusBtnFilterPress" class="shipped-request-button request-button" icon="false" width="100%" ></Button>
+				</VBox>
+				<!-- <VBox class="sapUiTinyMargin" width="25%">
+					<Text text="{eshipjetModel>/openCount}" class="NumberSizeTitle1"></Text>
+					<Text text="Open" class="sapUiTinyMarginBottom"></Text>
+					<Button type="Critical" id="Open" press="onOrderStstusBtnFilterPress"  class="InTransitord-request-button request-button" icon="false" width="100%" ></Button>
+				</VBox> -->
+				<VBox class="sapUiTinyMargin" width="25%">
+					<Text text="{eshipjetModel>/InTransistCount}" class="NumberSizeTitle1"></Text>
+					<Text text="In-Transit" class="sapUiTinyMarginBottom"></Text>
+					<Button press="onOrderStstusBtnFilterPress" id="In-Transit" class="open-request-button request-button" icon="false" width="100%" ></Button>
+				</VBox>
+				<VBox class="sapUiTinyMargin" width="25%">
+					<Text text="{eshipjetModel>/receivedCount}" class="NumberSizeTitle1"></Text>
+					<Text text="Delivered" class="sapUiTinyMarginBottom"></Text>
+					<Button type="Critical" id="Delivered" press="onOrderStstusBtnFilterPress"  class="Receivedord-request-button request-button" icon="false" width="100%" ></Button>
+				</VBox>
+				<VBox class="sapUiTinyMargin" width="25%">
+					<Text text="{eshipjetModel>/cancelledCount}" class="NumberSizeTitle1"></Text>
+					<Text text="Cancelled" class="sapUiTinyMarginBottom"></Text>
+					<Button type="Critical" id="Cancelled" press="onOrderStstusBtnFilterPress"  class="cancelled-request-button request-button" icon="false" width="100%" ></Button>
+					
+				</VBox>
+			</HBox>
+		</Toolbar>
+
+		</content>
+	</Panel>
+
+
+	<VBox class="whiteBackground sapUiTinyMarginTop" >
+		<Toolbar class="sapUiTinyMarginTop sapUiSmallMarginBegin sapUiSmallMarginEnd" >
+			<Button icon="sap-icon://filter" press="onOrdersFilterPopoverPress" type="Transparent" class="ordersIcons" ></Button>
+				<ToolbarSpacer ></ToolbarSpacer>
+				   <SearchField width="10rem" class="sapUiSmallMarginBottom forsearchhigh" search="onSearchOrder" ></SearchField>
+					<Button icon="sap-icon://synchronize" press="getOrdersHistoryShipments" type="Transparent" class="ordersIcons" ></Button>
+					<Button icon="sap-icon://action" press="onOrderExportToExcel" type="Transparent" class="ordersIcons" ></Button>
+                    <Button icon="sap-icon://action-settings" press="openOrderColNamesPopover" type="Transparent" class="ordersIcons" ></Button>
+                <customData>
+                    <core:CustomData key="remember" value="true" />
+                    <core:CustomData key="showClearButton" value="true" />
+                    <core:CustomData key="confirmButtonText" value="Ok" />
+                </customData>
+		</Toolbar>
+
+						<ui:Table
+							id="idOrdersTable"
+							rows="{eshipjetModel>/pagedOrders}"
+							class="sapUiSmallMarginBegin sapUiSmallMarginEnd rowRightLine ordersTableRightBorder"
+							selectionMode="None"
+							visibleRowCount="14" >
+										<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '5rem' : 'auto' }" sortProperty="Plant" class="whiteBackground" visible="{eshipjetModel>/OrderTableData/OrderColumns/0/visible}">
+									<Label text="Plant ID" />
+									<ui:template>
+										<Text text="{eshipjetModel>Plant}" wrapping="false" class="ordersSmallText" />
+									</ui:template>
+								</ui:Column>
+
+								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '6rem' : 'auto' }" sortProperty="Vbeln" visible="{eshipjetModel>/OrderTableData/OrderColumns/1/visible}">
+									<Label text="Order ID" />
+									<ui:template>
+										<Text text="{eshipjetModel>Vbeln}" wrapping="false" class="ordersSmallText" />
+									</ui:template>
+								</ui:Column>
+
+								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '10rem' : 'auto' }" sortProperty="Packagetype" visible="{eshipjetModel>/OrderTableData/OrderColumns/2/visible}">
+									<Label text="Order Type" />
+									<ui:template>
+										<Text text="SAP Delivery Number" wrapping="false" class="ordersSmallText" />
+									</ui:template>
+								</ui:Column>
+
+								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '7rem' : 'auto' }" sortProperty="Carriertype" visible="{eshipjetModel>/OrderTableData/OrderColumns/3/visible}">
+									<Label text="Ship Method" />
+									<ui:template>
+										<!-- <HBox justifyContent="SpaceBetween" width="100%" > -->
+											<Text text="{eshipjetModel>Carriertype}" wrapping="false" class="ordersSmallText" />
+											<!-- <Button icon="sap-icon://add" type="Transparent" ></Button> -->
+										<!-- </HBox> -->
+									</ui:template>
+								</ui:Column>
+
+								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '7rem' : 'auto' }" sortProperty="CarrierCode" visible="{eshipjetModel>/OrderTableData/OrderColumns/4/visible}">
+									<Label text="ERP Service ID" />
+									<ui:template>
+										<Text text="{eshipjetModel>CarrierCode}" wrapping="false" class="ordersSmallText" />
+									</ui:template>
+								</ui:Column>
+
+								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '7rem' : 'auto' }" sortProperty="CarrierCode" visible="{eshipjetModel>/OrderTableData/OrderColumns/5/visible}">
+									<Label text="Ship Type" />
+									<ui:template>
+										<Text text="{eshipjetModel>Shipmentid}" wrapping="false" class="ordersSmallText" />
+									</ui:template>
+								</ui:Column>
+
+								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '7rem' : 'auto' }" sortProperty="CarrierDesc" visible="{eshipjetModel>/OrderTableData/OrderColumns/6/visible}">
+									<Label text="Service Name" />
+									<ui:template>
+										<Text text="{eshipjetModel>CarrierDesc}" wrapping="false" class="ordersSmallText" />
+									</ui:template>
+								</ui:Column>
+
+								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '4rem' : 'auto' }" sortProperty="ShipmentType" visible="{eshipjetModel>/OrderTableData/OrderColumns/7/visible}">
+									<Label text="Type" />
+									<ui:template>
+										<Text text="{eshipjetModel>ShipmentType}" wrapping="false" class="ordersSmallText" />
+									</ui:template>
+								</ui:Column>
+
+								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '4rem' : 'auto' }" sortProperty="Totalpkg" visible="{eshipjetModel>/OrderTableData/OrderColumns/8/visible}">
+									<Label text="Pkgs" />
+									<ui:template>
+									<HBox justifyContent="Center" width="100%" >
+										<Text text="{= parseInt(${eshipjetModel>Totalpkg}, 10) }" wrapping="false" class="ordersSmallText" />
+									</HBox>
+									</ui:template>
+								</ui:Column>
+
+								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '4rem' : 'auto' }" sortProperty="PGI" visible="{eshipjetModel>/OrderTableData/OrderColumns/9/visible}">
+								<Label text="PGI" />
+								<ui:template>
+									<!-- <Button 
+										icon="{= ${eshipjetModel>PGI} === true ? 'sap-icon://accept' : 'sap-icon://decline'}" 
+										type="{= ${eshipjetModel>PGI} === true ? 'Success' : 'Error'}" /> -->
+										<Button icon="{= 
+													${eshipjetModel>Carriertype} === 'UPS' ? 'sap-icon://accept' : 
+													${eshipjetModel>Carriertype} === 'FedEx' ? 'sap-icon://decline' :
+													${eshipjetModel>Carriertype} === 'ABFS' ? 'sap-icon://lateness' : ''
+												}"
+												enabled="false"
+											class="greenColorForIcon ordersSmallText"
+											type="Transparent" />
+								</ui:template>
+							</ui:Column>
+
+
+								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '10rem' : 'auto' }" sortProperty="DateAdded" visible="{eshipjetModel>/OrderTableData/OrderColumns/10/visible}">
+									<Label text="Ship Date-Time" />
+									<ui:template>
+										<Text text="{path: 'eshipjetModel>DateAdded', formatter: '.formatter.formatCustomDateTimeForOrders'}" class="ordersSmallText" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+
+								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '12rem' : 'auto' }" sortProperty="TrackingNumber" visible="{eshipjetModel>/OrderTableData/OrderColumns/11/visible}">
+									<Label text="Tracking/Pro #" />
+									<ui:template>
+										<Link text="{eshipjetModel>TrackingNumber}" press="onTrackingNumberPress" class="ordersSmallText" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+
+								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '6rem' : 'auto' }" sortProperty="DeliveryStatus" visible="{eshipjetModel>/OrderTableData/OrderColumns/12/visible}">
+								<Label text="Status" />
+								<ui:template>
+									<!-- <Text text="Shipped" wrapping="false"
+										class="{path: 'Shipped', formatter: '.formatter.getDeliveryStatusClass'} ordersSmallText" /> -->
+									<Text text="{path: 'eshipjetModel>Shipprocess', formatter: '.formatter.formatShipmentType'}" wrapping="false" class="greenColorForIcon ordersSmallText" />
+								</ui:template>
+							</ui:Column>
+
+
+
+								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '12rem' : 'auto' }" sortProperty="ExpDelDate" visible="{eshipjetModel>/OrderTableData/OrderColumns/13/visible}">
+									<Label text="Del'd Date-Time" />
+									<ui:template>
+										<Text text="{path: 'eshipjetModel>DateAdded', formatter: '.formatter.formatCustomDateTimeForOrders'}" class="ordersSmallText" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+
+								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '12rem' : 'auto' }" sortProperty="RecContact" visible="{eshipjetModel>/OrderTableData/OrderColumns/14/visible}">
+									<Label text="Ship To Contact" />
+									<ui:template>
+										<Text text="{eshipjetModel>RecContact}" class="ordersSmallText" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+
+								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '10rem' : 'auto' }" sortProperty="RecCompany" visible="{eshipjetModel>/OrderTableData/OrderColumns/15/visible}">
+									<Label text="Ship To Company" />
+									<ui:template>
+										<Text text="{eshipjetModel>RecCompany}" class="ordersSmallText" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+
+								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '10rem' : 'auto' }" sortProperty="RecCity" visible="{eshipjetModel>/OrderTableData/OrderColumns/16/visible}">
+									<Label text="Ship To City" />
+									<ui:template>
+										<Text text="{eshipjetModel>RecCity}" class="ordersSmallText" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+
+								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '10rem' : 'auto' }" sortProperty="RecRegion" visible="{eshipjetModel>/OrderTableData/OrderColumns/17/visible}">
+									<Label text="Ship To State" />
+									<ui:template>
+										<Text text="{eshipjetModel>RecRegion}" class="ordersSmallText" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+
+								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '10rem' : 'auto' }" sortProperty="RecPostalcode" visible="{eshipjetModel>/OrderTableData/OrderColumns/18/visible}">
+									<Label text="Ship To Postal" />
+									<ui:template>
+										<Text text="{eshipjetModel>RecPostalcode}" class="ordersSmallText" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+
+								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '10rem' : 'auto' }" sortProperty="RecCountry" visible="{eshipjetModel>/OrderTableData/OrderColumns/19/visible}">
+									<Label text="Ship To Country" />
+									<ui:template>
+										<Text text="{eshipjetModel>RecCountry}" class="ordersSmallText" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+
+								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '10rem' : 'auto' }" sortProperty="RecPhone" visible="{eshipjetModel>/OrderTableData/OrderColumns/20/visible}">
+									<Label text="Ship To Phone" />
+									<ui:template>
+										<Text text="{eshipjetModel>RecPhone}" class="ordersSmallText" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+
+								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '10rem' : 'auto' }" sortProperty="Emailaddress" visible="{eshipjetModel>/OrderTableData/OrderColumns/21/visible}">
+									<Label text="Ship To Email" />
+									<ui:template>
+										<Text text="{eshipjetModel>Emailaddress}" class="ordersSmallText" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+
+								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '5rem' : 'auto' }" sortProperty="" visible="{eshipjetModel>/OrderTableData/OrderColumns/22/visible}">
+									<Label text="User ID" />
+									<ui:template>
+										<Text text="{eshipjetModel>userName}" class="ordersSmallText" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+
+								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '6rem' : 'auto' }" sortProperty="" visible="{eshipjetModel>/OrderTableData/OrderColumns/23/visible}">
+									<Label text="SAP User ID" />
+									<ui:template>
+										<Text text="{eshipjetModel>userName}" class="ordersSmallText" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+
+								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '4rem' : 'auto' }" sortProperty="" visible="{eshipjetModel>/OrderTableData/OrderColumns/24/visible}" hAlign="Center" >
+									<Label text="Note" />
+									<ui:template>
+										<VBox justifyContent="Center" alignItems="Center">
+												<Button icon="sap-icon://document-text" class="ordersSmallText" press="onShipmentWorkflowPress"  type="Transparent" ></Button>
+										</VBox>
+									</ui:template>
+								</ui:Column>
+
+								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '7rem' : 'auto' }" hAlign="End" >
+									<Label text="Actions"/>
+									<ui:template>
+										<HBox>
+											<Button text="View Now" class="ordersSmallButton" type="Transparent" press="onViewNowPressBackToShipNow" ></Button>
+											<Button icon="sap-icon://megamenu" class="ordersSmallButton" type="Transparent" press="handleDownArrowPress" ></Button>
+										</HBox>
+									</ui:template>
+								</ui:Column>
+						</ui:Table> 
+	</VBox>
+
+
+								<Toolbar class="whiteBackground sapUiTinyMarginTop ordersTableFooter">
+									<ToolbarSpacer/>
+									<Button text="First" type="Transparent" press=".onFirstPage"
+										enabled="{eshipjetModel>/FirstBtnVisableStatus}" />
+									<Button text="Previous" type="Transparent" press=".onPreviousPage"
+										enabled="{eshipjetModel>/PreviousBtnVisableStatus}" />
+									<Text id="paginationText" text="1-50 of 0" />
+									<Button text="Next" type="Transparent" press=".onNextPage"
+										enabled="{eshipjetModel>/NextBtnVisableStatus}" />
+									<Button text="Last" type="Transparent" press=".onLastPage"
+										enabled="{eshipjetModel>/LastBtnVisableStatus}" />
+								</Toolbar>
+
+
+
+
+
+        <!-- <ui:Table id="idOrdersTable"
+                class="sapUiTinyMarginTop"
+				selectionMode="None"
+				visibleRowCount="12">
+					<ui:extension>
+						<OverflowToolbar width="100%" height="3rem" >
+								<Button icon="sap-icon://filter" press="onOrdersFilterPopoverPress"></Button>
+								<ComboBox width="10%" class=" create-ship-req_input">
+									<core:Item ></core:Item>
+								</ComboBox>
+								<Label text="Delivery Number" class="sapUiMediumMarginBegin" ></Label>
+								<SearchField width="10%"  ></SearchField>
+								<Button text="Get" width="3%" type="Ghost" class="scan-ship-toolbar__button" ></Button>
+								
+								<ToolbarSpacer />
+								<Button icon="sap-icon://action" press="onOrdersExportToExcel" ></Button>
+								<Button icon="sap-icon://action-settings" press="openOrderColNamesPopover" >
+									<customData>
+										<core:CustomData key="remember" value="true" />
+										<core:CustomData key="showClearButton" value="true" />
+										<core:CustomData key="confirmButtonText" value="Ok" />
+									</customData>
+								</Button>
+						</OverflowToolbar>
+					</ui:extension>
+		</ui:Table>
+					<Toolbar >
+						<ToolbarSpacer/>
+						<Button  text="First" enabled="false" />
+						<Button  text="Previous" enabled="false"/>
+						<Text    text="1-50 of 74"/>
+						<Button  text="Next" />
+						<Button  text="Last" />
+					</Toolbar> -->
+</core:FragmentDefinition>

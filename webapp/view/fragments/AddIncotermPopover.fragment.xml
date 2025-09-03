@@ -1,0 +1,70 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    height="100%" >
+    
+    <Popover
+        id="idAddIncotermPopover"
+        placement="Bottom"
+        contentHeight="100%"
+        showHeader="false"
+        class="rightSidePopoverGare">
+        <!-- Custom Header -->
+        <customHeader>
+            <Toolbar>
+                <!-- Title -->
+                <Title text="Add Incoterm" />
+
+                <!-- Spacer to push close button to the right -->
+                <ToolbarSpacer />
+
+                <!-- Close Button -->
+                <Button
+                    icon="sap-icon://decline"
+                    class="Decline_Btn ship-now-decline_btn"
+                    press="AddIncotermClosePress" />
+            </Toolbar>
+        </customHeader>
+        <footer>
+            <OverflowToolbar class="p-sidebar-header">
+                <Button
+                    text="Cancel"
+                    press="AddIncotermCancelPopover"
+                />
+                <ToolbarSpacer />
+                <Button
+                    type="Emphasized"
+                    text="Save"
+                    press="AddIncotermSelectPopover"
+                />
+            </OverflowToolbar>
+        </footer>
+        <content>
+           	<f:SimpleForm editable="true"
+                            class="customSimpleFormShadow"
+                            width="auto"
+							  layout="ColumnLayout"
+							  columnsM="2"
+							  columnsL="2"
+							  columnsXL="2">
+					<f:content>
+                        <Label text="Incoterm" />
+                        <ComboBox class="sapUiSmallMarginBottom create-ship-req_input" placeholder="Select">
+                        </ComboBox>
+                       
+                        <Label text="Status" />
+                        <Switch class="sapUiSmallMarginBottom create-ship-req_input" state="true" >
+				            <layoutData>
+					            <FlexItemData growFactor="1" />
+				            </layoutData>
+			            </Switch>
+                         <Label text="Description" />  
+			            <Input class="sapUiSmallMarginBottom create-ship-req_input" ></Input>
+                        
+					</f:content>
+				</f:SimpleForm>
+        </content>
+    </Popover>
+</core:FragmentDefinition>

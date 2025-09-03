@@ -1,0 +1,3436 @@
+.dashboard-container {
+    /* // background: #F5F5F7 !important; */
+    height: calc(80vh - 60px);
+    margin-top: 0px;
+  }
+  .dashboard-area {
+    height: calc(100% - 25px);
+    display: flex;
+  }
+  .shipping-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    /* // background: #F5F5F7 !important; */
+  }
+  
+  
+  .shipping-area {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin: 0px 10px;
+  }
+  .shipping-wrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+  }
+  .shipping-card {
+    background-color: #FFFFFF;
+    width: 230px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0px;
+    color: #fff !important;
+  }
+  .dev_img_sec {
+    /* // height: 13vh; */
+    width: 82px;
+    height: 82px;
+  }
+  .btn_Edit {
+    border: none;
+    padding: 10px 10px;
+    font-size: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  .bg_col {
+    background-color: #fff;
+    padding: 25px 0px;
+  }
+  .align-middle {
+    top: 50%;
+    -ms-transform: translateY(50%);
+    transform: translateY(50%);
+  }
+  .ps-7 {
+    padding-left: 3.5rem !important;
+  }
+  .btn_common_Css {
+    width: 190px;
+    height: 50px;
+    padding: 15px;
+    border-radius: 6px;
+    background-color: #EBEDF9;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 19.6px;
+    text-align: center;
+    color: #030E4C;
+    transition-duration: 0.5s;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+  }
+  /* // .btn_common_Css:hover {
+  //   background: #FFFFFF;
+  //   color: #030E4C;
+  // } */
+  .footer-label {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #F1F1F1;
+    color: #637467;
+    font-size: 14px;
+  }
+  .dev_img_sec {
+    transition: background-color 0.5s ease, transform 0.5s ease;
+    /* Smooth transitions */
+  }
+  .dev_img_sec img {
+    transition: filter 0.5s ease;
+    /* Smooth transition for image color change */
+  }
+  .bg_col {
+    background-color: #fff;
+    width: 21%;
+    padding: 25px 0px;
+    transition: background-color 0.5s ease;
+    /* Smooth transition for background color */
+  }
+  .bg_col:hover .btn_common_Css {
+    background-color: #FFFFFF;
+  }
+  .active-shipping-card {
+    background-color: #030E4C;
+    transform: scale(1.05);
+    transition: 0.5s;
+    padding-bottom: 0px;
+    cursor: pointer;
+    &:hover {
+      background: #030E4C !important;
+      .ship-tile-button {
+        transform: scale(1.05);
+        transition: 0.5s;
+      }
+    }
+  }
+  /* // .shipping-card {
+  //   &:hover {
+  //     background-color: #030E4C;
+  //     transform: scale(1.1);
+  //     transition: 0.5s;
+  //     padding-bottom: 0px;
+  //     margin-top: -8px;
+  //     cursor: pointer;
+  //   }
+  //   .btn_common_Css {
+  //     &:active {
+  //       background-color: #FFFFFF;
+  //     }
+  //   }
+  // } */
+  .active-shipping-card .dev_img_sec img {
+    filter: invert(1);
+  }
+  /* .active-shipping-card .btn_common_Css {
+    background-color: #FFFFFF !important;
+    cursor: pointer;
+  } */
+  .btn_Edit {
+    border: none;
+    padding: 10px 10px;
+    font-size: 10px;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    transition: background-color 0.5s ease, color 0.5s ease;
+    /* Transition for smooth hover effects */
+  }
+  .btn_Edit:hover {
+    background-color: #FFFFFF;
+    /* Change button background color on hover */
+    /* // color: #030E4C; */
+    /* Change text color to white on hover */
+  }
+  .btn_common_Css:hover {
+    transform: scale(1.05);
+    transition: 0.5s;
+  }
+
+  .copilot-cls {
+    /* // padding-bottom: 5px; */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+    /* // padding-top: 5px; */
+  }
+  /* // .fields-container {
+  //   border-bottom: 1px solid #b2b2b2;
+  // } */
+  .field-icon {
+    width: 24px;
+    height: 24px;
+
+    img {
+      object-fit: contain;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .menu-items-css {
+    display: grid;                 
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2px;
+    border-right: none;
+  }
+  .copilot-cls {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    position: relative !important;
+}
+
+.links[_ngcontent-ng-c2277093332] {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+
+
+
+
+
+.pagedetails-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 15px 7px 15px !important;
+  margin: 0 13px;
+  background-color: white;
+}
+
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  padding-bottom: 0;
+  padding-right: 2px !important;
+}
+
+.toolBarHeader{
+  font-weight: 400 !important;
+  font-size: x-large !important;
+}
+.whiteColor{
+  color: white;
+}
+
+.toolBarHeader1{
+  font-weight: 400 !important;
+  font-size: x-large !important;
+  color: #794227 !important;
+  font-weight: bolder;
+  font-weight: bold !important;
+}
+.highlightedText {
+  color: #794227 !important;
+}
+
+
+.Orders_PageTitle {
+  font-size: 22px;
+  line-height: 32.78px;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  width: 100%;
+  color: #030927;
+}
+.TrackNowColor_PageTitle {
+  font-size: 22px;
+  line-height: 32.78px;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  width: 100%;
+  color: #030927;
+}
+
+.ShipReqLinePadding {
+   padding-bottom: 2px;
+}
+
+.pageStatus {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+}
+
+.open-container,
+.totalRec-container,
+.shipped-container,
+.cancelled-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  padding-right: 2px;
+  flex-direction: column;
+}
+
+.count {
+  font-size: 25px;
+  font-weight: 700;
+  color: #000;
+  padding: 0.25rem;
+}
+
+.totalActive-cls,
+.totalLocation-cls,
+.totalInactive-cls {
+  height: 25px;
+  width: 100%;
+  padding: 0;
+  border-radius: 4px;
+}
+
+.totalActive-cls {
+  background-color: #FF8001;
+}
+
+.totalInactive-cls {
+  background-color: #18CD1F;
+}
+
+.totalActive-cls:hover,
+.totalActive-cls.active {
+  border-bottom: 10px solid #B35A01 !important;
+  transform: translateY(-4px);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.totalLocation-cls:hover,
+.totalLocation-cls.active {
+  border-bottom: 10px solid #1678AC !important;
+  transform: translateY(-4px);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.totalInactive-cls:hover,
+.totalInactive-cls.active {
+  border-bottom: 10px solid #939A99 !important;
+  transform: translateY(-4px);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.addMasterBtn .p-tieredmenu {
+  top: 45px !important;
+}
+
+.buttonTitle {
+  justify-content: space-between;
+  border-radius: 4px 4px 4px 4px !important;
+  border: 1px solid #4EA732ff !important;
+  background-color: #4EA732ff !important;
+  color: #fff !important;
+  font-size: 16px !important;
+  height: 40px !important;
+  font-family: AvenirNextCyrMedium !important;
+  padding: 10px;
+  text-align: center;
+  line-height: 0px !important;
+  margin-top: 10px !important;
+  cursor: pointer !important;
+  width: 275px;
+}
+.buttonTitle:hover{
+  background-color: #258F1D !important;
+  color:  #fff !important;
+  border-color:1px solid #258F1D !important;
+}
+
+
+
+/* Base styles for buttons */
+.openButton {
+  position: relative; /* Ensure the shadow is positioned relative to the button */
+  transition: all 0.3s ease; /* Smooth transition for all effects */
+}
+
+/* Hover effect */
+.openButton:hover {
+  transform: translateY(-6px);
+  transition: all 0.3s ease;
+}
+
+/* Active (pressed) effect: Add shadow */
+.openButton.active {
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.7); /* Dark shadow on the active button */
+  transform: translateY(-6px); /* Keep the button in the lifted position */
+  transition: all 0.2s ease;
+}
+
+/* Normal button state (non-active) */
+.openButton {
+  box-shadow: none;
+  transform: translateY(0); /* Keep it normal */
+}
+
+
+/* ShipReqbtn  */
+.thumbtitle {
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 21.86px;
+  text-align: left;
+  color: #030927;
+  margin-bottom: 1rem;
+}
+
+.totalProgressbar {
+  height: 25px;
+  width: 100%;
+  padding: 0px;
+  border-radius: 4px 4px 4px 4px; 
+}
+
+.search-container {
+  display: flex;
+  padding: auto !important;
+  align-items: center;
+  position: relative;
+  .search-icon {
+    position: absolute;
+    right: 0.5rem;
+    cursor: pointer;
+    z-index: 1;
+  }
+  input {
+    padding-right: 2rem;
+  }
+}
+
+.sapMSFI[type='search'] {
+  padding-bottom: 7px;
+  font-size: 1rem;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%; /* Adjust as needed */
+  padding-top: 15px;
+  height:10%;
+  flex-direction: row;
+}
+
+.overlay-cancel,
+.overlay-apply {
+  flex: 0 0 auto; 
+}
+.column-config-cls {
+  display: none;
+  width: 300px;
+  border: 1px solid lightgrey;
+  position: fixed;
+  background-color: #fff;
+  padding: 1%;
+  height: 50%;
+  top: 20%;
+  right: 10%;
+}
+ .col-con-header{
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.col-con-content{
+  height:70%;
+  overflow-y: scroll;
+}
+.actions-column{
+  padding-right: 10px;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center;
+ }
+
+ .main-container {
+  margin-left: 15px;
+  border-radius: 4px 4px 4px 4px;
+  margin-right: 17px !important;
+  background: #ffffff !important;
+  height: 200px;
+}
+
+
+/* Ensure the table header is sticky */
+.sticky-action {
+  position: sticky;
+  right: 0;
+  background-color: white; /* Prevent overlapping text */
+  z-index: 100; /* Ensure it stays on top */
+  text-align: right;
+}
+
+/* Ensure the parent table allows scrolling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* For the table body cells (if needed) */
+td.sticky-action {
+  position: sticky;
+  right: 0;
+  background-color: white;
+  z-index: 1;
+  text-align: right;
+}
+
+/* Ensure the table container allows overflow scrolling */
+.table-container {
+  overflow-x: auto;
+  width: 100%;
+  display: block;
+}
+
+:host ::ng-deep .p-datatable-wrapper{
+  height: 58vh;
+}
+
+:host ::ng-deep .p-overlaypanel .p-overlaypanel-content {
+  padding-top: 0.75rem !important;
+}
+
+::ng-deep .gridCommonCss {
+  border-radius: 4px !important;
+  margin-top: 6px !important;
+  padding-top: 0px !important;
+  height: 69vh !important;
+  margin-left: 13px !important;
+  margin-right: 13px !important;
+}
+
+::ng-deep .card {
+  border-radius: 4px !important;
+}
+@media screen and (min-width: 1200px) and (max-height: 800px) {
+  /* // .transform {
+  //   transform: scale(0.8);
+  //   transform-origin: top left;
+  //   width: 125%;
+  //   height: 100vh;
+  // } */
+  :host ::ng-deep .p-datatable-wrapper{
+    height: 51vh;
+  }
+  ::ng-deep .gridCommonCss {
+    border-radius: 4px !important;
+    margin-top: 6px !important;
+    padding-top: 0px !important;
+    height: 64.5vh !important;
+  }
+}
+
+:host ::ng-deep  .table>:not(caption)>*>* {
+   padding: 0 !important; 
+}
+
+::ng-deep .p-sidebar-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  background-color: white;
+  padding: 2px !important;
+  border-bottom: 1px solid #eee !important;
+  box-shadow: 0px 5px rgba(0, 0, 0, 0.2)
+}
+/* ::ng-deep .p-component-overlay{
+  // width: 45%;
+} */
+
+.tracking-container {
+  width: 100%;
+  margin-top: 15px;
+  padding: 20px;
+  border-radius: 8px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.shipmentDetailsDev{
+  background: #fff !important;
+  border-radius: 4px !important;
+  padding-left: 15px !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding-top: 10px;
+  padding-bottom: 0px;
+}
+.load-track-table-data{
+    float: right;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.shipmentTravelHistroyDev{
+  background: #fff !important;
+  border-radius: 4px !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 350px;
+  overflow-y: auto;
+}
+
+
+
+.timeline-bar {
+  position: relative;
+  width: 40px;
+  text-align: center !important;
+}
+.timeline-icon {
+  font-size: 10px;
+  /* // padding-left: 2px; */
+  background-color: black;
+  border-radius: 10px;
+  color: black;
+}
+
+.timeline-check-circle {
+  font-size: 13px;
+  color: black;
+}
+.timeline-check-circle {
+  font-size: 13px;
+  color: black;
+  text-align: center !important;
+}
+.timeline-line {
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  background-color:black;
+  top: 0;
+  left: 48%;
+}
+
+.timeline-line-top {
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  background-color:black;
+  left: 48%;
+  top: 20px;
+}
+.timeline-line-bottom {
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  background-color:black;
+  left: 48%;
+  bottom: 16px;
+}
+.timeline-line-bottom-check-circle {
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  background-color:black;
+  left: 48%;
+  bottom: 27px;
+}
+
+.tracking-progress {
+  text-align: center; 
+}
+
+.tracking-progress img {
+  display: block; 
+  margin: 0 auto; 
+}
+
+.tracking-progress span {
+  display: block; 
+  margin: 5px 20px 10px 0px;
+  font-weight: bolder;
+  color: #008300;  
+  font-family: AvenirNextCyrMedium !important;
+}
+
+.track-table th, .track-table td {
+  padding: 8px; 
+  text-align: left;
+  word-wrap: break-word; 
+  overflow-wrap: break-word; 
+  white-space: normal; 
+  font-size: 12px !important;
+}
+
+td[rowspan] {
+  vertical-align: top;
+  padding-top: 10px;
+}
+
+.tracking-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: AvenirNextCyrMedium !important;
+}
+
+.tracking-table thead th {
+  background-color: black;
+  color: white;
+  /* // border: none; */
+}
+
+.tracking-table tbody td {
+  border: none;
+}
+
+
+.shipment-details {
+  display: grid;
+  grid-template-columns: 1fr 2fr; 
+  gap: 0;
+  font-family: AvenirNextCyrMedium !important;
+}
+.grid-row {
+  display: contents; 
+}
+
+.grid-label, .grid-value {
+  padding: 10px;
+  background-color: #ffffff;
+  font-size: 12px !important;
+}
+
+.grid-row:nth-child(odd) .grid-label,
+.grid-row:nth-child(odd) .grid-value {
+  background-color: #f9f9f9; 
+}
+
+.grid-row:nth-child(even) .grid-label,
+.grid-row:nth-child(even) .grid-value {
+  background-color: #ffffff; 
+}
+
+.close-icon {
+  padding: 4px;
+  border-radius: 22px;
+  display: inline-block;
+  height: 28px;
+  margin-top: -5px;
+}
+
+  ::ng-deep .p-sidebar-header {
+    background-color: white;
+    padding: 10px !important;
+    border-bottom: 1px solid #eee !important;
+  }
+  
+  :host ::ng-deep .p-sidebar-header { 
+    padding: 10px !important;
+  /* //  background-color: #F5F5F5 !important; */
+    font-family: AvenirNextCyrMedium !important;
+    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.2);
+    height: 68px !important;
+  }
+
+  ::ng-deep .return-info-card .p-card .p-card-body {
+    background: #fff !important;
+    border-radius: 4px !important;
+    height: 775px;
+    padding: 0.5rem !important;
+    padding-left: 15px !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+::ng-deep .carrier-info-card .p-card .p-card-body {
+  background: #fff !important;
+  border-radius: 4px !important;
+  height: 775px;
+  padding: 0.5rem !important;
+  padding-left: 15px !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+::ng-deep .p-card.p-component {
+  background: #fff;
+  padding: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  box-shadow: none !important;
+}
+/* // .custom-close-btn:hover {
+// background-color: #2F4169;
+// }
+
+// .custom-close-btn:hover {
+//   color: #ffffff !important;
+//   height: 62px;
+//   width: 56px;
+//   padding-right: 0px !important;
+// }
+
+// .custom-close-btn {
+//   color: #ffffff !important;
+//   height: 62px;
+//   width: 56px;
+//   padding-right: 0px !important;
+// } */
+
+.btncancel {
+  border: 1px solid #6D6E73 !important;
+  background-color: #fff !important;
+  color: #6D6E73 !important;
+  padding: 5px 15px !important;
+  border-radius: 4px !important;
+  font-family: AvenirNextCyrMedium !important;
+  transition: 0.4s important;
+  font-size: 15px !important;
+  width: 80px;
+    height: 38px !important;
+}
+
+.btncancel:hover {
+  background-color: #f1f1f1 !important;
+  border: 1px solid #6D6E73 !important;
+  color: #6D6E73 !important;
+}
+
+::ng-deep .p-sidebar-footer {
+  border-top: 1px solid #ccc !important;
+  display: flex;
+  /* // justify-content: flex-end; */
+  padding: 0.5rem 1.5rem 0.6rem 2rem !important;
+  margin: 0px !important;
+}
+
+.close-icon-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 22px;
+  border-left: 1px solid gray;
+  background-color: transparent;
+  transition: background-color 0.3s;
+}
+
+.close-icon-container:hover {
+  background-color: #DA4345;
+}
+
+.close-icon-container:hover .close-icon-tag {
+  filter: brightness(0) invert(1);
+}
+
+.close-icon-tag {
+  background-color: transparent !important;
+  display: inline-block;
+  height: 24px; 
+  width: 24px;
+}
+
+::ng-deep .frieghtCancelBtn {
+  color: #030e4c !important;
+  background-color: #fff !important;
+  font-family: AvenirNextCyrMedium !important;
+  border-radius: 4px !important;
+  border: 1px solid #030E4C !important;
+  font-size: 16px !important;
+  padding: 7px 30px;
+}
+::ng-deep .frieghtCancelBtn:focus{
+  border:1px solid #DA4345 !important;
+}
+::ng-deep .frieghtCancelBtn:hover{
+  color: #fff !important;
+  background-color:#DA4345 !important;
+  border: 1px solid #DA4345!important;
+}
+
+::ng-deep .p-sidebar-header {
+  /* // background-color: #f5f5f5 !important; */
+  font-family: AvenirNextCyrMedium !important;
+  box-shadow: 0 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+::ng-deep .siderbar-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 6.5px;
+}
+
+::ng-deep .returnlabel-img {
+  height: 80vh;
+  width: 100%;
+}
+
+::ng-deep .carrierlabel-img {
+  height: 80vh;
+  width: 100%;
+}
+
+.labeldiv {
+  padding-top: 15px !important;
+  padding-bottom: 13px !important;
+}
+
+@media screen and (min-width: 1200px) and (max-height: 800px) {
+  .returnlabel-img {
+    height: 750px;
+    width: 507px;
+  }
+  ::ng-deep .return-info-card .p-card .p-card-body {
+    width: 535px;
+  }
+  .carrierlabel-img {
+    height: 750px;
+    width: 507px;
+  }
+  ::ng-deep .carrier-info-card .p-card .p-card-body {
+    width: 535px;
+  }
+}
+  
+.shipped:hover,.shipped.active{
+  border-bottom: 10px solid  var(--shippedProgress-border-color) !important;
+  translate: 0 -6px;
+  transition: 0.3s;
+  height:32px;
+}
+.tracking:hover,.tracking.active{
+  border-bottom: 10px solid  var(--inTransit-border-color) !important;
+  translate: 0 -6px;
+  transition: 0.3s;
+  height:32px;
+}
+.delivered:hover,.delivered.active{
+  border-bottom: 10px solid  var(--deliveredProgress-border-color) !important;
+  translate: 0 -6px;
+  transition: 0.3s;
+  height:32px;
+}
+.cancelled:hover,.cancelled.active{
+  border-bottom: 10px solid  var(--cancelProgress-border-color) !important;
+  translate: 0 -6px;
+  transition: 0.3s;
+  height:32px;
+}
+.open:hover,.open.active{
+  border-bottom: 10px solid  var(--openProgress-border-color) !important;
+  translate: 0 -6px;
+  transition: 0.3s;
+  height:32px;
+}
+.total:hover,.total.active{
+  border-bottom: 10px solid  var(--totalProgress-border-color) !important;
+  translate: 0 -6px;
+  transition: 0.3s;
+  height:32px;
+}
+
+.pagedetails-header {
+  background-color: #f1f1f1;
+  padding-top: 0px !important;
+}
+
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 0px;
+  padding-left: 18px !important;
+}
+
+.pageTitle {
+  font-size: 22px;
+  line-height: 32.78px;
+  font-weight: bold;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 10px;
+  padding-top: 0px;
+  width: 100%;
+  color: #030927;
+}
+
+.count {
+
+  font-size: 25px !important;
+  font-weight: 700 !important;
+  color: #000 !important;
+}
+
+.thumbtitle {
+  font-size: 17px;
+  font-weight: 400 !important;
+  line-height: 21.86px;
+  text-align: left !important;
+  color: #030927;
+  margin-bottom: 1rem;
+}
+
+.totalProgressbar {
+  height: 25px;
+  width: 100%;
+  padding: 0px;
+  border-radius: 4px 4px 4px 4px;
+  /* // opacity: 0.7; */
+}
+
+.buttonTitle {
+  justify-content: space-between;
+  border-radius: 4px 4px 4px 4px !important;
+  border: 1px solid #4EA732ff !important;
+  background-color: #4EA732ff !important;
+  color: #fff !important;
+  font-size: 16px !important;
+  height: 40px !important;
+  font-family: AvenirNextCyrMedium !important;
+  padding: 10px;
+  text-align: center;
+  line-height: 0px !important;
+  margin-top: 10px !important;
+  cursor: pointer !important;
+  width: 275px;
+}
+.buttonTitle:hover{
+  background-color: #258f1d !important;
+  color:  #fff !important;
+  border-color:1px solid #258f1d !important;
+}
+.main-container1 {
+  padding-left: 18px !important;
+  }
+
+  ::ng-deep .labeldialog {
+    height: 100vh !important;
+    margin-top: -5rem !important;
+  }
+
+  .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+  }
+  
+  .sidebar-header h3 {
+    margin: 15px;
+    font-size: 22px;
+    color: #444444;
+    font-weight:  700;
+  }
+
+  .custom-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 125%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+
+  .iconsdiv {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+  }
+
+  .filter-icon:hover {
+    background-color: #e9ecef;
+    border-radius: 22px !important;
+    padding: 4px !important;
+}
+
+.download-icon{
+  padding: 4px !important;
+}
+
+.download-icon:hover{
+  border-radius: 22px !important;
+  padding: 4px !important;
+}
+.refreshIcon{
+  border-radius: 22px !important;
+  width: 100%;height: 25px;margin-right: 5px;
+}
+.refreshIcon:hover{
+  background-color: #e9ecef;
+}
+
+.customButton {
+  transition: all 0.3s ease !important; /* Smooth transition */
+}
+
+.customButton:active {
+  height: 50px !important; /* Adjust the height as needed */
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5) !important; /* Black shadow at the bottom */
+  transform: translateY(2px) !important; /* Simulate a pressed effect */
+}
+
+
+.batch-ship-void__button > span {
+  background-color: #9d9e9c !important;
+  color: #fff !important;
+  border: 1px solid #9d9e9c !important;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+  justify-content: space-between;
+  border-radius: 4px 4px 4px 4px !important;
+  height: 30px !important;
+  padding: 3px;
+  text-align: center;
+ 
+}
+
+.batch-ship-table__button > span {
+  background-color: #4E9C2D !important;
+  color: #fff !important;
+  border: 1px solid #4E9C2D !important;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+  justify-content: space-between;
+  border-radius: 4px 4px 4px 4px !important;
+  height: 30px !important;
+  padding: 3px;
+  text-align: center;
+ 
+}
+
+.shipNow-IconTabBar-Width{
+  min-width: 25rem !important;
+ 
+}
+.sapMScrollCont.sapUiContentPadding > .sapMScrollContScroll {
+    padding: 0rem;
+    box-sizing: border-box;
+}
+
+/* ShipNow Icon Tab Bar Width adjustment */
+/* .sapMITBInLine.sapMITBTextOnly .sapMITBHead .sapMITBVertical.sapMITBFilter {
+  height: 2.75rem;
+  width: auto !important;
+  min-width: 10rem !important;
+  max-width: 18rem !important;
+  display: flex !important; */
+  /* align-items: stretch !important;
+  justify-content: center !important; */
+/* }
+
+/* Create Ship Request Label Combobox Icon Adjustment*/
+/* .sapUiIcon {
+  cursor: default;
+  text-align: center;
+  display: inline-block;
+  vertical-align: baseline;
+  line-height: 1;
+  position: relative;
+  margin-top: 5px !important;
+} */
+
+
+.total:hover,
+.total.active {
+  border-bottom: 10px solid var(--totalProgress-border-color) !important;
+  transform: translate(0, -6px); /* 'translate' should be 'transform' */
+  transition: transform 0.3s, box-shadow 0.3s; /* Ensure transitions apply */
+  height: 32px;
+  background-color: white;
+  box-shadow: 0px 5px rgba(0, 0, 0, 0.2); /* Box shadow should work */
+}
+
+.total.active {
+  border-bottom: 10px solid var(--totalProgress-border-color) !important;
+  transform: translate(0, -6px) !important;
+  transition: transform 0.3s, box-shadow 0.3s; /* Ensure transitions apply */
+  height: 32px;
+  box-shadow: 0px 5px rgba(0, 0, 0, 0.2) !important;
+}
+
+.customCheckboxSize .sapMCbBg {
+  width: 24px !important; /* Adjust width */
+  height: 24px !important; /* Adjust height */
+}
+
+/* Adjust the checkbox tick (checkmark) */
+.customCheckboxSize .sapMCbMark {
+  width: 24px !important; /* Adjust tick width */
+  height: 24px !important; /* Adjust tick height */
+  /* background-size: 24px 24px !important; */
+}
+.shipNow-IconTabBar-Width {
+  .sapMITBInLine  {
+    .sapMITBHead {
+      display: flex;
+      .sapMITBVertical.sapMITBFilter  {
+        min-width: auto !important;
+        flex-grow: 1;
+      }
+    }
+  }
+
+}
+sapMPopover .sapMPopoverCont {
+  padding: 0.0625rem;
+  padding-bottom: 26px;
+  padding-left: 0px;
+
+}
+.request-button {
+  span {
+    height: 25px !important;
+    border-radius: 10px !important;
+    &::before {
+      content: none !important;
+    }
+    &:hover {
+      translate: 0 -10px;
+      transition: 0.3s;
+      height: 32px !important;
+    }
+  }
+}
+.total-request-button {
+  span{
+    background-color: rgb(31, 152, 222) !important;
+    height: 20px !important;
+    border-radius: 6px !important;
+    &:hover { 
+      border-bottom: 10px solid #166a9b !important;
+    }
+  }
+}
+
+.total-FreightQuoteOrders-button {
+  span{
+    background-color: rgb(0, 79, 125) !important;
+    height: 20px !important;
+    border-radius: 6px !important;
+    &:hover { 
+      border-bottom: 10px solid #166a9b !important;
+    }
+  }
+}
+
+.ship-type-value {
+  display: inline-block !important;
+  background-color: #E3F2FD !important;
+  color: #007ad9 !important;
+  font-weight: bold !important;
+  padding: 8px 14px !important;
+  border-radius: 3px !important;
+  border: 2px solid #007ad9 !important;
+  text-align: center !important;
+  min-width: 40px !important;
+  font-size: 12px !important;
+  letter-spacing: 0.5px !important;
+  box-shadow: 2px 2px 8px rgba(0, 122, 217, 0.2) !important;
+  transition: all 0.3s ease-in-out !important;
+  height: 2rem !important;
+}
+
+.plant-type-style {
+  display: inline-block !important;
+  background-color: #e0fdd6 !important;
+  color: #107815 !important;
+  font-weight: bold !important;
+  padding: 8px 14px !important;
+  border-radius: 3px !important;
+  border: 2px solid #107815 !important;
+  text-align: center !important;
+  min-width: 40px !important;
+  font-size: 12px !important;
+  letter-spacing: 0.5px !important;
+  box-shadow: 2px 2px 8px rgba(0, 122, 217, 0.2) !important;
+  transition: all 0.3s ease-in-out !important;
+  height: 2rem !important;
+}
+
+.shipped-request-button {
+  span{
+    background-color: rgb(74, 156, 26) !important;
+    height: 20px !important;
+    border-radius: 6px !important;
+    &:hover { 
+      border-bottom: 10px solid #346d12 !important;
+    }
+  }
+}
+.shippedProgress-request-button {
+  span{
+    background-color: rgb(8, 117, 28) !important;
+    height: 20px !important;
+    border-radius: 6px !important;
+    &:hover { 
+      border-bottom: 10px solid #346d12 !important;
+    }
+  }
+}
+.open-request-button {
+  span{
+    background-color: rgb(0, 174, 255) !important;
+    height: 20px !important;
+    border-radius: 6px !important;
+    &:hover { 
+      border-bottom: 10px solid #007ab3 !important;
+    }
+  }
+}
+.cancelled-request-button {
+  span{
+    background-color: rgb(232, 32, 32) !important;
+    height: 20px !important;
+    border-radius: 6px !important;
+    &:hover { 
+      border-bottom: 10px solid #a21616 !important;
+    }
+  }
+}
+
+.InTransitord-request-button {
+  span{
+    background-color: rgb(14, 51, 240) !important;
+    border-color: rgb(14, 51, 240) !important;
+    height: 20px !important;
+    border-radius: 6px !important;
+    &:hover { 
+      border-bottom: 10px solid #677cd2 !important;
+      /* border-bottom: 10px solid #939A99 !important; */
+    }
+  }
+}
+
+.Receivedord-request-button {
+  span{
+    /* background-color: rgb(182, 173, 15) !important; */
+    height: 20px !important;
+    border-radius: 6px !important;
+    &:hover { 
+      border-bottom: 10px solid #dfd43f !important;
+    }
+  }
+}
+
+.totalProgress-request-button {
+  span{
+    background-color: rgb(32, 172, 246) !important;
+    height: 20px !important;
+    border-radius: 6px !important;
+    &:hover { 
+      border-bottom: 10px solid #166a9b !important;
+    }
+  }
+}
+
+
+.inTransit-request-button {
+  span{
+    background-color: rgb(14, 51, 240) !important;
+    height: 20px !important;
+    border-radius: 6px !important;
+    &:hover { 
+      border-bottom: 10px solid #4d59c7 !important;
+    }
+  }
+}
+.InWhite-request-button {
+  span {
+    background-color: #D2D4DA !important;
+    height: 20px !important;
+    border-radius: 6px !important;
+    &:hover { 
+      border-bottom: 10px solid #939A99 !important;
+    }
+  }
+}
+
+
+.routing-Billing-Margin{
+  margin-bottom: 5px !important;
+}
+.Special-Services-Maring{
+  margin-bottom: 8px !important;
+}
+
+/* Combobox Arrow Icon Placed as middle using margin-top: 5px; */
+.sapUiSizeCompact .sapMInputBase:not(.sapMInputBaseReadonly) .sapMInputBaseIconContainer .sapMInputBaseIcon {
+  width: 2rem;
+  height: 1.5625rem;
+  line-height: 1.625rem;
+  margin-top: 5px;
+}
+
+.sapUiSizeCompact .sapMSFF {
+  height: 2.3rem !important;
+  padding-left: .5rem !important;
+  padding-top: 6px !important;
+}
+
+/* Ui Table Border Line Hide */
+.sapUiTableCell {
+  position: relative;
+  /* box-sizing: None !important;
+  border-right: None !important; */
+  border-bottom: .0625rem solid #e5e5e5;
+}
+
+/*------ ToolPage Header Dark Theme -----*/
+
+/* .sapTntToolHeader:not(.sapUshellShellToolHeader).sapMTBStandard {
+  border-bottom: none !important;
+  background-color: black !important;
+}
+.sapTntToolHeader .sapMText,
+.sapTntToolHeader .sapUiIcon {
+  color: white !important;
+  fill: white !important;
+}
+.sapTntToolHeader .sapMBtn {
+  background-color: black !important;
+  color: white !important;
+  fill: white !important;
+  border: none;
+} */
+
+/* New style for the header */
+.alHeaderStyle {
+  background-color: #2E3545 !important;
+  border-bottom: 1px solid #585656; /* optional subtle border */
+}
+
+.alHeaderStyle .sapMText,
+.alHeaderStyle .sapUiIcon {
+  color: white !important;
+  fill: black !important;
+}
+
+.alHeaderStyle .sapMBtn {
+  background-color: #2E3545 !important;
+  color: black !important;
+  fill: black !important;
+  border: 1px solid #4e4d4d; /* optional */
+}
+
+
+.customHeaderStyle {
+  border-bottom: none !important;
+  background-color: #212121 !important;
+}
+
+.customHeaderStyle .sapMText,
+.customHeaderStyle .sapUiIcon {
+  color: white !important;
+  fill: white !important;
+}
+
+.customHeaderStyle .sapMBtn :hover {
+  background-color: #212121 !important;
+  color: white !important;
+  fill: white !important;
+  border: none;
+}
+
+
+
+/* Custom CSS to position the dialog on the left */
+.myCustomDialog .sapMDialog {
+  left: 0 !important;
+  top: 0 !important;
+  transform: none !important;
+  margin: 0 !important;
+  height: 100vh;
+  width: 400px;
+}
+
+
+
+
+.scan-ship-toolbar1 {
+  padding: 0rem !important;
+  height: auto !important;
+  align-items: stretch;
+}
+
+.scan-ship-toolbar1__title {
+  align-self: center;
+}
+
+.scan-ship-toolbar1__input {
+  width: 400px !important;
+  height: auto !important;
+}
+
+.scan-ship-toolbar1__input > div {
+  height: auto !important;
+
+}
+.green-button_Master_Red {
+  color: unset !important;
+  border-radius: 1% !important;
+  height: 30px !important;
+  cursor: pointer;
+  background-color: #b92a2a !important; /* Always green */
+  color: #fff !important;
+  border: 1px solid #b92a2a !important;
+}
+
+.green-button_Master_Red span {
+  display: flex !important;
+  align-items: center;
+  color: #fff !important;
+}
+
+.green-button_Master_Red:hover,
+.green-button_Master_Red:focus,
+.green-button_Master_Red:active {
+  background-color: #b92a2a !important; /* Ensure no change on hover/click */
+  border: 1px solid #b92a2a !important;
+  color: #fff !important;
+}
+
+
+.green-button_Master {
+  color: unset !important;
+  border-radius: 1% !important;
+  height: 30px !important;
+  cursor: pointer;
+  background-color: #4E9C2D !important; /* Always green */
+  color: #fff !important;
+  border: 1px solid #4E9C2D !important;
+}
+
+.green-button_Master span {
+  display: flex !important;
+  align-items: center;
+  color: #fff !important;
+}
+
+.green-button_Master:hover,
+.green-button_Master:focus,
+.green-button_Master:active {
+  background-color: #4E9C2D !important; /* Ensure no change on hover/click */
+  border: 1px solid #4E9C2D !important;
+  color: #fff !important;
+}
+
+
+.green-button {
+  color: unset !important;
+  border-radius: 1% !important;
+  height: 40px !important;
+  cursor: pointer;
+  background-color: #4E9C2D !important; /* Always green */
+  color: #fff !important;
+  border: 1px solid #4E9C2D !important;
+}
+
+.green-button span {
+  display: flex !important;
+  align-items: center;
+  color: #fff !important;
+}
+
+.green-button:hover,
+.green-button:focus,
+.green-button:active {
+  background-color: #4E9C2D !important; /* Ensure no change on hover/click */
+  border: 1px solid #4E9C2D !important;
+  color: #fff !important;
+}
+
+
+
+.green-buttonVoid {
+  color: unset !important;
+  border-radius: 1% !important;
+  height: 40px !important;
+  cursor: pointer;
+  background-color: #4E9C2D !important; /* Always green */
+  color: #fff !important;
+  border: 1px solid #4E9C2D !important;
+}
+
+.green-buttonVoid span {
+  display: flex !important;
+  align-items: center;
+  color: #fff !important;
+}
+
+.green-buttonVoid:hover,
+.green-buttonVoid:focus,
+.green-buttonVoid:active {
+  background-color: #4E9C2D !important; /* Ensure no change on hover/click */
+  border: 1px solid #4E9C2D !important;
+  color: #fff !important;
+}
+
+/* Ship Now button base for now no use */ 
+.btnShipNowVoid {
+  background-color: #247a09;
+  border: 1px solid #4ea732;
+  float: right;
+  color: #fff;
+  margin-right: 7px !important;
+  font-size: 17.5px !important;
+  width: 160px !important;
+}
+
+
+/* Hover behavior: keep background green and text white */
+.btnShipNowVoid:hover {
+  background-color: #247a09 !important; /* same green */
+  border: 1px solid #4ea732 !important; /* same green border */
+  color: #ffffff !important; /* white text */
+  cursor: pointer; /* pointer cursor */
+}
+
+
+
+.scan-ship-toolbar1__input input {
+  height: 52px;
+}
+
+
+/* Large screens */
+@media screen and (min-width: 1880px) and (min-height: 858px) {
+  .TopHeight {
+    padding-top: 110px;
+  }
+}
+
+/* Medium screens */
+@media screen and (min-width: 1500px) and (max-width: 1600px) and (min-height: 720px) and (max-height: 740px) {
+  .TopHeight {
+    padding-top: 20px;
+  }
+}
+
+
+
+.scan-ship-toolbar1__button {
+  /* color: unset !important; */
+  border-radius: 6px !important;
+  height: 40px !important;
+  cursor: pointer;
+  border-color: green !important;
+}
+
+.scan-ship-toolbar1__button:hover > span {
+  background-color: #4E9C2D !important;
+  color: #fff !important;
+  border: 1px solid #4E9C2D !important;
+  animation: animateBtn 1s infinite;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+  border-radius: 6px !important;
+  border-color: green !important;
+}
+
+.shiptype-ship-toolbar1__button {
+  /* color: unset !important; */
+  border-radius: 1% !important;
+  height: 40px !important;
+  cursor: pointer;
+}
+
+.shiptype-ship-toolbar1__button:hover > span {
+  background-color: #4E9C2D !important;
+  color: #fff !important;
+  border: 1px solid #4E9C2D !important;
+  animation: animateBtn 1s infinite;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+  border-radius: 1% !important;
+}
+
+.validateAddress__button span {
+  color:  unset !important;
+  height: 90% !important;
+  border-radius: 1% !important;
+  display: flex !important;
+  align-items: center;
+  border-color: #4E9C2D !important;
+}
+
+.validateAddress__button:hover > span {
+  background-color: #4E9C2D !important;
+  color: #fff !important;
+  border: 1px solid #4E9C2D !important;
+  animation: animateBtn 1s infinite;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+   border-color: #4E9C2D !important;
+  border-radius: 1% !important;
+}
+
+.scan-ship-toolbar1__button_void:hover > span {
+  background-color: red !important;
+  border: 1px solid red !important;
+  border-radius: 6px !important;
+}
+
+
+.scan-ship-toolbar1__button:hover bdi {
+  color: #fff !important;
+  border-radius: 1% !important;
+}
+
+.scan-ship-toolbar1__button span {
+  color: unset !important;
+  height: 100% !important;
+  border-radius: 1% !important;
+  display: flex !important;
+  align-items: center;
+}
+
+body.dark-theme {
+  .scan-ship-toolbar1__input input {
+    color: #fff;
+  }
+
+  .scan-ship-toolbar1__input.sapInputFocused > div::before {
+    border: none !important;
+  }
+  .scan-ship-toolbar1__button > span{
+    border-radius: 1% !important;
+    background-color: gray;
+    color: #fff
+  }
+  .scan-ship-toolbar1__button:focus {
+    border: none;
+    border-radius: 1% !important;
+    span::before {
+      border: none !important;
+    }
+    
+  }
+  .scan-ship-toolbar1__title {
+    color: #f7f7f8;
+  }
+  div:has( > div > .scan-ship-page), .scan-ship-toolbar1, .scan-ship-table, .scan-ship-toolbar1__input input,
+  .scan-ship-table tr, .sapUiTableCtrlEmpty, div:has( > .scan-ship-table_footer_toolbar), .scan-ship-table_footer_toolbar {
+    background-color: #121212;;
+  }
+
+  .scan-ship-toolbar1__input input {
+    background-color: #2c2c2c !important;
+    color: #ffffff !important;
+    border: 1px solid #444 !important;
+  }
+
+  .scan-ship-table span, .sapUiTableCtrlEmpty, .scan-ship-toolbar1__input input::placeholder {
+    color: #fff;;
+  }
+
+  .scan-ship-toolbar1 {
+    border: 1px solid #f7f7f8 !important;
+  }
+  .scan-ship-toolbar__button {
+    
+    height: auto !important;
+    cursor: pointer;
+  }
+}
+
+/* Decline Button CSS */
+.Decline_Btn {
+  border-radius: 0px;
+  padding: 4px 10px;
+  font-size: 16px !important;
+  margin: 0 7px 0 0 !important;
+}
+
+/* Hover effect */
+.Decline_Btn:hover { 
+  background-color: rgb(180, 49, 49) !important;
+  border: 1px solid red !important;
+  color: #fff !important;
+}
+
+/* Change icon color when hovering */
+.Decline_Btn:hover .sapMBtnIcon {
+  color: #fff !important;
+  border: red;
+  background-color: red !important;
+  /* fill: #fff !important; Ensure the fill color is also changed for SVG icons */
+}
+
+
+.customTabBar {
+  margin: 10px;
+}
+
+.horizontalLine {
+  width: 100%;
+  height: 1px;
+  background-color: gray; /* Line Color */
+  margin: 10px 0;
+}
+
+.CreateShipReq_SpecialService{
+  background-color: white !important;
+  padding: 20px !important;
+  border-radius: 10px !important;
+  flex: auto !important;
+}
+
+.summary-section {
+  padding: 1rem 0;
+}
+
+.section-header {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+.quote-title {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.quote-amount {
+  color: green;
+  font-weight: bold;
+}
+.textRed {
+  color: #e74c3c !important; /* red */
+  font-weight: bold;
+}
+.mismatch {
+  background-color: #FFF1F1;
+  color: #D32F2F;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+.quote-status {
+  margin-top: 0.5rem;
+}
+
+
+.stat-card:hover {
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+.stat-card {
+  display: flex;
+  align-items: center;
+  background: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+* {
+  box-sizing: border-box;
+}
+
+.carrier-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  background-color: #f7f9fc;
+  border-color: #3498db;
+}
+.carrier-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background-color: #f9f9f9;
+}
+.carrier-card {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+  border: 1px solid #ddd;
+}
+.carrier-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+* {
+  box-sizing: border-box;
+}
+
+.fixedColumn {
+  position: sticky;
+  right: 0;
+  background-color: #ffffff; /* Ensure background matches */
+  z-index: 10;
+}
+
+
+.fixedColumnRight {
+  position: sticky;
+  right: 0;
+  background-color: white; /* Match table background */
+  z-index: 10;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+}
+
+
+
+.dark-theme[_ngcontent-ng-c3884817082] .inputField[_ngcontent-ng-c3884817082], .dark-theme[_ngcontent-ng-c3884817082] .dropDownCss[_ngcontent-ng-c3884817082], .dark-theme[_ngcontent-ng-c3884817082] .calendarCss[_ngcontent-ng-c3884817082] {
+  background-color: #2c2c2c !important;
+  color: #ffffff !important;
+  border: 1px solid #444 !important;
+}
+.inputField[_ngcontent-ng-c3884817082] {
+  width: 270px;
+  font-size: 20px;
+  font-weight: 800 !important;
+  border-radius: 5px;
+  background-color: #3B3B3C !important;
+  color: white !important;
+  padding: 10px;
+  box-shadow: 0 0 0 1px transparent;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  border-bottom-right-radius: 5px !important;
+  border-top-right-radius: 5px !important;
+  opacity: 0.8 !important;
+}
+.lwdw[_ngcontent-ng-c3884817082] {
+  font-size: 18px;
+  font-weight: 800 !important;
+  border: 1px solid #3C3C3C;
+  color: #FFFFFF !important;
+  font-weight: 800;
+  border-radius: 5px;
+  background-color: #3B3B3C !important;
+  color: white !important;
+  box-shadow: 0 0 0 1px transparent;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  border-bottom-right-radius: 5px !important;
+  border-top-right-radius: 5px !important;
+  opacity: 0.8 !important;
+  width: 3vw !important;
+}
+input[_ngcontent-ng-c3884817082], select[_ngcontent-ng-c3884817082], textarea[_ngcontent-ng-c3884817082] {
+  background: #2C2C2C;
+  color: #FFFFFF;
+  border: 1px solid #303030;
+  padding: 0.8rem;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+.mx-2 {
+  margin-left: 0.5rem !important;
+  margin-right: 0.5rem !important;
+}
+.text-dark {
+  --bs-text-opacity: 1;
+  color: rgba(var(--bs-dark-rgb), var(--bs-text-opacity)) !important;
+}
+.mx-2 {
+  margin-right: .5rem !important;
+  margin-left: .5rem !important;
+}
+.form-control {
+  display: block;
+  width: 100%;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+button, input, optgroup, select, textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+* {
+  box-sizing: border-box;
+}
+
+.rightSideDialogForTracking {
+  width: 55% !important;
+  height: 100% !important;  /* Adjusting height dynamically */
+  position: fixed !important;
+  z-index: 10002 !important;
+  max-width: 1230px;
+  max-height: 850px;
+  /* max-height: calc(100% - 100px) !important; */
+  top: 3px !important;    /* Adds 50px space from the top */
+  bottom: 5px !important; /* Adds 50px space from the bottom */
+  right: 0 !important;
+  left: auto !important;
+  border-radius: 0px !important;
+}
+
+.rightSidePopupBottomAdjustment{
+  position: relative !important;
+  bottom: 0 !important;
+}
+
+.backgroundForTrackTableColumns .sapMListTblCell.sapMListTblHeaderCell {
+  padding: 0;
+  background-color: black;
+  color: white !important;
+}
+
+
+/* Timeline Container - ensures alignment */
+.timeline-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 100%;
+}
+
+/* Timeline Dot */
+.timeline-icon {
+  width: 12px;
+  height: 12px;
+  background-color: black !important;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white !important;
+  font-size: 8px !important;
+  left: 20% !important;
+}
+
+.backgroundForTrackTableColumns .sapMListTblHeaderCell .sapMText {
+  color: white !important;
+}
+
+/* SimpleForm Styling */
+.customSimpleForm {
+  width: 100%;
+  background-color: #F8F8F8; /* Light gray background */
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* Label Alignment */
+.customLabel {
+  width: 40%;
+  text-align: left;
+  color: #333;
+}
+
+/* Text Alignment */
+.customTextField {
+  width: 100%;
+  text-align: center !important;
+  color: black;
+}
+
+.grayBackgroundColor .sapUiForm:not(.sapUiFormEdit) .sapMText {
+  min-height: 1rem;
+  background-color: gray;
+}
+
+/* Shipment Travel History Table Styling */
+.backgroundForTrackTableColumns {
+  width: 100%;
+  background-color: white;
+  border-radius: 8px;
+}
+
+/* Table Header Black Background */
+.customTableHeader {
+  background-color: black;
+  color: white !important;
+  font-weight: bold;
+  padding: 10px;
+}
+
+/* Alternating Row Colors */
+#idShipmentHistoryTable .sapMListTblRow:nth-child(odd) {
+  background-color: black !important;
+  color: white !important;
+}
+
+#idShipmentHistoryTable .sapMListTblRow:nth-child(even) {
+  background-color: gray !important;
+  color: white !important;
+}
+
+.timeline-line {
+    position: absolute !important;
+    width: 2px !important;
+    height: 73% !important;
+    background-color: black !important;
+    top: 100px !important;
+    left: 49% !important;
+}
+
+
+
+
+.customVBox {
+  padding: 20px;
+}
+
+/* Style for each row inside VBox */
+.customRow {
+  display: flex;
+  align-items: center; /* Vertically center the content */
+  padding: 10px;
+}
+
+/* Ensure that text is centered in the HBox */
+.centerText {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: start !important;
+}
+
+/* Alternate row colors */
+.customRow:nth-child(odd) {
+  background-color: #f5f5f5; /* Light gray background for even rows */
+}
+
+.customRow:nth-child(even) {
+  background-color: #ffffff; /* White background for odd rows */
+}
+
+/* Style for labels */
+.customLabel {
+  width: 40%; /* Adjust the width as needed */
+  font-weight: bold;
+  padding-right: 10px;
+}
+
+/* Style for text fields */
+.customTextField {
+  width: 60%; /* Adjust the width as needed */
+  padding-left: 10px;
+}
+
+.obtainProofOfDelivery{
+  color: #23A1B7 !important;
+}
+
+.text-primary {
+    color: #2196f3 !important;
+    font-weight: bold !important;
+}
+
+
+.customTabActive {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(200, 230, 200, 0.8), rgba(78, 167, 50, 0.7)) !important;
+  border-bottom: 1px solid #4ea732 !important;
+}
+
+.customTab {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-decoration: none;
+  background: none;
+  font-family: var(--mat-tab-header-label-text-font);
+  font-size: var(--mat-tab-header-label-text-size);
+  letter-spacing: var(--mat-tab-header-label-text-tracking);
+  line-height: var(--mat-tab-header-label-text-line-height);
+  font-weight: var(--mat-tab-header-label-text-weight);
+}
+
+.transparentDialog .sapMDialog {
+  background: rgba(0, 0, 0, 0) !important; /* Fully transparent */
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.transparentDialog .sapMDialog > .sapMDialogScroll {
+  background: rgba(0, 0, 0, 0) !important;
+}
+
+.transparentDialog .sapMDialog > section {
+  background: rgba(0, 0, 0, 0) !important;
+}
+
+.transparentDialog .sapMDialog > .sapMDialogSection {
+  background: rgba(0, 0, 0, 0) !important;
+}
+
+/* Also target any inner containers */
+.transparentDialog .sapMDialogScrollCont {
+  background: transparent !important;
+}
+
+
+.totalPkgsNumberData {
+     width: 55px !important;
+    color: #fff !important;
+    background-color: rgb(81, 0, 231) !important;
+    padding: 10px 24px !important;
+    margin-left: 0px;
+    margin-top: -6px !important;
+    border-radius: 6px;
+    font-weight: 700;
+    box-shadow: 2px 2px 8px #0003;
+     height: 37px;
+}
+
+.pickStatusNumberData {
+  color: white !important;
+  padding: 5px 15px !important;
+  margin-left: 8px;
+  border-radius: 6px;
+  font-weight: bold;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  background-color: rgb(0, 159, 53) !important;
+}
+.pickStatusNumberData2{
+    width: 55px !important;
+    color: #fff !important;
+    background-color: coral !important;
+    padding: 10px 24px !important;
+    margin-left: 0px;
+    margin-top: -6px !important;
+    border-radius: 6px;
+    font-weight: 700;
+    box-shadow: 2px 2px 8px #0003;
+    height: 37px;
+}
+
+.TransparentBackground{
+  background-color: transparent !important;
+}
+
+.customTabStyle *:focus-visible {
+  outline: none !important;
+}
+
+.customTabStyle .sapMITBText::after {
+  content: none !important;
+}
+
+.customTabStyle .sapMITBSelected {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(200, 230, 200, 0.8), rgba(78, 167, 50, 0.7)) !important;
+  border-bottom: 2px solid #4ea732 !important;
+  color: black !important;
+}
+
+.customTabStyle .sapMITBSelected .sapMITBText {
+  color: black !important;
+}
+
+.customTabStyle .sapMITBFilter .sapMITBText {
+  color: black !important;
+}
+
+/* .customTabStyle .sapMITBSelected {
+  border-bottom: 2px solid #4ea732 !important;
+} */
+
+.customTabStyle .sapMITBSelected {
+  box-shadow: none !important;   /* UI5's default shadow (blue) */
+  border-bottom: none !important; /* Blue border removal */
+}
+
+/* Override the default blue indicator */
+.customTabStyle .sapMITBSelected::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #4ea732 !important;
+}
+
+/* Ensure the selected tab text remains black */
+.customTabStyle .sapMITBSelected .sapMITBText {
+  color: black !important;
+}
+
+.customTabStyle .sapMITBFilter {
+  border-bottom: none !important;
+}
+
+.customTabStyle .sapMITBContentArrow::after {
+  content: none !important;
+  display: none !important;
+}
+
+.packageWeightsDevideText {
+  width: auto;
+  text-align: left;
+  font-size: x-large;
+  /* margin-top: 5% !important; */
+}
+
+
+.customBlueYellowIcon .sapMBtnIcon {
+  height: 20px !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  filter: brightness(0) saturate(100%) invert(25%) sepia(99%) saturate(2678%) hue-rotate(199deg) brightness(89%) contrast(92%);
+  padding-top: 15% !important;
+}
+
+/* .customBlueYellowIcon .sapMBtnIcon:hover {
+  height: 22px !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  filter: brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(2000%)
+            hue-rotate(20deg) brightness(100%) contrast(100%); /* Orange */
+  padding-top: 15% !important;
+} */
+
+.customOrdersIcon .sapUiIcon::before {
+  content: "";
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA6CAYAAAD7h6qmAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA...');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+
+.shipNow-IconTabBar-Width {
+  & .sapMITBInLine {
+      & .sapMITBHead {
+          .sapMITBVertical.sapMITBFilter {
+              min-width: 15rem !important;
+              flex-grow: 1;
+              justify-content: center !important;
+          }
+      }
+  }
+}
+
+.customLine{
+  border-bottom: groove !important;
+}
+.whiteBackground  {
+  background-color: white !important;
+  border-color: white !important;
+  padding: 4px !important;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 
+              0px -4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.whiteBackgroundShipnow  {
+  background-color: white !important;
+  padding: 4px !important;
+}
+
+.blueBackground  {
+  padding: 4px !important;
+  background-color: rgb(86, 136, 248) !important;
+}
+
+.packScreenCarrier{
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 800;
+  margin-left: 10px !important;
+  animation: _ngcontent-ng-c1812421190_zoomIn 0.5sease-in-out;
+}
+
+.customDeleteButton .sapUiIcon {
+  color: red !important;      /* Red Icon */
+  background-color: None !important;  /* White Background */
+  border-radius: 50%;         /* Optional: For rounded button */
+  padding-top: 15% !important;               /* Padding for spacing */
+  font-size: 16px !important; /* Small Icon Size */
+  width: 10px !important;                /* Small Button Width */
+  height: 15px !important;               /* Small Button Height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sapDeliveryNumberInptBold .sapMInputBaseInner {
+  padding-right: 0.25rem !important;
+  font-weight: bold !important;
+}
+
+
+.custom-input2:focus {
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 8px rgba(44, 160, 28) !important;
+}
+
+.columnConfigSearch .sapUiSizeCompact .sapMSFF {
+  padding-left: 2% !important;
+  padding-top: 2% !important;
+}
+.whiteBackgroundColumnConfig {
+  background-color: white !important;
+  border-color: white !important;
+  padding: 4px !important;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2),
+              0px -6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.saveBtnColumnConfig {
+  height: 40px !important;
+  width: 60px !important;
+  color: #4E9C2D !important;
+}
+
+.Ship-Now-toolbar1__button_ColumnConfig:hover > span {
+  background-color: #4E9C2D !important;
+  color: #fff !important;
+  height: 69px ;
+  padding-left: 16px;
+  width: 87px;
+  border: 1px solid #4E9C2D !important;
+  border-radius: 8% !important;
+}
+
+.Ship-Now-toolbar1__button_ColumnConfig:hover bdi {
+  color: #fff !important;
+  border-radius: 8% !important;
+}
+
+.Ship-Now-toolbar1__button_ColumnConfig span {
+ color: black !important;
+  height: 100% !important;
+ border-color: #000 !important;
+  border-radius: 8% !important;
+  padding-left: 16px;
+  border-radius: 8% !important;
+  display: flex !important;
+  align-items: center;
+  height: 80px;
+  width: 87px;
+}
+
+/* Dark Theme Styles */
+body.dark-theme {
+  .Ship-Now-toolbar1__button_ColumnConfig > span {
+    border-radius: 8% !important;
+    background-color: white !important;
+    color: #fff !important;
+  }
+
+  .Ship-Now-toolbar1__button_ColumnConfig:focus {
+    border: none;
+    border-radius: 8% !important;
+  }
+}
+
+.Ship-Now-toolbar1__button_ColumnConfig:focus .sapMBtnInner {
+  outline: none !important;
+}
+
+
+.getShippingRates-btn {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+  width: 120px !important;
+  margin-right: 80px !important;
+  span:before {
+    display: none !important;
+  }
+  bdi {
+    color: #000;
+  }
+}
+
+.getShippingRates-btn:hover {
+  background-color: #4ea732;
+  color: #fff !important;
+  span:before {
+    display: none !important;
+  }
+  bdi {
+    color: #fff;
+  }
+}
+
+.moreActions-btn {
+  height: 2.5rem !important;
+  min-height: 2.5rem !important;
+  background-color: #fff !important;
+  border: 1px solid #0070f2 !important; /* SAP blue */
+  color: #0070f2 !important;
+  border-radius: 6px;
+  padding: 0 1rem !important;
+}
+
+/* Inner button */
+.moreActions-btn .sapMBtnInner {
+  height: 100% !important;
+  background: transparent !important;
+  border: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit !important; /* ensures it follows parent */
+}
+
+/* ✅ Text span fix */
+.moreActions-btn .sapMBtnContent {
+  color: inherit !important;
+  font-weight: 500; /* optional: make text a bit bolder */
+}
+
+/* Icon inherits color */
+.moreActions-btn .sapUiIcon {
+  color: inherit !important;
+}
+
+/* Hover */
+.moreActions-btn:hover {
+  background-color: #0070f2 !important;
+  color: #fff !important;
+  border-color: #0070f2 !important;
+}
+
+.moreActions-btn:hover .sapMBtnContent,
+.moreActions-btn:hover .sapUiIcon {
+  color: #fff !important;
+}
+
+.moreActions-btn:focus .sapMBtnInner {
+  outline: none !important;
+}
+
+.customValueHelpIcon .sapUiIcon {
+  font-family: SAP-icons;
+  content: "\e00d"; /* Unicode for sap-icon://search */
+}
+
+.clearBtn {
+  height: 40px !important;
+  border-color: coral !important;
+  color: red !important;
+}
+
+.saveBtn {
+  height: 40px !important;
+  width: 60px !important;
+   border-color: #4E9C2D !important;
+  border-color: green !important;
+  color: green !important;
+}
+.firebrickColor{
+  color: firebrick;
+  font-weight: bold !important;
+  border: none;
+}
+.namecolorrc{
+  color: #3b5998 !important;
+  font-weight: bold !important;
+  border: none;
+}
+.carriercolortext{
+   color: #6f42c1 !important;
+  font-weight: bold !important;
+  border: none;
+}
+
+.shipnow-icon-tabbar *:focus-visible {
+  outline: none !important
+}
+
+
+
+.ship-now-footer_ship-now span {
+  background-color: transparent !important;
+}
+.green-button span {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.sapMDialog.busy-dialog {
+  box-shadow: none !important;
+  .sapMDialogSection {
+    background-color: transparent !important;
+  }
+}
+.ship-now-decline_btn:hover {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.ship-now-decline_btn:hover span {
+  background-color: red !important;
+}
+
+.pgiSuccess {
+  background-color: green !important; /* Set button background to green */
+  /* height: 2px !important;
+  width: 2px !important; */
+}
+
+.pgiSuccess .sapMBtnContent {
+  color: white !important; /* Ensure text color is white */
+  font-weight: 500 !important;
+}
+
+.pgiSuccess .sapMBtnIcon {
+  color: white !important; /* Ensure icon color is white */
+}
+
+.pgiFailed {
+  background-color: red !important;
+}
+
+.pgiFailed .sapMBtnContent {
+  color: white !important; /* Ensure text color is white */
+  font-weight: 500 !important;
+}
+
+.pgiFailed .sapMBtnIcon {
+  color: white !important;
+}
+
+.ordersDarkThemeToolbar {
+  width: 100%;
+  height: 4rem;
+  background-color: #2E3545 !important;
+  color: white !important;
+}
+
+.ordersTextColor {
+  text-align: left;
+  color: white !important;
+}
+
+.TrackNowTextColor {
+  text-align: left;
+  color: cyan !important;
+}
+
+
+.rowRightLine .sapUiTableCell {
+  position: relative;
+  box-sizing: border-box;
+  border-bottom: .0625rem solid #e5e5e5;
+}
+
+.ordersTableFooter{
+  padding: 20px !important;
+}
+
+.ordersIcons .sapUiIcon::before {
+  content: attr(data-sap-ui-icon-content);
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+  color: black;
+  font-weight: bold !important;
+}
+
+.greenColorForIcon .sapUiIcon::before {
+  content: attr(data-sap-ui-icon-content);
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+  color: rgb(87, 145, 0) !important;
+}
+
+.redColorForIcon .sapUiIcon::before {
+  content: attr(data-sap-ui-icon-content);
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+  color: red !important;
+}
+
+.yellowColorForIcon .sapUiIcon::before {
+  content: attr(data-sap-ui-icon-content);
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+  color: rgb(255, 251, 0) !important;
+}
+
+
+.greenColorForIcon {
+	color: green !important;
+	font-weight: bold;
+}
+.redColorForIcon {
+	color: red !important;
+	font-weight: bold;
+}
+
+.ordersTableRightBorder .sapUiTableCell {
+  position: relative;
+  box-sizing: border-box;
+  border-right: none !important; /* explicitly remove right border */
+  border-bottom: 1px solid #e5e5e5; /* light gray bottom border */
+}
+
+.orderItem .sapUiIcon::before {
+  content: attr(data-sap-ui-icon-content);
+  font-weight: bold !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ordersSmallText {
+  font-size: 10px !important;
+}
+
+.allOrdersSmallTextInShipperCopilot {
+  font-size: 12px !important;
+}
+
+.ordersSmallButton .sapUiSizeCompact .sapMBtnInner.sapMBtnText, .sapUiSizeCompact .sapMBtnInner.sapMBtnIconFirst {
+  padding-left: 0.4375rem;
+  padding-right: 0.4375rem;
+  font-size: 10px !important;
+}
+
+.shipNowShipToHeader{
+  background-color: #0CAFFF !important;
+  padding: 5px 10px !important;
+  border-radius: 5px !important;
+  color: white !important;
+  margin-bottom: 3px !important;
+  font-size: 15px !important;
+  font-weight: 600;
+  text-align: left;
+  padding-top: 2px;
+}
+
+.shipNowShipFromHeader{
+  color: rgb(0, 0, 0) !important;
+  margin-bottom: 3px !important;
+  font-size: 15px !important;
+  font-weight: 600;
+  text-align: left;
+  padding-top: 2px;
+}
+
+.packScreenPadding{
+  padding: 13px !important;
+}
+
+.sapMCbBg {
+  background-color: #fff;
+  /* border: solid .125rem #bfbfbf; */
+  display: inline-block;
+  position: absolute;
+  left: 0.8125rem;
+  top: 0.8125rem;
+  height: 1.125rem;
+  width: 1.125rem;
+  line-height: 1.125rem;
+  padding: 0px;
+  text-align: center;
+  font-size: 1rem;
+  border-top-left-radius: 0.125rem;
+  border-top-right-radius: 0.125rem;
+  border-bottom-right-radius: 0.125rem;
+  border-bottom-left-radius: 0.125rem;
+  -webkit-focus-ring-color: none;
+}
+
+.customInputWrapper {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  align-items: center;
+}
+
+.startButton {
+  border: none;
+  background: transparent;
+  height: 100%;
+}
+
+.shippercopilotcss {
+  border: none;
+  flex-grow: 1;
+}
+
+.freightQuoteStatusSubmitColor{
+  background-color: dodgerblue;
+}
+.freightQuoteStatusReceivedColor{
+  background-color: rgb(79, 168, 178);
+}
+.freightQuoteStatusClosedColor{
+  background-color: rgb(254, 54, 54);
+}
+.freightQuoteStatusApprovedColor{
+  background-color: rgb(0, 165, 0);
+}
+.freightQuoteStatusFontColor{
+  color: white !important;
+  font-weight: bold !important;
+}
+
+.freightQuoteStatusApprovedBtnColor .sapMBtnInner {
+  background-color: green !important;
+  color: white !important;
+  border-color: green !important;
+}
+
+.freightQuoteStatusCancelledBtnColor .sapMBtnInner {
+  background-color: red !important;
+  color: white !important;
+  border-color: red !important;
+}
+
+.customLogOutButton.sapMBtn {
+  border: 2px solid #ff4444 !important;
+  border-radius: 2px !important;
+  background: transparent !important;
+  padding: 3px 10px !important;
+  transition: all 0.3s ease !important;
+  height: 2rem !important;
+  /* width: 6rem !important; */
+}
+
+.customLogOutButton .sapMBtnInner {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 2px !important;
+}
+
+.customLogOutButton .sapMBtnContent {
+  color: #ff4444 !important;
+  font-weight: 500 !important;
+}
+
+.customLogOutButton .sapUiIcon {
+  color: #ff4444 !important;
+  margin-right: 6px !important;
+}
+
+/* Hover state */
+.customLogOutButton.sapMBtn:hover {
+  background: #ff4444 !important;
+  border-color: #ff4444 !important;
+}
+
+.customLogOutButton:hover .sapMBtnContent {
+  color: white !important;
+}
+
+.customLogOutButton:hover .sapUiIcon {
+  color: white !important;
+}
+
+.void-button {
+  background-color: #dc3545;
+  color: #fff !important;
+  opacity: 0.85;
+  border-radius: 5px !important;
+}
+
+/* Target the icon inside the button */
+.void-button .sapMBtnIcon {
+  color: #fff !important;
+  fill: #fff !important;
+}
+
+.void-button:hover {
+  background-color: #ffffff !important;
+  opacity: 1;
+  cursor: pointer;
+  border-radius: 5px !important;
+}
+
+.void-button:hover .sapMBtnIcon {
+  color: #00d13b !important;
+  fill: #fff !important;
+}
+
+.truckSymbol {
+  background-color: #00d13b;
+  color: #fff !important;
+  opacity: 0.85;
+  border-radius: 5px !important;
+}
+
+/* Target the icon inside the button */
+.truckSymbol .sapMBtnIcon {
+  color: #fff !important;
+  fill: #fff !important;
+}
+
+.truckSymbol:hover {
+  background-color: #ffffff !important;
+  opacity: 1;
+  cursor: pointer;
+  border-radius: 5px !important;
+}
+
+.truckSymbol:hover .sapMBtnIcon {
+  color: #00d13b !important;
+  fill: #fff !important;
+}
+
+.pgi-style {
+  color: rgb(11, 173, 11);
+  font-size: 1.5rem;
+  font-weight: bold !important;
+}
+
+.pgi-style .sapUiIcon {
+  font-size: 1.5rem;
+  color: rgb(11, 173, 11);
+}
+
+.pgi-Failed-style {
+  color: rgb(240, 60, 10);
+  font-size: 1.5rem;
+  font-weight: bold !important;
+}
+
+.pgi-Failed-style .sapUiIcon {
+  font-size: 1.5rem;
+  color: rgb(240, 60, 10);
+}
+
+.audit-style {
+  color: white !important;
+  padding: 6px 15px !important;
+  margin-left: 2px;
+  border-radius: 0px;
+  font-weight: bold;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  background-color: rgb(39, 2, 107) !important;
+  height: 35px !important;
+  font-size: x-large !important;
+}
+.billed-style {
+  color: white !important;
+  padding: 6px 15px !important;
+  margin-left: 2px;
+  border-radius: 0px;
+  font-weight: bold;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  background-color: rgb(171, 46, 171) !important;
+  height: 35px !important;
+  font-size: x-large !important;
+}
+.timer-style {
+  color: rgb(255, 0, 0) !important;
+  padding: 6px 15px !important;
+  margin-right: 15rem !important;
+  border-radius: 0px;
+  font-weight: bold;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  background-color: rgb(42, 34, 42) !important;
+  height: 35px !important;
+  font-size: x-large !important;
+}
+
+.shipnowUserInfoSimpleFormShadow {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 
+              0px -4px 8px rgba(0, 0, 0, 0.1); /* Top and bottom shadow */
+  border-radius: 10px !important;
+  background-color: #ffffff;
+  margin: 3px !important;
+  border: 1px solid #d1d1d1; /* Light grey border */
+}
+
+.customShippingDocumentsToolbar {
+  background-color: #007bff !important; /* Bootstrap-like bright blue */
+  color: white !important;
+  padding: 0.5rem 1rem;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+/* Ensure the title text inside is white */
+.customShippingDocumentsToolbar .sapMTitle {
+  color: white;
+  font-weight: bold;
+  background-color: #007bff !important;
+}
+
+.customUserInfoToolbar .sapUiIcon::before {
+  color: #007bff;
+  content: attr(data-sap-ui-icon-content);
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+  font-weight: bold !important;
+  font-size: 1.10rem !important;
+  margin-bottom: 50px !important;
+}
+
+.customUserInfoToolbar .sapMTitle {
+  color: #007bff;
+  font-weight: bold;
+}
+
+.shippingDetailsStartingBorder{
+  border-left: 5px solid #007bff !important;
+  border-radius: 12px !important;
+}
+
+.scanAndShip-toolbar-height {
+  height: 4rem !important;
+  align-items: normal !important; /* Optional: centers items vertically */
+}
+
+
+.ChargesSummaryToolbar .sapUiIcon::before {
+  color: #f59e0b;
+  content: attr(data-sap-ui-icon-content);
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+  font-weight: bold !important;
+  font-size: 1.10rem !important;
+  margin-bottom: 50px !important;
+}
+
+.ChargesSummaryToolbar .sapMTitle {
+  color: #f59e0b;
+  font-weight: bold; /* Optional */
+}
+
+.ChargesSummaryStartingBorder{
+  border-left: 5px solid #f59e0b !important;
+  border-radius: 12px !important;
+}
+
+.AddressesToolbar .sapUiIcon::before {
+  color: #16a34a;
+  content: attr(data-sap-ui-icon-content);
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+  font-weight: bold !important;
+  font-size: 1.10rem !important;
+  margin-bottom: 50px !important;
+}
+
+.AddressesToolbar .sapMTitle {
+  color: #16a34a;
+  font-weight: bold; /* Optional */
+}
+
+.AddressesStartingBorder{
+  border-left: 5px solid #16a34a !important;
+  border-radius: 12px !important;
+}
+
+.fontBold {
+  font-weight: bold;
+}
+
+.fontBoldWithGreenColor {
+  color: #16a34a;
+  font-weight: bold;
+}
+.fontBoldWithRedColor{
+  color: #dc0000;
+  font-weight: bold;
+}
+.fontBoldWithDarkmagentaColor{
+  color: darkmagenta !important;
+  font-weight: 800;
+  font-size: large;
+}
+.totalChargesFontSize{
+  font-size: large;
+  font-weight: 800;
+}
+.payerFontColor{
+  color: #007bff !important;
+}
+
+.lightFontColor{
+  color: #727272 !important;
+  font-weight: 100 !important;
+}
+
+.recentBtnStyle {
+  height: 3rem !important;
+  width: 3rem !important;
+  padding: 0 !important;
+  border-right: 1px solid rgb(119, 119, 119);
+  transform: scale(1.2);
+}
+
+/* Center the icon */
+.recentBtnStyle .sapMBtnInner {
+  height: 100% !important;
+  width: 100% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale(1.2);
+}
+
+/* Smooth hover effect for icon only */
+.recentBtnStyle:hover .sapUiIcon {
+  transform: scale(1.3);
+  transition: transform 0.2s ease;
+}
+
+
+/* .pgiBtnStyle:hover > span {
+  background-color: #4E9C2D !important;
+  color: #fff !important;
+  height: 69px;
+  padding-left: 18px;
+  width: 100px;
+  border: 1px solid #4E9C2D !important;
+  animation: animateBtn 1s infinite;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+  border-radius: 8% !important;
+}
+
+.pgiBtnStyle:hover bdi {
+  color: #fff !important;
+  border-radius: 8% !important;
+} */
+
+/* ✅ Common Button Size */
+.pgiBtnStyle,
+.ReversePGIBtnStyle {
+  height: 2.3rem !important;
+  width: 8rem !important;
+  min-height: 2.3rem !important;
+  line-height: 2.3rem !important; /* makes text/icon centered */
+  margin-bottom: 1rem !important;
+}
+
+/* Target UI5 button inner container */
+.pgiBtnStyle .sapMBtnInner,
+.ReversePGIBtnStyle .sapMBtnInner {
+  height: 2.3rem !important;
+  line-height: 2.3rem !important;
+}
+
+/* ✅ PGI Button (Green) */
+.pgiBtnStyle span {
+  background-color: #4E9C2D !important;
+  color: #fff !important;
+  border-color: #4E9C2D !important;
+  border-radius: 8% !important;
+  padding-left: 12px;
+  display: flex !important;
+  align-items: center;
+  margin-right: 3px !important;
+}
+
+/* ✅ Reverse PGI Button (Red) */
+.ReversePGIBtnStyle span {
+  background-color: #ff4444 !important;
+  color: #fff !important;
+  border-color: #ff4444 !important;
+  border-radius: 8% !important;
+  padding-left: 13px;
+  display: flex !important;
+  align-items: center;
+  margin-right: 3px !important;
+}
+
+/* ✅ Dark Theme Styles */
+body.dark-theme .pgiBtnStyle span {
+  background-color: #4E9C2D !important;
+  color: #fff !important;
+}
+
+body.dark-theme .ReversePGIBtnStyle span {
+  background-color: #ff4444 !important;
+  color: #fff !important;
+}
+
+
+
+.sapMPopover.hidePopoverBackground {
+  box-shadow: none !important;
+  margin-right: 5rem !important;
+}
+
+.sapMPopover.hidePopoverBackground .sapMPopoverCont {
+  background-color: transparent !important;
+}
+
+
+.pgiBtnSize .sapUiSizeCompact .sapMBtn{
+  height: 3rem;
+  padding: 0.1875rem 0;
+}
+
+
+.shipNowCloseBtnStyle {
+  height: 3rem !important;
+  width: 3rem !important;
+  padding: 0 !important;
+  transform: scale(1.2);
+}
+
+/* Center the icon */
+.shipNowCloseBtnStyle .sapMBtnInner {
+  height: 100% !important;
+  width: 100% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale(1.2);
+}
+
+/* 🔴 Hover effect (background + icon color) */
+.shipNowCloseBtnStyle:hover .sapMBtnInner {
+  background-color: #ff4444 !important; /* red background */
+  /* border-radius: 6px !important; */
+}
+
+.shipNowCloseBtnStyle:hover .sapMBtnInner .sapUiIcon {
+  color: #fff !important; /* icon turns white */
+}
+
+
+
+
+
+
+.voidIconBtnStyle {
+  height: 2.5rem !important;
+  min-height: 2.5rem !important;
+  background-color: #ff0101 !important;
+  border: 1px solid #ff0101 !important; /* SAP blue */
+  color: #ffffff !important;
+  border-radius: 6px;
+  padding: 0 1rem !important;
+}
+
+/* Inner button */
+.voidIconBtnStyle .sapMBtnInner {
+  height: 100% !important;
+  background: transparent !important;
+  border: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit !important; /* ensures it follows parent */
+}
+
+/* ✅ Text span fix */
+.voidIconBtnStyle .sapMBtnContent {
+  color: inherit !important;
+  font-weight: 500; /* optional: make text a bit bolder */
+}
+
+/* Icon inherits color */
+.voidIconBtnStyle .sapUiIcon {
+  color: inherit !important;
+}
+
+/* Hover */
+.voidIconBtnStyle:hover {
+  background-color: #ffffff !important;
+  color: #ff0101 !important;
+  border-color: #ff0101 !important;
+}
+
+.voidIconBtnStyle:hover .sapMBtnContent,
+.voidIconBtnStyle:hover .sapUiIcon {
+  color: #ff0101 !important;
+}
+
+.voidIconBtnStyle:focus .sapMBtnInner {
+  outline: none !important;
+}
+
+.shipNowBtnStyle {
+  height: 2.5rem !important;
+  min-height: 2.5rem !important;
+  background-color: #108600 !important;
+  border: 1px solid #108600 !important; /* SAP blue */
+  color: #ffffff !important;
+  border-radius: 6px;
+  padding: 0 1rem !important;
+}
+
+/* Inner button */
+.shipNowBtnStyle .sapMBtnInner {
+  height: 100% !important;
+  background: transparent !important;
+  border: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit !important; /* ensures it follows parent */
+}
+
+/* ✅ Text span fix */
+.shipNowBtnStyle .sapMBtnContent {
+  color: inherit !important;
+  font-weight: 500; /* optional: make text a bit bolder */
+}
+
+/* Icon inherits color */
+.shipNowBtnStyle .sapUiIcon {
+  color: inherit !important;
+}
+
+/* Hover */
+.shipNowBtnStyle:hover {
+  background-color: #ffffff !important;
+  color: #108600 !important;
+  border-color: #108600 !important;
+}
+
+.shipNowBtnStyle:hover .sapMBtnContent,
+.shipNowBtnStyle:hover .sapUiIcon {
+  color: #108600 !important;
+}
+
+.shipNowBtnStyle:focus .sapMBtnInner {
+  outline: none !important;
+}
+
+.internationalDetailsTableHeight{
+  width: 100% !important;
+  height: calc(65vh - 5rem) !important;
+  background-color: white !important;
+  padding: 4px !important;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 
+              0px -4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.getMissingDocsBtnStyle {
+  height: 2.5rem !important;
+  min-height: 2.5rem !important;
+  background-color: #fff !important;
+  border: 1px solid #4E9C2D !important; /* SAP blue */
+  color: #4E9C2D !important;
+  border-radius: 6px;
+  padding: 0 1rem !important;
+}
+
+/* Inner button */
+.getMissingDocsBtnStyle .sapMBtnInner {
+  height: 100% !important;
+  background: transparent !important;
+  border: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit !important; /* ensures it follows parent */
+}
+
+/* ✅ Text span fix */
+.getMissingDocsBtnStyle .sapMBtnContent {
+  color: inherit !important;
+  font-weight: 500; /* optional: make text a bit bolder */
+}
+
+/* Icon inherits color */
+.getMissingDocsBtnStyle .sapUiIcon {
+  color: inherit !important;
+}
+
+/* Hover */
+.getMissingDocsBtnStyle:hover {
+  background-color: #4E9C2D !important;
+  color: #fff !important;
+  border-color: #4E9C2D !important;
+}
+
+.getMissingDocsBtnStyle:hover .sapMBtnContent,
+.getMissingDocsBtnStyle:hover .sapUiIcon {
+  color: #fff !important;
+}
+
+.getMissingDocsBtnStyle:focus .sapMBtnInner {
+  outline: none !important;
+}
+
+.removeBtnOutline:focus .sapMBtnInner  {
+  outline: none !important;
+}
+
+.removeInputOutline:focus .sapMInputBaseInner  {
+  outline: none !important;
+}
+
+.trackAndTraceTableHeight{
+  width: 100% !important;
+  height: calc(75vh - 5rem) !important;
+  background-color: white !important;
+  padding: 4px !important;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 
+              0px -4px 8px rgba(0, 0, 0, 0.1);
+}
+
+

@@ -1,0 +1,90 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core">
+    <Dialog
+        id="idReturnLabelEditDialog"
+        contentWidth="40%"
+        contentHeight="70%"
+		class="rightSideDialogForTracking" >
+     <customHeader>
+    <Toolbar>
+        <Title text="Return Address Information" />
+            <ToolbarSpacer />
+                <Button 
+                    icon="sap-icon://decline" 
+					class="Decline_Btn ship-now-decline_btn"
+                    press="onReturnLabelEditDialogClosePress" />
+    </Toolbar>
+    </customHeader>
+
+    <f:SimpleForm 
+            class="customSimpleFormShadow"
+            width="auto"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="12"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="0"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="false" >
+			<f:content>
+				<core:Title text="Contact Info" icon="sap-icon://customer-briefing" />
+				<Label text="Contact Name" />
+				<Input class="sapUiSmallMarginBottom create-ship-req_input" value="{}" />
+				<Label text="Email" />
+				<Input class="sapUiSmallMarginBottom create-ship-req_input" value="{}" />
+				<core:Title  />
+                <Label text="Company Name" />
+				<Input class="sapUiSmallMarginBottom create-ship-req_input"  value="{}" />
+                <Label text="Phone No" />
+				<Input class="sapUiSmallMarginBottom create-ship-req_input" value="{}" />
+			</f:content>
+		</f:SimpleForm>
+
+
+        <f:SimpleForm 
+            class="customSimpleFormShadow"
+            width="auto"
+			editable="true" layout="ColumnLayout" columnsM="2" columnsL="2" columnsXL="2" >
+			<f:content>
+				<core:Title text="Address Info" icon="sap-icon://customer-briefing" />
+				<Label text="Address Line 1" />
+				<Input value="{}" />
+				<Label text="City"/>
+				<Input value="{}" >
+					<layoutData>
+						<f:ColumnElementData cellsSmall="6" cellsLarge="6" />
+					</layoutData>
+				</Input>
+				<Input value="{}" placeholder="State" />
+
+				<Label text="Address Line 2" />
+				<Input value="{}" />
+				<Label text="Zip / Postal Code" />
+				<Input value="{}" >
+					<layoutData>
+						<f:ColumnElementData cellsSmall="6" cellsLarge="6" />
+					</layoutData>
+				</Input>
+				<Input value="{}" placeholder="Country" />
+			</f:content>
+		</f:SimpleForm>
+		<footer>
+			<OverflowToolbar >
+				<Button text="Cancel" type="Ghost" press="onReturnLabelEditDialogClosePress" ></Button>
+				<ToolbarSpacer ></ToolbarSpacer>
+				<Button text="Save" type="Success" ></Button>
+			</OverflowToolbar>
+		</footer>
+    </Dialog>
+</core:FragmentDefinition>

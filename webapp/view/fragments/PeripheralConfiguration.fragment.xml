@@ -1,0 +1,190 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:ui="sap.ui.table"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog
+        id="_IDGenAlcoholEditDialogPeripheralConfiguration"
+        title="Alcohol"
+        contentWidth="40vh"
+        contentHeight="95%"
+        verticalScrolling="false"
+        horizontalScrolling="false"
+        class="rightSideDialogSpecialOptionsMasterPrint"
+    >
+        <!-- Custom Header -->
+
+        <Toolbar>
+            <Title text="Peripheral Configuration" />
+            <ToolbarSpacer />
+            <Button
+                icon="sap-icon://decline"
+                class="Decline_Btn ship-now-decline_btn"
+                press="onPeripheralConfigurationCancelPress"
+            />
+        </Toolbar>
+
+        <ScrollContainer
+            height="100%"
+            width="100%"
+            horizontal="true"
+            vertical="true"
+        >
+            <content>
+                <f:SimpleForm
+                    editable="true"
+                    class="customSimpleFormShadow"
+                    width="auto"
+                    layout="ResponsiveGridLayout"
+                    columnsM="4"
+                    columnsL="4"
+                    columnsXL="4"
+                >
+                    <f:content>
+                        <Toolbar ariaLabelledBy="idShipFrom">
+                            <Button
+                                icon="sap-icon://customer-briefing"
+                                press="handleAddLocPress"
+                            />
+                            <Title
+                                id="idAddLocaTionFrom11dssddsd"
+                                text="Printer Information"
+                            />
+                            <ToolbarSpacer />
+                            <Button text="Eshipjet Printer Connect 6.4" />
+                            <ToolbarSpacer />
+                            <Switch />
+                            <Text text="Auto Print" />
+                        </Toolbar>
+                        <Label text="Laser Printer" />
+                        <ComboBox
+                            width="300px"
+                            class="sapUiSmallMarginBottom create-ship-req_input"
+                            showClearIcon="true"
+                            items="{eshipjetModel>/ProductCollection}"
+                        >
+                            <core:Item
+                                key="{eshipjetModel>ProductId}"
+                                text="{eshipjetModel>Name}"
+                            />
+                        </ComboBox>
+
+                        <ToolbarSpacer />
+                        <CheckBox />
+                        <core:Icon
+                            src="sap-icon://print"
+                            size="2rem"
+                            color="#007aff"
+                        />
+                        <Label text="Thermal Printer" />
+                        <ComboBox
+                            width="300px"
+                            class="sapUiSmallMarginBottom create-ship-req_input"
+                            showClearIcon="true"
+                            items="{eshipjetModel>/ProductCollection}"
+                        >
+                            <core:Item
+                                key="{eshipjetModel>ProductId}"
+                                text="{eshipjetModel>Name}"
+                            />
+                        </ComboBox>
+                        <ToolbarSpacer />
+                        <CheckBox />
+                        <core:Icon
+                            src="sap-icon://print"
+                            size="2rem"
+                            color="#007aff"
+                        />
+                    </f:content>
+                </f:SimpleForm>
+
+                <f:SimpleForm
+                    editable="true"
+                    class="customSimpleFormShadow"
+                    width="auto"
+                    layout="ResponsiveGridLayout"
+                    columnsM="3"
+                    columnsL="3"
+                    columnsXL="3"
+                >
+                    <f:content>
+                        <Toolbar ariaLabelledBy="idShipFrom">
+                            <Button
+                                icon="sap-icon://customer-briefing"
+                                press="handleAddLocPress"
+                            />
+                            <Title
+                                id="idAddLocaTionFrom1sd"
+                                text="Scale Information"
+                            />
+                            <ToolbarSpacer />
+                            <Switch />
+                            <Text text="Auto Print" />
+                        </Toolbar>
+                        <Switch />
+                        <Text text="USB Scale" />
+                        <ToolbarSpacer />
+                        <Switch />
+                        <Text text="Serial Scale" />
+                        <!-- <Text text="No Scale Information. Please choose USB Scale or Serial Scale Information."></Text> -->
+                    </f:content>
+                </f:SimpleForm>
+
+                <f:SimpleForm
+                    editable="true"
+                    class="customSimpleFormShadow"
+                    width="auto"
+                    layout="ColumnLayout"
+                    columnsM="2"
+                    columnsL="2"
+                    columnsXL="2"
+                >
+                    <f:content>
+                        <Toolbar ariaLabelledBy="idShipFrom">
+                            <Button
+                                icon="sap-icon://customer-briefing"
+                                press="handleAddLocPress"
+                            />
+                            <Title
+                                id="idAddLocaTionFrom2dfs"
+                                text="Dimensional Scale Information"
+                            />
+                            <ToolbarSpacer />
+                            <Switch />
+                            <Text text="Dim Scale" />
+                        </Toolbar>
+                        <Label text="Manufacturer" />
+                        <Input
+                            class="sapUiSmallMarginBottom create-ship-req_input"
+                        />
+                        <Label text="Device Reference Code" />
+                        <Input
+                            class="sapUiSmallMarginBottom create-ship-req_input"
+                        />
+                        <Label text="API Key / Token" />
+                        <Input
+                            class="sapUiSmallMarginBottom create-ship-req_input"
+                        />
+                    </f:content>
+                </f:SimpleForm>
+            </content>
+        </ScrollContainer>
+        <!-- Footer -->
+        <footer>
+            <OverflowToolbar class="sapMPopoverFooter1">
+                <Button
+                    text="Cancel"
+                    press="onPeripheralConfigCancelPress"
+                />
+                <ToolbarSpacer />
+                <Button
+                    type="Emphasized"
+                    text="Submit"
+                    press="onPeripheralConfigSelectPress"
+                />
+            </OverflowToolbar>
+        </footer>
+    </Dialog>
+</core:FragmentDefinition>

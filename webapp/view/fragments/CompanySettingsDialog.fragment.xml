@@ -1,0 +1,63 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core">
+    <Dialog
+        draggable="true"
+        id="CompanySettingsopenDialog"
+        contentWidth="50%"
+        contentHeight="30%" 
+    >
+     <customHeader>
+        <Toolbar>
+            <!-- Title -->
+            <Title text="Register" />
+            
+            <!-- Spacer to push close button to the right -->
+            <ToolbarSpacer />
+
+            <!-- Close Button -->
+            <Button 
+                icon="sap-icon://decline"
+                 class="Decline_Btn ship-now-decline_btn"  
+                press="CompanySettingsClosePress" />
+        </Toolbar>
+    </customHeader>
+         <content>
+           	<f:SimpleForm editable="true"
+                           
+                            width="auto"
+							  layout="ColumnLayout"
+							  columnsM="2"
+							  columnsL="2"
+							  columnsXL="2">
+					<f:content>
+                        <Label text="Company Name" />
+                        <ComboBox class="sapUiSmallMarginBottom create-ship-req_input" placeholder="Select">
+                        </ComboBox>
+                        <Label text="Last Name" />  
+			            <Input class="sapUiSmallMarginBottom create-ship-req_input"></Input>
+                         <Label text="E-mail" />  
+			            <Input class="sapUiSmallMarginBottom create-ship-req_input" ></Input>
+                         <Label text="Number of Plants/Warehouses/Locations" />  
+			            <Input class="sapUiSmallMarginBottom create-ship-req_input" ></Input>
+                        <Label text="Job Title" />  
+			            <Input class="sapUiSmallMarginBottom create-ship-req_input" ></Input>
+                         <Label text="First Name" />  
+			            <Input class="sapUiSmallMarginBottom create-ship-req_input" ></Input>
+                         <Label text="Phone Number" />  
+			            <Input class="sapUiSmallMarginBottom create-ship-req_input" ></Input>
+                        
+					</f:content>
+				</f:SimpleForm>
+               
+        </content>
+    
+        <footer>
+            <OverflowToolbar>
+               <Button text="Register"></Button>
+            </OverflowToolbar>
+        </footer>
+    </Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,104 @@
+<core:FragmentDefinition 
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    height="100%">
+
+    <Popover id="idAddProductPopover" 
+            placement="Bottom"
+        contentHeight="100%"
+        showHeader="false"
+        class="rightSidePopoverGare"
+            >
+			 <!-- Custom Header -->
+    <customHeader>
+        <Toolbar>
+            <!-- Title -->
+            <Title text="Add Product" />
+            
+            <!-- Spacer to push close button to the right -->
+            <ToolbarSpacer />
+
+            <!-- Close Button -->
+            <Button 
+                icon="sap-icon://decline"
+                class="Decline_Btn ship-now-decline_btn" 
+                press="AddProductClosePress" />
+        </Toolbar>
+    </customHeader>
+		 <footer>
+            <OverflowToolbar class="p-sidebar-header">
+                <Button text="Cancel" press="AddProductCancelPopover" />
+                <ToolbarSpacer/>
+                <Button type="Emphasized" text="Save" press="AddProductSelectPopover" />
+            </OverflowToolbar>
+        </footer>
+
+		
+        <content >
+
+            <f:SimpleForm
+                editable="true"
+                class="customSimpleFormShadow"
+                width="auto"
+                layout="ColumnLayout"
+                columnsM="2"
+                columnsL="2"
+                columnsXL="2"
+            >
+                <f:content>
+                   
+                    <Label text="Location ID" />
+                    <ComboBox class="sapUiSmallMarginBottom create-ship-req_input" placeholder="Select"></ComboBox>
+                    <Label text="Product No" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="Quantity" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="Unit Weight" />
+                    <Input  class="sapUiSmallMarginBottom create-ship-req_input"/>
+                    <Label text="Harmonized Code" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="UN No" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="NMFC" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input"/>
+                    <Label text="EPC-RFID No" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input"/>
+                     <Label text="License No" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input"/>
+                    <Label text="Status" />
+                        <Switch state="true" >
+				            <layoutData>
+					            <FlexItemData growFactor="1" />
+				            </layoutData>
+			            </Switch>
+                    <Label text="Item No" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="Description" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input"/>
+                    <Label text="Unit Cost" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input"/>
+                    <Label text="Dimensions (Length X Width X Height)" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input"/>
+                    <Label text="ECCN" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input"/>
+                    <Label text="Class" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input"/>
+                    <Label text="Country of MFR" />
+                    <ComboBox class="sapUiSmallMarginBottom create-ship-req_input" placeholder="Select"></ComboBox>
+                    <Label text="Currency" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input"/>
+                    <Label text="UOM" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input"/>
+                </f:content>
+            </f:SimpleForm>
+               	
+
+           
+
+        </content>      
+
+       
+    </Popover>
+</core:FragmentDefinition>

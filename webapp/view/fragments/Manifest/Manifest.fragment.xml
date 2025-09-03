@@ -1,0 +1,60 @@
+<core:FragmentDefinition	xmlns="sap.m"    xmlns:ui="sap.ui.table"    	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"	xmlns:core="sap.ui.core">
+
+	    <Toolbar width="auto" height="15%" class="toolbarbottomborder fixedLayout">
+			<Text text="Shipping Manifest" class="sapUiTinyMarginBegin sapUiMediumMarginBottom sapUiTinyMarginTop pageTitle"  ></Text>
+				<ToolbarSpacer />
+					<Button text="Manifest and Print" icon="sap-icon://down" class="ship-req-toolbar__button sapUiMediumMarginBottom sapUiTinyMarginBottom sapUiTinyMarginEnd sapUiTinyMarginBegin" type="Success" iconFirst="true" press="onManifestPrintPress" ></Button>
+		</Toolbar>
+
+		<Toolbar height="15%" >
+			<HBox width="100%" >
+				<VBox class="sapUiTinyMargin" width="33%">
+					<Text text="1" class="NumberSizeTitle1"></Text>
+					<Text text="Total" class="sapUiTinyMarginBottom"></Text>
+					<Button type="Emphasized" press="handleManifestFilterBtnPress" id="idTotalShipmentsBtn" class="total-request-button request-button" icon="false" width="100%"  ></Button>
+				</VBox>
+				<VBox class="sapUiTinyMargin" width="33%">
+					<Text text="2" class="NumberSizeTitle1"></Text>
+					<Text text="Shipped" class="sapUiTinyMarginBottom"></Text>
+					<Button type="Critical" press="handleManifestFilterBtnPress" id="idTotalNoOfPiecesBtn" class="shipped-request-button request-button" icon="false" width="100%" ></Button>
+				</VBox>
+				<VBox class="sapUiTinyMargin" width="33%">
+					<Text text="3" class="NumberSizeTitle1"></Text>
+					<Text text="Cancelled" class="sapUiTinyMarginBottom"></Text>
+					<Button type="Success" press="handleManifestFilterBtnPress" id="idTotalWeightBtn" class="cancelled-request-button request-button" icon="false" width="100%" ></Button>
+				</VBox>
+				<VBox class="sapUiTinyMargin" width="33%">
+					<Text text="3" class="NumberSizeTitle1"></Text>
+					<Text text="Delivered" class="sapUiTinyMarginBottom"></Text>
+					<Button type="Success" press="handleManifestFilterBtnPress" id="id1TotalWeightBtn" class="shippedProgress-request-button request-button" icon="false" width="100%" ></Button>
+				</VBox>
+			</HBox>
+		</Toolbar>
+
+            <ui:Table
+                id="idManifestTable"
+                class="sapUiSmallMarginTop"
+				rows="{eshipjetModel>/TrackNowItems}"
+				selectionMode="None"
+				visibleRowCount="12">
+				<ui:extension>
+					<OverflowToolbar style="Clear">
+                        <Button icon="sap-icon://filter" press="handleTrackNowFltrIconPress"></Button>
+                        <ToolbarSpacer />
+                            <Button icon="sap-icon://action" press="OnManifestExportToExcel"></Button>
+                            <Button icon="sap-icon://action-settings" press="openManifestColNamesPopover"></Button>
+					</OverflowToolbar>
+				</ui:extension>
+				<ui:footer>
+					<Toolbar >
+						<ToolbarSpacer/>
+						<Button  text="First" enabled="false" />
+						<Button  text="Previous" enabled="false"/>
+						<Text    text="1-50 of 74"/>
+						<Button  text="Next" />
+						<Button  text="Last" />
+					</Toolbar>
+				</ui:footer>
+		</ui:Table>
+</core:FragmentDefinition>

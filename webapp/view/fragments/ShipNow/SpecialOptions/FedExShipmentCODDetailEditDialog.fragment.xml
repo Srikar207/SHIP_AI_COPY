@@ -1,0 +1,56 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core" 
+    xmlns:f="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns="sap.m">
+
+    <Dialog id="_IDGenFedExShipmentCODDetailEditDialog"
+            title="ETD Detail"
+            contentWidth="60vh"
+            contentHeight="95%"
+            verticalScrolling="false"
+            horizontalScrolling="false"
+            class="rightSideDialogSpecialOptions">
+            
+            <Toolbar>
+                <Title text="Shipment COD Detail" />
+                <ToolbarSpacer />
+                <Button icon="sap-icon://decline" press="onCloseFedexShipmentCODDetailEditDialog" />
+            </Toolbar>
+
+        <content>
+            <f:SimpleForm editable="true"
+                          class="customSimpleFormShadow"
+                          width="auto"
+                          layout="ColumnLayout"
+                          columnsM="2"
+                          columnsL="2"
+                          columnsXL="2">
+                <f:content>
+                   <Toolbar ariaLabelledBy="idShipFromsdsd" class="customLine" >
+						<!-- <Button icon="sap-icon://customer-briefing" id="idShipFrggomAddressBtn" /> -->
+                        <Title id="idShipFromuuqwq" text="Add Transportation Charges Detail" />
+					</Toolbar>
+                    <Label text="Tin Type" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />      
+                    <Label text="Amount" />
+                    <Input class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Label text="Collection Type" />
+                    <Input  class="sapUiSmallMarginBottom create-ship-req_input" />
+                     <Label text="Currency" />
+                    <Input  class="sapUiSmallMarginBottom create-ship-req_input" />
+                </f:content>
+            </f:SimpleForm>
+        </content>
+
+        <footer>
+            <OverflowToolbar class="sapMPopoverFooter1">
+                <Button text="Cancel" press="onCloseFedexShipmentCODDetailEditDialog" />
+                <ToolbarSpacer />
+                <Button text="Save" type="Emphasized" press="onCloseFedexShipmentCODDetailEditDialog" />
+            </OverflowToolbar>
+        </footer>
+
+    </Dialog>
+</core:FragmentDefinition>

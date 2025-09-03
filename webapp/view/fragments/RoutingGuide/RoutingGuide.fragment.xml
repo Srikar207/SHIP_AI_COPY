@@ -1,0 +1,56 @@
+<core:FragmentDefinition	xmlns="sap.m"    xmlns:ui="sap.ui.table"    	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"	xmlns:core="sap.ui.core">
+        <Toolbar  width="auto" height="15%" class="toolbarbottomborder fixedLayout" >
+			<Text text="Routing Guide"  class="sapUiTinyMarginBegin sapUiMediumMarginBottom sapUiTinyMarginTop pageTitle" ></Text>
+				<ToolbarSpacer />
+					<HBox>
+                    <Button text="Routing Guide"  press="onRoutingGuidePress" class="ship-req-toolbar__button sapUiMediumMarginBottom sapUiTinyMarginBottom sapUiTinyMarginEnd sapUiTinyMarginBegin"></Button>
+                    <!-- <Button type="Success" icon="sap-icon://navigation-down-arrow" ></Button> -->
+                </HBox>
+		</Toolbar>
+	    <Toolbar height="30%" width="100%" >
+			<VBox class="sapUiTinyMargin" width="33%">
+					<Text text="0" class="NumberSizeTitle1"></Text>
+					<Text text="Total Routing Rules" class="sapUiTinyMarginBottom"></Text>
+					<Button class="totalProgress-request-button request-button" type="Emphasized" press="handlRoutingGuideFilterBtnPress" icon="false" width="100%"  ></Button>
+				</VBox>
+				<VBox class="sapUiTinyMargin" width="33%">
+					<Text text="0" class="NumberSizeTitle1"></Text>
+					<Text text="Active" class="sapUiTinyMarginBottom"></Text>
+					<Button class="inTransit-request-button request-button" type="Critical" press="handleRoutingGuideFilterBtnPress" icon="false" width="100%" ></Button>
+				</VBox>
+				<VBox class="sapUiTinyMargin" width="33%">
+					<Text text="0" class="NumberSizeTitle1"></Text>
+					<Text text="Inactive" class="sapUiTinyMarginBottom"></Text>
+					<Button type="Success" class="InWhite-request-button request-button" press="handleRoutingGuideFilterBtnPress" icon="false" width="100%" ></Button>
+				</VBox>
+		</Toolbar>
+
+        <ui:Table id="idRoutingGuideTable1"
+                class="sapUiTinyMarginTop"
+				selectionMode="None"
+				visibleRowCount="12">
+					<ui:extension>
+						<OverflowToolbar>
+							<Button icon="sap-icon://filter" press="onRoutingGuideFilterPopoverPress"></Button>
+							<ToolbarSpacer ></ToolbarSpacer>
+							<Button icon="sap-icon://action" press="onRoutingGuideExportToExcel" ></Button>
+                            <Button icon="sap-icon://action-settings" press="openRoutingGuideColNamesPopover" >
+                                <customData>
+                                    <core:CustomData key="remember" value="true" />
+                                    <core:CustomData key="showClearButton" value="true" />
+                                    <core:CustomData key="confirmButtonText" value="Ok" />
+                                </customData>
+							</Button>										
+						</OverflowToolbar>
+					</ui:extension>
+		</ui:Table>
+					<Toolbar >
+						<ToolbarSpacer/>
+						<Button  text="First" enabled="false" />
+						<Button  text="Previous" enabled="false"/>
+						<Text    text="1-50 of 74"/>
+						<Button  text="Next" />
+						<Button  text="Last" />
+					</Toolbar>
+</core:FragmentDefinition>

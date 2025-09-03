@@ -1,0 +1,102 @@
+<core:FragmentDefinition xmlns="sap.m" 
+    xmlns:core="sap.ui.core" 
+    xmlns:f="sap.ui.layout.form">
+
+    <Dialog id="_IDGenAlcoholEditDialogshipnow"
+            title="Alcohol"
+            contentWidth="60vh"
+            contentHeight="95%"
+            verticalScrolling="false"
+            horizontalScrolling="false"
+            class="rightSideDialogSpecialOptionsshipnow">
+        
+       
+            <Toolbar>
+                <Title text="Pick An Address" />
+                <ToolbarSpacer />
+                <Button icon="sap-icon://decline" 
+                        class="Decline_Btn ship-now-decline_btn" 
+                        press="onShipNowPickAnAddressCancelPress1" />
+            </Toolbar>
+       
+        <content>
+        <ScrollContainer
+            height="100%"
+            width="100%"
+            horizontal="true"
+            vertical="true"
+        >
+            <Table id="idShipNowPickAnAddressTable"
+                   class="sapUiTinyMarginTop cnthight"
+                   growing="true"
+                   mode="SingleSelectLeft"
+                   items="{/shipFromAddresses}">
+                 <columns>
+                    <Column width="10rem" >
+                        <Text text="Contact Name" ></Text>
+                    </Column>
+                    <Column width="10rem" >
+                        <Text text="Company Name" ></Text>
+                    </Column>
+                    <Column width="10rem" >
+                        <Text text="Address Line 1" ></Text>
+                    </Column>
+                    <Column width="10rem" >
+                        <Text text="Address Line 2" ></Text>
+                    </Column>
+                    <Column width="10rem" >
+                        <Text text="Address Line 3" ></Text>
+                    </Column>
+                    <Column width="10rem" >
+                        <Text text="City" ></Text>
+                    </Column>
+                    <Column width="10rem" >
+                        <Text text="State" ></Text>
+                    </Column>
+                    <Column width="10rem" >
+                        <Text text="Zip Code" ></Text>
+                    </Column>
+                    <Column width="10rem" >
+                        <Text text="Country" ></Text>
+                    </Column>
+                    <Column width="10rem" >
+                        <Text text="Phone" ></Text>
+                    </Column>
+                    <Column width="10rem" >
+                        <Text text="Email" ></Text>
+                    </Column>
+                    <Column width="10rem" >
+                        <Text text="Address Type" ></Text>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{ShipFromCONTACT}" wrapping="false" />
+                            <Text text="{ShipFromCOMPANY}" wrapping="false" />
+                            <Text text="{ShipFromADDRESS_LINE1}" wrapping="false" />
+                            <Text text="{ShipFromADDRESS_LINE2}" wrapping="false" />
+                            <Text text="{addressLine3}" wrapping="false" />
+                            <Text text="{ShipFromCITY}" wrapping="false" />
+                            <Text text="{ShipFromSTATE}" wrapping="false" />
+                            <Text text="{ShipFromZIPCODE}" wrapping="false" />
+                            <Text text="{ShipFromCOUNTRY}" wrapping="false" />
+                            <Text text="{ShipFromPHONE}" wrapping="false" />
+                            <Text text="{ShipFromEMAIL}" wrapping="false" />
+                            <Text text="{ShipFromAddressType}" wrapping="false" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </ScrollContainer>
+        </content>
+ <footer>
+            <OverflowToolbar class="sapMPopoverFooter1">
+                  <Button text="Cancel" press="onShipNowPickAnAddressCancelPress1" />
+                <ToolbarSpacer />
+                 <Button type="Emphasized" text="Submit" press="onShipNowPickAnAddressSelectPress" />
+            </OverflowToolbar>
+        </footer>
+
+    </Dialog>
+</core:FragmentDefinition>

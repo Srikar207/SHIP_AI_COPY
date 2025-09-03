@@ -1,0 +1,26 @@
+
+
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+	<Popover
+		contentWidth="10%"
+		showHeader="false"
+		id="LTLClassesArrowPopover111s1"
+		class="sapUiResponsivePadding--header sapUiResponsivePadding--footer"
+		placement="Bottom"
+		initialFocus="email">
+		<List>
+            <!-- items="{eshipjetModel>/scanAndShipActionPopoverItems}" > -->
+            <StandardListItem
+                type="Active"
+                press="onLTLClassesImportPress"
+	    		title="Import LTLClasses"/>
+    	</List>
+	</Popover>
+</core:FragmentDefinition>
+
+
+

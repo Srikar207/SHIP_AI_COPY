@@ -1,0 +1,631 @@
+<mvc:View	controllerName="com.eshipjet.zeshipjet.controller.Eshipjet" xmlns="sap.m"	xmlns:core="sap.ui.core"	xmlns:mvc="sap.ui.core.mvc"	 xmlns:tnt="sap.tnt" 	xmlns:table="sap.ui.table"
+	xmlns:l="sap.ui.layout"	xmlns:f="sap.ui.layout.form"	height="100%">
+	<App id="app">
+	<tnt:ToolPage id="toolPage" sideExpanded="false" >
+		<tnt:header >
+			<tnt:ToolHeader id="myToolbar" visible="{eshipjetModel>/commonValues/toolPageHeader}" >
+				<!-- <Button		id="sideNavigationToggleButton"		icon="{value:'com/eshipjet/zeshipjet/css/images/menu.png', formatter:'sap.ui.require.toUrl'}"
+					type="Transparent"		press=".onSideNavButtonPress"> -->
+				<Button id="sideNavigationToggleButton"  icon="sap-icon://customfont/menuIcon"
+					type="Transparent" press=".onSideNavButtonPress">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow" />
+					</layoutData>
+				</Button>
+				<Text text="SAP ShipperCopilot 6.4"/>
+				<ToolbarSpacer/>
+				<Switch state="{eshipjetModel>/commonValues/darkTheme}"  change="onThemeChange" visible="{eshipjetModel>/commonValues/showDarkThemeSwitch}" >
+					<layoutData>
+						<FlexItemData growFactor="1" />
+					</layoutData>
+				</Switch>
+				<Button icon="sap-icon://action-settings" type="Transparent" press="onPressSettingsButton"/>
+				<Button icon="sap-icon://bell" type="Transparent" />
+			</tnt:ToolHeader>
+		</tnt:header>
+		<tnt:sideContent >
+			<tnt:SideNavigation visible="{eshipjetModel>/SideNavigation}" class="sapUiMediumMarginBottom" expanded="true" selectedKey="{eshipjetModel>/selectedKey}" itemSelect=".onItemSelect">
+				<tnt:NavigationList class="side-navigation" >
+					<tnt:NavigationListItem  text="SAP ShipperCopilot" icon="sap-icon://customfont/ShipperCopilate" key="ShipperCopilot" class="sideNavigationIcons" >
+					</tnt:NavigationListItem>
+					<tnt:NavigationListItem text="Orders" icon="sap-icon://customfont/order_icon" key="Orders">
+					</tnt:NavigationListItem>
+					<tnt:NavigationListItem text="Batch Ship" icon="sap-icon://customfont/batchship_icon" class="sideNavigationIcons" key="BatchShip">
+					</tnt:NavigationListItem>
+					<tnt:NavigationListItem text="Ship Request/Label" icon="sap-icon://customfont/shiprequest_icon" key="ShipRequestLabel" class="copilot-cls" >
+					</tnt:NavigationListItem>
+					<tnt:NavigationListItem text="Ship Now" icon="sap-icon://customfont/shipnow_icon" key="ShipNow">
+					</tnt:NavigationListItem>
+					<tnt:NavigationListItem text="Freight Quote Orders" icon="sap-icon://customfont/track_icon" key="FreightQuoteOrders">
+					</tnt:NavigationListItem>
+					<tnt:NavigationListItem text="Quote Now" icon="sap-icon://customfont/quotenow" key="QuoteNow">
+					</tnt:NavigationListItem>
+					<tnt:NavigationListItem text="Track Now" icon="sap-icon://customfont/track_icon" key="TrackNow">
+					</tnt:NavigationListItem>
+					<tnt:NavigationListItem text="Manifest" icon="sap-icon://customfont/track_icon" key="Manifest">
+					</tnt:NavigationListItem>
+					<tnt:NavigationListItem text="Scan &amp; Ship" icon="sap-icon://customfont/quickship_icon" key="ScanShip">
+					</tnt:NavigationListItem>
+					<tnt:NavigationListItem text="Dashboard" icon="sap-icon://customfont/dashboard_icon" key="Dashboard">
+					</tnt:NavigationListItem>
+					<tnt:NavigationListItem text="Reports" icon="sap-icon://customfont/dashboard_icon" key="Reports">
+					</tnt:NavigationListItem>
+					<tnt:NavigationListItem text="Returns" icon="sap-icon://customfont/returns_icon" key="Returns">
+					</tnt:NavigationListItem>
+					<tnt:NavigationListItem text="Routing Guide" icon="sap-icon://customfont/returns_icon" key="RoutingGuide">
+					</tnt:NavigationListItem>
+					<tnt:NavigationListItem text="Feight Audit Analysis" icon="sap-icon://customfont/returns_icon" key="FeightAuditAnalysis">
+					</tnt:NavigationListItem>
+					
+				</tnt:NavigationList>
+				<!-- <tnt:NavigationList>
+					<tnt:NavigationListItem text="Orders" icon="{value: 'com/eshipjet/zeshipjet/css/images/shiprequest.png',formatter: 'sap.ui.require.toUrl'}" key="Orders">
+					</tnt:NavigationListItem>
+				</tnt:NavigationList> -->
+			</tnt:SideNavigation>
+		</tnt:sideContent>
+		<tnt:mainContents>
+			<NavContainer id="pageContainer" initialPage="Dashboard">
+				<pages>
+					<ScrollContainer
+						id="Dashboard"
+						horizontal="false"
+						vertical="true"
+						height="100%"
+						class="sapUiContentPadding ship-tiles-page">
+						<FlexBox justifyContent="Center" alignItems="Center" height="calc(100% - 50px)">	
+							<l:HorizontalLayout id="TileContainerExpanded"
+				                    allowWrapping="true"
+				                    class="sapUiTinyMargin ship-tile-container">
+									<GenericTile press="onTilePress" class="ship-tile shipping-card"
+										headerImage="{value: 'com/eshipjet/zeshipjet/css/images/orders.png',formatter: 'sap.ui.require.toUrl'}">
+										<TileContent class="ship-tile-content">
+											<Button class="ship-tile-button" text="Orders"/>
+										</TileContent>
+									</GenericTile>
+									<GenericTile press="onTilePress" class="ship-tile active-shipping-card"
+										headerImage="{value: 'com/eshipjet/zeshipjet/css/images/ShipNow1.png',formatter: 'sap.ui.require.toUrl'}">
+										<TileContent class="ship-tile-content">
+											<Button class="ship-tile-button" text="Ship Now"/>
+										</TileContent>
+									</GenericTile>
+									<GenericTile press="onTilePress" class="ship-tile shipping-card"
+										headerImage="{value: 'com/eshipjet/zeshipjet/css/images/track.png',formatter: 'sap.ui.require.toUrl'}">
+										<TileContent class="ship-tile-content">
+											<Button class="ship-tile-button" text="Track Now"/>
+										</TileContent>
+									</GenericTile>
+							</l:HorizontalLayout>
+						</FlexBox>
+						<OverflowToolbar class="eship-footer">
+							<ToolbarSpacer/>
+								<Text text="© copyright 2024 eshipjet.ai, Inc. All rights reserved."/>
+							<ToolbarSpacer/>
+						</OverflowToolbar>
+					</ScrollContainer>
+
+					<ScrollContainer
+						id="ShipperCopilot"
+						horizontal="false"
+						vertical="true"
+						height="100%"
+						class="sapUiContentPadding ship-copilot-page">
+									<VBox visible="{ShipperCopilotModel>/iconState}" class="ship-copilot-top-section">
+										<HBox class="sapUiLargeMarginTop" justifyContent="Center">
+											<Image src="{value: 'com/eshipjet/zeshipjet/css/images/copilotlogo.png',formatter: 'sap.ui.require.toUrl'}" width="5rem" height="5rem"/>
+										</HBox>
+										<HBox class="sapUiLargeMarginTop" justifyContent="Center">
+											<Button class="sapUiTinyMargin ship-copilot-button all-shipments" icon="sap-icon://in-progress"  text="Show all Shipments" press="onPressAllShipments">
+												<customData>
+													<core:CustomData key="ShowAllShipments" value="ShowAllShipments" writeToDom="true" />
+												</customData>
+											</Button>
+											<Button class="sapUiTinyMargin ship-copilot-button country-shipments" icon="sap-icon://product" text="Country wise Shipments" press="onClickCountryWiseShipments"/>
+											<Button class="sapUiTinyMargin ship-copilot-button open-order-status" icon="sap-icon://shipping-status" text="Orders with Open Status"  press="onPressAllShipments">
+												<customData>
+													<core:CustomData key="OrderStatus" value="OrderStatus" writeToDom="true" />
+												</customData>
+											</Button>
+										</HBox>
+									</VBox>
+									<List width="100rem" id="chatList" inset="true" items="{ShipperCopilotModel>/messages}" class="co-pilot-search-results" visible="{ShipperCopilotModel>/listState}" growing="false" >
+										<CustomListItem class="sapUiTinyMargin">
+										<HBox justifyContent="{= ${ShipperCopilotModel>sender} === 'You' ? 'End' : 'Start'}">
+											<VBox class="messageBox {= ${ShipperCopilotModel>sender} === 'You' ? 'userMessage' : 'botMessage'}" visible="{ShipperCopilotModel>hasTableData}">
+
+												<!-- User Text -->
+												<Text text="{ShipperCopilotModel>text}" wrapping="true"
+													class="co-pilot-search-text"
+													visible="{ShipperCopilotModel>isUserText}" />
+
+												<!-- Bot Error Text -->
+												<HBox  visible="{= ${ShipperCopilotModel>sender} === 'BotError' }">
+													<Image class="sapUiSmallMarginEnd"
+														src="{value: 'com/eshipjet/zeshipjet/css/images/copilotlogo.png',formatter: 'sap.ui.require.toUrl'}"
+														width="16px" height="auto"/>
+													<Text text="{ShipperCopilotModel>text}" wrapping="true"/>
+												</HBox>
+
+												
+											</VBox>
+											<!-- <VBox  class="messageBox {= ${ShipperCopilotModel>sender} === 'You' ? 'userMessage' : 'botMessage'}"  visible="true">
+											
+											
+											</VBox> -->
+												<!-- Table -->
+											<VBox class="sapUiSmallMarginBottom  sapUiLargeMarginEnd" id="yourVBoxId" visible="{= ${ShipperCopilotModel>sender} === 'Bot'}">
+													<Text text="{ShipperCopilotModel>text}" wrapping="true" class="co-pilot-search-text sapUiTinyMarginBottom"/>
+												<table:Table
+													
+													visibleRowCount="4"
+													selectionMode="None"
+													width="32rem"
+													fixedColumnCount="1"
+													visible="{ShipperCopilotModel>hasTableData}"
+													rows="{ShipperCopilotModel>tableData}">
+													<table:columns>
+														<table:Column width="7rem" hAlign="Center">
+															<Label text="Request ID"/>
+															<table:template>
+																<Text text="{ShipperCopilotModel>Vbeln}" wrapping="false" />
+															</table:template>
+														</table:Column>
+														<table:Column width="7rem" hAlign="Center">
+															<Label text="Created Date"/>
+															<table:template>
+																<Text text="{path: 'ShipperCopilotModel>Createddate', formatter: '.formatter.formatCustomDateShipmentTable'}" wrapping="false" />
+															</table:template>
+														</table:Column>
+														<table:Column width="7rem" hAlign="Center">
+															<Label text="Ship Date"/>
+															<table:template>
+																<Text text="{path: 'ShipperCopilotModel>DateAdded', formatter: '.formatter.formatCustomDateShipmentTable'}" wrapping="false" />
+															</table:template>
+														</table:Column>
+														<table:Column width="7rem" hAlign="Center">
+															<Label text="Shipment Type"/>
+															<table:template>
+																<Text text="{= ${ShipperCopilotModel>Shipmenttype} === 'O' ? 'Parcel' : 'LTL' }" wrapping="false" />
+															</table:template>
+														</table:Column>
+														<table:Column width="7rem" hAlign="Center">
+															<Label text="Carrier Name"/>
+															<table:template>
+																<Text text="{ShipperCopilotModel>CarrierCode}" wrapping="false" />
+															</table:template>
+														</table:Column>
+														<table:Column width="7rem" hAlign="Center">
+															<Label text="Service Level"/>
+															<table:template>
+																<Text text="{ShipperCopilotModel>CarrierDesc}" wrapping="false" />
+															</table:template>
+														</table:Column>
+														<table:Column width="7rem" hAlign="Center">
+															<Label text="Tracking Number"/>
+															<table:template>
+																<Text text="{ShipperCopilotModel>TrackingNumber}" wrapping="false" />
+															</table:template>
+														</table:Column>
+														<table:Column width="7rem" hAlign="Center">
+															<Label text="Status"/>
+															<table:template>
+																<Text text="{ShipperCopilotModel>DeliveryStatus}" wrapping="false" />
+															</table:template>
+														</table:Column>
+														<table:Column width="7rem" hAlign="Center">
+															<Label text="Ship To Company"/>
+															<table:template>
+																<Text text="{ShipperCopilotModel>RecCompany}" wrapping="false" />
+															</table:template>
+														</table:Column>
+														<table:Column width="7rem" hAlign="Center">
+															<Label text="Ship To Contact"/>
+															<table:template>
+																<Text text="{ShipperCopilotModel>RecContact}" wrapping="false" />
+															</table:template>
+														</table:Column>
+														<table:Column width="7rem" hAlign="Center">
+															<Label text="Ship To Address Line 1"/>
+															<table:template>
+																<Text text="{ShipperCopilotModel>RecAddress1}" wrapping="false" />
+															</table:template>
+														</table:Column>
+														<table:Column width="7rem" hAlign="Center">
+															<Label text="Ship To City"/>
+															<table:template>
+																<Text text="{ShipperCopilotModel>RecCity}" wrapping="false" />
+															</table:template>
+														</table:Column>
+														<table:Column width="7rem" hAlign="Center">
+															<Label text="Ship To State"/>
+															<table:template>
+																<Text text="{ShipperCopilotModel>Region}" wrapping="false" />
+															</table:template>
+														</table:Column>
+														<table:Column width="7rem" hAlign="Center">
+															<Label text="Ship To Country"/>
+															<table:template>
+																<Text text="{ShipperCopilotModel>RecCountry}" wrapping="false" />
+															</table:template>
+														</table:Column>
+														<table:Column width="7rem" hAlign="Center">
+															<Label text="Ship To Zipcode"/>
+															<table:template>
+																<Text text="{ShipperCopilotModel>RecPostalcode}" wrapping="false" />
+															</table:template>
+														</table:Column>
+														<table:Column width="7rem" hAlign="Center">
+															<Label text="Ship To Phone"/>
+															<table:template>
+																<Text text="{ShipperCopilotModel>RecPhone}" wrapping="false" />
+															</table:template>
+														</table:Column>
+														<table:Column width="7rem" hAlign="Center">
+															<Label text="Ship To Email"/>
+															<table:template>
+																<Text text="{ShipperCopilotModel>Emailaddress}" wrapping="false" />
+															</table:template>
+														</table:Column>
+														<table:Column width="7rem" hAlign="Center">
+															<Label text="Requester Name"/>
+															<table:template>
+																<Text text="{ShipperCopilotModel>RecContact}" wrapping="false" />
+															</table:template>
+														</table:Column>
+														<table:Column width="7rem" hAlign="Center">
+															<Label text="Connected To"/>
+															<table:template>
+																<Text text="{path: 'ShipperCopilotModel>DateAdded', formatter: '.formatter.formatCustomDateShipmentTable'}" wrapping="false" />
+															</table:template>
+														</table:Column>
+														<table:Column width="7rem" hAlign="Center">
+															<Label text="Order Type"/>
+															<table:template>
+																<Text text="{ShipperCopilotModel>Shipmentid}" wrapping="false" />
+															</table:template>
+														</table:Column>
+														<table:Column width="7rem" hAlign="Center">
+															<Label text="Priority Level"/>
+															<table:template>
+																<Text text="{ShipperCopilotModel>Priorityalert}" wrapping="false" />
+															</table:template>
+														</table:Column>
+														<table:Column width="7rem" hAlign="Center">
+															<Label text="RF ID"/>
+															<table:template>
+																<Text text="{ShipperCopilotModel>Reference1}" wrapping="false" />
+															</table:template>
+														</table:Column>
+													</table:columns>
+												</table:Table>												
+												<HBox visible="{ShipperCopilotModel>hasTableData}" justifyContent="Start" class="sapUiTinyMarginTop">
+													<Button icon="sap-icon://download" type="Transparent" press="onDownloadAllShipmentsExcel"/>
+												</HBox>
+												<table:Table	visibleRowCount="1"		selectionMode="None"
+													width="13rem"													
+													visible="{ShipperCopilotModel>hasCountryTableData}"
+													rows="{ShipperCopilotModel>CountryTableData}">
+													<table:columns>
+														<table:Column width="6rem" hAlign="Center">
+															<Label text="Country"/>
+															<table:template>
+																<Text text="{ShipperCopilotModel>country}"  />
+															</table:template>
+														</table:Column>
+														<table:Column width="6rem" hAlign="Center">
+															<Label text="Count"/>
+															<table:template>
+																<Text text="{ShipperCopilotModel>count}" wrapping="false" />
+															</table:template>
+														</table:Column>													
+													</table:columns>
+												</table:Table>
+													
+												<Image  src="{ShipperCopilotModel>imageSrc}"
+													width="70%" height="80%"
+													press="onZoomImage"
+													visible="{ShipperCopilotModel>isBotImage}" />
+												<table:Table	visibleRowCount="{= ${ShipperCopilotModel>TrackTableData}.length }"		selectionMode="None"
+													width="18rem"													
+													visible="{ShipperCopilotModel>hasTrackTableData}"
+													rows="{ShipperCopilotModel>TrackTableData}">
+													<table:columns>
+														<table:Column width="9rem" hAlign="Center">
+															<Label text="Service Name"/>
+															<table:template>
+																<Text text="{ShipperCopilotModel>CarrierCode}"  />
+															</table:template>
+														</table:Column>														
+														<table:Column width="9rem" hAlign="Center">
+															<Label text="Tracking Number"/>
+															<table:template>
+																<Link text="{ShipperCopilotModel>TrackingNumber}" press="onShipperCopilotTrackPress" />
+															</table:template>
+														</table:Column>															
+													</table:columns>
+												</table:Table>
+											</VBox>
+										</HBox>
+									</CustomListItem>
+									</List>
+									<HBox justifyContent="Center" class="ship-copilot-search-section" width="80rem" >
+										<!-- <Button icon="sap-icon://chain-link" class="chainlinkCp sapUiLargeMarginBegin"/> -->
+										<Input id="userInput" class="sapUiTinyMarginEnd shippercopilotcss" placeholder="Good Afternoon {eshipjetModel>/userName}, I'm ready for the task" width="30rem" submit="onSendPress"/>
+										<Button icon="sap-icon://arrow-top" press="onSendPress" class="sapUiTinyMarginEnd"/>
+									</HBox>
+
+					</ScrollContainer>
+
+					
+					<!-- Orders Starts here -->
+					<ScrollContainer id="Orders" horizontal="false" vertical="true" height="calc(100% - 0px)" class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.Orders.Orders" type="XML" />
+						<!-- <mvc:XMLView viewName="com.eshipjet.zeshipjet.view.Orders"/> -->
+					</ScrollContainer>
+
+					<!-- Routing Guide Starts here -->
+					<ScrollContainer id="RoutingGuide" horizontal="false" vertical="true" height="calc(100% - 50px)" class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.RoutingGuide.RoutingGuide" type="XML" />
+						<!-- <mvc:XMLView viewName="com.eshipjet.zeshipjet.view.RoutingGuide"/> -->
+					</ScrollContainer>
+
+				<!-- Ship Request Label Starts here -->
+					<ScrollContainer id="ShipRequestLabel" horizontal="false" vertical="true" height="calc(100% - 50px)" class="sapUiContentPadding">
+							<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.ShipReqLabel.ShipRequestLabel" type="XML" />
+					</ScrollContainer>
+
+				<!-- Ship Now Starts here -->
+					<ScrollContainer id="ShipNow" horizontal="false" vertical="true" height="calc(100% - 50px)" class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.ShipNow.ShipNow" type="XML" />
+						<!-- <mvc:XMLView viewName="com.eshipjet.zeshipjet.view.ShipNow"/> -->
+					</ScrollContainer>
+
+				<!-- Freight Quote Orders Starts here -->
+					<ScrollContainer id="FreightQuoteOrders" horizontal="false" vertical="true" height="100%" class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.FreightQuoteOrders.FreightQuoteOrders" type="XML" />
+					</ScrollContainer>
+
+				<!-- Quote Now Starts here -->
+					<ScrollContainer	id="QuoteNow" horizontal="false" vertical="true" height="calc(100% - 50px)" class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.QuoteNow.QuoteNow" type="XML" />
+					</ScrollContainer>
+
+				<!-- Track Now Starts here -->
+					<ScrollContainer	id="TrackNow" horizontal="false" vertical="true" height="calc(100% - 50px)" class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.TrackNow.TrackNow" type="XML" />
+					</ScrollContainer>
+
+				<!-- Manifest Starts here -->
+					<ScrollContainer	id="Manifest" horizontal="false" vertical="true" height="calc(100% - 50px)" class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.Manifest.Manifest" type="XML" />
+					</ScrollContainer>
+
+				<!-- AES Direct Starts here -->
+					<ScrollContainer	id="AESDirect" horizontal="false" vertical="true" height="calc(100% - 50px)" class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.AESDirect" type="XML" />
+					</ScrollContainer>
+
+				<!-- Scan And Ship Starts here -->
+					<ScrollContainer	id="ScanShip"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.ScanAndShip.ScanAndShip" type="XML"/>
+					</ScrollContainer>
+
+				<!-- Batch Ship Starts here -->
+					<ScrollContainer	id="BatchShip"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.BatchShip.BatchShip" type="XML" />
+					</ScrollContainer>
+
+				<!-- Batch Reports Starts here -->
+					<ScrollContainer	id="Reports"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.Reports.Reports" type="XML" />
+					</ScrollContainer>
+
+				<!-- Feight Audit Analysis Ship Starts here -->
+					<ScrollContainer	id="FeightAuditAnalysis"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.FeightAuditAnalysis.FeightAuditAnalysis" type="XML" />
+					</ScrollContainer>
+
+
+<!-- Settings Button Icon Functionality changes starts here -->
+
+					<ScrollContainer	id="_ID_Location_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.Locations" type="XML" />
+					</ScrollContainer> 
+
+					<ScrollContainer	id="_ID_AddressBook_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.AddressBook" type="XML" />
+					</ScrollContainer> 
+
+					<ScrollContainer	id="_ID_Users_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.Users" type="XML" />
+					</ScrollContainer>
+
+					
+					<ScrollContainer	id="_ID_Roles_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.Roles" type="XML" />
+					</ScrollContainer>
+
+					<ScrollContainer	id="_ID_CarrierCatalog_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.CarrierCatalog" type="XML" />
+					</ScrollContainer> 
+
+					<ScrollContainer	id="_ID_CarrierAccounts_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.CarrierAccounts" type="XML" />
+					</ScrollContainer>
+
+					<ScrollContainer	id="_ID_CostCenters_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.CostCenters" type="XML" />
+					</ScrollContainer>
+
+					<ScrollContainer	id="_ID_FreightCondition_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.FreightCondition" type="XML" />
+					</ScrollContainer>
+
+					<ScrollContainer	id="_ID_Statuses_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.Statuses" type="XML" />
+					</ScrollContainer> 
+
+					<ScrollContainer	id="_ID_Products_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.Products" type="XML" />
+					</ScrollContainer>
+
+					<ScrollContainer	id="_ID_PackageTypes_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.PackageTypes" type="XML" />
+					</ScrollContainer> 
+					<ScrollContainer	id="_ID_DangerousGoods_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.DangerousGoods" type="XML" />
+					</ScrollContainer> 
+
+					<ScrollContainer	id="_ID_ThirdParties_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.ThirdParty" type="XML" />
+					</ScrollContainer> 
+
+					<ScrollContainer	id="_ID_LTLClasses_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.LTLClasses" type="XML" />
+					</ScrollContainer> 
+
+					<ScrollContainer	id="_ID_NMFC_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.NMFCTable" type="XML" />
+					</ScrollContainer> 
+					
+					<ScrollContainer	id="_ID_MOT_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.ModeOfTransport" type="XML" />
+					</ScrollContainer>
+
+					<ScrollContainer	id="_ID_OrderTypes_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.OrderTypes" type="XML" />
+					</ScrollContainer>
+
+					<ScrollContainer	id="_ID_RoutingGuide_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.RoutingGuide.CreateRoutingRuleClick" type="XML" />
+					</ScrollContainer>
+
+					<ScrollContainer	id="_ID_Incoterms_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.Incoterms" type="XML" />
+					</ScrollContainer>
+
+					<ScrollContainer	id="_ID_TrackingRange_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.TrackingRange" type="XML" />
+					</ScrollContainer> 
+
+					<ScrollContainer	id="_ID_Dimensions_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.DimensionsTable" type="XML" />
+					</ScrollContainer> 
+
+					<ScrollContainer	id="_ID_PaymentTypes_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.PaymentTypes" type="XML" />
+					</ScrollContainer> 
+
+					<ScrollContainer	id="_ID_SMTPConfig_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.SMTPTable" type="XML" />
+					</ScrollContainer> 
+
+					<ScrollContainer	id="_ID_ERP_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.ERPTable" type="XML" />
+					</ScrollContainer> 
+
+					<ScrollContainer	id="_ID_Countries_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.CountriesTable" type="XML" />
+					</ScrollContainer> 
+
+					<ScrollContainer	id="_ID_EUCountries_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.EUCountries" type="XML" />
+					</ScrollContainer>
+
+					<ScrollContainer	id="_ID_ResetPassword_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.ResetPassword" type="XML" />
+					</ScrollContainer>
+
+					<ScrollContainer	id="_ID_UnlockDeliveryNumber_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.UnlockDeliveryNumber" type="XML" />
+					</ScrollContainer>
+
+					<ScrollContainer	id="_ID_ShipmentErrorLogs_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.ShipmentErrorLogs" type="XML" />
+					</ScrollContainer>
+
+					<ScrollContainer	id="_ID_CommonErrorLogs_TableScrollContainer" horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.CommonErrorLogs" type="XML" />
+					</ScrollContainer>
+
+					<ScrollContainer	id="_ID_CreateShipReqLabel_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
+						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.ShipReqLabel.CreateShipReqLabelClick" type="XML" />
+					</ScrollContainer> 
+				</pages>
+			</NavContainer>
+		</tnt:mainContents>
+	</tnt:ToolPage>
+	    
+	  </App>
+
+	  	<OverflowToolbar class="eship-footer" visible="{eshipjetModel>/commonValues/allViewsFooter}">
+	  		<Button text="Log Out" class="customLogOutButton" type="Transparent" width="6rem" press="onLogOutPress" icon="sap-icon://log" ></Button>
+			<ToolbarSpacer/>
+				<Text text="© copyright 2024 eshipjet.ai, Inc. All rights reserved."/>
+			<ToolbarSpacer/>
+		</OverflowToolbar>
+
+		<OverflowToolbar class="eship-footer1 ship-now-footer" visible="{eshipjetModel>/commonValues/shipNowViewFooter}">
+			<HBox>
+				<Text text="SAP User ID : " class="todayscss sapUiTinyMarginEnd sapUiSmallMarginBegin" />
+				<Text text="{eshipjetModel>/userName}" class="greenTexttoday" />
+				<!-- <Text text="{eshipjetModel>/TodayShipmentsLength}" class="todayscssNumber sapUiTinyMarginBegin " /> -->
+			</HBox>
+
+			<ToolbarSpacer/>
+				<!-- <Button text="Get Shipping Rates" class="ship-now-footer_ship-rates btngetshipments"/> -->
+				<Button text="Get Shipping Rates" visible="{eshipjetModel>/commonValues/shipNowVoidSelectShipNow}" class="shipNowBtnStyle" type="Ghost" width="auto" press="onShipRatePress" />
+				<!-- <ComboBox class="create-ship-req_input" items="" placeholder="More Actions" editable="false" >
+					<HBox>
+						<core:Item key="postGoodsIssue" text="Post Goods Issue" />
+						<core:Icon src="sap-icon://accept" ></core:Icon>
+					</HBox>
+					<HBox >
+						<core:Item key="reversePGI" text="Reverse PGI" />
+						<core:Icon src="sap-icon://refresh" ></core:Icon>
+					</HBox>
+				</ComboBox> -->
+
+				<!-- <Select class="sapUiLargeMarginBegin" width="10%" >
+					<core:ListItem key="postGoodsIssue" text="Post Goods Issue" icon="sap-icon://accept" />
+					<core:ListItem key="reversePGI" text="Reverse PGI" icon="sap-icon://refresh" />
+				</Select> -->
+				<Button text="More Actions" press="onMoreActionsPress" class="moreActions-btn" iconFirst="false" />
+
+			<ToolbarSpacer/>
+				<!-- <Button text="Save" press="createHandlingUnits" class="scan-ship-toolbar1__button sapUiTinyMargin sapUiLargeMarginEnd" visible="{eshipjetModel>/commonValues/shipNowVoidSelectSave}" type="Ghost" width="5%"  /> -->
+				<Button text="Ship Now" press="onShipNowPress" id="idShipNowBtn" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" visible="{eshipjetModel>/commonValues/shipNowVoidSelectShipNow}" type="Ghost" class="shipNowBtnStyle sapUiMediumMarginEnd" />
+				<Button text="Void" press="onShipNowVoidPress"  visible="{eshipjetModel>/commonValues/shipNowVoidSelect}" type="Ghost" class="shipNowBtnStyle sapUiMediumMarginEnd" />
+		</OverflowToolbar>
+
+		<Toolbar class="sapUiLargeMarginBottom eship-req-footer" visible="{eshipjetModel>/commonValues/createShipReqViewFooter}" >
+			<Button text="Next" ></Button>
+		</Toolbar>
+		<OverflowToolbar class="eship-footer ship-now-footer" visible="{eshipjetModel>/commonValues/createShipReqViewFooter}">
+			
+				<Button text="Clear"  class="ship-now-footer_ship-rates" />
+			<ToolbarSpacer />
+				<Button text="Get Shipping Rates" class="ship-now-footer_ship-rates" visible="{eshipjetModel>/createShipReqBusinessSelect}"  press="onShipRatePress"/>
+				<Button text="Get Freight Quotes" press="onGetFreightQuotesPress" class="ship-now-footer_ship-rates" visible="{eshipjetModel>/createShipReqSpecialSrvsShow}" />
+				<Button text="Buy Shipping Label" class="ship-now-footer_ship-rates" visible="{eshipjetModel>/createShipReqPersonalSelect}" />
+			<ToolbarSpacer/>
+				<HBox >
+					<Button type="Success" text="Save" press="onCreateShipReqSavePress" class="create-ship-req-toolbar_save-button" width="4rem" ></Button>
+					<Button type="Success" icon="sap-icon://navigation-down-arrow" class="create-ship-req-toolbar__button" ></Button>
+                	
+
+				    <!-- <Button  text="Save" class="create-ship-req-footer" width="5rem" ></Button>
+                    <Button type="Success" press="onADDLocImpPress" icon="sap-icon://navigation-down-arrow" class="create-ship-req-footer" ></Button> -->
+                
+				</HBox>
+				<Button text="Ship Now" press="onShipNowPress" class="create-ship-req-footer sapUiSmallMarginEnd" />
+		</OverflowToolbar>
+
+		<OverflowToolbar class="eship-footer ship-now-footer" visible="{eshipjetModel>/commonValues/routingGuidFooter}">
+			<ToolbarSpacer/>
+				<HBox >
+					<Button text="Save" press="onRoutingGuidSavePress" class="ship-now-footer_ship-now" />
+					<Button icon="sap-icon://slim-arrow-down" press="onRoutingGuidSaveOptionsPress" class="ship-now-footer_ship-now" ></Button>
+				</HBox>
+		</OverflowToolbar>
+</mvc:View>
