@@ -364,11 +364,11 @@
 														<!-- <ComboBox class="create-ship-req_input" width="auto" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" items="{eshipjetModel>/carrierconfiguration1}" selectedKey="{eshipjetModel>/commonValues/ShipNowShipMethodSelectedKey}" selectionChange="onShopNowShipMethodTypeChange"  >
 															<core:Item key="{eshipjetModel>CarrierName}" text="{eshipjetModel>CarrierName}" />
 														</ComboBox> -->
-														<Input value="{ShipNowDataModel>/ShipToAddress/PostalCode}" width="auto" class="create-ship-req_input" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" ></Input>
+														<Input value="{eshipjetModel>/GetDeliveryData/to_ShipToParty/PostalCode}" width="auto" class="create-ship-req_input" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" ></Input>
 													</VBox>
 													<VBox class="" >
 														<Label text="Country" />
-														<ComboBox class="create-ship-req_input" width="auto" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" items="{eshipjetModel>/countriesList}" selectedKey="{ShipNowDataModel>/ShipToAddress/Country}" >
+														<ComboBox class="create-ship-req_input" width="auto" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" items="{eshipjetModel>/countriesList}" selectedKey="{eshipjetModel>/GetDeliveryData/to_ShipToParty/Country}" >
 															<core:Item key="{eshipjetModel>code}" text="{eshipjetModel>name}" />												
 														</ComboBox>
 													</VBox>
