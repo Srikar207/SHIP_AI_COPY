@@ -326,8 +326,8 @@
 										
 									</IconTabFilter>
 									<!-- Routing and Billing Details Tab Starts here -->
-Routing 
-									<IconTabFilter text="and Billing Details" key="Routing and Billing Details">
+
+									<IconTabFilter text="Routing and Billing Details" key="Routing and Billing Details">
 										<VBox class="scan-ship-toolbar1">
 
 										<HBox alignContent="Center" >
