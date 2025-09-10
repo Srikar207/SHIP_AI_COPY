@@ -59,6 +59,11 @@ server:
             authenticationType: BasicAuthentication
             destination: Eshipjet-ESJ
             path: /sap/opu/odata/ESHIPJET/CREATE_HU_SRV/
+          - url: https://sapdemo.eshipjet.com:44300
+            client: '200'
+            authenticationType: BasicAuthentication
+            destination: Eshipjet-ESJ
+            path: /sap/opu/odata/sap/ZCDS_DLVR_DATA_CDS/
     - name: sap-fe-mockserver
       beforeMiddleware: csp
       configuration:
@@ -100,6 +105,12 @@ server:
             metadataPath: ./webapp/localService/CREATE_HU_SRV/metadata.xml
             mockdataPath: ./webapp/localService/CREATE_HU_SRV/data
             generateMockData: true
+          - urlPath: /sap/opu/odata/sap/ZCDS_DLVR_DATA_CDS
+            metadataPath: ./webapp/localService/ZCDS_DLVR_DATA_CDS/metadata.xml
+            mockdataPath: ./webapp/localService/ZCDS_DLVR_DATA_CDS/data
+            generateMockData: true
         annotations:
           - localPath: ./webapp/localService/API_PRODUCT_SRV/API_PRODUCT_ANNO_MDL.xml
             urlPath: /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='API_PRODUCT_ANNO_MDL',Version='0001')/$value/
+          - localPath: ./webapp/localService/ZCDS_DLVR_DATA_CDS/ZCDS_DLVR_DATA_CDS_VAN.xml
+            urlPath: /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZCDS_DLVR_DATA_CDS_VAN',Version='0001')/$value/

@@ -1,0 +1,1255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZCDS_DLVR_DATA_CDS" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="I_CustomerType" sap:label="Customer" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Customer"/>
+                </Key>
+                <Property Name="Customer" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:text="CustomerName" sap:label="Customer" sap:quickinfo="Customer Number"/>
+                <Property Name="CustomerName" Type="Edm.String" MaxLength="80" sap:label="Name of Customer"/>
+                <Property Name="CustomerFullName" Type="Edm.String" MaxLength="220" sap:display-format="UpperCase" sap:label="Customer Name" sap:quickinfo="Customer Full Name"/>
+                <Property Name="BPCustomerName" Type="Edm.String" MaxLength="81" sap:label="Name of Customer" sap:quickinfo="Customer Name"/>
+                <Property Name="BPCustomerFullName" Type="Edm.String" MaxLength="220" sap:display-format="UpperCase" sap:label="Customer Name" sap:quickinfo="Customer Full Name"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created by" sap:quickinfo="Name of Person who Created the Object"/>
+                <Property Name="CreationDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Created On" sap:quickinfo="Record Created On"/>
+                <Property Name="AddressID" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Address"/>
+                <Property Name="CustomerClassification" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:text="CustomerClassification_Text" sap:label="Customer Classific." sap:quickinfo="Customer Classification" sap:value-list="standard"/>
+                <Property Name="CustomerClassification_Text" Type="Edm.String" MaxLength="20" sap:label="Customer Classification Description" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="VATRegistration" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="VAT Registration No." sap:quickinfo="VAT Registration Number"/>
+                <Property Name="CustomerAccountGroup" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Account group" sap:quickinfo="Customer Account Group"/>
+                <Property Name="AuthorizationGroup" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Authorization" sap:quickinfo="Authorization Group"/>
+                <Property Name="DeliveryIsBlocked" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Delivery block" sap:quickinfo="Central delivery block for the customer"/>
+                <Property Name="PostingIsBlocked" Type="Edm.Boolean" sap:label="Posting Block" sap:quickinfo="Central posting block"/>
+                <Property Name="BillingIsBlockedForCustomer" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Billing block" sap:quickinfo="Central billing block for customer"/>
+                <Property Name="OrderIsBlockedForCustomer" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Order block" sap:quickinfo="Central order block for customer"/>
+                <Property Name="InternationalLocationNumber1" Type="Edm.String" MaxLength="7" sap:display-format="NonNegative" sap:label="Int. location no. 1" sap:quickinfo="International Location Number (Part 1)"/>
+                <Property Name="IsOneTimeAccount" Type="Edm.Boolean" sap:label="One-time account" sap:quickinfo="Indicator: Is the account a one-time account?"/>
+                <Property Name="TaxJurisdiction" Type="Edm.String" MaxLength="15" sap:display-format="UpperCase" sap:label="Tax Jurisdiction"/>
+                <Property Name="Industry" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Industry" sap:quickinfo="Industry Key"/>
+                <Property Name="TaxNumberType" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Tax number type" sap:quickinfo="Tax Number Type"/>
+                <Property Name="TaxNumber1" Type="Edm.String" MaxLength="16" sap:display-format="UpperCase" sap:label="Tax Number 1"/>
+                <Property Name="TaxNumber2" Type="Edm.String" MaxLength="11" sap:display-format="UpperCase" sap:label="Tax Number 2"/>
+                <Property Name="TaxNumber3" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Tax Number 3"/>
+                <Property Name="TaxNumber4" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Tax Number 4"/>
+                <Property Name="TaxNumber5" Type="Edm.String" MaxLength="60" sap:display-format="UpperCase" sap:label="Tax Number 5"/>
+                <Property Name="TaxNumber6" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Tax Number 6"/>
+                <Property Name="CustomerCorporateGroup" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Group Key"/>
+                <Property Name="Supplier" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Supplier" sap:quickinfo="Account Number of Supplier"/>
+                <Property Name="NielsenRegion" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Nielsen indicator" sap:quickinfo="Nielsen ID"/>
+                <Property Name="IndustryCode1" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Industry code 1"/>
+                <Property Name="IndustryCode2" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Industry code 2"/>
+                <Property Name="IndustryCode3" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Industry code 3"/>
+                <Property Name="IndustryCode4" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Industry code 4"/>
+                <Property Name="IndustryCode5" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Industry code 5"/>
+                <Property Name="Country" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Country/Region Key"/>
+                <Property Name="OrganizationBPName1" Type="Edm.String" MaxLength="35" sap:label="Name" sap:quickinfo="Name 1"/>
+                <Property Name="OrganizationBPName2" Type="Edm.String" MaxLength="35" sap:label="Name 2"/>
+                <Property Name="CityName" Type="Edm.String" MaxLength="35" sap:label="City"/>
+                <Property Name="PostalCode" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Postal Code"/>
+                <Property Name="StreetName" Type="Edm.String" MaxLength="35" sap:label="Street" sap:quickinfo="Street and House Number"/>
+                <Property Name="SortField" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Search term" sap:quickinfo="Sort field"/>
+                <Property Name="FaxNumber" Type="Edm.String" MaxLength="31" sap:label="Fax Number"/>
+                <Property Name="BR_SUFRAMACode" Type="Edm.String" MaxLength="9" sap:display-format="UpperCase" sap:label="Suframa Code"/>
+                <Property Name="Region" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Region" sap:quickinfo="Region (State, Province, County)"/>
+                <Property Name="TelephoneNumber1" Type="Edm.String" MaxLength="16" sap:label="Telephone 1" sap:quickinfo="First telephone number"/>
+                <Property Name="TelephoneNumber2" Type="Edm.String" MaxLength="16" sap:label="Telephone 2" sap:quickinfo="Second telephone number"/>
+                <Property Name="AlternativePayerAccount" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Alternative Payer" sap:quickinfo="Account Number of an Alternative Payer"/>
+                <Property Name="DataMediumExchangeIndicator" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="DME Recipient Code" sap:quickinfo="Recipient Code for Data Medium Exchange"/>
+                <Property Name="VATLiability" Type="Edm.Boolean" sap:label="Liable for VAT"/>
+                <Property Name="IsBusinessPurposeCompleted" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Purpose Completed" sap:quickinfo="Business Purpose Completed Flag"/>
+                <Property Name="ResponsibleType" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Tax Type"/>
+                <Property Name="FiscalAddress" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Fiscal address" sap:quickinfo="Account number of the master record with the fiscal address"/>
+                <Property Name="NFPartnerIsNaturalPerson" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Natural Person"/>
+                <Property Name="DeletionIndicator" Type="Edm.Boolean" sap:label="Deletion Flag" sap:quickinfo="Central Deletion Flag for Master Record"/>
+                <Property Name="Language" Type="Edm.String" MaxLength="2" sap:label="Language Key"/>
+                <Property Name="TradingPartner" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:text="to_GlobalCompany/CompanyName" sap:label="Trading Partner No." sap:quickinfo="Company ID of Trading Partner" sap:value-list="standard"/>
+                <Property Name="DeliveryDateTypeRule" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Deliv Date Rule" sap:quickinfo="Delivery Date Rule"/>
+                <Property Name="ExpressTrainStationName" Type="Edm.String" MaxLength="25" sap:label="Express station" sap:quickinfo="Express train station"/>
+                <Property Name="TrainStationName" Type="Edm.String" MaxLength="25" sap:label="Train station"/>
+                <Property Name="InternationalLocationNumber2" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative" sap:label="Int. location no. 2" sap:quickinfo="International Location Number (Part 2)"/>
+                <Property Name="InternationalLocationNumber3" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative" sap:label="Check digit" sap:quickinfo="Check digit for the international location number"/>
+                <Property Name="CityCode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="City Code"/>
+                <Property Name="County" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="County Code"/>
+                <Property Name="CustomerHasUnloadingPoint" Type="Edm.Boolean" sap:label="Unloading points" sap:quickinfo="Indicator: Unloading points exist"/>
+                <Property Name="CustomerWorkingTimeCalendar" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Working times" sap:quickinfo="Working Time Calendar"/>
+                <Property Name="IsCompetitor" Type="Edm.Boolean" sap:label="Competitors" sap:quickinfo="Indicator: Competitor"/>
+                <Property Name="TaxInvoiceRepresentativeName" Type="Edm.String" MaxLength="10" sap:label="Rep's Name" sap:quickinfo="Name of Representative"/>
+                <Property Name="BusinessType" Type="Edm.String" MaxLength="30" sap:label="Type of Business"/>
+                <Property Name="IndustryType" Type="Edm.String" MaxLength="30" sap:label="Type of Industry"/>
+                <Property Name="TW_CollvBillingIsSupported" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Consolidated Invoic." sap:quickinfo="Consolidated Invoicing for Taiwan"/>
+                <Property Name="AlternativePayeeIsAllowed" Type="Edm.Boolean" sap:label="Alt.payer in doc?" sap:quickinfo="Indicator: Is an alternative payer allowed in document?"/>
+                <Property Name="FreeDefinedAttribute01" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Attribute 1"/>
+                <Property Name="FreeDefinedAttribute02" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Attribute 2"/>
+                <Property Name="FreeDefinedAttribute03" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Attribute 3"/>
+                <Property Name="FreeDefinedAttribute04" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Attribute 4"/>
+                <Property Name="FreeDefinedAttribute05" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Attribute 5"/>
+                <Property Name="FreeDefinedAttribute06" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Attribute 6"/>
+                <Property Name="FreeDefinedAttribute07" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Attribute 7"/>
+                <Property Name="FreeDefinedAttribute08" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Attribute 8"/>
+                <Property Name="FreeDefinedAttribute09" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Attribute 9"/>
+                <Property Name="FreeDefinedAttribute10" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Attribute 10"/>
+                <Property Name="PaymentReason" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Payment Reason"/>
+                <Property Name="CustomerConditionGroup1" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Condition group 1" sap:quickinfo="Customer condition group 1"/>
+                <Property Name="CustomerConditionGroup2" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Condition group 2" sap:quickinfo="Customer condition group 2"/>
+                <Property Name="CustomerConditionGroup3" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Condition group 3" sap:quickinfo="Customer condition group 3"/>
+                <Property Name="CustomerConditionGroup4" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Condition group 4" sap:quickinfo="Customer condition group 4"/>
+                <Property Name="CustomerConditionGroup5" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Condition group 5" sap:quickinfo="Customer condition group 5"/>
+                <Property Name="IsSalesProspect" Type="Edm.Boolean" sap:label="Prospect" sap:quickinfo="Indicator: Sales prospect"/>
+                <Property Name="PaymentIsBlockedForCustomer" Type="Edm.Boolean" sap:label="Payment block" sap:quickinfo="Payment Block"/>
+                <Property Name="IsConsumer" Type="Edm.Boolean" sap:label="Consumer" sap:quickinfo="Indicator: Consumer"/>
+                <Property Name="DataControllerSet" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Data Ctrlr. Set" sap:quickinfo="BP: Data Controller Set Flag"/>
+                <Property Name="DataController1" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController2" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController3" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController4" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController5" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController6" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController7" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController8" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController9" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController10" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="BusinessPartnerName1" Type="Edm.String" MaxLength="40" sap:label="Name" sap:quickinfo="Name 1"/>
+                <Property Name="BusinessPartnerName2" Type="Edm.String" MaxLength="40" sap:label="Name 2"/>
+                <Property Name="BusinessPartnerName3" Type="Edm.String" MaxLength="40" sap:label="Name 3"/>
+                <Property Name="BusinessPartnerName4" Type="Edm.String" MaxLength="40" sap:label="Name 4"/>
+                <Property Name="BPAddrCityName" Type="Edm.String" MaxLength="40" sap:label="City"/>
+                <Property Name="BPAddrStreetName" Type="Edm.String" MaxLength="60" sap:label="Street"/>
+                <Property Name="AddressSearchTerm1" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Search Term 1"/>
+                <Property Name="AddressSearchTerm2" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Search Term 2"/>
+                <Property Name="DistrictName" Type="Edm.String" MaxLength="40" sap:label="District"/>
+                <Property Name="POBoxDeviatingCityName" Type="Edm.String" MaxLength="40" sap:label="PO Box City" sap:quickinfo="PO Box city"/>
+                <Property Name="BusinessPartnerFormOfAddress" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Title Key" sap:quickinfo="Form-of-Address Key"/>
+                <NavigationProperty Name="to_CustomerClassification" Relationship="ZCDS_DLVR_DATA_CDS.assoc_C9CD836CFC89E1433FB2649E56D3AA66" FromRole="FromRole_assoc_C9CD836CFC89E1433FB2649E56D3AA66" ToRole="ToRole_assoc_C9CD836CFC89E1433FB2649E56D3AA66"/>
+                <NavigationProperty Name="to_GlobalCompany" Relationship="ZCDS_DLVR_DATA_CDS.assoc_116DF44D92A0493A401259DEA0CF7F53" FromRole="FromRole_assoc_116DF44D92A0493A401259DEA0CF7F53" ToRole="ToRole_assoc_116DF44D92A0493A401259DEA0CF7F53"/>
+            </EntityType>
+            <EntityType Name="I_CustomerClassificationType" sap:label="Customer Classification" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CustomerClassification"/>
+                </Key>
+                <Property Name="CustomerClassification" Type="Edm.String" Nullable="false" MaxLength="2" sap:display-format="UpperCase" sap:text="CustomerClassification_Text" sap:label="Customer Classific." sap:quickinfo="Customer Classification"/>
+                <Property Name="CustomerClassification_Text" Type="Edm.String" MaxLength="20" sap:label="Customer Classification Description" sap:creatable="false" sap:updatable="false"/>
+            </EntityType>
+            <EntityType Name="I_GlobalcompanyType" sap:label="Global Company" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Company"/>
+                </Key>
+                <Property Name="Company" Type="Edm.String" Nullable="false" MaxLength="6" sap:display-format="UpperCase" sap:text="CompanyName" sap:label="Company"/>
+                <Property Name="CompanyName" Type="Edm.String" MaxLength="30" sap:label="Name of the Company" sap:quickinfo="Company Name"/>
+                <Property Name="CompanyCurrency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Local Currency" sap:semantics="currency-code"/>
+                <Property Name="CompanyLanguage" Type="Edm.String" MaxLength="2" sap:label="Language Key"/>
+            </EntityType>
+            <EntityType Name="I_PartnerFunctionType" sap:label="Partner Function" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="PartnerFunction"/>
+                </Key>
+                <Property Name="PartnerFunction" Type="Edm.String" Nullable="false" MaxLength="2" sap:display-format="UpperCase" sap:text="PartnerFunction_Text" sap:label="Partner Function"/>
+                <Property Name="PartnerFunction_Text" Type="Edm.String" MaxLength="20" sap:label="Name" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="SDDocumentPartnerType" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Partner Type" sap:quickinfo="Type of partner number"/>
+            </EntityType>
+            <EntityType Name="I_SDDocumentPartnerType" sap:label="SD Document Partner" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="SDDocument"/>
+                    <PropertyRef Name="PartnerFunction"/>
+                </Key>
+                <Property Name="SDDocument" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="SD Document" sap:quickinfo="Sales and Distribution Document Number"/>
+                <Property Name="PartnerFunction" Type="Edm.String" Nullable="false" MaxLength="2" sap:display-format="UpperCase" sap:text="to_PartnerFunction/PartnerFunction_Text" sap:label="Partner Function" sap:value-list="standard"/>
+                <Property Name="Customer" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Customer" sap:quickinfo="Customer Number"/>
+                <Property Name="Supplier" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Supplier" sap:quickinfo="Account Number of Supplier"/>
+                <Property Name="Personnel" Type="Edm.String" MaxLength="8" sap:display-format="NonNegative" sap:label="Personnel Number"/>
+                <Property Name="ContactPerson" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative" sap:label="Contact Person" sap:quickinfo="Number of Contact Person"/>
+                <Property Name="ReferenceBusinessPartner" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Business Partner" sap:quickinfo="Business Partner Number"/>
+                <Property Name="AddressID" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Address Number"/>
+                <Property Name="AddressPersonID" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Person Number"/>
+                <Property Name="AddressObjectType" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Address Type" sap:quickinfo="Address type (1=Organization, 2=Person, 3=Contact person)"/>
+                <Property Name="SDDocPartnerAddressRefType" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Address indicator"/>
+                <Property Name="BPAddrDeterminationTransaction" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Address Detn" sap:quickinfo="Address Determination in Document"/>
+                <Property Name="BPRefAddressIDForDocSpcfcAddr" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="BP Ref. Address Num." sap:quickinfo="BP Reference Address Number"/>
+                <Property Name="SDDocPartnerAddrIsDocSpecific" Type="Edm.Boolean" sap:label="Doc-Specific Address" sap:quickinfo="Document-Specific Address Indicator"/>
+                <Property Name="VATRegistration" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="VAT Registration No." sap:quickinfo="VAT Registration Number"/>
+                <Property Name="UnloadingPointName" Type="Edm.String" MaxLength="25" sap:label="Unloading Point"/>
+                <Property Name="CountryCode" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Country/Region Key"/>
+                <Property Name="CustomerHierarchyType" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Cust.hierarchy type" sap:quickinfo="Customer hierarchy type"/>
+                <Property Name="CustIsPrcDetnRlvt" Type="Edm.Boolean" sap:label="Price determination" sap:quickinfo="Relevant for price determination ID"/>
+                <Property Name="CustomerIsRebateRelevant" Type="Edm.Boolean" sap:label="Rebate" sap:quickinfo="Indicator: Customer Is Rebate-Relevant"/>
+                <Property Name="CustomerHierarchyLevel" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative" sap:label="Hierarchy level" sap:quickinfo="Level number within hierarchy"/>
+                <Property Name="CustomerHierarchyFixedLevel" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative" sap:label="Hierarchy assignment" sap:quickinfo="Assignment to Hierarchy"/>
+                <Property Name="TransportZone" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Transportation Zone" sap:quickinfo="Transportation zone to or from which the goods are delivered"/>
+                <NavigationProperty Name="to_PartnerFunction" Relationship="ZCDS_DLVR_DATA_CDS.assoc_ECD71209EE29280ABC8EEAB08FCBDF8D" FromRole="FromRole_assoc_ECD71209EE29280ABC8EEAB08FCBDF8D" ToRole="ToRole_assoc_ECD71209EE29280ABC8EEAB08FCBDF8D"/>
+            </EntityType>
+            <EntityType Name="zcds_dlvr_dataType" sap:semantics="aggregate" sap:label="CDS for delivery details" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DeliveryDocument" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Delivery"/>
+                <Property Name="SDDocumentCategory" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:label="SD Document Category"/>
+                <Property Name="DeliveryDocumentType" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Delivery Type"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="12" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Created By" sap:quickinfo="Name of Person Responsible for Creating the Object"/>
+                <Property Name="CreationDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="Created On" sap:quickinfo="Record Creation Date"/>
+                <Property Name="CreationTime" Type="Edm.Time" Precision="0" sap:aggregation-role="dimension" sap:label="Time" sap:quickinfo="Entry time"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="12" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Changed By" sap:quickinfo="Name of Person Who Changed Object"/>
+                <Property Name="LastChangeDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="Changed On" sap:quickinfo="Last Changed On"/>
+                <Property Name="ShippingPoint" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Shipping Point" sap:quickinfo="Shipping Point / Receiving Point"/>
+                <Property Name="SalesOrganization" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Sales Organization"/>
+                <Property Name="SalesOffice" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Sales Office"/>
+                <Property Name="CompleteDeliveryIsDefined" Type="Edm.Boolean" sap:aggregation-role="dimension" sap:label="Complete Delivery" sap:quickinfo="Complete Delivery Defined for Each Sales Order"/>
+                <Property Name="OrderCombinationIsAllowed" Type="Edm.Boolean" sap:aggregation-role="dimension" sap:label="Order Combination" sap:quickinfo="Order Combination Indicator"/>
+                <Property Name="DeliveryPriority" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Delivery Priority"/>
+                <Property Name="DeliveryBlockReason" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Delivery Block" sap:quickinfo="Delivery Block (Document Header)"/>
+                <Property Name="Supplier" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Supplier"/>
+                <Property Name="DeliveryDocumentBySupplier" Type="Edm.String" MaxLength="35" sap:aggregation-role="dimension" sap:label="External Delivery ID" sap:quickinfo="External Identification of Delivery Note"/>
+                <Property Name="DeliveryIsInPlant" Type="Edm.Boolean" sap:aggregation-role="dimension" sap:label="In Plant" sap:quickinfo="Delivery has Status 'In Plant'"/>
+                <Property Name="ReceivingPlant" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Receiving Plant" sap:quickinfo="Receiving Plant for Deliveries"/>
+                <Property Name="Warehouse" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Warehouse Number" sap:quickinfo="Warehouse Number / Warehouse Complex"/>
+                <Property Name="IsExportDelivery" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Export" sap:quickinfo="Export indicator"/>
+                <Property Name="OrderID" Type="Edm.String" MaxLength="12" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Order" sap:quickinfo="Order Number"/>
+                <Property Name="HeaderGrossWeight" Type="Edm.Decimal" Precision="15" Scale="3" sap:aggregation-role="measure" sap:unit="HeaderWeightUnit" sap:label="Total Weight" sap:filterable="false"/>
+                <Property Name="HeaderNetWeight" Type="Edm.Decimal" Precision="15" Scale="3" sap:aggregation-role="measure" sap:unit="HeaderWeightUnit" sap:label="Net Weight" sap:filterable="false"/>
+                <Property Name="HeaderWeightUnit" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:label="Unit of Weight" sap:semantics="unit-of-measure"/>
+                <Property Name="HeaderVolume" Type="Edm.Decimal" Precision="15" Scale="3" sap:aggregation-role="measure" sap:unit="HeaderVolumeUnit" sap:label="Volume" sap:filterable="false"/>
+                <Property Name="HeaderVolumeUnit" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:label="Volume Unit" sap:semantics="unit-of-measure"/>
+                <Property Name="IsDeliveryForSingleWarehouse" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="ID: Delivery Split" sap:quickinfo="Delivery Within one Warehouse"/>
+                <Property Name="GoodsIssueOrReceiptSlipNumber" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="GR/GI Slip No." sap:quickinfo="Goods Receipt/Issue Slip Number"/>
+                <Property Name="WarehouseGate" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Door for Whse No." sap:quickinfo="Door for Warehouse Number"/>
+                <Property Name="WarehouseStagingArea" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Staging Area" sap:quickinfo="Staging Area for Warehouse Complex"/>
+                <Property Name="MeansOfTransportRefMaterial" Type="Edm.String" MaxLength="40" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Means of Transport"/>
+                <Property Name="SpecialProcessingCode" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Spec.Processing" sap:quickinfo="Special Processing Indicator"/>
+                <Property Name="ExternalIdentificationType" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Type of Ext. Ident." sap:quickinfo="Type of External Identification"/>
+                <Property Name="DeliveryVersion" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Delivery Version"/>
+                <Property Name="PickedItemsLocation" Type="Edm.String" MaxLength="20" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Picked Items Locat." sap:quickinfo="Picked Items Location"/>
+                <Property Name="DocumentDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="Document Date" sap:quickinfo="Document Date in Document"/>
+                <Property Name="DelivCompGrpSts" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Component Group Ind." sap:quickinfo="Component Group Indicator"/>
+                <Property Name="PickingDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="Picking Date"/>
+                <Property Name="PickingTime" Type="Edm.Time" Precision="0" sap:aggregation-role="dimension" sap:label="Picking Time" sap:quickinfo="Picking Time (Local Time, with Reference to a Plant)"/>
+                <Property Name="TotalNumberOfPackage" Type="Edm.String" MaxLength="5" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Number of Packages" sap:quickinfo="Total Number of Packages in Delivery"/>
+                <Property Name="LoadingPoint" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Loading Point"/>
+                <Property Name="LoadingDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="Loading Date"/>
+                <Property Name="LoadingTime" Type="Edm.Time" Precision="0" sap:aggregation-role="dimension" sap:label="Loading Time" sap:quickinfo="Loading Time (Local Time Relating to a Shipping Point)"/>
+                <Property Name="BillOfLading" Type="Edm.String" MaxLength="35" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Bill of Lading"/>
+                <Property Name="HandlingUnitInStock" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="HU Placed in Stock" sap:quickinfo="Handling Unit Placed in Stock"/>
+                <Property Name="ShipToParty" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Ship-to Party"/>
+                <Property Name="ShippingType" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Shipping Type"/>
+                <Property Name="DeliveryDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="Delivery Date"/>
+                <Property Name="DeliveryTime" Type="Edm.Time" Precision="0" sap:aggregation-role="dimension" sap:label="Time of delivery"/>
+                <Property Name="ShippingCondition" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Shipping Conditions"/>
+                <Property Name="ShipmentBlockReason" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="ShipmentBlockReason" sap:quickinfo="Shipment Blocking Reason"/>
+                <Property Name="TransportationPlanningDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="Transptn Plang Date" sap:quickinfo="Transportation Planning Date"/>
+                <Property Name="TransportationPlanningTime" Type="Edm.Time" Precision="0" sap:aggregation-role="dimension" sap:label="Transp. Plan. Time" sap:quickinfo="Transp. Planning Time (Local, Relating to a Shipping Point)"/>
+                <Property Name="ProposedDeliveryRoute" Type="Edm.String" MaxLength="6" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Route"/>
+                <Property Name="RouteSchedule" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Route Schedule"/>
+                <Property Name="PlannedGoodsIssueDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="Pland Gds Mvmnt Date" sap:quickinfo="Planned Goods Movement Date"/>
+                <Property Name="GoodsIssueTime" Type="Edm.Time" Precision="0" sap:aggregation-role="dimension" sap:label="Goods Issue Time" sap:quickinfo="Time of Goods Issue (Local, Relating to a Plant)"/>
+                <Property Name="ActualGoodsMovementDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="Act. Gds Mvmnt Date" sap:quickinfo="Actual Goods Movement Date"/>
+                <Property Name="ActualGoodsMovementTime" Type="Edm.Time" Precision="0" sap:aggregation-role="dimension" sap:label="Goods Issue Time" sap:quickinfo="Time of Goods Issue (Local, Relating to a Plant)"/>
+                <Property Name="IncotermsClassification" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Incoterms" sap:quickinfo="Incoterms (Part 1)"/>
+                <Property Name="IncotermsTransferLocation" Type="Edm.String" MaxLength="28" sap:aggregation-role="dimension" sap:label="Incoterms (Part 2)"/>
+                <Property Name="ExternalTransportSystem" Type="Edm.String" MaxLength="5" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="ID Transport System" sap:quickinfo="ID for External Transport System"/>
+                <Property Name="TransportationGroup" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Transportation Group"/>
+                <Property Name="MeansOfTransport" Type="Edm.String" MaxLength="20" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Means of Trans. ID" sap:quickinfo="Means of Transport ID"/>
+                <Property Name="MeansOfTransportType" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Means-of-Trans. Type" sap:quickinfo="Means-of-Transport Type"/>
+                <Property Name="UnloadingPointName" Type="Edm.String" MaxLength="25" sap:aggregation-role="dimension" sap:label="Unloading Point"/>
+                <Property Name="ProofOfDeliveryDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="POD Date" sap:quickinfo="Date (Proof of Delivery)"/>
+                <Property Name="ConfirmationTime" Type="Edm.Time" Precision="0" sap:aggregation-role="dimension" sap:label="Confirm. Time" sap:quickinfo="Confirmation Time"/>
+                <Property Name="FactoryCalendarByCustomer" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Factory Calendar" sap:quickinfo="Customer Factory Calendar"/>
+                <Property Name="ShippingLocationTimeZone" Type="Edm.String" MaxLength="6" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Del. loc. time zone" sap:quickinfo="Time zone of delivering location"/>
+                <Property Name="ReceivingLocationTimeZone" Type="Edm.String" MaxLength="6" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Rec. loc. time zone" sap:quickinfo="Time zone of recipient location"/>
+                <Property Name="IntercompanyBillingDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="Billing Date(Intco)" sap:quickinfo="Billing Date for Intercompany Billing"/>
+                <Property Name="BillingDocumentDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="Billing Date"/>
+                <Property Name="HeaderBillingBlockReason" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Billing Block" sap:quickinfo="Billing Block in SD Document"/>
+                <Property Name="InternalFinancialDocument" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Financial Doc. No." sap:quickinfo="Financial doc. processing: Internal financial doc. number"/>
+                <Property Name="PaymentGuaranteeProcedure" Type="Edm.String" MaxLength="6" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Paymt Guarant. Proc." sap:quickinfo="Payment Guarantee Procedure"/>
+                <Property Name="DepreciationPercentage" Type="Edm.Decimal" Precision="5" Scale="2" sap:aggregation-role="dimension" sap:label="Depreciation %" sap:quickinfo="Depreciation percentage for financial document processing"/>
+                <Property Name="NextShippingDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="Next date"/>
+                <Property Name="CustomerCreditAccount" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Credit Account" sap:quickinfo="Customer's Account Number with Credit Limit Reference"/>
+                <Property Name="ReleasedCreditAmount" Type="Edm.Decimal" Precision="16" Scale="3" sap:aggregation-role="measure" sap:unit="ControllingAreaCurrency" sap:label="Rel. Credit Value" sap:quickinfo="Released Credit Value of the Document" sap:filterable="false"/>
+                <Property Name="ControllingAreaCurrency" Type="Edm.String" MaxLength="5" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency key of credit control area" sap:semantics="currency-code"/>
+                <Property Name="CreditBlockReleaseDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="Release date" sap:quickinfo="Release date of the document determined by credit management"/>
+                <Property Name="SoldToParty" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Sold-to Party"/>
+                <Property Name="CustomerGroup" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Customer Group"/>
+                <Property Name="SalesDistrict" Type="Edm.String" MaxLength="6" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Sales District"/>
+                <Property Name="TransactionCurrency" Type="Edm.String" MaxLength="5" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Document Currency" sap:quickinfo="SD Document Currency" sap:semantics="currency-code"/>
+                <Property Name="StatisticsCurrency" Type="Edm.String" MaxLength="5" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Statistics Currency" sap:semantics="currency-code"/>
+                <Property Name="OverallIntcoBillingStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Intco Billing Status" sap:quickinfo="Intercompany Billing Status (All Items)"/>
+                <Property Name="OverallSDProcessStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Overall Status" sap:quickinfo="Overall Processing Status (Header/All Items)"/>
+                <Property Name="TotalBlockStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Overall Block Status" sap:quickinfo="Overall Block Status (Header)"/>
+                <Property Name="OverallDelivConfStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Delivery Conf. Sts" sap:quickinfo="Delivery Confirmation Status (All Items)"/>
+                <Property Name="TransportationPlanningStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Transp. Plng Sts" sap:quickinfo="Transportation Planning Status (Header)"/>
+                <Property Name="OverallPickingConfStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Pick Confirmation" sap:quickinfo="Status of Pick Confirmation"/>
+                <Property Name="OverallPickingStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Picking Status" sap:quickinfo="Picking Status/Putaway Status (All Items)"/>
+                <Property Name="OverallPackingStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Packing Status" sap:quickinfo="Packing Status (All Items)"/>
+                <Property Name="OverallWarehouseActivityStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="WM Activity Status" sap:quickinfo="Status of Warehouse Management Activities (All Items)"/>
+                <Property Name="DistrStatusByDecentralizedWrhs" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Status Decent. Whse" sap:quickinfo="Distribution Status (Decentralized Warehouse Processing)"/>
+                <Property Name="OverallGoodsMovementStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Goods Movement Sts" sap:quickinfo="Goods Movement Status (All Items)"/>
+                <Property Name="OverallDelivReltdBillgStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Deliv.Rel. Billg Sts" sap:quickinfo="Delivery-Related Billing Status (All Items)"/>
+                <Property Name="OverallProofOfDeliveryStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="POD Status" sap:quickinfo="POD Status on Header Level"/>
+                <Property Name="HdrGeneralIncompletionStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Overall Header" sap:quickinfo="Incompletion Status (Header)"/>
+                <Property Name="HeaderDelivIncompletionStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Delivery – Header" sap:quickinfo="Delivery Incompletion Status (Header)"/>
+                <Property Name="HeaderPickgIncompletionStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Picking/Putaway–Hdr" sap:quickinfo="Picking/Putaway Incompletion Status (Header)"/>
+                <Property Name="HeaderPackingIncompletionSts" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Packing – Header" sap:quickinfo="Packing Incompletion Status (Header)"/>
+                <Property Name="HdrGoodsMvtIncompletionStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="GoodsMvt–Header" sap:quickinfo="Goods Movement Incompletion Status (Header)"/>
+                <Property Name="HeaderBillgIncompletionStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Billing – Header" sap:quickinfo="Billing Incompletion Status (Header)"/>
+                <Property Name="OvrlItmGeneralIncompletionSts" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="All Items" sap:quickinfo="Incompletion Status (All Items)"/>
+                <Property Name="OvrlItmPackingIncompletionSts" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Packing – All Items" sap:quickinfo="Packing Incompletion Status (All Items)"/>
+                <Property Name="OvrlItmPickingIncompletionSts" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Picking/Ptwy – Items" sap:quickinfo="Picking/Putaway Incompletion Status (All Items)"/>
+                <Property Name="OvrlItmDelivIncompletionSts" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Delivery – All Items" sap:quickinfo="Delivery Incompletion Status (All Items)"/>
+                <Property Name="OvrlItmGdsMvtIncompletionSts" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="GdsMvt–All Itms" sap:quickinfo="Goods Movement Incompletion Status (All Items)"/>
+                <Property Name="TotalCreditCheckStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Credit Status" sap:quickinfo="Overall Status of Credit Checks"/>
+                <Property Name="FinDocCreditCheckStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Financial Document" sap:quickinfo="Status of Credit Check Against Financial Document"/>
+                <Property Name="PaytAuthsnCreditCheckSts" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Payment Card Status" sap:quickinfo="Status of Credit Check Against Payment Card Authorization"/>
+                <Property Name="CentralCreditCheckStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="SAP Cred. Mgmt" sap:quickinfo="Status of Credit Check SAP Credit Management"/>
+                <Property Name="ExprtInsurCreditCheckStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Expt Cred. Insurance" sap:quickinfo="Status of Credit Check Against Export Credit Insurance"/>
+                <Property Name="MaxDocValueCreditCheckStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Maximum Value" sap:quickinfo="Status of Credit Check Against Maximum Document Value"/>
+                <Property Name="PaymentTermCreditCheckStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Terms of Payment" sap:quickinfo="Status of Credit Check Against Terms of Payment"/>
+                <Property Name="ShippingGroupNumber" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="PSST Group"/>
+                <Property Name="PricingDocument" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Doc. Condition No." sap:quickinfo="Number of the Document Condition"/>
+                <Property Name="SalesOrgForIntcoBilling" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Sls Organization ICB" sap:quickinfo="Sales Organization for Intercompany Billing"/>
+                <Property Name="DistrChnlForIntcoBilling" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Distrib.Channel" sap:quickinfo="Distribution Channel for Intercompany billing"/>
+                <Property Name="DivisionForIntcoBilling" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Interco. Billing Div" sap:quickinfo="Division for Intercompany Billing"/>
+                <Property Name="IntercompanyBillingType" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Intercomp.bill.type" sap:quickinfo="Billing type for intercompany billing"/>
+                <Property Name="FactoryCalendarForIntcoBilling" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Billing date" sap:quickinfo="Date for intercompany billing"/>
+                <Property Name="IntercompanyBillingCustomer" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Customer Interc. Bl." sap:quickinfo="Customer Number for Intercompany Billing"/>
+                <Property Name="DeliveryDocumentCondition" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Doc. condition no." sap:quickinfo="Number of document condition - pricing"/>
+                <Property Name="TotalNetAmount" Type="Edm.Decimal" Precision="16" Scale="3" sap:aggregation-role="measure" sap:unit="TransactionCurrency" sap:label="Net Value" sap:quickinfo="Net Value of the Sales Document in Document Currency" sap:filterable="false"/>
+                <Property Name="ReferenceDocumentNumber" Type="Edm.String" MaxLength="16" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Reference" sap:quickinfo="Reference Document Number"/>
+                <Property Name="DeletionIndicator" Type="Edm.Boolean" sap:aggregation-role="dimension" sap:label="Document deletion ID" sap:quickinfo="Document deletion indicator"/>
+                <Property Name="OverallChmlCmplncStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Prod. Marktablty Sts" sap:quickinfo="Total Product Marketability Check Status"/>
+                <Property Name="OverallDangerousGoodsStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Dangerous Goods Sts" sap:quickinfo="Total Dangerous Goods Check Status"/>
+                <Property Name="OverallSafetyDataSheetStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Sfty Data Sheet Sts" sap:quickinfo="Total Safety Data Sheet Check Status"/>
+                <Property Name="OverallTrdCmplncEmbargoSts" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Embargo Status" sap:quickinfo="Embargo Status (All Items)"/>
+                <Property Name="OvrlTrdCmplncSnctndListChkSts" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Screening Status" sap:quickinfo="Screening Status (All Items)"/>
+                <Property Name="OvrlTrdCmplncLegalCtrlChkSts" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Legal Control Status"/>
+                <Property Name="IsCorrectionDelivery" Type="Edm.Boolean" sap:aggregation-role="dimension" sap:label="Correction delivery"/>
+                <Property Name="ReadyForWarehouseExecStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Warehouse Execution" sap:quickinfo="Warehouse Execution Status"/>
+                <Property Name="DelivAdvncdShipgRcvgRlvnce" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Adv. SR Relevance" sap:quickinfo="Advanced Shipping and Receiving Relevance"/>
+                <Property Name="DelivIsQtyCrrtnAdvncShipgRcvg" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Qty. Corr. Adv. SR" sap:quickinfo="Quantity Correction After Goods Receipt in Advanced SR"/>
+                <Property Name="EU_DeliveryARCStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="ET ARC Status" sap:quickinfo="Excise Tax Total ARC Status (on Delivery Header Level)"/>
+                <Property Name="IntcoExtActlTransfOfCtrlDteTme" Type="Edm.DateTimeOffset" Precision="0" sap:aggregation-role="dimension" sap:label="Ext. act. date" sap:quickinfo="External Actual Transfer of Control Date"/>
+                <Property Name="IntcoExtPlndTransfOfCtrlDteTme" Type="Edm.DateTimeOffset" Precision="0" sap:aggregation-role="dimension" sap:label="Ext. plan. date" sap:quickinfo="External Planned Transfer of Control Date"/>
+                <Property Name="IntcoExtTransfOfCtrlDteTmeTmzn" Type="Edm.String" MaxLength="6" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Time zone ext. TOCD" sap:quickinfo="Time zone for external Transfer of Control Date"/>
+                <Property Name="IntcoIntActlTransfOfCtrlDteTme" Type="Edm.DateTimeOffset" Precision="0" sap:aggregation-role="dimension" sap:label="Int. act. date" sap:quickinfo="Internal Actual Transfer of Control Date"/>
+                <Property Name="IntcoIntPlndTransfOfCtrlDteTme" Type="Edm.DateTimeOffset" Precision="0" sap:aggregation-role="dimension" sap:label="Int. plan. date" sap:quickinfo="Internal Planned Transfer of Control Date"/>
+                <Property Name="IntcoIntTransfOfCtrlDteTmeTmzn" Type="Edm.String" MaxLength="6" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Time zone int. TOCD" sap:quickinfo="Time zone for internal Transfer of Control Date"/>
+                <Property Name="LogisticsExecutionScenario" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Scenario Logistic Ex" sap:quickinfo="Scenario Logistic Execution"/>
+                <NavigationProperty Name="to_Carrier" Relationship="ZCDS_DLVR_DATA_CDS.assoc_31039D23ED2CAD4D37415BCA1C862F22" FromRole="FromRole_assoc_31039D23ED2CAD4D37415BCA1C862F22" ToRole="ToRole_assoc_31039D23ED2CAD4D37415BCA1C862F22"/>
+                <NavigationProperty Name="to_Items" Relationship="ZCDS_DLVR_DATA_CDS.assoc_DB6010109942522B5BB0A6F00DABF233" FromRole="FromRole_assoc_DB6010109942522B5BB0A6F00DABF233" ToRole="ToRole_assoc_DB6010109942522B5BB0A6F00DABF233"/>
+                <NavigationProperty Name="to_Packages" Relationship="ZCDS_DLVR_DATA_CDS.assoc_A168A13F89F34A06F7CF223BF288FE98" FromRole="FromRole_assoc_A168A13F89F34A06F7CF223BF288FE98" ToRole="ToRole_assoc_A168A13F89F34A06F7CF223BF288FE98"/>
+                <NavigationProperty Name="to_Partner" Relationship="ZCDS_DLVR_DATA_CDS.assoc_6FC2BA4221821E278E46831908E37729" FromRole="FromRole_assoc_6FC2BA4221821E278E46831908E37729" ToRole="ToRole_assoc_6FC2BA4221821E278E46831908E37729"/>
+                <NavigationProperty Name="to_ShipFrom" Relationship="ZCDS_DLVR_DATA_CDS.assoc_1743ACA70228EAA2C2B46A797347DC26" FromRole="FromRole_assoc_1743ACA70228EAA2C2B46A797347DC26" ToRole="ToRole_assoc_1743ACA70228EAA2C2B46A797347DC26"/>
+                <NavigationProperty Name="to_Shipper" Relationship="ZCDS_DLVR_DATA_CDS.assoc_42F8111711AAF2D7F3E9D60487C3B5EA" FromRole="FromRole_assoc_42F8111711AAF2D7F3E9D60487C3B5EA" ToRole="ToRole_assoc_42F8111711AAF2D7F3E9D60487C3B5EA"/>
+                <NavigationProperty Name="to_ShipTo" Relationship="ZCDS_DLVR_DATA_CDS.assoc_CFDAB621C42BAE720B10AA9BFCC4C705" FromRole="FromRole_assoc_CFDAB621C42BAE720B10AA9BFCC4C705" ToRole="ToRole_assoc_CFDAB621C42BAE720B10AA9BFCC4C705"/>
+                <NavigationProperty Name="to_ShipToParty" Relationship="ZCDS_DLVR_DATA_CDS.assoc_2D12A1073586B8158AA8A880D2F66927" FromRole="FromRole_assoc_2D12A1073586B8158AA8A880D2F66927" ToRole="ToRole_assoc_2D12A1073586B8158AA8A880D2F66927"/>
+                <NavigationProperty Name="to_SoldTo" Relationship="ZCDS_DLVR_DATA_CDS.assoc_49817F88B95B6DF210D0227C096F27CF" FromRole="FromRole_assoc_49817F88B95B6DF210D0227C096F27CF" ToRole="ToRole_assoc_49817F88B95B6DF210D0227C096F27CF"/>
+                <NavigationProperty Name="to_SoldToParty" Relationship="ZCDS_DLVR_DATA_CDS.assoc_55360828C2A556590B42201B60A5C1C6" FromRole="FromRole_assoc_55360828C2A556590B42201B60A5C1C6" ToRole="ToRole_assoc_55360828C2A556590B42201B60A5C1C6"/>
+            </EntityType>
+            <EntityType Name="z_dlvr_itemType" sap:semantics="aggregate" sap:label="CDS view for delivery item details" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DeliveryDocument" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Delivery"/>
+                <Property Name="DeliveryDocumentItem" Type="Edm.String" MaxLength="6" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Item" sap:quickinfo="Delivery Item"/>
+                <Property Name="SDDocumentCategory" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:label="SD Document Category"/>
+                <Property Name="TransactionCurrency" Type="Edm.String" MaxLength="5" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Document Currency" sap:quickinfo="SD Document Currency" sap:semantics="currency-code"/>
+                <Property Name="DeliveryDocumentItemCategory" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Item Category" sap:quickinfo="Delivery Item Category"/>
+                <Property Name="SalesDocumentItemType" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Item Type"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="12" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Created By" sap:quickinfo="Name of Person Responsible for Creating the Object"/>
+                <Property Name="CreationDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="Created On" sap:quickinfo="Record Creation Date"/>
+                <Property Name="CreationTime" Type="Edm.Time" Precision="0" sap:aggregation-role="dimension" sap:label="Time" sap:quickinfo="Entry time"/>
+                <Property Name="LastChangeDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="Changed On" sap:quickinfo="Last Changed On"/>
+                <Property Name="DistributionChannel" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Distribution Channel"/>
+                <Property Name="Division" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Division"/>
+                <Property Name="SalesGroup" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Sales Group"/>
+                <Property Name="SalesOffice" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Sales Office"/>
+                <Property Name="DepartmentClassificationByCust" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Department" sap:quickinfo="Department number"/>
+                <Property Name="Material" Type="Edm.String" MaxLength="40" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
+                <Property Name="Product" Type="Edm.String" MaxLength="40" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Product" sap:quickinfo="Product Number"/>
+                <Property Name="MaterialByCustomer" Type="Edm.String" MaxLength="35" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Customer Material"/>
+                <Property Name="OriginallyRequestedMaterial" Type="Edm.String" MaxLength="40" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Material Entered"/>
+                <Property Name="InternationalArticleNumber" Type="Edm.String" MaxLength="18" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="EAN/UPC" sap:quickinfo="International Article Number (EAN/UPC)"/>
+                <Property Name="Batch" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Batch" sap:quickinfo="Batch Number"/>
+                <Property Name="BatchClassification" Type="Edm.String" MaxLength="18" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Internal object no." sap:quickinfo="Internal object number of the batch classification"/>
+                <Property Name="BatchBySupplier" Type="Edm.String" MaxLength="15" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Supplier Batch" sap:quickinfo="Supplier Batch Number"/>
+                <Property Name="MaterialIsIntBatchManaged" Type="Edm.Boolean" sap:aggregation-role="dimension" sap:label="Batch Management" sap:quickinfo="Batch management indicator (internal)"/>
+                <Property Name="MaterialIsBatchManaged" Type="Edm.Boolean" sap:aggregation-role="dimension" sap:label="Batch Management" sap:quickinfo="Batch Management Requirement Indicator"/>
+                <Property Name="MaterialGroup" Type="Edm.String" MaxLength="9" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Material Group"/>
+                <Property Name="ProductGroup" Type="Edm.String" MaxLength="9" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Product Group"/>
+                <Property Name="MaterialFreightGroup" Type="Edm.String" MaxLength="8" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Material Freight Grp" sap:quickinfo="Material Freight Group"/>
+                <Property Name="AdditionalMaterialGroup1" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Material Group 1"/>
+                <Property Name="AdditionalMaterialGroup2" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Material Group 2"/>
+                <Property Name="AdditionalMaterialGroup3" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Material Group 3"/>
+                <Property Name="AdditionalMaterialGroup4" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Material Group 4"/>
+                <Property Name="AdditionalMaterialGroup5" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Material Group 5"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Plant"/>
+                <Property Name="Warehouse" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Warehouse Number" sap:quickinfo="Warehouse Number / Warehouse Complex"/>
+                <Property Name="StorageLocation" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Storage Location"/>
+                <Property Name="StorageBin" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Storage Bin"/>
+                <Property Name="StorageType" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Storage Type"/>
+                <Property Name="DeliveryItemResourceID" Type="Edm.String" MaxLength="40" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Resource" sap:quickinfo="Resource Name (Stock Identifier)"/>
+                <Property Name="LoadingPointForDelivery" Type="Edm.String" MaxLength="20" sap:aggregation-role="dimension" sap:label="Load./Unload. Pt" sap:quickinfo="Loading/Unloading Point"/>
+                <Property Name="InventorySpecialStockType" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Special Stock" sap:quickinfo="Special Stock Indicator"/>
+                <Property Name="ShelfLifeExpirationDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="SLED/BBD" sap:quickinfo="Shelf Life Expiration or Best-Before Date"/>
+                <Property Name="NumberOfSerialNumbers" Type="Edm.Int32" sap:aggregation-role="dimension" sap:label="No.serial numbers" sap:quickinfo="Number of serial numbers"/>
+                <Property Name="ProductConfiguration" Type="Edm.String" MaxLength="18" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Configuration"/>
+                <Property Name="ProductHierarchyNode" Type="Edm.String" MaxLength="18" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Product Hierarchy"/>
+                <Property Name="ManufactureDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="Date of Manufacture"/>
+                <Property Name="DeliveryDocumentItemText" Type="Edm.String" MaxLength="40" sap:aggregation-role="dimension" sap:label="Item Description" sap:quickinfo="Short text for sales order item"/>
+                <Property Name="HigherLevelItem" Type="Edm.String" MaxLength="6" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Higher-Level Item" sap:quickinfo="Higher-Level Item in Bill of Material Structures"/>
+                <Property Name="HigherLvlItmOfBatSpltItm" Type="Edm.String" MaxLength="6" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="HigherLevelItemBatch" sap:quickinfo="Higher-Level Item of Batch Split Item"/>
+                <Property Name="ActualDeliveryQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:aggregation-role="dimension" sap:unit="DeliveryQuantityUnit" sap:label="Delivery Quantity" sap:quickinfo="Actual quantity delivered (in sales units)"/>
+                <Property Name="QuantityIsFixed" Type="Edm.Boolean" sap:aggregation-role="dimension" sap:label="Quantity is fixed"/>
+                <Property Name="OriginalDeliveryQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:aggregation-role="dimension" sap:unit="DeliveryQuantityUnit" sap:label="Delivery Quantity" sap:quickinfo="Original Quantity of Delivery Item"/>
+                <Property Name="DeliveryQuantityUnit" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:label="Sales Unit" sap:semantics="unit-of-measure"/>
+                <Property Name="ActualDeliveredQtyInBaseUnit" Type="Edm.Decimal" Precision="13" Scale="3" sap:aggregation-role="dimension" sap:unit="BaseUnit" sap:label="Actual delivery qty" sap:quickinfo="Actual quantity delivered in stockkeeping units"/>
+                <Property Name="BaseUnit" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
+                <Property Name="DeliveryToBaseQuantityDnmntr" Type="Edm.Decimal" Precision="5" Scale="0" sap:aggregation-role="dimension" sap:label="Denominator" sap:quickinfo="Denominator (divisor) for conversion of sales Qty into SKU"/>
+                <Property Name="DeliveryToBaseQuantityNmrtr" Type="Edm.Decimal" Precision="5" Scale="0" sap:aggregation-role="dimension" sap:label="Numerator" sap:quickinfo="Numerator (factor) for conversion of sales quantity into SKU"/>
+                <Property Name="ProductAvailabilityDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="Material Avail. Date" sap:quickinfo="Material Staging/Availability Date"/>
+                <Property Name="ProductAvailabilityTime" Type="Edm.Time" Precision="0" sap:aggregation-role="dimension" sap:label="Matl Staging Time" sap:quickinfo="Material Staging Time (Local, Relating to a Plant)"/>
+                <Property Name="DeliveryGroup" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Delivery Group" sap:quickinfo="Delivery Group (Items are delivered together)"/>
+                <Property Name="ItemGrossWeight" Type="Edm.Decimal" Precision="15" Scale="3" sap:aggregation-role="measure" sap:unit="ItemWeightUnit" sap:label="Gross Weight" sap:filterable="false"/>
+                <Property Name="ItemNetWeight" Type="Edm.Decimal" Precision="15" Scale="3" sap:aggregation-role="measure" sap:unit="ItemWeightUnit" sap:label="Net Weight" sap:filterable="false"/>
+                <Property Name="ItemWeightUnit" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:label="Unit of Weight" sap:semantics="unit-of-measure"/>
+                <Property Name="ItemVolume" Type="Edm.Decimal" Precision="15" Scale="3" sap:aggregation-role="dimension" sap:unit="ItemVolumeUnit" sap:label="Volume"/>
+                <Property Name="ItemVolumeUnit" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:label="Volume Unit" sap:semantics="unit-of-measure"/>
+                <Property Name="InspectionLot" Type="Edm.String" MaxLength="12" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Inspection Lot" sap:quickinfo="Inspection Lot Number"/>
+                <Property Name="InspectionPartialLot" Type="Edm.String" MaxLength="6" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Partial Lot" sap:quickinfo="Partial Lot Number"/>
+                <Property Name="PartialDeliveryIsAllowed" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Part.dlv./item" sap:quickinfo="Partial delivery at item level"/>
+                <Property Name="UnlimitedOverdeliveryIsAllowed" Type="Edm.Boolean" sap:aggregation-role="dimension" sap:label="Unltd Overdelivery" sap:quickinfo="Unlimited Overdelivery Allowed"/>
+                <Property Name="OverdelivTolrtdLmtRatioInPct" Type="Edm.Decimal" Precision="3" Scale="1" sap:aggregation-role="dimension" sap:label="Overdeliv. Tolerance" sap:quickinfo="Overdelivery Tolerance"/>
+                <Property Name="UnderdelivTolrtdLmtRatioInPct" Type="Edm.Decimal" Precision="3" Scale="1" sap:aggregation-role="dimension" sap:label="Underdel. Tolerance" sap:quickinfo="Underdelivery Tolerance"/>
+                <Property Name="WarehouseStorageBin" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Storage Bin"/>
+                <Property Name="BOMExplosion" Type="Edm.String" MaxLength="8" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="BOM explosion number"/>
+                <Property Name="CustEngineeringChgStatus" Type="Edm.String" MaxLength="17" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Engineering Change" sap:quickinfo="Customer Engineering Change Status"/>
+                <Property Name="WarehouseStagingArea" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Staging Area" sap:quickinfo="Staging Area for Warehouse Complex"/>
+                <Property Name="WarehouseStockCategory" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Stock Category" sap:quickinfo="Stock Category in the Warehouse Management System"/>
+                <Property Name="IssgOrRcvgStockCategory" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Stock Category" sap:quickinfo="Stock Category in the Warehouse Management System"/>
+                <Property Name="IssgOrRcvgMaterial" Type="Edm.String" MaxLength="40" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Receiving Material" sap:quickinfo="Receiving/Issuing Material"/>
+                <Property Name="IssuingOrReceivingPlant" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Receiving plant" sap:quickinfo="Receiving plant/issuing plant"/>
+                <Property Name="IssuingOrReceivingStorageLoc" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Receiving stor. loc." sap:quickinfo="Receiving/issuing storage location"/>
+                <Property Name="IssgOrRcvgBatch" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Receiving Batch" sap:quickinfo="Receiving/Issuing Batch"/>
+                <Property Name="IssgOrRcvgValuationType" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Val. Type Tfr Batch" sap:quickinfo="Valuation Type of Transfer Batch"/>
+                <Property Name="IssgOrRcvgSpclStockInd" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Sp. ind. stock tfr." sap:quickinfo="Special stock indicator for physical stock transfer"/>
+                <Property Name="IssgOrRcvgResourceID" Type="Edm.String" MaxLength="40" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Receiv. Resource" sap:quickinfo="Resource Name (Stock Identifier Complement)"/>
+                <Property Name="PrimaryPostingSwitch" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Main posting id" sap:quickinfo="Indicator: UNMAT in main posting"/>
+                <Property Name="StockType" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Stock Type"/>
+                <Property Name="IsNotGoodsMovementsRelevant" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="No goods movement" sap:quickinfo="Indicator: Item Not Relevant for Goods Movements"/>
+                <Property Name="GLAccount" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="G/L Account" sap:quickinfo="G/L Account Number"/>
+                <Property Name="GoodsMovementReasonCode" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Reason for movement" sap:quickinfo="Reason for goods movment"/>
+                <Property Name="SubsequentMovementType" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Subseq.movement type" sap:quickinfo="Subsequent movement type"/>
+                <Property Name="IsCompletelyDelivered" Type="Edm.Boolean" sap:aggregation-role="dimension" sap:label="Delivery Completed" sap:quickinfo="&quot;Delivery Completed&quot; Indicator"/>
+                <Property Name="AlternateProductNumber" Type="Edm.String" MaxLength="40" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Alternate Product Nr" sap:quickinfo="Alternate Product Number"/>
+                <Property Name="CumulativeBatchQtyInBaseUnit" Type="Edm.Decimal" Precision="15" Scale="3" sap:aggregation-role="dimension" sap:unit="BaseUnit" sap:label="Cumul.batch quantity" sap:quickinfo="Cumulative batch quantity of all split items (in StckUnit)"/>
+                <Property Name="PickingControl" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Picking indicator" sap:quickinfo="Indicator for picking control"/>
+                <Property Name="LoadingGroup" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Loading Group"/>
+                <Property Name="GoodsMovementType" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Movement Type" sap:quickinfo="Movement Type (Inventory Management)"/>
+                <Property Name="TransportationGroup" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Transportation Group"/>
+                <Property Name="ReceivingPoint" Type="Edm.String" MaxLength="25" sap:aggregation-role="dimension" sap:label="Receiving Point"/>
+                <Property Name="FixedShipgProcgDurationInDays" Type="Edm.Decimal" Precision="5" Scale="2" sap:aggregation-role="dimension" sap:label="Fixed process. time" sap:quickinfo="Fixed shipping processing time in days (= setup time)"/>
+                <Property Name="VarblShipgProcgDurationInDays" Type="Edm.Decimal" Precision="5" Scale="2" sap:aggregation-role="dimension" sap:label="Var. processing time" sap:quickinfo="Variable shipping processing time in days"/>
+                <Property Name="ProofOfDeliveryRelevanceCode" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="POD rel. RC/SC doc" sap:quickinfo="POD Control (Proof of Delivery)"/>
+                <Property Name="ItemIsBillingRelevant" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Relevant for Billing"/>
+                <Property Name="ItemBillingBlockReason" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Billing Block"/>
+                <Property Name="PaymentGuaranteeForm" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Paymt guarantee form" sap:quickinfo="Form of payment guarantee"/>
+                <Property Name="IntercompanyBillingStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Intco Billing Status" sap:quickinfo="Intercompany Billing Status (Item)"/>
+                <Property Name="BusinessArea" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Business Area"/>
+                <Property Name="ControllingArea" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Controlling Area"/>
+                <Property Name="ProfitabilitySegment" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Profitability Segment (Deprecated)" sap:quickinfo="Deprecated: Profitability Segment"/>
+                <Property Name="ProfitabilitySegment_2" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Profitability Segment"/>
+                <Property Name="ProfitCenter" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Profit Center"/>
+                <Property Name="InventoryValuationType" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Valuation Type"/>
+                <Property Name="IsSeparateValuation" Type="Edm.Boolean" sap:aggregation-role="dimension" sap:label="Separate valuation" sap:quickinfo="Indicator: Separate valuation"/>
+                <Property Name="ConsumptionPosting" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Consumption" sap:quickinfo="Consumption posting"/>
+                <Property Name="OrderID" Type="Edm.String" MaxLength="12" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Order" sap:quickinfo="Order Number"/>
+                <Property Name="OrderItem" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Item Number" sap:quickinfo="Number of Order Item"/>
+                <Property Name="CostCenter" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Cost Center"/>
+                <Property Name="DeliveryDocumentItemBySupplier" Type="Edm.String" MaxLength="6" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="External item" sap:quickinfo="External item number"/>
+                <Property Name="ReferenceSDDocument" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Reference Document" sap:quickinfo="Document Number of Reference Document"/>
+                <Property Name="ReferenceSDDocumentItem" Type="Edm.String" MaxLength="6" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Reference Item" sap:quickinfo="Item number of the reference item"/>
+                <Property Name="ReferenceSDDocumentCategory" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:label="Preceding Doc.Categ." sap:quickinfo="Document Category of Preceding SD Document"/>
+                <Property Name="PurchaseOrder" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Purchase Order" sap:quickinfo="Purchase Order Number"/>
+                <Property Name="PurchaseOrderItem" Type="Edm.String" MaxLength="5" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Purchase Order Item" sap:quickinfo="Item Number of Purchase Order"/>
+                <Property Name="ReferenceDocumentLogicalSystem" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="PrDocLogSys" sap:quickinfo="Logical System in the Preceding Document"/>
+                <Property Name="AdditionalCustomerGroup1" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Customer Group 1"/>
+                <Property Name="AdditionalCustomerGroup2" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Customer Group 2"/>
+                <Property Name="AdditionalCustomerGroup3" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Customer Group 3"/>
+                <Property Name="AdditionalCustomerGroup4" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Customer Group 4"/>
+                <Property Name="AdditionalCustomerGroup5" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Customer Group 5"/>
+                <Property Name="RetailPromotion" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Retail Promotion"/>
+                <Property Name="StatisticsDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="Statistics Date" sap:quickinfo="Statistics date"/>
+                <Property Name="IntDeliveryScheduleNumber" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Int.dlv.sched.no." sap:quickinfo="Internal delivery schedule number"/>
+                <Property Name="SchedulingAgreementReleaseType" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Release type"/>
+                <Property Name="SDProcessStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Overall Status" sap:quickinfo="Overall Processing Status (Item)"/>
+                <Property Name="PickingConfirmationStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Picking Confirmation" sap:quickinfo="Confirmation Status of Picking/Putaway"/>
+                <Property Name="PickingStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Picking Status" sap:quickinfo="Picking Status/Putaway Status (Item)"/>
+                <Property Name="WarehouseActivityStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="WM Activity Status" sap:quickinfo="Status of Warehouse Management Activities (Item)"/>
+                <Property Name="PackingStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Packing Status" sap:quickinfo="Packing Status (Item)"/>
+                <Property Name="GoodsMovementStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Goods Movement Sts" sap:quickinfo="Goods Movement Status (Item)"/>
+                <Property Name="DeliveryRelatedBillingStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Deliv.Rel. Billg Sts" sap:quickinfo="Delivery-Related Billing Status (Item)"/>
+                <Property Name="ProofOfDeliveryStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="POD status" sap:quickinfo="POD status on item level"/>
+                <Property Name="ItemGeneralIncompletionStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Item" sap:quickinfo="Incompletion Status (Item)"/>
+                <Property Name="ItemDeliveryIncompletionStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Delivery – Item" sap:quickinfo="Delivery Incompletion Status (Item)"/>
+                <Property Name="ItemPickingIncompletionStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Picking/Putaway–Item" sap:quickinfo="Picking/Putaway Incompletion Status (Item)"/>
+                <Property Name="ItemGdsMvtIncompletionSts" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Goods Mvt –Item" sap:quickinfo="Goods Movement Incompletion Status (Item)"/>
+                <Property Name="ItemPackingIncompletionStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Packing – Item" sap:quickinfo="Packing Incompletion Status (Item)"/>
+                <Property Name="ItemBillingIncompletionStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Billing – Item" sap:quickinfo="Billing Incompletion Status (Item)"/>
+                <Property Name="EU_DeliveryItemARCStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="ET ARC Status" sap:quickinfo="Excise Tax ARC Status"/>
+                <Property Name="RequirementSegment" Type="Edm.String" MaxLength="40" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Requirement Segment"/>
+                <Property Name="StockSegment" Type="Edm.String" MaxLength="40" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Stock Segment"/>
+                <Property Name="ProductSeasonYear" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Season Year"/>
+                <Property Name="ProductSeason" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Season"/>
+                <Property Name="ProductCollection" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Collection" sap:quickinfo="Fashion Collection"/>
+                <Property Name="ProductTheme" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Theme" sap:quickinfo="Fashion Theme"/>
+                <Property Name="ProductCharacteristic1" Type="Edm.String" MaxLength="18" sap:aggregation-role="dimension" sap:label="Characteristic 1" sap:quickinfo="Characteristic Value 1"/>
+                <Property Name="ProductCharacteristic2" Type="Edm.String" MaxLength="18" sap:aggregation-role="dimension" sap:label="Characteristic 2" sap:quickinfo="Characteristic Value 2"/>
+                <Property Name="ProductCharacteristic3" Type="Edm.String" MaxLength="18" sap:aggregation-role="dimension" sap:label="Characteristic 3" sap:quickinfo="Characteristic Value 3"/>
+                <Property Name="ItemHasValueAddedService" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="VAS Relevant"/>
+                <Property Name="ValAddedSrvcParentItmNumber" Type="Edm.String" MaxLength="6" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Item" sap:quickinfo="Delivery Item"/>
+                <Property Name="ValAddedSrvcTransactionNumber" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Transaction Number"/>
+                <Property Name="ValAddedSrvcItemGroup" Type="Edm.String" MaxLength="5" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Item Group"/>
+                <Property Name="ValAddedSrvcItemNumber" Type="Edm.String" MaxLength="5" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Item Number"/>
+                <Property Name="OriginSDDocument" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Originating Document"/>
+                <Property Name="SDDocumentItem" Type="Edm.String" MaxLength="6" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Originating Item"/>
+                <Property Name="SalesSDDocumentCategory" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:label="SD Document Category"/>
+                <Property Name="MaterialTypePrimary" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Material Type"/>
+                <Property Name="CostInDocumentCurrency" Type="Edm.Decimal" Precision="14" Scale="3" sap:aggregation-role="dimension" sap:unit="TransactionCurrency" sap:label="Cost" sap:quickinfo="Cost in Document Currency"/>
+                <Property Name="Subtotal1Amount" Type="Edm.Decimal" Precision="14" Scale="3" sap:aggregation-role="dimension" sap:unit="TransactionCurrency" sap:label="Subtotal 1" sap:quickinfo="Subtotal 1 from Pricing Procedure for Price Element"/>
+                <Property Name="Subtotal2Amount" Type="Edm.Decimal" Precision="14" Scale="3" sap:aggregation-role="dimension" sap:unit="TransactionCurrency" sap:label="Subtotal 2" sap:quickinfo="Subtotal 2 from Pricing Procedure for Price Element"/>
+                <Property Name="Subtotal3Amount" Type="Edm.Decimal" Precision="14" Scale="3" sap:aggregation-role="dimension" sap:unit="TransactionCurrency" sap:label="Subtotal 3" sap:quickinfo="Subtotal 3 from Pricing Procedure for Price Element"/>
+                <Property Name="Subtotal4Amount" Type="Edm.Decimal" Precision="14" Scale="3" sap:aggregation-role="dimension" sap:unit="TransactionCurrency" sap:label="Subtotal 4" sap:quickinfo="Subtotal 4 from Pricing Procedure for Price Element"/>
+                <Property Name="Subtotal5Amount" Type="Edm.Decimal" Precision="14" Scale="3" sap:aggregation-role="dimension" sap:unit="TransactionCurrency" sap:label="Subtotal 5" sap:quickinfo="Subtotal 5 from Pricing Procedure for Price Element"/>
+                <Property Name="Subtotal6Amount" Type="Edm.Decimal" Precision="14" Scale="3" sap:aggregation-role="dimension" sap:unit="TransactionCurrency" sap:label="Subtotal 6" sap:quickinfo="Subtotal 6 from Pricing Procedure for Price Element"/>
+                <Property Name="OrderDocument" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Sales Order" sap:quickinfo="Sales Order Number"/>
+                <Property Name="PlanningMaterial" Type="Edm.String" MaxLength="40" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Planning material"/>
+                <Property Name="PlanningPlant" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Planning Plant"/>
+                <Property Name="ProductGroupBaseUnit" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:label="Product group unit" sap:quickinfo="Base unit of measure for product group" sap:semantics="unit-of-measure"/>
+                <Property Name="ConversionFactor" Type="Edm.Double" sap:aggregation-role="dimension" sap:label="Cnversion" sap:quickinfo="Conversion factor: quantities"/>
+                <Property Name="IsReturnsItem" Type="Edm.Boolean" sap:aggregation-role="dimension" sap:label="Returns" sap:quickinfo="Returns Item"/>
+                <Property Name="ReturnsDeliveryItemCode" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Returns" sap:quickinfo="Returns Item"/>
+                <Property Name="ConditionUnit" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:label="Unit of Measure" sap:quickinfo="Condition Unit" sap:semantics="unit-of-measure"/>
+                <Property Name="NetPriceAmount" Type="Edm.Decimal" Precision="12" Scale="3" sap:aggregation-role="measure" sap:unit="TransactionCurrency" sap:label="Net Price" sap:filterable="false"/>
+                <Property Name="TotalNetAmount" Type="Edm.Decimal" Precision="16" Scale="3" sap:aggregation-role="measure" sap:unit="TransactionCurrency" sap:label="Net Value" sap:quickinfo="Net Value in Document Currency" sap:filterable="false"/>
+                <Property Name="CreditRelatedPrice" Type="Edm.Double" sap:aggregation-role="dimension" sap:label="Credit Price" sap:quickinfo="Item Credit Price"/>
+                <Property Name="CreditRelatedPriceAmount" Type="Edm.Decimal" Precision="12" Scale="3" sap:aggregation-role="dimension" sap:unit="TransactionCurrency" sap:label="Credit Price" sap:quickinfo="Item credit price"/>
+                <Property Name="DeliveryToBaseUnitCnvrsnFctr" Type="Edm.Double" sap:aggregation-role="dimension" sap:label="Conversion factor" sap:quickinfo="Conversion Factor of Delivery Quantity VRKME for MEINS"/>
+                <Property Name="FunctionalArea" Type="Edm.String" MaxLength="16" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Functional Area"/>
+                <Property Name="RFMReservation" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Reservation" sap:quickinfo="Number of reservation/dependent requirements"/>
+                <Property Name="RFMReservationItem" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Item no." sap:quickinfo="Item Number of Reservation / Dependent Requirements"/>
+                <Property Name="Reservation" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Reservation" sap:quickinfo="Number of reservation/dependent requirements"/>
+                <Property Name="ReservationItem" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Item no." sap:quickinfo="Item Number of Reservation / Dependent Requirements"/>
+                <Property Name="ReservationRecordType" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Record type"/>
+                <Property Name="ChmlCmplncStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Prod. Marktablty Sts" sap:quickinfo="Product Marketability Check Status"/>
+                <Property Name="DangerousGoodsStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Dangerous Goods Sts" sap:quickinfo="Dangerous Goods Check Status"/>
+                <Property Name="SafetyDataSheetStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Sfty Data Sheet Sts" sap:quickinfo="Safety Data Sheet Check Status"/>
+                <Property Name="TrdCmplncEmbargoSts" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Embargo Status" sap:quickinfo="Embargo Status (Item)"/>
+                <Property Name="TrdCmplncSnctndListChkSts" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Screening Status" sap:quickinfo="Screening Status (Item)"/>
+                <Property Name="TrdCmplncLegalControlSts" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Legal Control Status" sap:quickinfo="Legal Control Check Status"/>
+                <Property Name="HigherLevelItemUsage" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Usage of HL Item" sap:quickinfo="ID for higher-level item usage"/>
+                <Property Name="FldLogsStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Field Logistics Ind." sap:quickinfo="Field Logistics Indicator"/>
+                <Property Name="BatchSearchStrategy" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="No.cond.rec. batch" sap:quickinfo="Number of condition record from batch determination"/>
+                <Property Name="ValueChainInstanceChar32UUID" Type="Edm.Guid" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="GUID 16" sap:quickinfo="GUID in 'CHAR' Format in Uppercase"/>
+                <Property Name="ValueChainCategory" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Value Chain Category"/>
+                <Property Name="IntcoRefSDDocumentCategory" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:label="Intco Ref Doc Cat" sap:quickinfo="Intercompany Reference Document Category"/>
+                <Property Name="IntcoRefSDDocument" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Intco Ref Doc" sap:quickinfo="Intercompany Reference Document ID"/>
+                <Property Name="IntcoRefSDDocumentItem" Type="Edm.String" MaxLength="6" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Intco Ref Doc Item" sap:quickinfo="Intercompany Reference Document Item ID"/>
+                <Property Name="ServiceDocumentType" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Service Doc. Type" sap:quickinfo="Service Document Type"/>
+                <Property Name="ServiceDocument" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Service Document" sap:quickinfo="Service Document ID"/>
+                <Property Name="ServiceDocumentItem" Type="Edm.String" MaxLength="6" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Service Doc. Item" sap:quickinfo="Service Document Item ID"/>
+                <Property Name="WBSElementInternalID" Type="Edm.String" MaxLength="8" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="WBS Internal ID" sap:quickinfo="WBS Element"/>
+            </EntityType>
+            <EntityType Name="z_hu_detType" sap:semantics="aggregate" sap:label="HU Details" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HandlingUnitInternalID" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Internal HU number" sap:quickinfo="Internal Handling Unit Number"/>
+                <Property Name="HandlingUnitItemUUID" Type="Edm.Guid" sap:aggregation-role="dimension" sap:label="Handle" sap:quickinfo="Worldwide unique key for VEPO"/>
+                <Property Name="HandlingUnitExternalID" Type="Edm.String" MaxLength="20" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Handling Unit" sap:quickinfo="External Handling Unit Identification"/>
+                <Property Name="HandlingUnitExternalIdType" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="HU Identfier Type" sap:quickinfo="Type of External Handling Unit Identifier"/>
+                <Property Name="ShippingPoint" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Shipping Point" sap:quickinfo="Shipping Point / Receiving Point"/>
+                <Property Name="LoadingPoint" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Loading Point"/>
+                <Property Name="PackagingMaterial" Type="Edm.String" MaxLength="40" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Packaging Materials"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Plant"/>
+                <Property Name="SalesDocumentItemCategory" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Item Category" sap:quickinfo="Sales Document Item Category"/>
+                <Property Name="SalesOrganization" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Sales Organization"/>
+                <Property Name="DistributionChannel" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="RefDistCh-Cust/Mat." sap:quickinfo="Reference distrib.channel for cust.and material masters"/>
+                <Property Name="StorageLocation" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Storage Location"/>
+                <Property Name="Warehouse" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Warehouse Number" sap:quickinfo="Warehouse Number/Warehouse Complex"/>
+                <Property Name="GrossWeight" Type="Edm.Decimal" Precision="15" Scale="3" sap:aggregation-role="measure" sap:unit="WeightUnit" sap:label="Total Weight" sap:quickinfo="Total Weight of Handling Unit" sap:filterable="false"/>
+                <Property Name="NetWeight" Type="Edm.Decimal" Precision="15" Scale="3" sap:aggregation-role="measure" sap:unit="WeightUnit" sap:label="Loading Weight" sap:quickinfo="Loading Weight of Handling Unit" sap:filterable="false"/>
+                <Property Name="HandlingUnitMaxWeight" Type="Edm.Decimal" Precision="15" Scale="3" sap:aggregation-role="measure" sap:unit="WeightUnit" sap:label="Allowed Load Weight" sap:quickinfo="Allowed Loading Weight of a Handling Unit" sap:filterable="false"/>
+                <Property Name="WeightUnit" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:label="Unit of Weight" sap:semantics="unit-of-measure"/>
+                <Property Name="HandlingUnitTareWeight" Type="Edm.Decimal" Precision="15" Scale="3" sap:aggregation-role="dimension" sap:unit="HandlingUnitTareWeightUnit" sap:label="Tare Weight" sap:quickinfo="Tare Weight of Handling Unit"/>
+                <Property Name="HandlingUnitTareWeightUnit" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:label="Unit of Weight" sap:semantics="unit-of-measure"/>
+                <Property Name="HandlingUnitWeightTolerance" Type="Edm.Decimal" Precision="3" Scale="1" sap:aggregation-role="dimension" sap:label="Excess wt tolerance" sap:quickinfo="Excess Weight Tolerance for Handling unit"/>
+                <Property Name="GrossVolume" Type="Edm.Decimal" Precision="15" Scale="3" sap:aggregation-role="measure" sap:unit="VolumeUnit" sap:label="Total Volume" sap:quickinfo="Total Volume of Handling Unit" sap:filterable="false"/>
+                <Property Name="HandlingUnitNetVolume" Type="Edm.Decimal" Precision="15" Scale="3" sap:aggregation-role="measure" sap:unit="VolumeUnit" sap:label="Loading Volume" sap:quickinfo="Loading Volume of Handling Unit" sap:filterable="false"/>
+                <Property Name="HandlingUnitMaxVolume" Type="Edm.Decimal" Precision="15" Scale="3" sap:aggregation-role="measure" sap:unit="VolumeUnit" sap:label="Allowed Volume" sap:quickinfo="Allowed Loading Volume for Handling Unit" sap:filterable="false"/>
+                <Property Name="VolumeUnit" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:label="Volume Unit" sap:semantics="unit-of-measure"/>
+                <Property Name="HandlingUnitTareVolume" Type="Edm.Decimal" Precision="15" Scale="3" sap:aggregation-role="dimension" sap:unit="HandlingUnitTareVolumeUnit" sap:label="Tare Volume" sap:quickinfo="Tare Volume of Handling Unit"/>
+                <Property Name="HandlingUnitTareVolumeUnit" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:label="Volume Unit" sap:semantics="unit-of-measure"/>
+                <Property Name="HandlingUnitVolumeTolerance" Type="Edm.Decimal" Precision="3" Scale="1" sap:aggregation-role="dimension" sap:label="Excess volume tol." sap:quickinfo="Excess Volume Tolerance of the Handling Unit"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="12" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Created By" sap:quickinfo="Name of Person Responsible for Creating the Object"/>
+                <Property Name="CreationDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="Created On" sap:quickinfo="Record Creation Date"/>
+                <Property Name="CreationTime" Type="Edm.Time" Precision="0" sap:aggregation-role="dimension" sap:label="Time" sap:quickinfo="Entry time"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="12" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Changed By" sap:quickinfo="Name of Person Who Changed Object"/>
+                <Property Name="LastChangeDate" Type="Edm.DateTime" Precision="0" sap:aggregation-role="dimension" sap:display-format="Date" sap:label="Changed On" sap:quickinfo="Last Changed On"/>
+                <Property Name="LastChangeTime" Type="Edm.Time" Precision="0" sap:aggregation-role="dimension" sap:label="Changed at" sap:quickinfo="Time last change was made"/>
+                <Property Name="HandlingUnitGroup1" Type="Edm.String" MaxLength="5" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Handling unit gr. 1" sap:quickinfo="Handling Unit Group 1                     (Freely Definable)"/>
+                <Property Name="HandlingUnitGroup2" Type="Edm.String" MaxLength="5" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Handling unit gr. 2" sap:quickinfo="Handling Unit Group 2                     (Freely Definable)"/>
+                <Property Name="HandlingUnitGroup3" Type="Edm.String" MaxLength="5" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Handling unit gr. 3" sap:quickinfo="Handling Unit Group 3                     (Freely Definable)"/>
+                <Property Name="HandlingUnitGroup4" Type="Edm.String" MaxLength="5" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="HU group 4" sap:quickinfo="Handling Unit Group 4                     (Freely Definable)"/>
+                <Property Name="HandlingUnitGroup5" Type="Edm.String" MaxLength="5" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="HU group 5" sap:quickinfo="Handling Unit Group 5                     (Freely Definable)"/>
+                <Property Name="HandlingUnitLength" Type="Edm.Decimal" Precision="13" Scale="3" sap:aggregation-role="dimension" sap:unit="UnitOfMeasureDimension" sap:label="Length"/>
+                <Property Name="HandlingUnitWidth" Type="Edm.Decimal" Precision="13" Scale="3" sap:aggregation-role="dimension" sap:unit="UnitOfMeasureDimension" sap:label="Width"/>
+                <Property Name="HandlingUnitHeight" Type="Edm.Decimal" Precision="13" Scale="3" sap:aggregation-role="dimension" sap:unit="UnitOfMeasureDimension" sap:label="Height"/>
+                <Property Name="UnitOfMeasureDimension" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:label="Unit of Dimension" sap:quickinfo="Unit of Dimension for Length/Width/Height" sap:semantics="unit-of-measure"/>
+                <Property Name="HandlingUnitBaseUnitOfMeasure" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
+                <Property Name="HandlingUnitDeliveryWithPkgItm" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Generated delivery" sap:quickinfo="Delivery in Which Packaging Material Is Generated as an Item"/>
+                <Property Name="HandlingUnitGenDeliveryItem" Type="Edm.String" MaxLength="6" sap:aggregation-role="dimension" sap:display-format="NonNegative" sap:label="Generated item" sap:quickinfo="Generated delivery item"/>
+                <Property Name="HandlingUnitContentDescription" Type="Edm.String" MaxLength="40" sap:aggregation-role="dimension" sap:label="Content" sap:quickinfo="Description of Handling Unit Content"/>
+                <Property Name="PackagingMaterialType" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Packaging Mat. Type" sap:quickinfo="Packaging Material Type"/>
+                <Property Name="PackagingMaterialGroup" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Matl Grp Pack.Matls" sap:quickinfo="Material Group: Packaging Materials"/>
+                <Property Name="HandlingUnitWeightVolumeIsFix" Type="Edm.Boolean" sap:aggregation-role="dimension" sap:label="Weight/Vol. Fixed" sap:quickinfo="Weight and Volume Fixed"/>
+                <Property Name="PackagingMaterialCategory" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Pack. Mat. Cat." sap:quickinfo="Packaging Material Category"/>
+                <Property Name="HandlingUnitSecondExternalId" Type="Edm.String" MaxLength="20" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="HU identification 2" sap:quickinfo="Handling Unit's 2nd External Identification"/>
+                <Property Name="HandlingUnitCustomerPackMat" Type="Edm.String" MaxLength="35" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Customer packag.matl" sap:quickinfo="Partner's (Customer's or Vendor's) Packaging Material"/>
+                <Property Name="HandlingUnitPackingObjectType" Type="Edm.String" MaxLength="2" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Packing Object"/>
+                <Property Name="HandlingUnitPackingObjectKey" Type="Edm.String" MaxLength="20" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Object Key" sap:quickinfo="Key for Object to Which the Handling Unit is Assigned"/>
+                <Property Name="SourceHandlingUnitUUID" Type="Edm.Guid" sap:aggregation-role="dimension" sap:label="Handle" sap:quickinfo="Worldwide unique key for VEKP-VENUM"/>
+                <Property Name="HandlingUnitIsClosed" Type="Edm.Boolean" sap:aggregation-role="dimension" sap:label="Closed" sap:quickinfo="Packaging Material is Closed Packaging"/>
+                <Property Name="HazardousSubstanceIndicator" Type="Edm.Boolean" sap:aggregation-role="dimension" sap:label="Rel. for dang. goods" sap:quickinfo="Packing Level is Relevant for Dangerous Goods"/>
+                <Property Name="HandlingUnitLowerLevelRefer" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Higher-level HU" sap:quickinfo="Higher-Level Handling Unit"/>
+                <Property Name="HandlingUnitInternalStatus" Type="Edm.String" MaxLength="4" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="HU status" sap:quickinfo="Handling unit status"/>
+                <Property Name="PackingInstruction" Type="Edm.Guid" sap:aggregation-role="dimension" sap:label="Packing object" sap:quickinfo="Unique internal packing object number"/>
+                <Property Name="PackingInstructionStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Local packing status" sap:quickinfo="Local packing status for a single HU (without sub HUs)"/>
+                <Property Name="PackInstructExtLabelNotPrinted" Type="Edm.Boolean" sap:aggregation-role="dimension" sap:label="No Shipping Label" sap:quickinfo="Checkbox: Do Not Print External Shipping Label"/>
+                <Property Name="HandlingUnitIsComplete" Type="Edm.Boolean" sap:aggregation-role="dimension" sap:label="Status" sap:quickinfo="Status (at this time without functionality)"/>
+                <Property Name="HandlingUnitStockMgmtType" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="HU system" sap:quickinfo="HU and IM Stock in Separate Systems"/>
+                <Property Name="HandlingUnitSlotNumber" Type="Edm.String" MaxLength="35" sap:aggregation-role="dimension" sap:label="Slot Number" sap:quickinfo="Slot Number (LOGPOS_EXT_LONG)"/>
+                <Property Name="ProductionSupplyArea" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Prodn Supply Area" sap:quickinfo="Production Supply Area"/>
+            </EntityType>
+            <EntityType Name="z_partnerType" sap:label="cds for partner details" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="BusinessPartner"/>
+                    <PropertyRef Name="AddressNumber"/>
+                    <PropertyRef Name="DeliveryDocument"/>
+                    <PropertyRef Name="PartnerFunction"/>
+                </Key>
+                <Property Name="BusinessPartner" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Business Partner" sap:quickinfo="Business Partner Number"/>
+                <Property Name="AddressNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Address Number"/>
+                <Property Name="DeliveryDocument" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="SD Document" sap:quickinfo="Sales and Distribution Document Number"/>
+                <Property Name="PartnerFunction" Type="Edm.String" Nullable="false" MaxLength="2" sap:display-format="UpperCase" sap:label="Partner Function"/>
+                <Property Name="BusinessPartnerCategory" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="BP Category" sap:quickinfo="Business Partner Category"/>
+                <Property Name="AuthorizationGroup" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Authorization Group"/>
+                <Property Name="BusinessPartnerUUID" Type="Edm.Guid" sap:label="BP GUID" sap:quickinfo="Business Partner GUID"/>
+                <Property Name="PersonNumber" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Person Number"/>
+                <Property Name="ETag" Type="Edm.String" MaxLength="26"/>
+                <Property Name="BusinessPartnerName" Type="Edm.String" MaxLength="81"/>
+                <Property Name="BusinessPartnerFullName" Type="Edm.String" MaxLength="81"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created by" sap:quickinfo="User who created the object"/>
+                <Property Name="CreationDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Created On" sap:quickinfo="Date on which the object was created"/>
+                <Property Name="CreationTime" Type="Edm.Time" Precision="0" sap:label="Created at" sap:quickinfo="Time at which the object was created"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Changed by" sap:quickinfo="Last user to change object"/>
+                <Property Name="LastChangeDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Changed on" sap:quickinfo="Date when object was last changed"/>
+                <Property Name="LastChangeTime" Type="Edm.Time" Precision="0" sap:label="Changed at" sap:quickinfo="Time at which object was last changed"/>
+                <Property Name="BusinessPartnerIsBlocked" Type="Edm.Boolean" sap:label="Central Block" sap:quickinfo="Central Block for Business Partner"/>
+                <Property Name="IsBusinessPurposeCompleted" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Purpose Completed" sap:quickinfo="Business Purpose Completed Flag"/>
+                <Property Name="FirstName" Type="Edm.String" MaxLength="40" sap:label="First Name" sap:quickinfo="First Name of Business Partner (Person)"/>
+                <Property Name="LastName" Type="Edm.String" MaxLength="40" sap:label="Last Name" sap:quickinfo="Last Name of Business Partner (Person)"/>
+                <Property Name="PersonFullName" Type="Edm.String" MaxLength="80" sap:label="Full Name"/>
+                <Property Name="OrganizationBPName1" Type="Edm.String" MaxLength="40" sap:label="Name 1" sap:quickinfo="Name 1 of organization"/>
+                <Property Name="OrganizationBPName2" Type="Edm.String" MaxLength="40" sap:label="Name 2" sap:quickinfo="Name 2 of organization"/>
+                <Property Name="OrganizationBPName3" Type="Edm.String" MaxLength="40" sap:label="Name 3" sap:quickinfo="Name 3 of organization"/>
+                <Property Name="OrganizationBPName4" Type="Edm.String" MaxLength="40" sap:label="Name 4" sap:quickinfo="Name 4 of organization"/>
+                <Property Name="InternationalLocationNumber1" Type="Edm.String" MaxLength="7" sap:display-format="NonNegative" sap:label="Int. location no. 1" sap:quickinfo="International location number  (part 1)"/>
+                <Property Name="InternationalLocationNumber2" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative" sap:label="Int. location no. 2" sap:quickinfo="International location number (Part 2)"/>
+                <Property Name="InternationalLocationNumber3" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative" sap:label="Check digit" sap:quickinfo="Check digit for the international location number"/>
+                <Property Name="LegalForm" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Legal form" sap:quickinfo="BP: Legal form of organization"/>
+                <Property Name="OrganizationFoundationDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Date founded" sap:quickinfo="Date organization founded"/>
+                <Property Name="OrganizationLiquidationDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Liquidation date" sap:quickinfo="Liquidation date of organization"/>
+                <Property Name="Industry" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Industry sector"/>
+                <Property Name="IsNaturalPerson" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Natural Person" sap:quickinfo="Business Partner Is a Natural Person Under the Tax Laws"/>
+                <Property Name="IsFemale" Type="Edm.Boolean" sap:label="Female" sap:quickinfo="Selection: Business partner is female"/>
+                <Property Name="IsMale" Type="Edm.Boolean" sap:label="Male" sap:quickinfo="Selection: Business partner is male"/>
+                <Property Name="IsSexUnknown" Type="Edm.Boolean" sap:label="Unknown" sap:quickinfo="Selection: Sex of business partner is not known"/>
+                <Property Name="FormOfAddress" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Title Key" sap:quickinfo="Form-of-Address Key"/>
+                <Property Name="AcademicTitle" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Academic Title 1" sap:quickinfo="Academic Title: Key"/>
+                <Property Name="AcademicTitle2" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="2nd academic title" sap:quickinfo="Second academic title (key)"/>
+                <Property Name="NameFormat" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Name Format" sap:quickinfo="Name format"/>
+                <Property Name="NameCountry" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Ctry/Reg. for Format" sap:quickinfo="Country/Region for Name Format Rule"/>
+                <Property Name="BusinessPartnerGrouping" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Grouping" sap:quickinfo="Business Partner Grouping"/>
+                <Property Name="BusinessPartnerType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="BP Type" sap:quickinfo="Business Partner Type"/>
+                <Property Name="MiddleName" Type="Edm.String" MaxLength="40" sap:label="Middle Name" sap:quickinfo="Middle name or second forename of a person"/>
+                <Property Name="AdditionalLastName" Type="Edm.String" MaxLength="40" sap:label="Other Last Name" sap:quickinfo="Other Last Name of a Person"/>
+                <Property Name="GroupBusinessPartnerName1" Type="Edm.String" MaxLength="40" sap:label="Name 1" sap:quickinfo="Name 1 (group)"/>
+                <Property Name="GroupBusinessPartnerName2" Type="Edm.String" MaxLength="40" sap:label="Name 2" sap:quickinfo="Name 2 (group)"/>
+                <Property Name="CorrespondenceLanguage" Type="Edm.String" MaxLength="2" sap:label="Correspondence Lang." sap:quickinfo="Business Partner: Correspondence Language"/>
+                <Property Name="Language" Type="Edm.String" MaxLength="2" sap:label="Language" sap:quickinfo="Business partner: Language"/>
+                <Property Name="SearchTerm1" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Search Term 1" sap:quickinfo="Search Term 1 for Business Partner"/>
+                <Property Name="SearchTerm2" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Search Term 2" sap:quickinfo="Search Term 2 for Business Partner"/>
+                <Property Name="BPLastNameSearchHelp" Type="Edm.String" MaxLength="35" sap:display-format="UpperCase" sap:label="Name 1/Last Name" sap:quickinfo="Search Help Field 1 (Name 1/Last Name)"/>
+                <Property Name="BPFirstNameSearchHelp" Type="Edm.String" MaxLength="35" sap:display-format="UpperCase" sap:label="Name 2/First Name" sap:quickinfo="Search Help Field 2 (Name 2/First Name)"/>
+                <Property Name="BusinessPartnerNicknameLabel" Type="Edm.String" MaxLength="40" sap:label="Known As" sap:quickinfo="Nickname of Business Partner (Person)"/>
+                <Property Name="IndependentAddressID" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Address Number"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" sap:label="Is active" sap:quickinfo="Draft - Indicator - Is active document"/>
+                <Property Name="BirthDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Date of Birth" sap:quickinfo="Date of Birth of Business Partner"/>
+                <Property Name="IsMarkedForArchiving" Type="Edm.Boolean" sap:label="Archiving Flag" sap:quickinfo="Central Archiving Flag"/>
+                <Property Name="ContactPermission" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Contact" sap:quickinfo="Business Partner: Contact Permission"/>
+                <Property Name="BusinessPartnerIDByExtSystem" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="External BP Number" sap:quickinfo="Business Partner Number in External System"/>
+                <Property Name="LegalEntityOfOrganization" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Legal entity" sap:quickinfo="Legal Entity of Organization"/>
+                <Property Name="BusinessPartnerPrintFormat" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Print Format" sap:quickinfo="Business Partner Print Format"/>
+                <Property Name="BusinessPartnerDataOriginType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Data Origin" sap:quickinfo="Data Origin Types"/>
+                <Property Name="BusinessPartnerIsNotReleased" Type="Edm.Boolean" sap:label="Not Released" sap:quickinfo="Indicator: Not Released"/>
+                <Property Name="IsNotContractuallyCapable" Type="Edm.Boolean" sap:label="Not Legally Competnt" sap:quickinfo="Indicator: Not Legally Competent"/>
+                <Property Name="BusinessPartnerOccupation" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Occupation" sap:quickinfo="Occupation/group"/>
+                <Property Name="BusPartMaritalStatus" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Marital Status" sap:quickinfo="Marital Status of Business Partner"/>
+                <Property Name="BusPartNationality" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Nationality"/>
+                <Property Name="NonResidentCompanyOriginCntry" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Ctry/Reg. of Origin" sap:quickinfo="Country/Region of Origin: Non-Resident Companies"/>
+                <Property Name="BusinessPartnerSalutation" Type="Edm.String" MaxLength="50" sap:label="Salutation"/>
+                <Property Name="BusinessPartnerBirthName" Type="Edm.String" MaxLength="40" sap:label="Name at Birth" sap:quickinfo="Name at birth of business partner"/>
+                <Property Name="BusinessPartnerSupplementName" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Name Supplement" sap:quickinfo="Name supplement, e.g. noble title (key)"/>
+                <Property Name="BusinessPartnerBirthplaceName" Type="Edm.String" MaxLength="40" sap:label="Birthplace" sap:quickinfo="Birthplace of business partner"/>
+                <Property Name="NaturalPersonEmployerName" Type="Edm.String" MaxLength="35" sap:label="Employer" sap:quickinfo="Name of Employer of a Natural Person"/>
+                <Property Name="BusinessPartnerDeathDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Death date" sap:quickinfo="Date of death of business partner"/>
+                <Property Name="BusinessPartnerBirthDateStatus" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Birth Date Status" sap:quickinfo="Date of Birth: Status"/>
+                <Property Name="BusinessPartnerGroupType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Partner group type" sap:quickinfo="Group type"/>
+                <Property Name="LastNamePrefix" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Prefix Key" sap:quickinfo="Name Prefix (Key)"/>
+                <Property Name="LastNameSecondPrefix" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="2nd prefix" sap:quickinfo="2nd name prefix (key)"/>
+                <Property Name="Initials" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Initials" sap:quickinfo="&quot;Middle Initial&quot; or personal initials"/>
+                <Property Name="GenderCodeName" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Sex" sap:quickinfo="Sex of business partner (person)"/>
+                <Property Name="DataControllerSet" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Data Ctrlr. Set" sap:quickinfo="BP: Data Controller Set Flag"/>
+                <Property Name="DataController1" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController2" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController3" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController4" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController5" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController6" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController7" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController8" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController9" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController10" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="BPDataControllerIsNotRequired" Type="Edm.Boolean" sap:label="DC Not Required" sap:quickinfo="BP: Data Controller Not Required"/>
+                <Property Name="TrdCmplncLicenseIsMilitarySctr" Type="Edm.Boolean" sap:label="Military use" sap:quickinfo="ID for mainly military use"/>
+                <Property Name="TrdCmplncLicenseIsNuclearSctr" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Nuclear Sector" sap:quickinfo="Nuclear Sector (Indicator)"/>
+                <Property Name="ValidityStartDate" Type="Edm.DateTimeOffset" Precision="0" sap:label="Valid From" sap:quickinfo="Validity Start of a Business Partner Address"/>
+                <Property Name="ValidityEndDate" Type="Edm.DateTimeOffset" Precision="0" sap:label="Valid To" sap:quickinfo="Validity End of a Business Partner Address"/>
+                <Property Name="BusinessPartnerAddressUUID" Type="Edm.Guid" sap:label="GUID of a Business Partner Address" sap:heading=""/>
+                <Property Name="BPTargetAddressID" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Move Target Address" sap:quickinfo="Number of Move Target Address for Address Moves"/>
+                <Property Name="BPAddressMoveDateTime" Type="Edm.DateTimeOffset" Precision="0" sap:label="Date of Move" sap:quickinfo="Date of Move for Address Moves"/>
+                <Property Name="CareOfName" Type="Edm.String" MaxLength="40" sap:label="c/o" sap:quickinfo="c/o name"/>
+                <Property Name="FullName" Type="Edm.String" MaxLength="80" sap:label="Full Name" sap:quickinfo="Full name of a party (Bus. Partner, Org. Unit, Doc. address)"/>
+                <Property Name="HouseNumber" Type="Edm.String" MaxLength="10" sap:label="House Number"/>
+                <Property Name="StreetName" Type="Edm.String" MaxLength="60" sap:label="Street"/>
+                <Property Name="HouseNumberSupplementText" Type="Edm.String" MaxLength="10" sap:label="Supplement" sap:quickinfo="House number supplement"/>
+                <Property Name="District" Type="Edm.String" MaxLength="40" sap:label="District"/>
+                <Property Name="PostalCode" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Postal Code" sap:quickinfo="City postal code"/>
+                <Property Name="CityName" Type="Edm.String" MaxLength="40" sap:label="City"/>
+                <Property Name="Country" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Country/Region Key"/>
+                <Property Name="Region" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Region" sap:quickinfo="Region (State, Province, County)"/>
+                <Property Name="AddressTimeZone" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Time Zone" sap:quickinfo="Address Time Zone"/>
+                <Property Name="TaxJurisdiction" Type="Edm.String" MaxLength="15" sap:display-format="UpperCase" sap:label="Tax Jurisdiction"/>
+                <Property Name="TransportZone" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Transportation Zone" sap:quickinfo="Transportation zone to or from which the goods are delivered"/>
+                <Property Name="CompanyPostalCode" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Company Postal Code" sap:quickinfo="Company Postal Code (for Large Customers)"/>
+                <Property Name="DeliveryServiceNumber" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Delivery Service No." sap:quickinfo="Number of Delivery Service"/>
+                <Property Name="POBox" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="PO Box"/>
+                <Property Name="POBoxIsWithoutNumber" Type="Edm.Boolean" sap:label="PO Box w/o No." sap:quickinfo="Flag: PO Box Without Number"/>
+                <Property Name="POBoxPostalCode" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="PO Box Postal Code"/>
+                <Property Name="POBoxLobbyName" Type="Edm.String" MaxLength="40" sap:label="PO Box Lobby"/>
+                <Property Name="POBoxDeviatingCityName" Type="Edm.String" MaxLength="40" sap:label="PO Box City" sap:quickinfo="PO Box city"/>
+                <Property Name="POBoxDeviatingRegion" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="PO Box Region" sap:quickinfo="Region for PO Box (Country/Region, State, Province, ...)"/>
+                <Property Name="POBoxDeviatingCountry" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="PO Box Ctry/Region" sap:quickinfo="PO Box of Country/Region"/>
+                <Property Name="PrfrdCommMediumType" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Comm. Method" sap:quickinfo="Communication Method (Key) (Business Address Services)"/>
+                <Property Name="StreetPrefixName" Type="Edm.String" MaxLength="40" sap:label="Street 2"/>
+                <Property Name="AdditionalStreetPrefixName" Type="Edm.String" MaxLength="40" sap:label="Street 3"/>
+                <Property Name="StreetSuffixName" Type="Edm.String" MaxLength="40" sap:label="Street 4"/>
+                <Property Name="AdditionalStreetSuffixName" Type="Edm.String" MaxLength="40" sap:label="Street 5"/>
+                <Property Name="HomeCityName" Type="Edm.String" MaxLength="40" sap:label="Different City" sap:quickinfo="City (different from postal city)"/>
+                <Property Name="DeliveryServiceTypeCode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Delvry Serv Type" sap:quickinfo="Type of Delivery Service"/>
+                <Property Name="AddressStreetUnusable" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Undeliverable" sap:quickinfo="Street Address Undeliverable Flag"/>
+                <Property Name="AddressPostBoxUnusable" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Undeliverable" sap:quickinfo="PO Box Address Undeliverable Flag"/>
+                <Property Name="Building" Type="Edm.String" MaxLength="20" sap:label="Building Code" sap:quickinfo="Building (Number or Code)"/>
+                <Property Name="Floor" Type="Edm.String" MaxLength="10" sap:label="Floor" sap:quickinfo="Floor in building"/>
+                <Property Name="RoomNumber" Type="Edm.String" MaxLength="10" sap:label="Room Number" sap:quickinfo="Room or Apartment Number"/>
+                <Property Name="County" Type="Edm.String" MaxLength="40" sap:label="County"/>
+                <Property Name="CountyCode" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="County code" sap:quickinfo="County code for county"/>
+                <Property Name="TownshipCode" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Township code" sap:quickinfo="Township code for Township"/>
+                <Property Name="TownshipName" Type="Edm.String" MaxLength="40" sap:label="Township"/>
+                <Property Name="CityFileTestStatus" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Test stat./City file" sap:quickinfo="City file test status"/>
+                <Property Name="PhoneNumber" Type="Edm.String" MaxLength="30"/>
+                <Property Name="PhoneNumberCountry" Type="Edm.String" MaxLength="3"/>
+                <Property Name="PhoneNumberExtension" Type="Edm.String" MaxLength="10"/>
+                <Property Name="FaxNumber" Type="Edm.String" MaxLength="30"/>
+                <Property Name="FaxCountry" Type="Edm.String" MaxLength="3"/>
+                <Property Name="FaxNumberExtension" Type="Edm.String" MaxLength="10"/>
+                <Property Name="MobilePhoneNumber" Type="Edm.String" MaxLength="30"/>
+                <Property Name="MobilePhoneCountry" Type="Edm.String" MaxLength="3"/>
+                <Property Name="EmailAddress" Type="Edm.String" MaxLength="241"/>
+                <Property Name="URLFieldLength" Type="Edm.Int16"/>
+                <Property Name="Customer" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Customer" sap:quickinfo="Customer Number"/>
+                <Property Name="Supplier" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Supplier" sap:quickinfo="Account Number of Supplier"/>
+                <Property Name="Personnel" Type="Edm.String" MaxLength="8" sap:display-format="NonNegative" sap:label="Personnel Number"/>
+                <Property Name="ContactPerson" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative" sap:label="Contact Person" sap:quickinfo="Number of Contact Person"/>
+                <Property Name="AddressID" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Address Number"/>
+                <Property Name="AddressPersonID" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Person Number"/>
+                <Property Name="ShippingPoint" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Shipping Point" sap:quickinfo="Shipping Point / Receiving Point"/>
+            </EntityType>
+            <Association Name="assoc_ECD71209EE29280ABC8EEAB08FCBDF8D" sap:content-version="1">
+                <End Type="ZCDS_DLVR_DATA_CDS.I_SDDocumentPartnerType" Multiplicity="1" Role="FromRole_assoc_ECD71209EE29280ABC8EEAB08FCBDF8D"/>
+                <End Type="ZCDS_DLVR_DATA_CDS.I_PartnerFunctionType" Multiplicity="0..1" Role="ToRole_assoc_ECD71209EE29280ABC8EEAB08FCBDF8D"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_assoc_ECD71209EE29280ABC8EEAB08FCBDF8D">
+                        <PropertyRef Name="PartnerFunction"/>
+                    </Principal>
+                    <Dependent Role="FromRole_assoc_ECD71209EE29280ABC8EEAB08FCBDF8D">
+                        <PropertyRef Name="PartnerFunction"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="assoc_116DF44D92A0493A401259DEA0CF7F53" sap:content-version="1">
+                <End Type="ZCDS_DLVR_DATA_CDS.I_CustomerType" Multiplicity="1" Role="FromRole_assoc_116DF44D92A0493A401259DEA0CF7F53"/>
+                <End Type="ZCDS_DLVR_DATA_CDS.I_GlobalcompanyType" Multiplicity="0..1" Role="ToRole_assoc_116DF44D92A0493A401259DEA0CF7F53"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_assoc_116DF44D92A0493A401259DEA0CF7F53">
+                        <PropertyRef Name="Company"/>
+                    </Principal>
+                    <Dependent Role="FromRole_assoc_116DF44D92A0493A401259DEA0CF7F53">
+                        <PropertyRef Name="TradingPartner"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="assoc_C9CD836CFC89E1433FB2649E56D3AA66" sap:content-version="1">
+                <End Type="ZCDS_DLVR_DATA_CDS.I_CustomerType" Multiplicity="1" Role="FromRole_assoc_C9CD836CFC89E1433FB2649E56D3AA66"/>
+                <End Type="ZCDS_DLVR_DATA_CDS.I_CustomerClassificationType" Multiplicity="0..1" Role="ToRole_assoc_C9CD836CFC89E1433FB2649E56D3AA66"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_assoc_C9CD836CFC89E1433FB2649E56D3AA66">
+                        <PropertyRef Name="CustomerClassification"/>
+                    </Principal>
+                    <Dependent Role="FromRole_assoc_C9CD836CFC89E1433FB2649E56D3AA66">
+                        <PropertyRef Name="CustomerClassification"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="assoc_31039D23ED2CAD4D37415BCA1C862F22" sap:content-version="1">
+                <End Type="ZCDS_DLVR_DATA_CDS.zcds_dlvr_dataType" Multiplicity="1" Role="FromRole_assoc_31039D23ED2CAD4D37415BCA1C862F22"/>
+                <End Type="ZCDS_DLVR_DATA_CDS.z_partnerType" Multiplicity="0..1" Role="ToRole_assoc_31039D23ED2CAD4D37415BCA1C862F22"/>
+            </Association>
+            <Association Name="assoc_DB6010109942522B5BB0A6F00DABF233" sap:content-version="1">
+                <End Type="ZCDS_DLVR_DATA_CDS.zcds_dlvr_dataType" Multiplicity="1" Role="FromRole_assoc_DB6010109942522B5BB0A6F00DABF233"/>
+                <End Type="ZCDS_DLVR_DATA_CDS.z_dlvr_itemType" Multiplicity="*" Role="ToRole_assoc_DB6010109942522B5BB0A6F00DABF233"/>
+            </Association>
+            <Association Name="assoc_A168A13F89F34A06F7CF223BF288FE98" sap:content-version="1">
+                <End Type="ZCDS_DLVR_DATA_CDS.zcds_dlvr_dataType" Multiplicity="1" Role="FromRole_assoc_A168A13F89F34A06F7CF223BF288FE98"/>
+                <End Type="ZCDS_DLVR_DATA_CDS.z_hu_detType" Multiplicity="*" Role="ToRole_assoc_A168A13F89F34A06F7CF223BF288FE98"/>
+            </Association>
+            <Association Name="assoc_6FC2BA4221821E278E46831908E37729" sap:content-version="1">
+                <End Type="ZCDS_DLVR_DATA_CDS.zcds_dlvr_dataType" Multiplicity="1" Role="FromRole_assoc_6FC2BA4221821E278E46831908E37729"/>
+                <End Type="ZCDS_DLVR_DATA_CDS.I_SDDocumentPartnerType" Multiplicity="*" Role="ToRole_assoc_6FC2BA4221821E278E46831908E37729"/>
+            </Association>
+            <Association Name="assoc_1743ACA70228EAA2C2B46A797347DC26" sap:content-version="1">
+                <End Type="ZCDS_DLVR_DATA_CDS.zcds_dlvr_dataType" Multiplicity="1" Role="FromRole_assoc_1743ACA70228EAA2C2B46A797347DC26"/>
+                <End Type="ZCDS_DLVR_DATA_CDS.z_partnerType" Multiplicity="0..1" Role="ToRole_assoc_1743ACA70228EAA2C2B46A797347DC26"/>
+            </Association>
+            <Association Name="assoc_42F8111711AAF2D7F3E9D60487C3B5EA" sap:content-version="1">
+                <End Type="ZCDS_DLVR_DATA_CDS.zcds_dlvr_dataType" Multiplicity="1" Role="FromRole_assoc_42F8111711AAF2D7F3E9D60487C3B5EA"/>
+                <End Type="ZCDS_DLVR_DATA_CDS.z_partnerType" Multiplicity="0..1" Role="ToRole_assoc_42F8111711AAF2D7F3E9D60487C3B5EA"/>
+            </Association>
+            <Association Name="assoc_CFDAB621C42BAE720B10AA9BFCC4C705" sap:content-version="1">
+                <End Type="ZCDS_DLVR_DATA_CDS.zcds_dlvr_dataType" Multiplicity="1" Role="FromRole_assoc_CFDAB621C42BAE720B10AA9BFCC4C705"/>
+                <End Type="ZCDS_DLVR_DATA_CDS.z_partnerType" Multiplicity="0..1" Role="ToRole_assoc_CFDAB621C42BAE720B10AA9BFCC4C705"/>
+            </Association>
+            <Association Name="assoc_2D12A1073586B8158AA8A880D2F66927" sap:content-version="1">
+                <End Type="ZCDS_DLVR_DATA_CDS.zcds_dlvr_dataType" Multiplicity="1" Role="FromRole_assoc_2D12A1073586B8158AA8A880D2F66927"/>
+                <End Type="ZCDS_DLVR_DATA_CDS.I_CustomerType" Multiplicity="0..1" Role="ToRole_assoc_2D12A1073586B8158AA8A880D2F66927"/>
+            </Association>
+            <Association Name="assoc_49817F88B95B6DF210D0227C096F27CF" sap:content-version="1">
+                <End Type="ZCDS_DLVR_DATA_CDS.zcds_dlvr_dataType" Multiplicity="1" Role="FromRole_assoc_49817F88B95B6DF210D0227C096F27CF"/>
+                <End Type="ZCDS_DLVR_DATA_CDS.z_partnerType" Multiplicity="0..1" Role="ToRole_assoc_49817F88B95B6DF210D0227C096F27CF"/>
+            </Association>
+            <Association Name="assoc_55360828C2A556590B42201B60A5C1C6" sap:content-version="1">
+                <End Type="ZCDS_DLVR_DATA_CDS.zcds_dlvr_dataType" Multiplicity="1" Role="FromRole_assoc_55360828C2A556590B42201B60A5C1C6"/>
+                <End Type="ZCDS_DLVR_DATA_CDS.I_CustomerType" Multiplicity="0..1" Role="ToRole_assoc_55360828C2A556590B42201B60A5C1C6"/>
+            </Association>
+            <EntityContainer Name="ZCDS_DLVR_DATA_CDS_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="I_Customer" EntityType="ZCDS_DLVR_DATA_CDS.I_CustomerType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="I_CustomerClassification" EntityType="ZCDS_DLVR_DATA_CDS.I_CustomerClassificationType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_Globalcompany" EntityType="ZCDS_DLVR_DATA_CDS.I_GlobalcompanyType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_PartnerFunction" EntityType="ZCDS_DLVR_DATA_CDS.I_PartnerFunctionType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="I_SDDocumentPartner" EntityType="ZCDS_DLVR_DATA_CDS.I_SDDocumentPartnerType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="zcds_dlvr_data" EntityType="ZCDS_DLVR_DATA_CDS.zcds_dlvr_dataType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="z_dlvr_item" EntityType="ZCDS_DLVR_DATA_CDS.z_dlvr_itemType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="z_hu_det" EntityType="ZCDS_DLVR_DATA_CDS.z_hu_detType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="z_partner" EntityType="ZCDS_DLVR_DATA_CDS.z_partnerType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <AssociationSet Name="assoc_55360828C2A556590B42201B60A5C1C6" Association="ZCDS_DLVR_DATA_CDS.assoc_55360828C2A556590B42201B60A5C1C6" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="zcds_dlvr_data" Role="FromRole_assoc_55360828C2A556590B42201B60A5C1C6"/>
+                    <End EntitySet="I_Customer" Role="ToRole_assoc_55360828C2A556590B42201B60A5C1C6"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_ECD71209EE29280ABC8EEAB08FCBDF8D" Association="ZCDS_DLVR_DATA_CDS.assoc_ECD71209EE29280ABC8EEAB08FCBDF8D" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="I_SDDocumentPartner" Role="FromRole_assoc_ECD71209EE29280ABC8EEAB08FCBDF8D"/>
+                    <End EntitySet="I_PartnerFunction" Role="ToRole_assoc_ECD71209EE29280ABC8EEAB08FCBDF8D"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_C9CD836CFC89E1433FB2649E56D3AA66" Association="ZCDS_DLVR_DATA_CDS.assoc_C9CD836CFC89E1433FB2649E56D3AA66" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="I_Customer" Role="FromRole_assoc_C9CD836CFC89E1433FB2649E56D3AA66"/>
+                    <End EntitySet="I_CustomerClassification" Role="ToRole_assoc_C9CD836CFC89E1433FB2649E56D3AA66"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_42F8111711AAF2D7F3E9D60487C3B5EA" Association="ZCDS_DLVR_DATA_CDS.assoc_42F8111711AAF2D7F3E9D60487C3B5EA" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="zcds_dlvr_data" Role="FromRole_assoc_42F8111711AAF2D7F3E9D60487C3B5EA"/>
+                    <End EntitySet="z_partner" Role="ToRole_assoc_42F8111711AAF2D7F3E9D60487C3B5EA"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_DB6010109942522B5BB0A6F00DABF233" Association="ZCDS_DLVR_DATA_CDS.assoc_DB6010109942522B5BB0A6F00DABF233" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="zcds_dlvr_data" Role="FromRole_assoc_DB6010109942522B5BB0A6F00DABF233"/>
+                    <End EntitySet="z_dlvr_item" Role="ToRole_assoc_DB6010109942522B5BB0A6F00DABF233"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_6FC2BA4221821E278E46831908E37729" Association="ZCDS_DLVR_DATA_CDS.assoc_6FC2BA4221821E278E46831908E37729" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="zcds_dlvr_data" Role="FromRole_assoc_6FC2BA4221821E278E46831908E37729"/>
+                    <End EntitySet="I_SDDocumentPartner" Role="ToRole_assoc_6FC2BA4221821E278E46831908E37729"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_31039D23ED2CAD4D37415BCA1C862F22" Association="ZCDS_DLVR_DATA_CDS.assoc_31039D23ED2CAD4D37415BCA1C862F22" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="zcds_dlvr_data" Role="FromRole_assoc_31039D23ED2CAD4D37415BCA1C862F22"/>
+                    <End EntitySet="z_partner" Role="ToRole_assoc_31039D23ED2CAD4D37415BCA1C862F22"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_49817F88B95B6DF210D0227C096F27CF" Association="ZCDS_DLVR_DATA_CDS.assoc_49817F88B95B6DF210D0227C096F27CF" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="zcds_dlvr_data" Role="FromRole_assoc_49817F88B95B6DF210D0227C096F27CF"/>
+                    <End EntitySet="z_partner" Role="ToRole_assoc_49817F88B95B6DF210D0227C096F27CF"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_1743ACA70228EAA2C2B46A797347DC26" Association="ZCDS_DLVR_DATA_CDS.assoc_1743ACA70228EAA2C2B46A797347DC26" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="zcds_dlvr_data" Role="FromRole_assoc_1743ACA70228EAA2C2B46A797347DC26"/>
+                    <End EntitySet="z_partner" Role="ToRole_assoc_1743ACA70228EAA2C2B46A797347DC26"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_CFDAB621C42BAE720B10AA9BFCC4C705" Association="ZCDS_DLVR_DATA_CDS.assoc_CFDAB621C42BAE720B10AA9BFCC4C705" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="zcds_dlvr_data" Role="FromRole_assoc_CFDAB621C42BAE720B10AA9BFCC4C705"/>
+                    <End EntitySet="z_partner" Role="ToRole_assoc_CFDAB621C42BAE720B10AA9BFCC4C705"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_2D12A1073586B8158AA8A880D2F66927" Association="ZCDS_DLVR_DATA_CDS.assoc_2D12A1073586B8158AA8A880D2F66927" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="zcds_dlvr_data" Role="FromRole_assoc_2D12A1073586B8158AA8A880D2F66927"/>
+                    <End EntitySet="I_Customer" Role="ToRole_assoc_2D12A1073586B8158AA8A880D2F66927"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_A168A13F89F34A06F7CF223BF288FE98" Association="ZCDS_DLVR_DATA_CDS.assoc_A168A13F89F34A06F7CF223BF288FE98" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="zcds_dlvr_data" Role="FromRole_assoc_A168A13F89F34A06F7CF223BF288FE98"/>
+                    <End EntitySet="z_hu_det" Role="ToRole_assoc_A168A13F89F34A06F7CF223BF288FE98"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_116DF44D92A0493A401259DEA0CF7F53" Association="ZCDS_DLVR_DATA_CDS.assoc_116DF44D92A0493A401259DEA0CF7F53" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="I_Customer" Role="FromRole_assoc_116DF44D92A0493A401259DEA0CF7F53"/>
+                    <End EntitySet="I_Globalcompany" Role="ToRole_assoc_116DF44D92A0493A401259DEA0CF7F53"/>
+                </AssociationSet>
+            </EntityContainer>
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <Annotations Target="ZCDS_DLVR_DATA_CDS.I_CustomerType/CustomerClassification" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Customer Classification"/>
+                        <PropertyValue Property="CollectionPath" String="I_CustomerClassification"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="CustomerClassification"/>
+                                    <PropertyValue Property="ValueListProperty" String="CustomerClassification"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CustomerClassification_Text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZCDS_DLVR_DATA_CDS.I_CustomerType/TradingPartner" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Global Company"/>
+                        <PropertyValue Property="CollectionPath" String="I_Globalcompany"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="TradingPartner"/>
+                                    <PropertyValue Property="ValueListProperty" String="Company"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CompanyName"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZCDS_DLVR_DATA_CDS.I_SDDocumentPartnerType/PartnerFunction" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Partner Function"/>
+                        <PropertyValue Property="CollectionPath" String="I_PartnerFunction"/>
+                        <PropertyValue Property="SearchSupported" Bool="false"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="PartnerFunction"/>
+                                    <PropertyValue Property="ValueListProperty" String="PartnerFunction"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PartnerFunction_Text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZCDS_DLVR_DATA_CDS.ZCDS_DLVR_DATA_CDS_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ZCDS_DLVR_DATA_CDS.ZCDS_DLVR_DATA_CDS_Entities/z_dlvr_item" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>ID</PropertyPath>
+                                <PropertyPath>ItemGrossWeight</PropertyPath>
+                                <PropertyPath>ItemNetWeight</PropertyPath>
+                                <PropertyPath>NetPriceAmount</PropertyPath>
+                                <PropertyPath>TotalNetAmount</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>ID</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZCDS_DLVR_DATA_CDS.ZCDS_DLVR_DATA_CDS_Entities/z_hu_det" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>ID</PropertyPath>
+                                <PropertyPath>GrossWeight</PropertyPath>
+                                <PropertyPath>NetWeight</PropertyPath>
+                                <PropertyPath>HandlingUnitMaxWeight</PropertyPath>
+                                <PropertyPath>GrossVolume</PropertyPath>
+                                <PropertyPath>HandlingUnitNetVolume</PropertyPath>
+                                <PropertyPath>HandlingUnitMaxVolume</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>ID</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZCDS_DLVR_DATA_CDS.ZCDS_DLVR_DATA_CDS_Entities/zcds_dlvr_data" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>ID</PropertyPath>
+                                <PropertyPath>HeaderGrossWeight</PropertyPath>
+                                <PropertyPath>HeaderNetWeight</PropertyPath>
+                                <PropertyPath>HeaderVolume</PropertyPath>
+                                <PropertyPath>ReleasedCreditAmount</PropertyPath>
+                                <PropertyPath>TotalNetAmount</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_Carrier"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_Items"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_Packages"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_Partner"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_ShipFrom"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_ShipTo"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_ShipToParty"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_Shipper"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_SoldTo"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_SoldToParty"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>ID</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZCDS_DLVR_DATA_CDS.ZCDS_DLVR_DATA_CDS_Entities/I_Customer" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_CustomerClassification"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_GlobalCompany"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZCDS_DLVR_DATA_CDS.ZCDS_DLVR_DATA_CDS_Entities/I_SDDocumentPartner" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_PartnerFunction"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZCDS_DLVR_DATA_CDS.I_CustomerType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.SAPObjectNodeType">
+                    <Record>
+                        <PropertyValue Property="Name" String="Customer"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZCDS_DLVR_DATA_CDS.I_PartnerFunctionType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.SAPObjectNodeType">
+                    <Record>
+                        <PropertyValue Property="Name" String="PartnerFunction"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <atom:link rel="self" href="https://sapdemo.eshipjet.com:44300/sap/opu/odata/sap/ZCDS_DLVR_DATA_CDS/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://sapdemo.eshipjet.com:44300/sap/opu/odata/sap/ZCDS_DLVR_DATA_CDS/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

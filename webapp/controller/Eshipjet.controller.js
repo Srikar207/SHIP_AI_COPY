@@ -3510,7 +3510,9 @@ sap.ui.define([
         //     });
         // },
 
-        onShipNowGetPress: async function () {            
+
+
+        onShipNowGetPress1: async function () {            
             var sDeveliveryNumber = eshipjetModel.getProperty("/commonValues/sapDeliveryNumber");
             eshipjetModel.setProperty("/commonValues/ShipNowShipsrvNameSelectedKey","");
             eshipjetModel.setProperty("/commonValues/shipNowGanderWhiteSelect", false );
@@ -20876,6 +20878,34 @@ sap.ui.define([
             this.onTrackTraceColSelectClosePress();
             // optionally call refresh on your orders table
         },
+
+
+
+
+        onShipNowGetPress:function(){
+            var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+            var sDeveliveryNumber = eshipjetModel.getProperty("/commonValues/sapDeliveryNumber");
+            var GetDeliveryDataModel = oController.getOwnerComponent().getModel("GetDeliveryDataModel");
+            var aFilters = [
+                new sap.ui.model.Filter("DeliveryDocument", sap.ui.model.FilterOperator.EQ, sDeveliveryNumber.toString())
+            ];
+            GetDeliveryDataModel.read("/zcds_dlvr_data", {
+                filters: aFilters,
+                urlParameters: {
+                    "$expand": "to_Carrier,to_Items,to_Packages,to_Partner,to_ShipFrom,to_ShipTo,to_ShipToParty,to_Shipper,to_SoldTo,to_SoldToParty"
+                },
+                success: function(oData, response) {
+                    eshipjetModel.setProperty("/GetDeliveryData", oData.results[0]);
+                    console.log("Success", oData);
+                },
+                error: function(oError) {
+                    console.error("Error", oError);
+                    var oResponse = JSON.parse(oError.responseText);
+                    sMessage = oResponse.error.message.value || sMessage;
+                    MessageBox.error(sMessage);
+                }
+            });
+        }
 
     });
 });

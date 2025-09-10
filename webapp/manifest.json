@@ -105,6 +105,24 @@
           "localUri": "localService/CREATE_HU_SRV/metadata.xml",
           "odataVersion": "2.0"
         }
+      },
+      "ZCDS_DLVR_DATA_CDS_VAN": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZCDS_DLVR_DATA_CDS_VAN',Version='0001')/$value/",
+        "type": "ODataAnnotation",
+        "settings": {
+          "localUri": "localService/ZCDS_DLVR_DATA_CDS/ZCDS_DLVR_DATA_CDS_VAN.xml"
+        }
+      },
+      "ZCDS_DLVR_DATA_CDS": {
+        "uri": "/sap/opu/odata/sap/ZCDS_DLVR_DATA_CDS/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "ZCDS_DLVR_DATA_CDS_VAN"
+          ],
+          "localUri": "localService/ZCDS_DLVR_DATA_CDS/metadata.xml",
+          "odataVersion": "2.0"
+        }
       }
     }
   },
@@ -237,6 +255,11 @@
       },
       "CreateHUSrvModel": {
         "dataSource": "CREATE_HU_SRV",
+        "preload": true,
+        "settings": {}
+      },
+      "GetDeliveryDataModel": {
+        "dataSource": "ZCDS_DLVR_DATA_CDS",
         "preload": true,
         "settings": {}
       }
