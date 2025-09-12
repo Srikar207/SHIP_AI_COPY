@@ -2,7 +2,7 @@
 
 specVersion: "3.1"
 metadata:
-  name: com.eshipjet.zeshipjet
+  name: com.eshipjetcopy.zeshipjetcopy
 type: application
 builder:
   resources:
@@ -18,7 +18,7 @@ builder:
           url: https://sapdemo.eshipjet.com:44300
           client: '200'
         app:
-          name: ZESHIPJET
+          name: ZESHIPJETCOPY
           package: zeshipjet
           transport: ESJK900059
         exclude:

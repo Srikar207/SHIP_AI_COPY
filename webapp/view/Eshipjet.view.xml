@@ -1,10 +1,10 @@
-<mvc:View	controllerName="com.eshipjet.zeshipjet.controller.Eshipjet" xmlns="sap.m"	xmlns:core="sap.ui.core"	xmlns:mvc="sap.ui.core.mvc"	 xmlns:tnt="sap.tnt" 	xmlns:table="sap.ui.table"
+<mvc:View	controllerName="com.eshipjetcopy.zeshipjetcopy.controller.Eshipjet" xmlns="sap.m"	xmlns:core="sap.ui.core"	xmlns:mvc="sap.ui.core.mvc"	 xmlns:tnt="sap.tnt" 	xmlns:table="sap.ui.table"
 	xmlns:l="sap.ui.layout"	xmlns:f="sap.ui.layout.form"	height="100%">
 	<App id="app">
 	<tnt:ToolPage id="toolPage" sideExpanded="false" >
 		<tnt:header >
 			<tnt:ToolHeader id="myToolbar" visible="{eshipjetModel>/commonValues/toolPageHeader}" >
-				<!-- <Button		id="sideNavigationToggleButton"		icon="{value:'com/eshipjet/zeshipjet/css/images/menu.png', formatter:'sap.ui.require.toUrl'}"
+				<!-- <Button		id="sideNavigationToggleButton"		icon="{value:'com/eshipjetcopy/zeshipjetcopy/css/images/menu.png', formatter:'sap.ui.require.toUrl'}"
 					type="Transparent"		press=".onSideNavButtonPress"> -->
 				<Button id="sideNavigationToggleButton"  icon="sap-icon://customfont/menuIcon"
 					type="Transparent" press=".onSideNavButtonPress">
@@ -59,7 +59,7 @@
 					
 				</tnt:NavigationList>
 				<!-- <tnt:NavigationList>
-					<tnt:NavigationListItem text="Orders" icon="{value: 'com/eshipjet/zeshipjet/css/images/shiprequest.png',formatter: 'sap.ui.require.toUrl'}" key="Orders">
+					<tnt:NavigationListItem text="Orders" icon="{value: 'com/eshipjetcopy/zeshipjetcopy/css/images/shiprequest.png',formatter: 'sap.ui.require.toUrl'}" key="Orders">
 					</tnt:NavigationListItem>
 				</tnt:NavigationList> -->
 			</tnt:SideNavigation>
@@ -78,19 +78,19 @@
 				                    allowWrapping="true"
 				                    class="sapUiTinyMargin ship-tile-container">
 									<GenericTile press="onTilePress" class="ship-tile shipping-card"
-										headerImage="{value: 'com/eshipjet/zeshipjet/css/images/orders.png',formatter: 'sap.ui.require.toUrl'}">
+										headerImage="{value: 'com/eshipjetcopy/zeshipjetcopy/css/images/orders.png',formatter: 'sap.ui.require.toUrl'}">
 										<TileContent class="ship-tile-content">
 											<Button class="ship-tile-button" text="Orders"/>
 										</TileContent>
 									</GenericTile>
 									<GenericTile press="onTilePress" class="ship-tile active-shipping-card"
-										headerImage="{value: 'com/eshipjet/zeshipjet/css/images/ShipNow1.png',formatter: 'sap.ui.require.toUrl'}">
+										headerImage="{value: 'com/eshipjetcopy/zeshipjetcopy/css/images/ShipNow1.png',formatter: 'sap.ui.require.toUrl'}">
 										<TileContent class="ship-tile-content">
 											<Button class="ship-tile-button" text="Ship Now"/>
 										</TileContent>
 									</GenericTile>
 									<GenericTile press="onTilePress" class="ship-tile shipping-card"
-										headerImage="{value: 'com/eshipjet/zeshipjet/css/images/track.png',formatter: 'sap.ui.require.toUrl'}">
+										headerImage="{value: 'com/eshipjetcopy/zeshipjetcopy/css/images/track.png',formatter: 'sap.ui.require.toUrl'}">
 										<TileContent class="ship-tile-content">
 											<Button class="ship-tile-button" text="Track Now"/>
 										</TileContent>
@@ -112,7 +112,7 @@
 						class="sapUiContentPadding ship-copilot-page">
 									<VBox visible="{ShipperCopilotModel>/iconState}" class="ship-copilot-top-section">
 										<HBox class="sapUiLargeMarginTop" justifyContent="Center">
-											<Image src="{value: 'com/eshipjet/zeshipjet/css/images/copilotlogo.png',formatter: 'sap.ui.require.toUrl'}" width="5rem" height="5rem"/>
+											<Image src="{value: 'com/eshipjetcopy/zeshipjetcopy/css/images/copilotlogo.png',formatter: 'sap.ui.require.toUrl'}" width="5rem" height="5rem"/>
 										</HBox>
 										<HBox class="sapUiLargeMarginTop" justifyContent="Center">
 											<Button class="sapUiTinyMargin ship-copilot-button all-shipments" icon="sap-icon://in-progress"  text="Show all Shipments" press="onPressAllShipments">
@@ -141,7 +141,7 @@
 												<!-- Bot Error Text -->
 												<HBox  visible="{= ${ShipperCopilotModel>sender} === 'BotError' }">
 													<Image class="sapUiSmallMarginEnd"
-														src="{value: 'com/eshipjet/zeshipjet/css/images/copilotlogo.png',formatter: 'sap.ui.require.toUrl'}"
+														src="{value: 'com/eshipjetcopy/zeshipjetcopy/css/images/copilotlogo.png',formatter: 'sap.ui.require.toUrl'}"
 														width="16px" height="auto"/>
 													<Text text="{ShipperCopilotModel>text}" wrapping="true"/>
 												</HBox>
@@ -359,197 +359,197 @@
 					
 					<!-- Orders Starts here -->
 					<ScrollContainer id="Orders" horizontal="false" vertical="true" height="calc(100% - 0px)" class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.Orders.Orders" type="XML" />
-						<!-- <mvc:XMLView viewName="com.eshipjet.zeshipjet.view.Orders"/> -->
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.Orders.Orders" type="XML" />
+						<!-- <mvc:XMLView viewName="com.eshipjetcopy.zeshipjetcopy.view.Orders"/> -->
 					</ScrollContainer>
 
 					<!-- Routing Guide Starts here -->
 					<ScrollContainer id="RoutingGuide" horizontal="false" vertical="true" height="calc(100% - 50px)" class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.RoutingGuide.RoutingGuide" type="XML" />
-						<!-- <mvc:XMLView viewName="com.eshipjet.zeshipjet.view.RoutingGuide"/> -->
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.RoutingGuide.RoutingGuide" type="XML" />
+						<!-- <mvc:XMLView viewName="com.eshipjetcopy.zeshipjetcopy.view.RoutingGuide"/> -->
 					</ScrollContainer>
 
 				<!-- Ship Request Label Starts here -->
 					<ScrollContainer id="ShipRequestLabel" horizontal="false" vertical="true" height="calc(100% - 50px)" class="sapUiContentPadding">
-							<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.ShipReqLabel.ShipRequestLabel" type="XML" />
+							<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipReqLabel.ShipRequestLabel" type="XML" />
 					</ScrollContainer>
 
 				<!-- Ship Now Starts here -->
 					<ScrollContainer id="ShipNow" horizontal="false" vertical="true" height="calc(100% - 50px)" class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.ShipNow.ShipNow" type="XML" />
-						<!-- <mvc:XMLView viewName="com.eshipjet.zeshipjet.view.ShipNow"/> -->
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.ShipNow" type="XML" />
+						<!-- <mvc:XMLView viewName="com.eshipjetcopy.zeshipjetcopy.view.ShipNow"/> -->
 					</ScrollContainer>
 
 				<!-- Freight Quote Orders Starts here -->
 					<ScrollContainer id="FreightQuoteOrders" horizontal="false" vertical="true" height="100%" class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.FreightQuoteOrders.FreightQuoteOrders" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.FreightQuoteOrders.FreightQuoteOrders" type="XML" />
 					</ScrollContainer>
 
 				<!-- Quote Now Starts here -->
 					<ScrollContainer	id="QuoteNow" horizontal="false" vertical="true" height="calc(100% - 50px)" class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.QuoteNow.QuoteNow" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.QuoteNow.QuoteNow" type="XML" />
 					</ScrollContainer>
 
 				<!-- Track Now Starts here -->
 					<ScrollContainer	id="TrackNow" horizontal="false" vertical="true" height="calc(100% - 50px)" class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.TrackNow.TrackNow" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.TrackNow.TrackNow" type="XML" />
 					</ScrollContainer>
 
 				<!-- Manifest Starts here -->
 					<ScrollContainer	id="Manifest" horizontal="false" vertical="true" height="calc(100% - 50px)" class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.Manifest.Manifest" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.Manifest.Manifest" type="XML" />
 					</ScrollContainer>
 
 				<!-- AES Direct Starts here -->
 					<ScrollContainer	id="AESDirect" horizontal="false" vertical="true" height="calc(100% - 50px)" class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.AESDirect" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.AESDirect" type="XML" />
 					</ScrollContainer>
 
 				<!-- Scan And Ship Starts here -->
 					<ScrollContainer	id="ScanShip"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.ScanAndShip.ScanAndShip" type="XML"/>
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.ScanAndShip.ScanAndShip" type="XML"/>
 					</ScrollContainer>
 
 				<!-- Batch Ship Starts here -->
 					<ScrollContainer	id="BatchShip"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.BatchShip.BatchShip" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.BatchShip.BatchShip" type="XML" />
 					</ScrollContainer>
 
 				<!-- Batch Reports Starts here -->
 					<ScrollContainer	id="Reports"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.Reports.Reports" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.Reports.Reports" type="XML" />
 					</ScrollContainer>
 
 				<!-- Feight Audit Analysis Ship Starts here -->
 					<ScrollContainer	id="FeightAuditAnalysis"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.FeightAuditAnalysis.FeightAuditAnalysis" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.FeightAuditAnalysis.FeightAuditAnalysis" type="XML" />
 					</ScrollContainer>
 
 
 <!-- Settings Button Icon Functionality changes starts here -->
 
 					<ScrollContainer	id="_ID_Location_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.Locations" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.Locations" type="XML" />
 					</ScrollContainer> 
 
 					<ScrollContainer	id="_ID_AddressBook_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.AddressBook" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.AddressBook" type="XML" />
 					</ScrollContainer> 
 
 					<ScrollContainer	id="_ID_Users_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.Users" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.Users" type="XML" />
 					</ScrollContainer>
 
 					
 					<ScrollContainer	id="_ID_Roles_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.Roles" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.Roles" type="XML" />
 					</ScrollContainer>
 
 					<ScrollContainer	id="_ID_CarrierCatalog_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.CarrierCatalog" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.CarrierCatalog" type="XML" />
 					</ScrollContainer> 
 
 					<ScrollContainer	id="_ID_CarrierAccounts_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.CarrierAccounts" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.CarrierAccounts" type="XML" />
 					</ScrollContainer>
 
 					<ScrollContainer	id="_ID_CostCenters_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.CostCenters" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.CostCenters" type="XML" />
 					</ScrollContainer>
 
 					<ScrollContainer	id="_ID_FreightCondition_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.FreightCondition" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.FreightCondition" type="XML" />
 					</ScrollContainer>
 
 					<ScrollContainer	id="_ID_Statuses_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.Statuses" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.Statuses" type="XML" />
 					</ScrollContainer> 
 
 					<ScrollContainer	id="_ID_Products_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.Products" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.Products" type="XML" />
 					</ScrollContainer>
 
 					<ScrollContainer	id="_ID_PackageTypes_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.PackageTypes" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.PackageTypes" type="XML" />
 					</ScrollContainer> 
 					<ScrollContainer	id="_ID_DangerousGoods_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.DangerousGoods" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.DangerousGoods" type="XML" />
 					</ScrollContainer> 
 
 					<ScrollContainer	id="_ID_ThirdParties_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.ThirdParty" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.ThirdParty" type="XML" />
 					</ScrollContainer> 
 
 					<ScrollContainer	id="_ID_LTLClasses_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.LTLClasses" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.LTLClasses" type="XML" />
 					</ScrollContainer> 
 
 					<ScrollContainer	id="_ID_NMFC_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.NMFCTable" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.NMFCTable" type="XML" />
 					</ScrollContainer> 
 					
 					<ScrollContainer	id="_ID_MOT_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.ModeOfTransport" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.ModeOfTransport" type="XML" />
 					</ScrollContainer>
 
 					<ScrollContainer	id="_ID_OrderTypes_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.OrderTypes" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.OrderTypes" type="XML" />
 					</ScrollContainer>
 
 					<ScrollContainer	id="_ID_RoutingGuide_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.RoutingGuide.CreateRoutingRuleClick" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.RoutingGuide.CreateRoutingRuleClick" type="XML" />
 					</ScrollContainer>
 
 					<ScrollContainer	id="_ID_Incoterms_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.Incoterms" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.Incoterms" type="XML" />
 					</ScrollContainer>
 
 					<ScrollContainer	id="_ID_TrackingRange_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.TrackingRange" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.TrackingRange" type="XML" />
 					</ScrollContainer> 
 
 					<ScrollContainer	id="_ID_Dimensions_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.DimensionsTable" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.DimensionsTable" type="XML" />
 					</ScrollContainer> 
 
 					<ScrollContainer	id="_ID_PaymentTypes_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.PaymentTypes" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.PaymentTypes" type="XML" />
 					</ScrollContainer> 
 
 					<ScrollContainer	id="_ID_SMTPConfig_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.SMTPTable" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.SMTPTable" type="XML" />
 					</ScrollContainer> 
 
 					<ScrollContainer	id="_ID_ERP_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.ERPTable" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.ERPTable" type="XML" />
 					</ScrollContainer> 
 
 					<ScrollContainer	id="_ID_Countries_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.CountriesTable" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.CountriesTable" type="XML" />
 					</ScrollContainer> 
 
 					<ScrollContainer	id="_ID_EUCountries_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.EUCountries" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.EUCountries" type="XML" />
 					</ScrollContainer>
 
 					<ScrollContainer	id="_ID_ResetPassword_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.ResetPassword" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.ResetPassword" type="XML" />
 					</ScrollContainer>
 
 					<ScrollContainer	id="_ID_UnlockDeliveryNumber_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.UnlockDeliveryNumber" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.UnlockDeliveryNumber" type="XML" />
 					</ScrollContainer>
 
 					<ScrollContainer	id="_ID_ShipmentErrorLogs_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.ShipmentErrorLogs" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipmentErrorLogs" type="XML" />
 					</ScrollContainer>
 
 					<ScrollContainer	id="_ID_CommonErrorLogs_TableScrollContainer" horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.CommonErrorLogs" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.CommonErrorLogs" type="XML" />
 					</ScrollContainer>
 
 					<ScrollContainer	id="_ID_CreateShipReqLabel_TableScrollContainer"	horizontal="false"	vertical="true"	height="calc(100% - 50px)"	class="sapUiContentPadding">
-						<core:Fragment fragmentName="com.eshipjet.zeshipjet.view.fragments.ShipReqLabel.CreateShipReqLabelClick" type="XML" />
+						<core:Fragment fragmentName="com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipReqLabel.CreateShipReqLabelClick" type="XML" />
 					</ScrollContainer> 
 				</pages>
 			</NavContainer>

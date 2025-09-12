@@ -4,7 +4,7 @@ sap.ui.define([
     
 ], function (Controller, JSONModel) {
     "use strict";
-    return Controller.extend("com.eshipjet.zeshipjet.controller.ShipNow", {
+    return Controller.extend("com.eshipjetcopy.zeshipjetcopy.controller.ShipNow", {
         onInit: function () {
             
         }

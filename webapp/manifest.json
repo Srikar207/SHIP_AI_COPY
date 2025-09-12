@@ -1,7 +1,7 @@
 {
   "_version": "1.65.0",
   "sap.app": {
-    "id": "com.eshipjet.zeshipjet",
+    "id": "com.eshipjetcopy.zeshipjetcopy",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -11,7 +11,7 @@
     "description": "{{appDescription}}",
     "resources": "resources.json",
     "sourceTemplate": {
-      "id": "@sap/generator-fiori:basic",
+      "id": "@sap/generator-fiori:basiccopy",
       "version": "1.15.6",
       "toolsId": "d1fc7917-d11d-4531-827c-52e7b742fe43"
     },
@@ -164,7 +164,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "com.eshipjet.zeshipjet.i18n.i18n"
+          "bundleName": "com.eshipjetcopy.zeshipjetcopy.i18n.i18n"
         }
       },
       "eshipjetModel": {
@@ -282,9 +282,9 @@
         "transition": "slide",
         "type": "View",
         "viewType": "XML",
-        "path": "com.eshipjet.zeshipjet.view",
+        "path": "com.eshipjetcopy.zeshipjetcopy.view",
         "async": true,
-        "viewPath": "com.eshipjet.zeshipjet.view"
+        "viewPath": "com.eshipjetcopy.zeshipjetcopy.view"
       },
       "routes": [
         {
@@ -303,7 +303,7 @@
       }
     },
     "rootView": {
-      "viewName": "com.eshipjet.zeshipjet.view.Eshipjet",
+      "viewName": "com.eshipjetcopy.zeshipjetcopy.view.Eshipjet",
       "type": "XML",
       "id": "app"
     }

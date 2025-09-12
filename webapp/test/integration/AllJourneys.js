@@ -7,7 +7,7 @@ sap.ui.define([
 
 	Opa5.extendConfig({
 		arrangements: new Startup(),
-		viewNamespace: "com.eshipjet.zeshipjet.view.",
+		viewNamespace: "com.eshipjetcopy.zeshipjetcopy.view.",
 		autoWait: true
 	});
 });

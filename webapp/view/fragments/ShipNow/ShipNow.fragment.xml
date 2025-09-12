@@ -246,28 +246,28 @@
 									<ui:Column width="5rem">
 										<Label text="Partner ID" />
 										<ui:template>
-											<Text text="{eshipjetModel>Kunner}" />
+											<Text text="{eshipjetModel>PartnerID}" />
 										</ui:template>
 									</ui:Column>
 
 									<ui:Column>
 										<Label text="Company Name" />
 										<ui:template>
-											<Text text="{eshipjetModel>BusinessPartnerName1}" />
+											<Text text="{eshipjetModel>CompanyName}" />
 										</ui:template>
 									</ui:Column>
 
 									<ui:Column>
 										<Label text="Contact Name" />
 										<ui:template>
-											<Text text="{eshipjetModel>FullName}" />
+											<Text text="{eshipjetModel>ContactName}" />
 										</ui:template>
 									</ui:Column>
 
 									<ui:Column>
 										<Label text="Address Line 1" />
 										<ui:template>
-											<Text text="{eshipjetModel>StreetName}" />
+											<Text text="{eshipjetModel>AddressLine1}" />
 										</ui:template>
 									</ui:Column>
 
@@ -281,14 +281,14 @@
 									<ui:Column>
 										<Label text="City" />
 										<ui:template>
-											<Text text="{eshipjetModel>CityName}" />
+											<Text text="{eshipjetModel>City}" />
 										</ui:template>
 									</ui:Column>
 
 									<ui:Column>
 										<Label text="State / Province" />
 										<ui:template>
-											<Text text="{eshipjetModel>Region}" />
+											<Text text="{eshipjetModel>State}" />
 										</ui:template>
 									</ui:Column>
 
@@ -316,7 +316,7 @@
 									<ui:Column>
 										<Label text="Email Address" />
 										<ui:template>
-											<Text text="{eshipjetModel>email}" />
+											<Text text="{eshipjetModel>EmailAddress}" />
 										</ui:template>
 									</ui:Column>
 								</ui:columns>
@@ -966,7 +966,7 @@
 					<!-- Product Table -->
 						<ui:Table
 							id="idShipNowPackTable"
-							rows="{eshipjetModel>/commonValues/packAddProductTable}"
+							rows="{eshipjetModel>/GetDeliveryData/to_Items/results}"
 							class="sapUiSmallMarginTop"
 							selectionMode="MultiToggle"
 							visibleRowCount="4" >
@@ -988,7 +988,7 @@
 								<ui:Column width="auto" visible="{eshipjetModel>/ShipNowProductsTableColumns/0/visible}" >
 									<Label text="Product Code" />
 									<ui:template>
-										<Text text="{eshipjetModel>Material}" wrapping="false" />
+										<Text text="{eshipjetModel>Product}" wrapping="false" />
 									</ui:template>
 								</ui:Column>
 								<ui:Column width="15rem" visible="{eshipjetModel>/ShipNowProductsTableColumns/1/visible}">
@@ -1000,7 +1000,7 @@
 								<ui:Column width="15rem" visible="{eshipjetModel>/ShipNowProductsTableColumns/2/visible}">
 									<Label text="Document Number" />
 									<ui:template>
-										<Text text="{eshipjetModel>DocumentNumber}" wrapping="false" />
+										<Text text="{eshipjetModel>DeliveryDocument}" wrapping="false" />
 									</ui:template>
 								</ui:Column>
 								<ui:Column width="auto" visible="{eshipjetModel>/ShipNowProductsTableColumns/3/visible}" >
@@ -1019,7 +1019,7 @@
 									</HBox>
 									<ui:template>
 									<HBox justifyContent="End" alignItems="End" width="100%">
-										<Text text="{eshipjetModel>ActualDeliveryQuantity}" wrapping="false" />
+										<Text text="{eshipjetModel>OriginalDeliveryQuantity}" wrapping="false" />
 									</HBox>
 									</ui:template>
 								</ui:Column>
@@ -1029,7 +1029,7 @@
 									</HBox>
 									<ui:template>
 									<HBox justifyContent="End" alignItems="End" width="100%">
-										<Text text="{eshipjetModel>BalanceQty}" wrapping="false" />
+										<Text text="{eshipjetModel>ActualDeliveryQuantity}" wrapping="false" />
 									</HBox>
 									</ui:template>
 								</ui:Column>
@@ -1049,7 +1049,7 @@
 								</HBox>
 									<ui:template>
 									<HBox justifyContent="End" alignItems="End">
-										<Text text="{eshipjetModel>ItemGrossWeight}" />
+										<Text text="{eshipjetModel>OriginallyRequestedMaterial}" />
 									</HBox>
 									</ui:template>
 								</ui:Column>
@@ -1069,7 +1069,7 @@
 								</HBox>
 									<ui:template>
 									<HBox justifyContent="End" alignItems="End">
-										<Text text="{eshipjetModel>ItemGrossWeight}" />
+										<Text text="{eshipjetModel>CostInDocumentCurrency}" />
 									</HBox>
 									</ui:template>
 								</ui:Column>
@@ -1179,7 +1179,7 @@
 
 						<ui:Table
 							id="idShipNowHandlingUnitTable"
-							rows="{eshipjetModel>/HandlingUnits}"
+							rows="{eshipjetModel>/GetDeliveryData/to_Packages/results}"
 							class="sapUiTinyMarginTop"
 							selectionMode="Single"
 							visibleRowCount="6"
@@ -1196,14 +1196,14 @@
 									<Label text="Material / SAP HU ID" />
 									<ui:template>
 									<HBox justifyContent="Start" alignItems="Start">
-							 		<Link text="{eshipjetModel>Hunumber}" press="handleHULinkPress" wrapping="false" />
+							 		<Link text="{eshipjetModel>HandlingUnitExternalID}" press="handleHULinkPress" wrapping="false" />
 									</HBox>
 									</ui:template>
 								</ui:Column>
 								<ui:Column width="12rem" visible="{eshipjetModel>/ShipNowHandlingUnitTableColumns/1/visible}">
 									<Label text="Created By" />
 									<ui:template>
-										<Text text="" wrapping="false" />
+										<Text text="{eshipjetModel>CreatedByUser}" wrapping="false" />
 									</ui:template>
 								</ui:Column>
 								<ui:Column width="10rem" visible="{eshipjetModel>/ShipNowHandlingUnitTableColumns/2/visible}" >
@@ -1212,7 +1212,7 @@
 									</HBox>
 									<ui:template>
 									<HBox justifyContent="End" alignItems="End">
-										<Text text="{eshipjetModel>Totalweight}" wrapping="false" />
+										<Text text="{eshipjetModel>GrossWeight}" wrapping="false" />
 									</HBox>
 									</ui:template>
 								</ui:Column>
@@ -1232,26 +1232,26 @@
 									</HBox>
 									<ui:template>
 									<HBox justifyContent="Center" alignItems="Center" width="100%">
-										<Text text="{eshipjetModel>BoxCount}" wrapping="false" />
+										<Text text="{eshipjetModel>HandlingUnitPackingObjectType}" wrapping="false" />
 										</HBox>
 									</ui:template>
 								</ui:Column>
 								<ui:Column width="13rem" visible="{eshipjetModel>/ShipNowHandlingUnitTableColumns/5/visible}" >
 									<Label text="Class" />
 									<ui:template>
-										<Text text="{eshipjetModel>Class}" wrapping="false" />
+										<Text text="{eshipjetModel>HandlingUnitInternalID}" wrapping="false" />
 									</ui:template>
 								</ui:Column>
 								<ui:Column width="10rem" visible="{eshipjetModel>/ShipNowHandlingUnitTableColumns/6/visible}" >
 									<Label text="NMFC" />
 									<ui:template>
-										<Text text="{eshipjetModel>Nfmc}" wrapping="false" />
+										<Text text="" wrapping="false" />
 									</ui:template>
 								</ui:Column>
 								<ui:Column width="10rem" visible="{eshipjetModel>/ShipNowHandlingUnitTableColumns/7/visible}" >
 									<Label text="Commodity Description" />
 									<ui:template>
-										<Text text="{eshipjetModel>CommodityDesc}" wrapping="false" />
+										<Text text="" wrapping="false" />
 									</ui:template>
 								</ui:Column>
 								<ui:Column width="auto" visible="{eshipjetModel>/ShipNowHandlingUnitTableColumns/8/visible}" >
@@ -1278,14 +1278,14 @@
 									<ui:template>
 									<HBox justifyContent="Center" alignItems="Center">
 										 <core:Icon src="sap-icon://circle-task-2"    class="ordersSmallText"
-                color="{= ${eshipjetModel>Hunumber} > 0 ? 'green' : 'grey' }"  enabled="{= ${eshipjetModel>Hunumber} > 0 }"/>
+                color="{= ${eshipjetModel>HandlingUnitIsClosed} ? 'green' : 'grey' }"  enabled="{= ${eshipjetModel>Hunumber} > 0 }"/>
 										 </HBox>
 									</ui:template>
 								</ui:Column>
 								<ui:Column width="8rem" visible="{eshipjetModel>/ShipNowHandlingUnitTableColumns/11/visible}" >
 									<Label text="Package Material" />
 									<ui:template>
-										<Text text="{eshipjetModel>Pacmatnr}" wrapping="false" />
+										<Text text="{eshipjetModel>PackagingMaterial}" wrapping="false" />
 									</ui:template>
 								</ui:Column>
 								<ui:Column width="10rem" visible="{eshipjetModel>/ShipNowHandlingUnitTableColumns/12/visible}" >

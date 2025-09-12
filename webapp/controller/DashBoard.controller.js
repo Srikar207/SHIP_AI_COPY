@@ -1,9 +1,9 @@
 sap.ui.define([
-    "com/eshipjet/zeshipjet/controller/BaseController"
+    "com/eshipjetcopy/zeshipjetcopy/controller/BaseController"
   ], function(BaseController) {
     "use strict";
   
-    return BaseController.extend("com.eshipjet.zeshipjet.controller.Dashboard", {
+    return BaseController.extend("com.eshipjetcopy.zeshipjetcopy.controller.Dashboard", {
     
       onInit: function() {
         // nothing special if you don't need
@@ -13,7 +13,7 @@ sap.ui.define([
         const oCurrObj = oEvent.getSource().getBindingContext().getObject();
         if (oCurrObj && oCurrObj.name === "Locations") {
           this.loadFragmentPage(
-            "com.eshipjet.zeshipjet.view.fragments.Locations",
+            "com.eshipjetcopy.zeshipjetcopy.view.fragments.Locations",
             "Locations",
             "_oLocationsPage",
             this.byId("pageContainer"),

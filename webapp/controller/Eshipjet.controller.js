@@ -25,13 +25,13 @@ sap.ui.define([
         oController, oResourceBundle, eshipjetModel, oShipperCopilotModel;
     const SortOrder = CoreLibrary.SortOrder;
     
-    return Controller.extend("com.eshipjet.zeshipjet.controller.Eshipjet", {
+    return Controller.extend("com.eshipjetcopy.zeshipjetcopy.controller.Eshipjet", {
         formatter: formatter,
         onInit: function () {
             
             // this.getMasterData();
 
-            // var sAudioPath = sap.ui.require.toUrl("com/eshipjet/zeshipjet/audio/Lock.mp3");
+            // var sAudioPath = sap.ui.require.toUrl("com/eshipjetcopy/zeshipjetcopy/audio/Lock.mp3");
             // var audio = new Audio(sAudioPath);
             // audio.play();
 
@@ -80,7 +80,7 @@ sap.ui.define([
             this._currentPage = 1;
             this.setupFreightQuotePagination();
 
-            var oModel = new JSONModel(sap.ui.require.toUrl("com/eshipjet/zeshipjet/model/data.json"));
+            var oModel = new JSONModel(sap.ui.require.toUrl("com/eshipjetcopy/zeshipjetcopy/model/data.json"));
             this.getView().setModel(oModel);
             oController = this;
             // Initialize a JSON model to store chat messages
@@ -934,7 +934,7 @@ sap.ui.define([
         //     if (!this._pShipNowHUColumnConfigPopover) {
         //         this._pShipNowHUColumnConfigPopover = Fragment.load({
         //             id: oView.getId(),
-        //             name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.ShipNowHUColumnConfig",
+        //             name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.ShipNowHUColumnConfig",
         //             controller: this
         //         }).then(function (oPopover) {
         //             oView.addDependent(oPopover);
@@ -1012,7 +1012,7 @@ sap.ui.define([
             if (!this._pShipNowHUColumnConfigPopover) {
                 this._pShipNowHUColumnConfigPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.ShipNowHUColumnConfig",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.ShipNowHUColumnConfig",
                     controller: this
                 }).then((oPopover) => {
                     oView.addDependent(oPopover);
@@ -1157,7 +1157,7 @@ sap.ui.define([
         //     if (!this._pShipNowPrdctPopover) {
         //         this._pShipNowPrdctPopover = Fragment.load({
         //             id: oView.getId(),
-        //             name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.ShipNowPrdctTableColumns",
+        //             name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.ShipNowPrdctTableColumns",
         //             controller: this
         //         }).then(function (oPopover) {
         //             oView.addDependent(oPopover);
@@ -1223,7 +1223,7 @@ sap.ui.define([
             if (!this._pShipNowPrdctPopover) {
                 this._pShipNowPrdctPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.ShipNowPrdctTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.ShipNowPrdctTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -1762,7 +1762,7 @@ sap.ui.define([
 
         eshipjetModel.setProperty("/BusinessPartners", aBusinessPartnersTable);
 
-            // var sAudioPath = sap.ui.require.toUrl("com/eshipjet/zeshipjet/audio/clearSound.mp3");
+            // var sAudioPath = sap.ui.require.toUrl("com/eshipjetcopy/zeshipjetcopy/audio/clearSound.mp3");
             // var audio = new Audio(sAudioPath);
             // audio.play();
         },
@@ -2541,7 +2541,7 @@ sap.ui.define([
                     //     oController.showLabelAfterShipmentSuccess(ShipNowPostResponse);
                     // }
                     
-                    // var sAudioPath = sap.ui.require.toUrl("com/eshipjet/zeshipjet/audio/ShipNow.mp3");
+                    // var sAudioPath = sap.ui.require.toUrl("com/eshipjetcopy/zeshipjetcopy/audio/ShipNow.mp3");
                     // var audio = new Audio(sAudioPath);
                     // audio.play();
                     oController.onCloseBusyDialog();
@@ -3576,7 +3576,7 @@ sap.ui.define([
         onOpenBusyDialog: function () {
             if (!oController._pBusyDialog) {
 				oController._pBusyDialog = Fragment.load({
-                    name: "com.eshipjet.zeshipjet.view.fragments.BusyDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.BusyDialog",
 					controller: oController
 				}).then(function (oBusyDialog) {
 					oController.getView().addDependent(oBusyDialog);
@@ -4193,7 +4193,7 @@ sap.ui.define([
                                 oController.getHandlingUnit(sapDeliveryNumber);
                                 // oController.onCloseBusyDialog();
 
-                                // var sAudioPath = sap.ui.require.toUrl("com/eshipjet/zeshipjet/audio/PackToHU.mp3");
+                                // var sAudioPath = sap.ui.require.toUrl("com/eshipjetcopy/zeshipjetcopy/audio/PackToHU.mp3");
                                 // var audio = new Audio(sAudioPath);
                                 // audio.play();
                             },
@@ -4222,7 +4222,7 @@ sap.ui.define([
                         //         eshipjetModel.updateBindings(true);
                         //         // oController.onCloseBusyDialog();
 
-                        //         // var sAudioPath = sap.ui.require.toUrl("com/eshipjet/zeshipjet/audio/PackToHU.mp3");
+                        //         // var sAudioPath = sap.ui.require.toUrl("com/eshipjetcopy/zeshipjetcopy/audio/PackToHU.mp3");
                         //         // var audio = new Audio(sAudioPath);
                         //         // audio.play();
                         //     },
@@ -4471,7 +4471,7 @@ sap.ui.define([
                                     eshipjetModel.updateBindings(true);
                                     oController.getHandlingUnit(sapDeliveryNumber);
 
-                                    // var sAudioPath = sap.ui.require.toUrl("com/eshipjet/zeshipjet/audio/PackToHU.mp3");
+                                    // var sAudioPath = sap.ui.require.toUrl("com/eshipjetcopy/zeshipjetcopy/audio/PackToHU.mp3");
                                     // var audio = new Audio(sAudioPath);
                                     // audio.play();
                                     
@@ -4496,7 +4496,7 @@ sap.ui.define([
         //     if (!this.byId("idCodEditDialog")) {
         //         Fragment.load({
         //             id: oView.getId(),
-        //             name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.CodEditDialog",
+        //             name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.CodEditDialog",
         //             controller: this // Pass the controller for binding
         //         }).then(function (oCodEditDialog) {
         //             oView.addDependent(oCodEditDialog);
@@ -4522,7 +4522,7 @@ sap.ui.define([
             if (!this._oDryIceEditDialog) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.SpecialOptions.DryIceEditDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.SpecialOptions.DryIceEditDialog",
                     controller: this
                 }).then(function (oPopover) {
                     this._oDryIceEditDialog = oPopover;
@@ -4546,7 +4546,7 @@ sap.ui.define([
             if (!this.byId("_IDGenBatteryEditDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.SpecialOptions.FedExBatteryEditDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.SpecialOptions.FedExBatteryEditDialog",
                     controller: this
                 }).then(function(oDialog) {
                     oView.addDependent(oDialog);
@@ -4567,7 +4567,7 @@ sap.ui.define([
             if (!this.byId("_IDGenFedExDeliveryIncAcceptEditDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.SpecialOptions.FedExDeliveryIncAcceptEditDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.SpecialOptions.FedExDeliveryIncAcceptEditDialog",
                     controller: this
                 }).then(function(oDialog) {
                     oView.addDependent(oDialog);
@@ -4588,7 +4588,7 @@ sap.ui.define([
             if (!this.byId("_IDGenFedExBrokerSelectEditDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.SpecialOptions.FedExBrokerSelectEditDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.SpecialOptions.FedExBrokerSelectEditDialog",
                     controller: this
                 }).then(function(oDialog) {
                     oView.addDependent(oDialog);
@@ -4610,7 +4610,7 @@ sap.ui.define([
             if (!this.byId("_IDGenAlcoholEditDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.SpecialOptions.FedExAlcoholEditDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.SpecialOptions.FedExAlcoholEditDialog",
                     controller: this
                 }).then(function(oDialog) {
                     oView.addDependent(oDialog);
@@ -4631,7 +4631,7 @@ sap.ui.define([
             if (!this.byId("_IDGenHULabelDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.SpecialOptions.HULabelDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.SpecialOptions.HULabelDialog",
                     controller: this
                 }).then(function(oDialog) {
                     oView.addDependent(oDialog);
@@ -4652,7 +4652,7 @@ sap.ui.define([
             if (!this.byId("_IDGenFedExHoldAtLoctionEditDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.SpecialOptions.FedExHoldAtLoctionEditDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.SpecialOptions.FedExHoldAtLoctionEditDialog",
                     controller: this
                 }).then(function(oDialog) {
                     oView.addDependent(oDialog);
@@ -4673,7 +4673,7 @@ sap.ui.define([
             if (!this.byId("_IDGenFedExETDDetailEditDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.SpecialOptions.FedExETDDetailEditDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.SpecialOptions.FedExETDDetailEditDialog",
                     controller: this
                 }).then(function(oDialog) {
                     oView.addDependent(oDialog);
@@ -4694,7 +4694,7 @@ sap.ui.define([
             if (!this.byId("_IDGenFedexInternationalTrafficInArmsRegulationsDetailEditDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.SpecialOptions.FedexInternationalTrafficInArmsRegulationsDetailEditDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.SpecialOptions.FedexInternationalTrafficInArmsRegulationsDetailEditDialog",
                     controller: this
                 }).then(function(oDialog) {
                     oView.addDependent(oDialog);
@@ -4716,7 +4716,7 @@ sap.ui.define([
             if (!this.byId("_IDGenFedExEmailReturnLabelEditDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.SpecialOptions.FedExEmailReturnLabelEditDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.SpecialOptions.FedExEmailReturnLabelEditDialog",
                     controller: this
                 }).then(function(oDialog) {
                     oView.addDependent(oDialog);
@@ -4737,7 +4737,7 @@ sap.ui.define([
             if (!this.byId("_IDGenFedExHomeDeliveryEditDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.SpecialOptions.FedExHomeDeliveryEditDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.SpecialOptions.FedExHomeDeliveryEditDialog",
                     controller: this
                 }).then(function(oDialog) {
                     oView.addDependent(oDialog);
@@ -4758,7 +4758,7 @@ sap.ui.define([
             if (!this.byId("_IDGenFedExPendingShipmentDetailEditDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.SpecialOptions.FedExPendingShipmentDetailEditDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.SpecialOptions.FedExPendingShipmentDetailEditDialog",
                     controller: this
                 }).then(function(oDialog) {
                     oView.addDependent(oDialog);
@@ -4780,7 +4780,7 @@ sap.ui.define([
             if (!this.byId("_IDGenFedExInternationalControlledExportEditDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.SpecialOptions.FedExInternationalControlledExportEditDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.SpecialOptions.FedExInternationalControlledExportEditDialog",
                     controller: this
                 }).then(function(oDialog) {
                     oView.addDependent(oDialog);
@@ -4801,7 +4801,7 @@ sap.ui.define([
             if (!this.byId("_IDGenFedExPrintReturnLabelEditDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.SpecialOptions.FedExPrintReturnLabelEditDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.SpecialOptions.FedExPrintReturnLabelEditDialog",
                     controller: this
                 }).then(function(oDialog) {
                     oView.addDependent(oDialog);
@@ -4822,7 +4822,7 @@ sap.ui.define([
             if (!this.byId("_IDGenFedExHomeDeliveryPremiumEditDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.SpecialOptions.FedExHomeDeliveryPremiumEditDilog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.SpecialOptions.FedExHomeDeliveryPremiumEditDilog",
                     controller: this
                 }).then(function(oDialog) {
                     oView.addDependent(oDialog);
@@ -4843,7 +4843,7 @@ sap.ui.define([
             if (!this.byId("_IDGenFedExShipmentCODDetailEditDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.SpecialOptions.FedExShipmentCODDetailEditDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.SpecialOptions.FedExShipmentCODDetailEditDialog",
                     controller: this
                 }).then(function(oDialog) {
                     oView.addDependent(oDialog);
@@ -4864,7 +4864,7 @@ sap.ui.define([
             if (!this.byId("_IDGenFedExShipmentCODDetailEditDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.SpecialOptions.FedExShipmentCODDetailEditDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.SpecialOptions.FedExShipmentCODDetailEditDialog",
                     controller: this
                 }).then(function(oDialog) {
                     oView.addDependent(oDialog);
@@ -4885,7 +4885,7 @@ sap.ui.define([
             if (!this.byId("_IDGenUPSHazMatEditDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.SpecialOptions.UPSHazMatEditDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.SpecialOptions.UPSHazMatEditDialog",
                     controller: this
                 }).then(function(oDialog) {
                     oView.addDependent(oDialog);
@@ -4907,7 +4907,7 @@ sap.ui.define([
             if (!this.byId("_IDGenUPSImportControlEditDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.SpecialOptions.UPSImportControlEditDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.SpecialOptions.UPSImportControlEditDialog",
                     controller: this
                 }).then(function(oDialog) {
                     oView.addDependent(oDialog);
@@ -4928,7 +4928,7 @@ sap.ui.define([
             if (!this.byId("_IDGenUPSCODInformationEditDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.SpecialOptions.UPSCODInformationEditDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.SpecialOptions.UPSCODInformationEditDialog",
                     controller: this
                 }).then(function(oDialog) {
                     oView.addDependent(oDialog);
@@ -4949,7 +4949,7 @@ sap.ui.define([
             if (!this.byId("idHoldAtLocationEditDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.HoldAtLocationEditDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.HoldAtLocationEditDialog",
                     controller: this // Pass the controller for binding
                 }).then(function (oHoldAtLocationEditDialog) {
                     oView.addDependent(oHoldAtLocationEditDialog);
@@ -4969,7 +4969,7 @@ sap.ui.define([
             if (!this.byId("idReturnLabelEditDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.ReturnLabelEditDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.ReturnLabelEditDialog",
                     controller: this // Pass the controller for binding
                 }).then(function (oReturnLabelEditDialog) {
                     oView.addDependent(oReturnLabelEditDialog);
@@ -5020,7 +5020,7 @@ sap.ui.define([
             if (!this.byId("_IDGenSerialNumberDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.SerialNumberDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.SerialNumberDialog",
                     controller: this
                 }).then(function(oSerialNumberDialog) {
                     oView.addDependent(oSerialNumberDialog);
@@ -5161,7 +5161,7 @@ sap.ui.define([
             if (!this._pShipNowProductsPopover) {
                 this._pShipNowProductsPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.ShipNowProductsTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.ShipNowProductsTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -5337,7 +5337,7 @@ sap.ui.define([
             if (!this._pShipNowHandlingUnitPopover) {
                 this._pShipNowHandlingUnitPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.ShipNowHandlingUnitTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.ShipNowHandlingUnitTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -5494,7 +5494,7 @@ sap.ui.define([
             if (!this._pScanPopover) {
                 this._pScanPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ScanAndShip.ScanShipTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ScanAndShip.ScanShipTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -5657,7 +5657,7 @@ sap.ui.define([
             if (!this._pPopover) {
                 this._pPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ScanAndShip.ScanShipFilterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ScanAndShip.ScanShipFilterPopover",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -5797,7 +5797,7 @@ sap.ui.define([
             if (!this._addPopover) {
                 this._addPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ScanAndShip.ScanAndShipActPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ScanAndShip.ScanAndShipActPopover",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -6036,7 +6036,7 @@ sap.ui.define([
         //     if (!this._pOrderPopover) {
         //         this._pOrderPopover = Fragment.load({
         //             id: oView.getId(),
-        //             name: "com.eshipjet.zeshipjet.view.fragments.Orders.OrderTableColumns",
+        //             name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.Orders.OrderTableColumns",
         //             controller: this
         //         }).then(function (oPopover) {
         //             oView.addDependent(oPopover);
@@ -6086,7 +6086,7 @@ sap.ui.define([
             if (!this._pOrderPopover) {
                 this._pOrderPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.Orders.OrderTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.Orders.OrderTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -6249,7 +6249,7 @@ sap.ui.define([
             if (!this._orderPopover) {
                 this._orderPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.Orders.OrderFilterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.Orders.OrderFilterPopover",
                     controller: this
                 }).then(function (orderPopover) {
                     oView.addDependent(orderPopover);
@@ -6442,7 +6442,7 @@ sap.ui.define([
             if (!this._pRoutingGuidePopover) {
                 this._pRoutingGuidePopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.RoutingGuide.RoutingGuideTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.RoutingGuide.RoutingGuideTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -6519,7 +6519,7 @@ sap.ui.define([
             if (!this._RoutingGuidePopover) {
                 this._RoutingGuidePopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.RoutingGuide.RoutingGuideFilterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.RoutingGuide.RoutingGuideFilterPopover",
                     controller: this
                 }).then(function (RoutingGuidePopover) {
                     oView.addDependent(RoutingGuidePopover);
@@ -6562,7 +6562,7 @@ sap.ui.define([
             if (!this._RoutingGuideSaveOptionsPopover) {
                 this._RoutingGuideSaveOptionsPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.RoutingGuide.RoutingGuideSaveOptions",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.RoutingGuide.RoutingGuideSaveOptions",
                     controller: this
                 }).then(function (RoutingGuideSaveOptionsPopover) {
                     oView.addDependent(RoutingGuideSaveOptionsPopover);
@@ -6796,7 +6796,7 @@ sap.ui.define([
                 if (!this._pShipReqPopover) {
                     this._pShipReqPopover = Fragment.load({
                         id: oView.getId(),
-                        name: "com.eshipjet.zeshipjet.view.fragments.ShipReqLabel.ShipReqTableColumns",
+                        name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipReqLabel.ShipReqTableColumns",
                         controller: this
                     }).then(function (oPopover) {
                         oView.addDependent(oPopover);
@@ -6869,7 +6869,7 @@ sap.ui.define([
                 if (!this._shipReqPopover) {
                     this._shipReqPopover = Fragment.load({
                         id: oView.getId(),
-                        name: "com.eshipjet.zeshipjet.view.fragments.ShipReqLabel.ShipReqFilterPopover",
+                        name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipReqLabel.ShipReqFilterPopover",
                         controller: this
                     }).then(function (shipReqPopover) {
                         oView.addDependent(shipReqPopover);
@@ -7185,7 +7185,7 @@ sap.ui.define([
             if (!this._pCreateShipReqPopover) {
                 this._pCreateShipReqPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipReqLabel.CreateShipReqTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipReqLabel.CreateShipReqTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -7264,7 +7264,7 @@ sap.ui.define([
             if (!this._addPopover) {
                 this._addPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipReqLabel.ShipReqActPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipReqLabel.ShipReqActPopover",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -7522,7 +7522,7 @@ sap.ui.define([
                 if (!this._pTrackNowPopover) {
                     this._pTrackNowPopover = Fragment.load({
                         id: oView.getId(),
-                        name: "com.eshipjet.zeshipjet.view.fragments.TrackNow.TrackNowTableColumns",
+                        name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.TrackNow.TrackNowTableColumns",
                         controller: this
                     }).then(function (oPopover) {
                         oView.addDependent(oPopover);
@@ -7595,7 +7595,7 @@ sap.ui.define([
             if (!this._trackNowPopover) {
                 this._trackNowPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.TrackNow.TrackNowFilterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.TrackNow.TrackNowFilterPopover",
                     controller: this
                 }).then(function (trackNowPopover) {
                     oView.addDependent(trackNowPopover);
@@ -7861,7 +7861,7 @@ sap.ui.define([
             if (!this._pManifestPopover) {
                 this._pManifestPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.Manifest.ManifestTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.Manifest.ManifestTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -7939,7 +7939,7 @@ sap.ui.define([
             if (!this._pManifestPrintPopover) {
                 this._pManifestPrintPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.Manifest.ManifestPrintDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.Manifest.ManifestPrintDialog",
                     controller: this
                 }).then(function (oManifestPrintPopover) {
                     oView.addDependent(oManifestPrintPopover);
@@ -8077,7 +8077,7 @@ sap.ui.define([
             if (!this._pFeightAuditAnalysisPopover) {
                 this._pFeightAuditAnalysisPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.FeightAuditAnalysis.FeightAuditAnalysisTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.FeightAuditAnalysis.FeightAuditAnalysisTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -8163,7 +8163,7 @@ sap.ui.define([
             if (!this._FeightAuditAnalysisPopover) {
                 this._FeightAuditAnalysisPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.FeightAuditAnalysis.FeightAuditAnalysisFilterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.FeightAuditAnalysis.FeightAuditAnalysisFilterPopover",
                     controller: this
                 }).then(function (FeightAuditAnalysisPopover) {
                     oView.addDependent(FeightAuditAnalysisPopover);
@@ -8263,7 +8263,7 @@ sap.ui.define([
             if (!this._pBatchShipPopover) {
                 this._pBatchShipPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.BatchShip.BatchShipTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.BatchShip.BatchShipTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -8341,7 +8341,7 @@ sap.ui.define([
             if (!this._batchShipPopover) {
                 this._batchShipPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.BatchShip.BatchShipFilterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.BatchShip.BatchShipFilterPopover",
                     controller: this
                 }).then(function (batchShipPopover) {
                     oView.addDependent(batchShipPopover);
@@ -8369,7 +8369,7 @@ sap.ui.define([
             if (!this._batchShipPopover) {
                 this._batchShipPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.BatchShip.BatchShipFilterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.BatchShip.BatchShipFilterPopover",
                     controller: this
                 }).then(function (batchShipPopover) {
                     oView.addDependent(batchShipPopover);
@@ -8485,7 +8485,7 @@ sap.ui.define([
                     if (!oController._recentShipPopover) {
                         oController._recentShipPopover = Fragment.load({
                             id: oView.getId(),
-                            name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.RecentShipment",
+                            name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.RecentShipment",
                             controller: oController
                         }).then(function (oPopover) {
                             oView.addDependent(oPopover);
@@ -9087,7 +9087,7 @@ sap.ui.define([
             if (!this._dashBoardAddPopover) {
                 this._dashBoardAddPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.DashboardAddIconPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.DashboardAddIconPopover",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -9356,7 +9356,7 @@ sap.ui.define([
             if (!this.byId("DefaultconfopenDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.DefaultConfigDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.DefaultConfigDialog",
                     controller: this // Pass the controller for binding
                 }).then(function (oDialog) {
                     oView.addDependent(oDialog);
@@ -9381,7 +9381,7 @@ sap.ui.define([
             if (!this.byId("DefaultconfopenDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.LockUnlockUserDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.LockUnlockUserDialog",
                     controller: this // Pass the controller for binding
                 }).then(function (oDialog) {
                     oView.addDependent(oDialog);
@@ -9410,7 +9410,7 @@ sap.ui.define([
             if (!this._pAddressBookPopover) {
                 this._pAddressBookPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddressBookTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddressBookTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -9596,7 +9596,7 @@ sap.ui.define([
             if (!this._AddressBookPopover) {
                 this._AddressBookPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddressBookFilterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddressBookFilterPopover",
                     controller: this
                 }).then(function (AddressBookPopover) {
                     oView.addDependent(AddressBookPopover);
@@ -10186,7 +10186,7 @@ sap.ui.define([
             if (!this._ProductsPopover) {
                 this._ProductsPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ProductsFilterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ProductsFilterPopover",
                     controller: this
                 }).then(function (ProductsPopover) {
                     oView.addDependent(ProductsPopover);
@@ -10240,7 +10240,7 @@ sap.ui.define([
             if (!this._pUsersPopover) {
                 this._pUsersPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.UsersTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.UsersTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -10416,7 +10416,7 @@ sap.ui.define([
             if (!this._UsersPopover) {
                 this._UsersPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.UsersFilterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.UsersFilterPopover",
                     controller: this
                 }).then(function (UsersPopover) {
                     oView.addDependent(UsersPopover);
@@ -10502,7 +10502,7 @@ sap.ui.define([
             if (!this.byId("_IDGenAlcoholEditDialogPeripheralConfiguration")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.PeripheralConfiguration",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.PeripheralConfiguration",
                     controller: this // Pass the controller for binding
                 }).then(function (oDialog) {
                     oView.addDependent(oDialog);
@@ -10532,7 +10532,7 @@ sap.ui.define([
             if (!this._pRolesPopover) {
                 this._pRolesPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.RolesTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.RolesTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -10701,7 +10701,7 @@ sap.ui.define([
             if (!this._pCarrierCatalogPopover) {
                 this._pCarrierCatalogPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.CarrierCatalogTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.CarrierCatalogTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -10870,7 +10870,7 @@ sap.ui.define([
             if (!this._CarrierCatalogPopover) {
                 this._CarrierCatalogPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.CarrierCatalogFilterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.CarrierCatalogFilterPopover",
                     controller: this
                 }).then(function (CarrierCatalogPopover) {
                     oView.addDependent(CarrierCatalogPopover);
@@ -10928,7 +10928,7 @@ sap.ui.define([
             if (!this._pCarrierAccountPopover) {
                 this._pCarrierAccountPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.CarrierAccountTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.CarrierAccountTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -11103,7 +11103,7 @@ sap.ui.define([
             if (!this._CarriesAccountsPopover) {
                 this._CarriesAccountsPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.CarriesAccountsFilterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.CarriesAccountsFilterPopover",
                     controller: this
                 }).then(function (CarriesAccountsPopover) {
                     oView.addDependent(CarriesAccountsPopover);
@@ -11163,7 +11163,7 @@ sap.ui.define([
             if (!this._pCostCenterPopover) {
                 this._pCostCenterPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.CostCenterTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.CostCenterTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -11328,7 +11328,7 @@ sap.ui.define([
             if (!this._UsersPopover) {
                 this._UsersPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.CostCenterFilterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.CostCenterFilterPopover",
                     controller: this
                 }).then(function (UsersPopover) {
                     oView.addDependent(UsersPopover);
@@ -11414,7 +11414,7 @@ sap.ui.define([
             if (!this._pFreightConditionPopover) {
                 this._pFreightConditionPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.FreightConditionTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.FreightConditionTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -11579,7 +11579,7 @@ sap.ui.define([
         //     if (!this._UsersPopover) {
         //         this._UsersPopover = Fragment.load({
         //             id: oView.getId(),
-        //             name: "com.eshipjet.zeshipjet.view.fragments.CostCenterFilterPopover",
+        //             name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.CostCenterFilterPopover",
         //             controller: this
         //         }).then(function (UsersPopover) {
         //             oView.addDependent(UsersPopover);
@@ -11664,7 +11664,7 @@ sap.ui.define([
             if (!this._pStatusesPopover) {
                 this._pStatusesPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.StatusesTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.StatusesTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -11830,7 +11830,7 @@ sap.ui.define([
             if (!this._StatusesPopover) {
                 this._StatusesPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.StatusesFilterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.StatusesFilterPopover",
                     controller: this
                 }).then(function (StatusesPopover) {
                     oView.addDependent(StatusesPopover);
@@ -11907,7 +11907,7 @@ sap.ui.define([
             if (!this._pProductsPopover) {
                 this._pProductsPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ProductsTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ProductsTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -12054,7 +12054,7 @@ sap.ui.define([
             if (!this._pPackageTypesPopover) {
                 this._pPackageTypesPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.PackageTypesTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.PackageTypesTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -12220,7 +12220,7 @@ sap.ui.define([
             if (!this._PackageTypesPopover) {
                 this._PackageTypesPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.PackageTypesFilterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.PackageTypesFilterPopover",
                     controller: this
                 }).then(function (PackageTypesPopover) {
                     oView.addDependent(PackageTypesPopover);
@@ -12298,7 +12298,7 @@ sap.ui.define([
             if (!this._pDangerousGoodsPopover) {
                 this._pDangerousGoodsPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.DangerousGoodsTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.DangerousGoodsTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -12488,7 +12488,7 @@ sap.ui.define([
             if (!this._pThirdPartiesPopover) {
                 this._pThirdPartiesPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ThirdPartiesTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ThirdPartiesTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -12664,7 +12664,7 @@ sap.ui.define([
             if (!this._pLTLClassesPopover) {
                 this._pLTLClassesPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.LTLClassesTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.LTLClassesTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -12810,7 +12810,7 @@ sap.ui.define([
             if (!this._pCommonErrorLogsPopover) {
                 this._pCommonErrorLogsPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.CommonErrorLogsTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.CommonErrorLogsTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -12956,7 +12956,7 @@ sap.ui.define([
             if (!this._pNMFCPopover) {
                 this._pNMFCPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.NMFCTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.NMFCTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -13103,7 +13103,7 @@ sap.ui.define([
             if (!this._pMOTPopover) {
                 this._pMOTPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.MOTTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.MOTTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -13249,7 +13249,7 @@ sap.ui.define([
             if (!this._pLocationsPopover) {
                 this._pLocationsPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.LocationsTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.LocationsTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -13426,7 +13426,7 @@ sap.ui.define([
             if (!this._LocationsPopover) {
                 this._LocationsPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.LocationsFilterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.LocationsFilterPopover",
                     controller: this
                 }).then(function (LocationsPopover) {
                     oView.addDependent(LocationsPopover);
@@ -13510,7 +13510,7 @@ sap.ui.define([
             if (!this._ThirdPartyPopover) {
                 this._ThirdPartyPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ThirdPartyFilterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ThirdPartyFilterPopover",
                     controller: this
                 }).then(function (ThirdPartyPopover) {
                     oView.addDependent(ThirdPartyPopover);
@@ -13584,7 +13584,7 @@ sap.ui.define([
             if (!this._LTLClassesPopover) {
                 this._LTLClassesPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.LTLClassesFilterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.LTLClassesFilterPopover",
                     controller: this
                 }).then(function (LTLClassesPopover) {
                     oView.addDependent(LTLClassesPopover);
@@ -13671,7 +13671,7 @@ sap.ui.define([
             if (!this._DangerousGoodsPopover) {
                 this._DangerousGoodsPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.DangerousGoodsFilterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.DangerousGoodsFilterPopover",
                     controller: this
                 }).then(function (DangerousGoodsPopover) {
                     oView.addDependent(DangerousGoodsPopover);
@@ -13748,7 +13748,7 @@ sap.ui.define([
             if (!this._NMFCTablePopover) {
                 this._NMFCTablePopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.NMFCTableFilterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.NMFCTableFilterPopover",
                     controller: this
                 }).then(function (NMFCTablePopover) {
                     oView.addDependent(NMFCTablePopover);
@@ -13827,7 +13827,7 @@ sap.ui.define([
             if (!this._OrderTypesPopover) {
                 this._OrderTypesPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.OrderTypesFilterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.OrderTypesFilterPopover",
                     controller: this
                 }).then(function (OrderTypesPopover) {
                     oView.addDependent(OrderTypesPopover);
@@ -13906,7 +13906,7 @@ sap.ui.define([
             if (!this._IncotermsPopover) {
                 this._IncotermsPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.IncotermsFilterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.IncotermsFilterPopover",
                     controller: this
                 }).then(function (IncotermsPopover) {
                     oView.addDependent(IncotermsPopover);
@@ -13984,7 +13984,7 @@ sap.ui.define([
             if (!this._PaymentTypesPopover) {
                 this._PaymentTypesPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.PaymentTypesFilterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.PaymentTypesFilterPopover",
                     controller: this
                 }).then(function (PaymentTypesPopover) {
                     oView.addDependent(PaymentTypesPopover);
@@ -14072,7 +14072,7 @@ sap.ui.define([
             if (!this._pOrderTypesPopover) {
                 this._pOrderTypesPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.OrderTypesTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.OrderTypesTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -14219,7 +14219,7 @@ sap.ui.define([
             if (!this._pIncotermsPopover) {
                 this._pIncotermsPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.IncotermsTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.IncotermsTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -14365,7 +14365,7 @@ sap.ui.define([
             if (!this._pTrackingRangePopover) {
                 this._pTrackingRangePopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.TrackingRangeTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.TrackingRangeTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -14509,7 +14509,7 @@ sap.ui.define([
             if (!this._pDimensionsPopover) {
                 this._pDimensionsPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.DimensionsTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.DimensionsTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -14656,7 +14656,7 @@ sap.ui.define([
             if (!this._pPaymentTypesPopover) {
                 this._pPaymentTypesPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.PaymentTypesTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.PaymentTypesTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -14801,7 +14801,7 @@ sap.ui.define([
             if (!this._pSMTPPopover) {
                 this._pSMTPPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.SMTPTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.SMTPTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -14948,7 +14948,7 @@ sap.ui.define([
             if (!this._pERPPopover) {
                 this._pERPPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ERPTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ERPTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -15095,7 +15095,7 @@ sap.ui.define([
             if (!this._pCountriesPopover) {
                 this._pCountriesPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.CountriesTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.CountriesTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -15242,7 +15242,7 @@ sap.ui.define([
             if (!this._pEUCountriesPopover) {
                 this._pEUCountriesPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.EUCountriesTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.EUCountriesTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -15388,7 +15388,7 @@ sap.ui.define([
             if (!this._pShipmentErrorLogsPopover) {
                 this._pShipmentErrorLogsPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipmentErrorLogsTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipmentErrorLogsTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -15534,7 +15534,7 @@ sap.ui.define([
             if (!this._AddLocPopover) {
                 this._AddLocPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddLocationPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddLocationPopover",
                     controller: this
                 }).then(function (oAddLocPopover) {
                     oView.addDependent(oAddLocPopover);
@@ -15577,7 +15577,7 @@ sap.ui.define([
             if (!this.byId("_IDGenAlcoholEditDialogshipnow")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.ShipNowPickAnAddressPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.ShipNowPickAnAddressPopover",
                     controller: this
                 }).then(function(oDialog) {
                     oView.addDependent(oDialog);
@@ -15621,7 +15621,7 @@ sap.ui.define([
                 if (!this.byId("_IDGenAlcoholEditDialogshipnowTo")) {
                     Fragment.load({
                         id: oView.getId(),
-                        name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.ShipToPickAnAddressPopover",
+                        name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.ShipToPickAnAddressPopover",
                         controller: this
                     }).then(function(oDialog) {
                         oView.addDependent(oDialog);
@@ -15665,7 +15665,7 @@ sap.ui.define([
             if (!this._AddShioReqLabelAddIconPopover) {
                 this._AddShioReqLabelAddIconPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.ShipNowAddIconPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.ShipNowAddIconPopover",
                     controller: this
                 }).then(function (oAddShioReqLabelAddIconPopover) {
                     oView.addDependent(oAddShioReqLabelAddIconPopover);
@@ -15710,7 +15710,7 @@ sap.ui.define([
         if (!this._AddShioReqLabelEditIconPopover) {
             this._AddShioReqLabelEditIconPopover = Fragment.load({
                 id: oView.getId(),
-                name: "com.eshipjet.zeshipjet.view.fragments.ShipReqLabel.ShipReqLabelEditIconPopover",
+                name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipReqLabel.ShipReqLabelEditIconPopover",
                 controller: this
             }).then(function (oAddShioReqLabelEditIconPopover) {
                 oView.addDependent(oAddShioReqLabelEditIconPopover);
@@ -15753,7 +15753,7 @@ sap.ui.define([
             if (!this._AddAdressBookPopover) {
                 this._AddAdressBookPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddAddressBookPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddAddressBookPopover",
                     controller: this
                 }).then(function (oAddAdressBookPopover) {
                     oView.addDependent(oAddAdressBookPopover);
@@ -15792,7 +15792,7 @@ sap.ui.define([
             if (!this._AddUserPopover) {
                 this._AddUserPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddUserPopOver",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddUserPopOver",
                     controller: this
                 }).then(function (oAddUserPopover) {
                     oView.addDependent(oAddUserPopover);
@@ -15829,7 +15829,7 @@ sap.ui.define([
             if (!oController.ShipNowSearchDlg) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.shipNowSearchIcon",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.shipNowSearchIcon",
                     controller: this
                 }).then(function (oShipNowSearchDialog) {
                     oView.addDependent(oShipNowSearchDialog);
@@ -15850,7 +15850,7 @@ sap.ui.define([
             if (!this.byId("idShipNowConsolidationDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.shipNowConsolidationDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.shipNowConsolidationDialog",
                     controller: this
                 }).then(function (oShipNowConsolidationDialog) {
                     oView.addDependent(oShipNowConsolidationDialog);
@@ -15882,7 +15882,7 @@ sap.ui.define([
                 // Load the fragment only once
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.HandlingUnitDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.HandlingUnitDialog",
                     controller: oController
                 }).then(function (oHandlingUnitDialog) {
                     oController.HandlingUnitDlg = oHandlingUnitDialog; // store reference
@@ -15980,7 +15980,7 @@ sap.ui.define([
             if (!this._pShipNowConsolidationPopover) {
                 this._pShipNowConsolidationPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.ShipNowConsolidationTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.ShipNowConsolidationTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -16057,7 +16057,7 @@ sap.ui.define([
             if (!this._ShipNowConsolidationPopover) {
                 this._ShipNowConsolidationPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.ShipNowConsolidationFilterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.ShipNowConsolidationFilterPopover",
                     controller: this
                 }).then(function (ShipNowConsolidationPopover) {
                     oView.addDependent(ShipNowConsolidationPopover);
@@ -16085,7 +16085,7 @@ sap.ui.define([
             if (!this._AddEUPopover) {
                 this._AddEUPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddEUCountriesPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddEUCountriesPopover",
                     controller: this
                 }).then(function (oAddEUPopover) {
                     oView.addDependent(oAddEUPopover);
@@ -16113,7 +16113,7 @@ sap.ui.define([
             if (!this._AddCountriesPopover) {
                 this._AddCountriesPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddCountriesPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddCountriesPopover",
                     controller: this
                 }).then(function (oAddCountriesPopover) {
                     oView.addDependent(oAddCountriesPopover);
@@ -16143,7 +16143,7 @@ sap.ui.define([
             if (!this._AddERPPopover) {
                 this._AddERPPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddERPPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddERPPopover",
                     controller: this
                 }).then(function (oAddERPPopover) {
                     oView.addDependent(oAddERPPopover);
@@ -16173,7 +16173,7 @@ sap.ui.define([
             if (!this._AddPayPopover) {
                 this._AddPayPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddPaymentTypesPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddPaymentTypesPopover",
                     controller: this
                 }).then(function (oAddPayPopover) {
                     oView.addDependent(oAddPayPopover);
@@ -16203,7 +16203,7 @@ sap.ui.define([
             if (!this._AddRolePopover) {
                 this._AddRolePopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddRolePopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddRolePopover",
                     controller: this
                 }).then(function (oAddRolePopover) {
                     oView.addDependent(oAddRolePopover);
@@ -16229,7 +16229,7 @@ sap.ui.define([
             if (!this._oCreateBatchShipPopover) {
                 this._oCreateBatchShipPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.BatchShip.CreateBatch",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.BatchShip.CreateBatch",
                     controller: this
                 }).then(function (CreateBatchShipPopover) {
                     oView.addDependent(CreateBatchShipPopover);
@@ -16288,7 +16288,7 @@ sap.ui.define([
             if (!this._AddPrdPopover) {
                 this._AddPrdPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddProductPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddProductPopover",
                     controller: this
                 }).then(function (oAddPrdPopover) {
                     oView.addDependent(oAddPrdPopover);
@@ -16316,7 +16316,7 @@ sap.ui.define([
             if (!this._AddPackPopover) {
                 this._AddPackPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddPackageTypePopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddPackageTypePopover",
                     controller: this
                 }).then(function (oAddPackPopover) {
                     oView.addDependent(oAddPackPopover);
@@ -16344,7 +16344,7 @@ sap.ui.define([
             if (!this._AddCostPopover) {
                 this._AddCostPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddCostCenterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddCostCenterPopover",
                     controller: this
                 }).then(function (oAddCostPopover) {
                     oView.addDependent(oAddCostPopover);
@@ -16373,7 +16373,7 @@ sap.ui.define([
             if (!this._AddCostPopover) {
                 this._AddCostPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddCostCenterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddCostCenterPopover",
                     controller: this
                 }).then(function (oAddCostPopover) {
                     oView.addDependent(oAddCostPopover);
@@ -16401,7 +16401,7 @@ sap.ui.define([
             if (!this._AddStatusPopover) {
                 this._AddStatusPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddStatusPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddStatusPopover",
                     controller: this
                 }).then(function (oAddStatusPopover) {
                     oView.addDependent(oAddStatusPopover);
@@ -16429,7 +16429,7 @@ sap.ui.define([
             if (!this._AddThirdPopover) {
                 this._AddThirdPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddThirdPartyPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddThirdPartyPopover",
                     controller: this
                 }).then(function (oAddThirdPopover) {
                     oView.addDependent(oAddThirdPopover);
@@ -16456,7 +16456,7 @@ sap.ui.define([
             if (!this._AddLTLPopover) {
                 this._AddLTLPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddLTLClassPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddLTLClassPopover",
                     controller: this
                 }).then(function (oAddLTLPopover) {
                     oView.addDependent(oAddLTLPopover);
@@ -16484,7 +16484,7 @@ sap.ui.define([
             if (!this._AddNMFCPopover) {
                 this._AddNMFCPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddNMFCClassPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddNMFCClassPopover",
                     controller: this
                 }).then(function (oAddNMFCPopover) {
                     oView.addDependent(oAddNMFCPopover);
@@ -16512,7 +16512,7 @@ sap.ui.define([
             if (!this._AddModeOfTransPopover) {
                 this._AddModeOfTransPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddModeOfTransportPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddModeOfTransportPopover",
                     controller: this
                 }).then(function (oAddModeOfTransPopover) {
                     oView.addDependent(oAddModeOfTransPopover);
@@ -16541,7 +16541,7 @@ sap.ui.define([
             if (!this._AddModeOfTransPopover) {
                 this._AddModeOfTransPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddOrderTypePopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddOrderTypePopover",
                     controller: this
                 }).then(function (oAddModeOfTransPopover) {
                     oView.addDependent(oAddModeOfTransPopover);
@@ -16569,7 +16569,7 @@ sap.ui.define([
             if (!this._AddAddIncotermPopover) {
                 this._AddAddIncotermPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddIncotermPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddIncotermPopover",
                     controller: this
                 }).then(function (oAddAddIncotermPopover) {
                     oView.addDependent(oAddAddIncotermPopover);
@@ -16597,7 +16597,7 @@ sap.ui.define([
             if (!this._AddAddDimensionsPopover) {
                 this._AddAddDimensionsPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddDimensionsPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddDimensionsPopover",
                     controller: this
                 }).then(function (oAddAddDimensionsPopover) {
                     oView.addDependent(oAddAddDimensionsPopover);
@@ -16625,7 +16625,7 @@ sap.ui.define([
             if (!this._AddAddSMTPConfigPopover) {
                 this._AddAddSMTPConfigPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddSMTPConfigPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddSMTPConfigPopover",
                     controller: this
                 }).then(function (oAddAddSMTPConfigPopover) {
                     oView.addDependent(oAddAddSMTPConfigPopover);
@@ -16651,7 +16651,7 @@ sap.ui.define([
             if (!this.byId("idAddCarrierDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddCarrierDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddCarrierDialog",
                     controller: this // Pass the controller for binding
                 }).then(function (oAddCarrierDialog) {
                     oView.addDependent(oAddCarrierDialog);
@@ -16727,7 +16727,7 @@ sap.ui.define([
             if (!this.byId("idAddCarrierConfigurationDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddCarrierConfigurationDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddCarrierConfigurationDialog",
                     controller: this // Pass the controller for binding
                 }).then(function (oAddCarrierConfigurationDialog) {
                     oView.addDependent(oAddCarrierConfigurationDialog);
@@ -16752,7 +16752,7 @@ sap.ui.define([
             if (!this.byId("_IDGenAlcoholEditDialogUpdateCompanySettings")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.UpdateCompanySettingsPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.UpdateCompanySettingsPopover",
                     controller: this // Pass the controller for binding
                 }).then(function (oDialog) {
                     oView.addDependent(oDialog);
@@ -16777,7 +16777,7 @@ sap.ui.define([
             if (!this.byId("ResetPasswordopenDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ResetPassword",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ResetPassword",
                     controller: this // Pass the controller for binding
                 }).then(function (oDialog) {
                     oView.addDependent(oDialog);
@@ -16802,7 +16802,7 @@ sap.ui.define([
             if (!this.byId("UnlockDeliveryNumberopenDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.UnlockDeliveryNumber",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.UnlockDeliveryNumber",
                     controller: this // Pass the controller for binding
                 }).then(function (oDialog) {
                     oView.addDependent(oDialog);
@@ -16840,7 +16840,7 @@ sap.ui.define([
                 if (!oController.byId("idFreightQuotesDialog")) {
                     Fragment.load({
                         id: oView.getId(),
-                        name: "com.eshipjet.zeshipjet.view.fragments.ShipReqLabel.GetFreightQuotesDialog",
+                        name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipReqLabel.GetFreightQuotesDialog",
                         controller: oController // Pass the controller for binding
                     }).then(function (oDialog) {
                         oView.addDependent(oDialog);
@@ -16972,7 +16972,7 @@ sap.ui.define([
             if (!this._AddAddTrackingRangeopover) {
                 this._AddAddTrackingRangePopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddTrackingRangePopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddTrackingRangePopover",
                     controller: this
                 }).then(function (oAddAddTrackingRangePopover) {
                     oView.addDependent(oAddAddTrackingRangePopover);
@@ -17032,7 +17032,7 @@ sap.ui.define([
             if (!this.byId("idAddProductDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipReqLabel.AddProductsDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipReqLabel.AddProductsDialog",
                     controller: this // Pass the controller for binding
                 }).then(function (oAddProductDialog) {
                     oView.addDependent(oAddProductDialog);
@@ -17085,7 +17085,7 @@ sap.ui.define([
             if (!this.byId("idTrackingNumberDialog1")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipReqLabel.TrackingNumberDialog1",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipReqLabel.TrackingNumberDialog1",
                     controller: this // Pass the controller for binding
                 }).then(function (oTrackingNumberDialog) {
                     oView.addDependent(oTrackingNumberDialog);
@@ -17105,7 +17105,7 @@ sap.ui.define([
             if (!this.byId("idTrackingNumberDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipReqLabel.TrackingNumberDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipReqLabel.TrackingNumberDialog",
                     controller: this // Pass the controller for binding
                 }).then(function (oTrackingNumberDialog) {
                     oView.addDependent(oTrackingNumberDialog);
@@ -17125,7 +17125,7 @@ sap.ui.define([
             if (!this.byId("idShipMethodDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.FreightQuoteOrders.ShipMethodPlusDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.FreightQuoteOrders.ShipMethodPlusDialog",
                     controller: this // Pass the controller for binding
                 }).then(function (oShipMethodDialog) {
                     oView.addDependent(oShipMethodDialog);
@@ -17147,7 +17147,7 @@ sap.ui.define([
             if (!this.byId("idShipmentWorkflowDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipReqLabel.ShipmentWorkflowPlusDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipReqLabel.ShipmentWorkflowPlusDialog",
                     controller: this // Pass the controller for binding
                 }).then(function (oShipmentWorkflowDialog) {
                     oView.addDependent(oShipmentWorkflowDialog);
@@ -17208,7 +17208,7 @@ sap.ui.define([
             if (!this._onSearchPopover) {
                 this._onSearchPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.ShipNowPickAnAddressPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.ShipNowPickAnAddressPopover",
                     controller: this
                 }).then(function (oonSearchPopover) {
                     oView.addDependent(oonSearchPopover);
@@ -17229,7 +17229,7 @@ sap.ui.define([
             if (!this._moreActionsPopover) {
                 this._moreActionsPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.MoreActions",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.MoreActions",
                     controller: this
                 }).then(function (oMoreActionsPopover) {
                     oView.addDependent(oMoreActionsPopover);
@@ -17872,7 +17872,7 @@ sap.ui.define([
             if (!this._oADDLocImpPopover) {
                 this._oADDLocImpPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.AddLocImportPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddLocImportPopover",
                     controller: this
                 }).then(function (ADDLocImpPopover) {
                     oView.addDependent(ADDLocImpPopover);
@@ -17892,7 +17892,7 @@ sap.ui.define([
             if (!this._oADDLocImpPopover) {
                 this._oADDLocImpPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.CubeDimPackPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.CubeDimPackPopover",
                     controller: this
                 }).then(function (ADDLocImpPopover) {
                     oView.addDependent(ADDLocImpPopover);
@@ -17914,7 +17914,7 @@ sap.ui.define([
             if (!this._oAddIMportRolesPopover) {
                 this._oAddIMportRolesPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ImportRolesLocPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ImportRolesLocPopover",
                     controller: this
                 }).then(function (AddIMportRolesPopover) {
                     oView.addDependent(AddIMportRolesPopover);
@@ -17937,7 +17937,7 @@ sap.ui.define([
         if (!this._oAddAdressBookArrowPopover) {
             this._oAddAdressBookArrowPopover = Fragment.load({
                 id: oView.getId(),
-                name: "com.eshipjet.zeshipjet.view.fragments.AddAddressImportArrowPopover",
+                name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddAddressImportArrowPopover",
                 controller: this
             }).then(function (AddAdressBookArrowPopover) {
                 oView.addDependent(AddAdressBookArrowPopover);
@@ -17958,7 +17958,7 @@ sap.ui.define([
         if (!this._oAddImportAddressBookPopover) {
             this._oAddImportAddressBookPopover = Fragment.load({
                 id: oView.getId(),
-                name: "com.eshipjet.zeshipjet.view.fragments.AddAddressImportPopover1",
+                name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddAddressImportPopover1",
                 controller: this
             }).then(function (AddImportAddressBookPopover) {
                 oView.addDependent(AddImportAddressBookPopover);
@@ -17981,7 +17981,7 @@ sap.ui.define([
         if (!this._oAddUserArrowPopover) {
             this._oAddUserArrowPopover = Fragment.load({
                 id: oView.getId(),
-                name: "com.eshipjet.zeshipjet.view.fragments.UserArrowPressPopover",
+                name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.UserArrowPressPopover",
                 controller: this
             }).then(function (AddUserArrowPopover) {
                 oView.addDependent(AddUserArrowPopover);
@@ -18002,7 +18002,7 @@ sap.ui.define([
         if (!this._oAddUserImportPopover) {
             this._oAddUserImportPopover = Fragment.load({
                 id: oView.getId(),
-                name: "com.eshipjet.zeshipjet.view.fragments.UserImportPopover",
+                name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.UserImportPopover",
                 controller: this
             }).then(function (AddUserImportPopover) {
                 oView.addDependent(AddUserImportPopover);
@@ -18028,7 +18028,7 @@ sap.ui.define([
         if (!this._oAddThirdPartyArrowPopover) {
             this._oAddThirdPartyArrowPopover = Fragment.load({
                 id: oView.getId(),
-                name: "com.eshipjet.zeshipjet.view.fragments.ThirdPartyArrowPopover",
+                name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ThirdPartyArrowPopover",
                 controller: this
             }).then(function (AddThirdPartyArrowPopover) {
                 oView.addDependent(AddThirdPartyArrowPopover);
@@ -18048,7 +18048,7 @@ sap.ui.define([
         if (!this._oAddThirdPartyImportPopover) {
             this._oAddThirdPartyImportPopover = Fragment.load({
                 id: oView.getId(),
-                name: "com.eshipjet.zeshipjet.view.fragments.ThirdPartyImportPopover",
+                name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ThirdPartyImportPopover",
                 controller: this
             }).then(function (AddThirdPartyImportPopover) {
                 oView.addDependent(AddThirdPartyImportPopover);
@@ -18076,7 +18076,7 @@ sap.ui.define([
         if (!this._oAddRolesArrowPopover) {
             this._oAddRolesArrowPopover = Fragment.load({
                 id: oView.getId(),
-                name: "com.eshipjet.zeshipjet.view.fragments.RolesArrowPopover",
+                name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.RolesArrowPopover",
                 controller: this
             }).then(function (AddRolesArrowPopover) {
                 oView.addDependent(AddRolesArrowPopover);
@@ -18096,7 +18096,7 @@ sap.ui.define([
         if (!this._oAddRolesImportPopover) {
             this._oAddRolesImportPopover = Fragment.load({
                 id: oView.getId(),
-                name: "com.eshipjet.zeshipjet.view.fragments.RolesImportPopover",
+                name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.RolesImportPopover",
                 controller: this
             }).then(function (AddRolesImportPopover) {
                 oView.addDependent(AddRolesImportPopover);
@@ -18118,7 +18118,7 @@ sap.ui.define([
         if (!this._oAddCostCenterArrowPopover) {
             this._oAddCostCenterArrowPopover = Fragment.load({
                 id: oView.getId(),
-                name: "com.eshipjet.zeshipjet.view.fragments.CostCenterArrowPopover",
+                name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.CostCenterArrowPopover",
                 controller: this
             }).then(function (AddCostCenterArrowPopover) {
                 oView.addDependent(AddCostCenterArrowPopover);
@@ -18145,7 +18145,7 @@ sap.ui.define([
         if (!this._oAddCostCenterImportPopover) {
             this._oAddCostCenterImportPopover = Fragment.load({
                 id: oView.getId(),
-                name: "com.eshipjet.zeshipjet.view.fragments.CostCenterImportPopover",
+                name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.CostCenterImportPopover",
                 controller: this
             }).then(function (AddCostCenterImportPopover) {
                 oView.addDependent(AddCostCenterImportPopover);
@@ -18166,7 +18166,7 @@ sap.ui.define([
         if (!this._oAddLTLClassesArrowPopover) {
             this._oAddLTLClassesArrowPopover = Fragment.load({
                 id: oView.getId(),
-                name: "com.eshipjet.zeshipjet.view.fragments.LTLClassesArrowPopover",
+                name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.LTLClassesArrowPopover",
                 controller: this
             }).then(function (AddLTLClassesArrowPopover) {
                 oView.addDependent(AddLTLClassesArrowPopover);
@@ -18186,7 +18186,7 @@ sap.ui.define([
         if (!this._oAddLTLClassesImportPopover) {
             this._oAddLTLClassesImportPopover = Fragment.load({
                 id: oView.getId(),
-                name: "com.eshipjet.zeshipjet.view.fragments.LTLClassesImportPopover",
+                name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.LTLClassesImportPopover",
                 controller: this
             }).then(function (AddLTLClassesImportPopover) {
                 oView.addDependent(AddLTLClassesImportPopover);
@@ -18213,7 +18213,7 @@ sap.ui.define([
         if (!this._oAddCarrierCatalogArrowPopover) {
             this._oAddCarrierCatalogArrowPopover = Fragment.load({
                 id: oView.getId(),
-                name: "com.eshipjet.zeshipjet.view.fragments.CarrierCatalogArrowPopover",
+                name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.CarrierCatalogArrowPopover",
                 controller: this
             }).then(function (AddCarrierCatalogArrowPopover) {
                 oView.addDependent(AddCarrierCatalogArrowPopover);
@@ -18233,7 +18233,7 @@ sap.ui.define([
         if (!this._oAddCarrierCatalogImportPopover) {
             this._oAddCarrierCatalogImportPopover = Fragment.load({
                 id: oView.getId(),
-                name: "com.eshipjet.zeshipjet.view.fragments.CarrierCatalogImportPopover",
+                name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.CarrierCatalogImportPopover",
                 controller: this
             }).then(function (AddCarrierCatalogImportPopover) {
                 oView.addDependent(AddCarrierCatalogImportPopover);
@@ -18259,7 +18259,7 @@ sap.ui.define([
         if (!this._oAddCarrierAccountsArrowPopover) {
             this._oAddCarrierAccountsArrowPopover = Fragment.load({
                 id: oView.getId(),
-                name: "com.eshipjet.zeshipjet.view.fragments.CarrierAccountsArrowPopover",
+                name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.CarrierAccountsArrowPopover",
                 controller: this
             }).then(function (AddCarrierAccountsArrowPopover) {
                 oView.addDependent(AddCarrierAccountsArrowPopover);
@@ -18279,7 +18279,7 @@ sap.ui.define([
         if (!this._oAddCarrierAccountsImportPopover) {
             this._oAddCarrierAccountsImportPopover = Fragment.load({
                 id: oView.getId(),
-                name: "com.eshipjet.zeshipjet.view.fragments.CarrierAccountsImportPopover",
+                name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.CarrierAccountsImportPopover",
                 controller: this
             }).then(function (AddCarrierAccountsImportPopover) {
                 oView.addDependent(AddCarrierAccountsImportPopover);
@@ -18308,7 +18308,7 @@ sap.ui.define([
             if (!this._oAddStatusArrowPopover) {
                 this._oAddStatusArrowPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.StatusArrowPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.StatusArrowPopover",
                     controller: this
                 }).then(function (AddStatusArrowPopover) {
                     oView.addDependent(AddStatusArrowPopover);
@@ -18328,7 +18328,7 @@ sap.ui.define([
             if (!this._oAddStatusImportPopover) {
                 this._oAddStatusImportPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.StatusImportPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.StatusImportPopover",
                     controller: this
                 }).then(function (AddStatusImportPopover) {
                     oView.addDependent(AddStatusImportPopover);
@@ -18356,7 +18356,7 @@ sap.ui.define([
             if (!this._oAddProductArrowPopover) {
                 this._oAddProductArrowPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ProductArrowPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ProductArrowPopover",
                     controller: this
                 }).then(function (AddProductArrowPopover) {
                     oView.addDependent(AddProductArrowPopover);
@@ -18376,7 +18376,7 @@ sap.ui.define([
             if (!this._oAddProductImportPopover) {
                 this._oAddProductImportPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ProductImportPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ProductImportPopover",
                     controller: this
                 }).then(function (AddProductImportPopover) {
                     oView.addDependent(AddProductImportPopover);
@@ -18402,7 +18402,7 @@ sap.ui.define([
             if (!this._oAddDangerousGoodsArrowPopover) {
                 this._oAddDangerousGoodsArrowPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.DangerousGoodsImportArrowPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.DangerousGoodsImportArrowPopover",
                     controller: this
                 }).then(function (AddDangerousGoodsArrowPopover) {
                     oView.addDependent(AddDangerousGoodsArrowPopover);
@@ -18421,7 +18421,7 @@ sap.ui.define([
             if (!this._oAddDangerousGoodsImportDialog) {
                 this._oAddDangerousGoodsImportDialog = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.DangerousGoodsImportDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.DangerousGoodsImportDialog",
                     controller: this
                 }).then(function (oDialog) {
                     oView.addDependent(oDialog);
@@ -18450,7 +18450,7 @@ sap.ui.define([
             if (!this._oAddPackagesTypesArrowPopover) {
                 this._oAddPackagesTypesArrowPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.PackageTypesArrowPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.PackageTypesArrowPopover",
                     controller: this
                 }).then(function (AddPackagesTypesArrowPopover) {
                     oView.addDependent(AddPackagesTypesArrowPopover);
@@ -18470,7 +18470,7 @@ sap.ui.define([
             if (!this._oAddPackagesTypesImportPopover) {
                 this._oAddPackagesTypesImportPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.PackageTypesImportPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.PackageTypesImportPopover",
                     controller: this
                 }).then(function (AddPackagesTypesImportPopover) {
                     oView.addDependent(AddPackagesTypesImportPopover);
@@ -18893,7 +18893,7 @@ sap.ui.define([
         if (!oController.byId("_IDGenShipNowShppindRateDialog")) {
             Fragment.load({
                 id: oView.getId(),
-                name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.ShippingRates",
+                name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.ShippingRates",
                 controller: this // Pass the controller for binding
             }).then(function (oShippingDialog) {
                 oView.addDependent(oShippingDialog);
@@ -19573,7 +19573,7 @@ sap.ui.define([
         if (!this._AddDangerousGoodsPopover) {
             this._AddDangerousGoodsPopover = Fragment.load({
                 id: oView.getId(),
-                name: "com.eshipjet.zeshipjet.view.fragments.AddDangerousGoodsPopover",
+                name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.AddDangerousGoodsPopover",
                 controller: this
             }).then(function (oAddDangerousGoodsPopover) {
                 oView.addDependent(oAddDangerousGoodsPopover);
@@ -19601,7 +19601,7 @@ sap.ui.define([
             if (!this._pShipNowSAPDeliveryPopover) {
                 this._pShipNowSAPDeliveryPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.SAPDeliveryList",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.SAPDeliveryList",
                     controller: this
                 }).then(function (oShipNowSAPDeliveryPopover) {
                     oView.addDependent(oShipNowSAPDeliveryPopover);
@@ -19798,7 +19798,7 @@ sap.ui.define([
             if (!this.byId("addressVerificationDialog")) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.SpecialOptions.ValidateAddressDialog",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.SpecialOptions.ValidateAddressDialog",
                     controller: this
                 }).then(function(oDialog) {
                     oView.addDependent(oDialog);
@@ -20461,7 +20461,7 @@ sap.ui.define([
             if (!this._pOrderPopover) {
                 this._pOrderPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.FreightQuoteOrders.FreightQuoteOrdersTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.FreightQuoteOrders.FreightQuoteOrdersTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -20535,7 +20535,7 @@ sap.ui.define([
             if (!this._pFreightQuotePopover) {
                 this._pFreightQuotePopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.FreightQuoteOrders.FreightQuoteOrdersTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.FreightQuoteOrders.FreightQuoteOrdersTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -20686,7 +20686,7 @@ sap.ui.define([
             if (!this._orderPopover) {
                 this._orderPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.FreightQuoteOrders.FreightQuoteOrdersFilterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.FreightQuoteOrders.FreightQuoteOrdersFilterPopover",
                     controller: this
                 }).then(function (orderPopover) {
                     oView.addDependent(orderPopover);
@@ -20815,7 +20815,7 @@ sap.ui.define([
             if (!this._pTrackTracePopover) {
                 this._pTrackTracePopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.ShipNow.TrackTraceTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.TrackTraceTableColumns",
                     controller: this
                 }).then(function (oTrackTracePopover) {
                     oView.addDependent(oTrackTracePopover);
@@ -20880,7 +20880,6 @@ sap.ui.define([
         },
 
 
- 
 
         onShipNowGetPress:function(){
             var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
@@ -20892,10 +20891,20 @@ sap.ui.define([
             GetDeliveryDataModel.read("/zcds_dlvr_data", {
                 filters: aFilters,
                 urlParameters: {
-                    "$expand": "to_Carrier,to_Items,to_Packages,to_Partner,to_ShipFrom,to_ShipTo,to_ShipToParty,to_Shipper,to_SoldTo,to_SoldToParty"
+                    "$expand": "to_Carrier,to_Items,to_Packages,to_ShipFrom,to_ShipTo,to_ShipToParty,to_Shipper,to_SoldTo,to_SoldToParty"
                 },
                 success: function(oData, response) {
                     eshipjetModel.setProperty("/GetDeliveryData", oData.results[0]);
+                    var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData");
+                    oController.ShippingType = GetDeliveryData.ShippingType;
+                    var BusinessPartners = [
+                        {"PartnerType": "Sold-to Party", "PartnerID":GetDeliveryData.to_SoldToParty.AddressID, "CompanyName":GetDeliveryData.to_SoldToParty.BPCustomerFullName, "ContactName":GetDeliveryData.to_SoldToParty.CustomerName, "AddressLine1":GetDeliveryData.to_SoldToParty.AddressSearchTerm1, "City":GetDeliveryData.to_SoldToParty.CityName, "State":GetDeliveryData.to_SoldToParty.Region, "PostalCode":GetDeliveryData.to_SoldToParty.PostalCode, "Country":GetDeliveryData.to_SoldToParty.Country, "PhoneNumber":GetDeliveryData.to_SoldToParty.TelephoneNumber1, "EmailAddress":""},
+                        {"PartnerType": "Forwarding Agent", "PartnerID":GetDeliveryData.to_Carrier.AddressID, "CompanyName":GetDeliveryData.to_Carrier.BusinessPartnerFullName, "ContactName":GetDeliveryData.to_Carrier.Supplier, "AddressLine1":"", "City":GetDeliveryData.to_Carrier.CityName, "State":GetDeliveryData.to_Carrier.Region, "PostalCode":GetDeliveryData.to_Carrier.PostalCode, "Country":GetDeliveryData.to_Carrier.Country, "PhoneNumber":GetDeliveryData.to_Carrier.PhoneNumber, "EmailAddress":GetDeliveryData.to_Carrier.EmailAddress},
+                        {"PartnerType": "Ship-to Party", "PartnerID":GetDeliveryData.to_SoldToParty.AddressID, "CompanyName":GetDeliveryData.to_SoldToParty.BPCustomerFullName, "ContactName":GetDeliveryData.to_SoldToParty.CustomerName, "AddressLine1":GetDeliveryData.to_SoldToParty.AddressSearchTerm1, "City":GetDeliveryData.to_SoldToParty.CityName, "State":GetDeliveryData.to_SoldToParty.Region, "PostalCode":GetDeliveryData.to_SoldToParty.PostalCode, "Country":GetDeliveryData.to_SoldToParty.Country, "PhoneNumber":GetDeliveryData.to_SoldToParty.TelephoneNumber1, "EmailAddress":""}
+                    ];
+                    eshipjetModel.setProperty("/BusinessPartners", BusinessPartners);
+                    eshipjetModel.setProperty("/commonValues/ShipNowShipMethodSelectedKey", GetDeliveryData.to_Carrier.Supplier);
+                    oController.onShopNowShipMethodAfterChange(GetDeliveryData.to_Carrier.Supplier);
                     console.log("Success", oData);
                 },
                 error: function(oError) {

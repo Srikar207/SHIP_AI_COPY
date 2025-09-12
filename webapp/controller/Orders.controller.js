@@ -23,7 +23,7 @@ sap.ui.define([
         oController, oResourceBundle;
     const SortOrder = CoreLibrary.SortOrder;
 
-    return Controller.extend("com.eshipjet.zeshipjet.controller.Orders", {
+    return Controller.extend("com.eshipjetcopy.zeshipjetcopy.controller.Orders", {
         Formatter: formatter,
         onInit: function () {
             // oController._handleDisplayOrdersTable();
@@ -108,7 +108,7 @@ sap.ui.define([
             if (!this._pOrderPopover) {
                 this._pOrderPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.Orders.OrderTableColumns",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.Orders.OrderTableColumns",
                     controller: this
                 }).then(function (oPopover) {
                     oView.addDependent(oPopover);
@@ -225,7 +225,7 @@ sap.ui.define([
             if (!this._orderPopover) {
                 this._orderPopover = Fragment.load({
                     id: oView.getId(),
-                    name: "com.eshipjet.zeshipjet.view.fragments.Orders.OrderFilterPopover",
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.Orders.OrderFilterPopover",
                     controller: this
                 }).then(function (orderPopover) {
                     oView.addDependent(orderPopover);

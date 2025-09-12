@@ -1,11 +1,11 @@
 sap.ui.define([
     "sap/ui/core/UIComponent",
-    "com/eshipjet/zeshipjet/model/models",
+    "com/eshipjetcopy/zeshipjetcopy/model/models",
     "sap/ui/core/IconPool"
 ], (UIComponent, models, IconPool) => {
     "use strict";
 
-    return UIComponent.extend("com.eshipjet.zeshipjet.Component", {
+    return UIComponent.extend("com.eshipjetcopy.zeshipjetcopy.Component", {
         metadata: {
             manifest: "json",
             interfaces: [
