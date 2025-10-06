@@ -117,16 +117,16 @@ sap.ui.define([
             oController.ShippingTypeDropdownData();
 
             var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
-            var userId = sap.ushell.Container.getUser().getId();
-            var userName;
-            if (!userId || userId.toUpperCase() === "DEFAULT_USER") {
-                userName = "Guest"; // or "User"
-            }else{
-                userName = userId.split('.')[0].toLowerCase();
-                userName = userName.charAt(0).toUpperCase() + userName.slice(1);
-            }
+            // var userId = sap.ushell.Container.getUser().getId();
+            // var userName;
+            // if (!userId || userId.toUpperCase() === "DEFAULT_USER") {
+            //     userName = "Guest"; // or "User"
+            // }else{
+            //     userName = userId.split('.')[0].toLowerCase();
+            //     userName = userName.charAt(0).toUpperCase() + userName.slice(1);
+            // }
             
-            eshipjetModel.setProperty("/userName", userName);
+            eshipjetModel.setProperty("/userName", "KUMAR");
 
         },
 

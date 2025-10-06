@@ -3,7 +3,7 @@
 QUnit.config.autostart = false;
 
 sap.ui.require([
-	"comeshipjet/zeshipjet/test/unit/AllTests"
+	"comeshipjetcopy/zeshipjetcopy/test/unit/AllTests"
 ], function (Controller) {
 	"use strict";
 	QUnit.start();

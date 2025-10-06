@@ -1,7 +1,7 @@
 /*global QUnit*/
 
 sap.ui.define([
-	"comeshipjet/zeshipjet/controller/Eshipjet.controller"
+	"comeshipjetcopy/zeshipjetcopy/controller/Eshipjet.controller"
 ], function (Controller) {
 	"use strict";
 

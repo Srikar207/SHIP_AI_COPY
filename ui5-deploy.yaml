@@ -19,7 +19,7 @@ builder:
           client: '200'
         app:
           name: ZESHIPJETCOPY
-          package: zeshipjet
-          transport: ESJK900059
+          package: /ESHIPJET/CARRIER
+          transport: ESJK900125
         exclude:
           - /test/
