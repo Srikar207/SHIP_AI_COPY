@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ESHIPJET.CARRIERS_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="carrier" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CarrierCode"/>
+                </Key>
+                <Property Name="LocationId" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Location ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CarrierCode" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Carrier Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CarrierDescription" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CarrierType" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Carrier Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ShipFrmCntry" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Ship From Country" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ShipToCntry" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Ship To Country" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AcntNmbr" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Account Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UserId" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:label="User ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Password" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Password" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AccessKey" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Access Key" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MeterId" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Meter ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HubId" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Hub ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ConnectionType" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Connection Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LabelType" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Label Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RateUrl" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Rate URL" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ShipUrl" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Ship URL" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TrackUrl" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Track URL" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VoidUrl" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Void URL" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PodUrl" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="POD URL" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TokenUrl" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Token URL" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RateQuote" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Rate Quote" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FreightQuote" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Freight Quote" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EndOfDay" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="End of Day" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ManualRates" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Manual Rates" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AutomateProNumber" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Automate Pro Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatedOn" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Created On" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatedBy" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Created By" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LastChangedOn" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Last Changed On" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LastChangedBy" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Last Changed By" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IsActive" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Is Active" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="to_CarrierServices" Relationship="ESHIPJET.CARRIERS_SRV.assoc_carr_crsrv" FromRole="FromRole_assoc_carr_crsrv" ToRole="ToRole_assoc_carr_crsrv"/>
+            </EntityType>
+            <EntityType Name="carrier_srv" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CarrierCode"/>
+                </Key>
+                <Property Name="CarrierCode" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Carrier Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ServCode" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label=" Service Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ServDesc" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Service Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ErpServId" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="ERP Service ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ServiceCoverage" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Service Coverage" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatedBy" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Created By" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatedOn" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Created On" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LastChangedOn" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Last Changed On" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LastChangedBy" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Last Changed By" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IsActive" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Is Active" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="assoc_carr_crsrv" sap:content-version="1">
+                <End Type="ESHIPJET.CARRIERS_SRV.carrier" Multiplicity="1" Role="FromRole_assoc_carr_crsrv"/>
+                <End Type="ESHIPJET.CARRIERS_SRV.carrier_srv" Multiplicity="*" Role="ToRole_assoc_carr_crsrv"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_assoc_carr_crsrv">
+                        <PropertyRef Name="CarrierCode"/>
+                    </Principal>
+                    <Dependent Role="ToRole_assoc_carr_crsrv">
+                        <PropertyRef Name="CarrierCode"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ESHIPJET_CARRIERS_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="carrierSet" EntityType="ESHIPJET.CARRIERS_SRV.carrier" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="carrier_srvSet" EntityType="ESHIPJET.CARRIERS_SRV.carrier_srv" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="assoc_carr_crsrvSet" Association="ESHIPJET.CARRIERS_SRV.assoc_carr_crsrv" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="carrierSet" Role="FromRole_assoc_carr_crsrv"/>
+                    <End EntitySet="carrier_srvSet" Role="ToRole_assoc_carr_crsrv"/>
+                </AssociationSet>
+            </EntityContainer>
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <atom:link rel="self" href="https://sapdemo.eshipjet.com:44300/sap/opu/odata/ESHIPJET/CARRIERS_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://sapdemo.eshipjet.com:44300/sap/opu/odata/ESHIPJET/CARRIERS_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
