@@ -85,6 +85,21 @@ sap.ui.define([
             return oDateFormat.format(new Date(oDate));
           },
 
+          formatCustomDateTimeForRecentShipments: function (oDate) {
+            if (!oDate) return "";
+
+            // Extract timestamp from "/Date(1759881600000)/"
+            const timeStamp = parseInt(oDate.replace(/[^0-9]/g, ""), 10);
+            const dateObj = new Date(timeStamp);
+
+            const oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+                pattern: "MM/dd/yyyy HH:mm"
+            });
+
+            return oDateFormat.format(dateObj);
+        },
+
+
           formatCustomDateShipmentTable: function (sDateStr) {
             if (!sDateStr) return "";
             const oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({

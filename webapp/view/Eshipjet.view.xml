@@ -7,30 +7,30 @@
 				<!-- <Button		id="sideNavigationToggleButton"		icon="{value:'com/eshipjetcopy/zeshipjetcopy/css/images/menu.png', formatter:'sap.ui.require.toUrl'}"
 					type="Transparent"		press=".onSideNavButtonPress"> -->
 				<Button id="sideNavigationToggleButton"  icon="sap-icon://customfont/menuIcon"
-					type="Transparent" press=".onSideNavButtonPress">
+					type="Transparent" press=".onSideNavButtonPress" class="btnInnerFocus" >
 					<layoutData>
 						<OverflowToolbarLayoutData priority="NeverOverflow" />
 					</layoutData>
 				</Button>
-				<Text text="SAP ShipperCopilot copy 6.4"/>
+				<Text text="SAP ShipperCopilot 6.4"/>
 				<ToolbarSpacer/>
-				<Switch state="{eshipjetModel>/commonValues/darkTheme}"  change="onThemeChange" visible="{eshipjetModel>/commonValues/showDarkThemeSwitch}" >
+				<Switch state="{eshipjetModel>/commonValues/darkTheme}"  change="onThemeChange" visible="{eshipjetModel>/commonValues/showDarkThemeSwitch}" class="btnInnerFocus" >
 					<layoutData>
 						<FlexItemData growFactor="1" />
 					</layoutData>
 				</Switch>
-				<Button icon="sap-icon://action-settings" type="Transparent" press="onPressSettingsButton"/>
-				<Button icon="sap-icon://bell" type="Transparent" />
+				<Button icon="sap-icon://action-settings" type="Transparent" press="onPressSettingsButton" class="btnInnerFocus" />
+				<Button icon="sap-icon://bell" type="Transparent" class="btnInnerFocus" />
 			</tnt:ToolHeader>
 		</tnt:header>
 		<tnt:sideContent >
 			<tnt:SideNavigation visible="{eshipjetModel>/SideNavigation}" class="sapUiMediumMarginBottom" expanded="true" selectedKey="{eshipjetModel>/selectedKey}" itemSelect=".onItemSelect">
 				<tnt:NavigationList class="side-navigation" >
-					<tnt:NavigationListItem  text="SAP ShipperCopilot" icon="sap-icon://customfont/ShipperCopilate" key="ShipperCopilot" class="sideNavigationIcons" >
+					<tnt:NavigationListItem  text="SAP ShipperCopilot" icon="sap-icon://customfont/ShipperCopilate" key="ShipperCopilot" class="sideNavigationIcons btnInnerFocus" >
 					</tnt:NavigationListItem>
-					<tnt:NavigationListItem text="Orders" icon="sap-icon://customfont/order_icon" key="Orders">
+					<tnt:NavigationListItem text="Orders" icon="sap-icon://customfont/order_icon" key="Orders" class="btnInnerFocus" >
 					</tnt:NavigationListItem>
-					<tnt:NavigationListItem text="Batch Ship" icon="sap-icon://customfont/batchship_icon" class="sideNavigationIcons" key="BatchShip">
+					<tnt:NavigationListItem text="Batch Ship" icon="sap-icon://customfont/batchship_icon" class="sideNavigationIcons btnInnerFocus" key="BatchShip">
 					</tnt:NavigationListItem>
 					<tnt:NavigationListItem text="Ship Request/Label" icon="sap-icon://customfont/shiprequest_icon" key="ShipRequestLabel" class="copilot-cls" >
 					</tnt:NavigationListItem>
@@ -77,19 +77,19 @@
 							<l:HorizontalLayout id="TileContainerExpanded"
 				                    allowWrapping="true"
 				                    class="sapUiTinyMargin ship-tile-container">
-									<GenericTile press="onTilePress" class="ship-tile shipping-card"
+									<GenericTile press="onTilePress" class="ship-tile shipping-card btnInnerFocus"
 										headerImage="{value: 'com/eshipjetcopy/zeshipjetcopy/css/images/orders.png',formatter: 'sap.ui.require.toUrl'}">
 										<TileContent class="ship-tile-content">
 											<Button class="ship-tile-button" text="Orders"/>
 										</TileContent>
 									</GenericTile>
-									<GenericTile press="onTilePress" class="ship-tile active-shipping-card"
+									<GenericTile press="onTilePress" class="ship-tile active-shipping-card btnInnerFocus"
 										headerImage="{value: 'com/eshipjetcopy/zeshipjetcopy/css/images/ShipNow1.png',formatter: 'sap.ui.require.toUrl'}">
 										<TileContent class="ship-tile-content">
 											<Button class="ship-tile-button" text="Ship Now"/>
 										</TileContent>
 									</GenericTile>
-									<GenericTile press="onTilePress" class="ship-tile shipping-card"
+									<GenericTile press="onTilePress" class="ship-tile shipping-card btnInnerFocus"
 										headerImage="{value: 'com/eshipjetcopy/zeshipjetcopy/css/images/track.png',formatter: 'sap.ui.require.toUrl'}">
 										<TileContent class="ship-tile-content">
 											<Button class="ship-tile-button" text="Track Now"/>
@@ -559,7 +559,7 @@
 	  </App>
 
 	  	<OverflowToolbar class="eship-footer" visible="{eshipjetModel>/commonValues/allViewsFooter}">
-	  		<Button text="Log Out" class="customLogOutButton" type="Transparent" width="6rem" press="onLogOutPress" icon="sap-icon://log" ></Button>
+	  		<Button text="Log Out" class="customLogOutButton btnInnerFocus" type="Transparent" width="6rem" press="onLogOutPress" icon="sap-icon://log" ></Button>
 			<ToolbarSpacer/>
 				<Text text="© copyright 2024 eshipjet.ai, Inc. All rights reserved."/>
 			<ToolbarSpacer/>

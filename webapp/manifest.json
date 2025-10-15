@@ -11,98 +11,17 @@
     "description": "{{appDescription}}",
     "resources": "resources.json",
     "sourceTemplate": {
-      "id": "@sap/generator-fiori:basiccopy",
+      "id": "@sap/generator-fiori:basic",
       "version": "1.15.6",
       "toolsId": "d1fc7917-d11d-4531-827c-52e7b742fe43"
     },
     "dataSources": {
-      "SHIP_SRV": {
-        "uri": "/sap/opu/odata/ESHIPJET/SHIP_SRV",
-        "type": "OData",
-        "settings": {
-          "annotations": [],
-          "localUri": "localService/SHIP_SRV/metadata.xml",
-          "odataVersion": "2.0"
-        }
-      },
-      "API_OUTBOUND_DELIVERY_SRV": {
-        "uri": "/sap/opu/odata/sap/API_OUTBOUND_DELIVERY_SRV;v=2/",
-        "type": "OData",
-        "settings": {
-          "annotations": [],
-          "localUri": "localService/API_OUTBOUND_DELIVERY_SRV;v=2/metadata.xml",
-          "odataVersion": "2.0"
-        }
-      },
-      "API_HANDLING_UNIT": {
-        "uri": "/sap/opu/odata/sap/API_HANDLING_UNIT",
-        "type": "OData",
-        "settings": {
-          "annotations": [],
-          "localUri": "localService/API_HANDLING_UNIT/metadata.xml",
-          "odataVersion": "2.0"
-        }
-      },
-      "API_SALES_ORDER_SRV": {
-        "uri": "/sap/opu/odata/sap/API_SALES_ORDER_SRV",
-        "type": "OData",
-        "settings": {
-          "annotations": [],
-          "localUri": "localService/API_SALES_ORDER_SRV/metadata.xml",
-          "odataVersion": "2.0"
-        }
-      },
       "MANFEST_SRV1": {
         "uri": "/sap/opu/odata/ESHIPJET/MANFEST_SRV/",
         "type": "OData",
         "settings": {
           "annotations": [],
           "localUri": "localService/MANFEST_SRV1/metadata.xml",
-          "odataVersion": "2.0"
-        }
-      },
-      "ZSJ_SHIPPER_DATA_UPDATE_SRV_SRV": {
-        "uri": "/sap/opu/odata/sap/ZSJ_SHIPPER_DATA_UPDATE_SRV_SRV/",
-        "type": "OData",
-        "settings": {
-          "annotations": [],
-          "localUri": "localService/ZSJ_SHIPPER_DATA_UPDATE_SRV_SRV/metadata.xml",
-          "odataVersion": "2.0"
-        }
-      },
-      "SHIP_READ_DATA_SRV": {
-        "uri": "/sap/opu/odata/ESHIPJET/SHIP_READ_DATA_SRV/",
-        "type": "OData",
-        "settings": {
-          "annotations": [],
-          "localUri": "localService/SHIP_READ_DATA_SRV/metadata.xml",
-          "odataVersion": "2.0"
-        }
-      },
-      "API_PRODUCT_ANNO_MDL": {
-        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='API_PRODUCT_ANNO_MDL',Version='0001')/$value/",
-        "type": "ODataAnnotation",
-        "settings": {
-          "localUri": "localService/API_PRODUCT_SRV/API_PRODUCT_ANNO_MDL.xml"
-        }
-      },
-      "API_PRODUCT_SRV": {
-        "uri": "/sap/opu/odata/sap/API_PRODUCT_SRV/",
-        "type": "OData",
-        "settings": {
-          "annotations": [
-            "API_PRODUCT_ANNO_MDL"
-          ],
-          "localUri": "localService/API_PRODUCT_SRV/metadata.xml",
-          "odataVersion": "2.0"
-        }
-      },
-      "CREATE_HU_SRV": {
-        "uri": "/sap/opu/odata/ESHIPJET/CREATE_HU_SRV/",
-        "type": "OData",
-        "settings": {
-          "annotations": [],
-          "localUri": "localService/CREATE_HU_SRV/metadata.xml",
           "odataVersion": "2.0"
         }
       },
@@ -121,6 +40,33 @@
             "ZCDS_DLVR_DATA_CDS_VAN"
           ],
           "localUri": "localService/ZCDS_DLVR_DATA_CDS/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "CREATE_HU_SRV": {
+        "uri": "/sap/opu/odata/ESHIPJET/CREATE_HU_SRV/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/CREATE_HU_SRV/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "sapS4cloud": {
+        "uri": "/sap/opu/odata/sap/API_OUTBOUND_DELIVERY_SRV;v=0002/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/sap/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "MANIFEST_SRV": {
+        "uri": "/sap/opu/odata/ESHIPJET/MANIFEST_SRV/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/MANIFEST_SRV/metadata.xml",
           "odataVersion": "2.0"
         }
       }
@@ -171,54 +117,6 @@
         "type": "sap.ui.model.json.JSONModel",
         "uri": "model/data.json"
       },
-      "": {
-        "preload": true,
-        "dataSource": "SHIP_SRV",
-        "settings": {
-          "defaultBindingMode": "TwoWay",
-          "defaultCountMode": "Inline",
-          "refreshAfterChange": false,
-          "metadataUrlParams": {
-            "sap-value-list": "none"
-          }
-        }
-      },
-      "OutBoundDeliveryModel": {
-        "dataSource": "API_OUTBOUND_DELIVERY_SRV",
-        "preload": true,
-        "settings": {
-          "defaultBindingMode": "TwoWay",
-          "defaultCountMode": "Inline",
-          "refreshAfterChange": false,
-          "metadataUrlParams": {
-            "sap-value-list": "none"
-          }
-        }
-      },
-      "HandlingUnitModel": {
-        "dataSource": "API_HANDLING_UNIT",
-        "preload": true,
-        "settings": {
-          "defaultBindingMode": "TwoWay",
-          "defaultCountMode": "Inline",
-          "refreshAfterChange": false,
-          "metadataUrlParams": {
-            "sap-value-list": "none"
-          }
-        }
-      },
-      "SalesOrderModel": {
-        "dataSource": "API_SALES_ORDER_SRV",
-        "preload": true,
-        "settings": {
-          "defaultBindingMode": "TwoWay",
-          "defaultCountMode": "Inline",
-          "refreshAfterChange": false,
-          "metadataUrlParams": {
-            "sap-value-list": "none"
-          }
-        }
-      },
       "ManifestSrvModel": {
         "dataSource": "MANFEST_SRV1",
         "preload": true,
@@ -231,25 +129,8 @@
           }
         }
       },
-      "ShipperDataUpdateSrvModel": {
-        "dataSource": "ZSJ_SHIPPER_DATA_UPDATE_SRV_SRV",
-        "preload": true,
-        "settings": {
-          "defaultBindingMode": "TwoWay",
-          "defaultCountMode": "Inline",
-          "refreshAfterChange": false,
-          "metadataUrlParams": {
-            "sap-value-list": "none"
-          }
-        }
-      },
-      "ShipReadDataSrvModel": {
-        "dataSource": "SHIP_READ_DATA_SRV",
-        "preload": true,
-        "settings": {}
-      },
-      "APIProductSrvModel": {
-        "dataSource": "API_PRODUCT_SRV",
+      "GetDeliveryDataModel": {
+        "dataSource": "ZCDS_DLVR_DATA_CDS",
         "preload": true,
         "settings": {}
       },
@@ -258,8 +139,13 @@
         "preload": true,
         "settings": {}
       },
-      "GetDeliveryDataModel": {
-        "dataSource": "ZCDS_DLVR_DATA_CDS",
+      "sapS4HanaCloudModel": {
+        "dataSource": "sapS4cloud",
+        "preload": true,
+        "settings": {}
+      },
+      "ManifestModel": {
+        "dataSource": "MANIFEST_SRV",
         "preload": true,
         "settings": {}
       }

@@ -1,36 +1,36 @@
 <core:FragmentDefinition	xmlns="sap.m"    xmlns:ui="sap.ui.table"  	xmlns:l="sap.ui.layout"	xmlns:f="sap.ui.layout.form"	xmlns:core="sap.ui.core">
 
-		<Toolbar width="auto" height="3rem" class="toolbarbottomborder fixedLayout ordersDarkThemeToolbar">
+		<Toolbar width="auto"  class="carrierCatalogToolbar noBorderToolbar" height="5rem" >
 			<Text text="Carrier Catalog" class="toolBarHeader sapUiTinyMarginBegin whiteColor" ></Text>
 				<ToolbarSpacer />
 					<HBox>
-						<Button  text="Add Carrier"  press="AddCarrierDialog" class="Master-toolbar__button" width="8rem" ></Button>
+						<Button  text="Add Carrier"  press="AddCarrierDialog" class="addCarrierBtnStyle" width="auto" ></Button>
 						<!-- <Button type="Success" press="onCarrierCatalogArrowPress" icon="sap-icon://navigation-down-arrow" class="Master-toolbar__button sapUiTinyMarginEnd" ></Button> -->
                 	</HBox>
 		</Toolbar>
 
-        <Toolbar height="25%" class="whiteBackground sapUiTinyMarginBottom " >
+        <Toolbar height="25%" class="toolbarbottomborder" >
 			<HBox width="100%" >
 				<VBox class="sapUiTinyMargin" width="33%">
 					<Text text="1" class="NumberSizeTitle1"></Text>
 					<Text text="Total Carrier" class="NumberSizeTitle2"></Text>
-					<Button class="totalProgress-request-button request-button" icon="false" width="100%"  ></Button>
+					<Button class="totalProgress-request-button request-button btnInnerFocus" icon="false" width="100%" ></Button>
 				</VBox>
 				<VBox class="sapUiTinyMargin" width="33%">
 					<Text text="2" class="NumberSizeTitle1"></Text>
 					<Text text="Active" class="NumberSizeTitle2"></Text>
-					<Button type="Critical" class="inTransit-request-button request-button" icon="false" width="100%" ></Button>
+					<Button class="shipped-request-button request-button btnInnerFocus" icon="false" width="100%" ></Button>
 				</VBox>
 				<VBox class="sapUiTinyMargin" width="33%">
 					<Text text="3" class="NumberSizeTitle1"></Text>
 					<Text text="Inactive" class="NumberSizeTitle2"></Text>
-					<Button class="InWhite-request-button request-button" type="Success" icon="false" width="100%" ></Button>
+					<Button class="InWhite-request-button request-button btnInnerFocus" icon="false" width="100%" ></Button>
 				</VBox>
 			</HBox>
 		</Toolbar>
 
 
-	<VBox class="whiteBackground sapUiTinyMarginTop" >
+	<VBox class="whiteBackgroundForTables sapUiTinyMarginTop" >
 		<Toolbar class="sapUiTinyMarginTop sapUiSmallMarginBegin sapUiSmallMarginEnd" >
 			<Button icon="sap-icon://filter" press="onCarrierCatalogFilterPopoverPress" type="Transparent" class="ordersIcons" ></Button>
 			<ToolbarSpacer ></ToolbarSpacer>
@@ -47,18 +47,18 @@
 			id="_IDCarriesCatalogTable"
 			class="rowRightLine ordersTableRightBorder"
 			selectionMode="None"
-			visibleRowCount="10"
+			visibleRowCount="13"
 			ariaLabelledBy="title">
 		</ui:Table>
     </VBox>
 
-	<Toolbar class="whiteBackground sapUiTinyMarginTop ordersTableFooter">
+	<Toolbar class="whiteBackgroundForTables ordersTableFooter">
 		<ToolbarSpacer/>
-			<Button  text="First" type="Transparent"/>
-			<Button  text="Previous" type="Transparent"/>
+			<Button  text="First" icon="sap-icon://close-command-field" class="btnInnerFocus" />
+			<Button  text="Previous" icon="sap-icon://nav-back" class="btnInnerFocus" />
 			<Text    text="1-0 of 0" />
-			<Button  text="Next" type="Transparent"/>
-			<Button  text="Last" type="Transparent"/>
+			<Button  text="Next" class="btnInnerFocus" />
+			<Button  text="Last" icon="sap-icon://open-command-field" class="btnInnerFocus" iconFirst="false" />
 	</Toolbar>
 
     <!-- <ui:Table	id="_IDCarriesCatalogTable"	width="100%"	class="headerContent sapUiTinyMarginTop"

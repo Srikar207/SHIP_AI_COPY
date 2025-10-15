@@ -18,7 +18,7 @@
         <Toolbar >
             <Title text="Add Carrier"></Title>
             <ToolbarSpacer ></ToolbarSpacer>
-                <Button icon="sap-icon://decline" press="AddCarrierCancelDialog" class="Decline_Btn ship-now-decline_btn" ></Button>
+                <Button icon="sap-icon://decline" press="AddCarrierCancelDialog" class="Decline_Btn ship-now-decline_btn btnInnerFocus" type="Transparent" ></Button>
         </Toolbar>
         <HBox alignContent="Center" >
 												<HBox height="4.5rem" width="auto" class="whiteBackground sapUiTinyMarginEnd packScreenPadding" alignItems="Center" >
@@ -179,9 +179,9 @@
                     
         <footer >
             <Toolbar >
-                <Button  text="Cancel" press="AddCarrierCancelDialog" class="green-button_Master_Red" />
+                <Button  text="Cancel" press="AddCarrierCancelDialog" class="customLogOutButton btnInnerFocus" type="Transparent"  />
                 <ToolbarSpacer/>
-                <Button  text="Save" press="AddCarrierUpdateDialog" class="green-button_Master"/>
+                <Button  text="Save" press="AddCarrierUpdateDialog" class="addCarrierSaveBtnStyle btnInnerFocus" width="auto" />
             </Toolbar>
         </footer>
     </Dialog>

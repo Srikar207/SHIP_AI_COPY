@@ -1029,7 +1029,7 @@
 									</HBox>
 									<ui:template>
 									<HBox justifyContent="End" alignItems="End" width="100%">
-										<Text text="{eshipjetModel>ActualDeliveryQuantity}" wrapping="false" />
+										<Text text="{eshipjetModel>BalanceQty}" wrapping="false" />
 									</HBox>
 									</ui:template>
 								</ui:Column>
@@ -1160,7 +1160,7 @@
 
 								<HBox height="3rem" width="37%" class="whiteBackground sapUiTinyMarginEnd" alignItems="Center" justifyContent="SpaceBetween" >
 								   <FlexBox justifyContent="SpaceBetween" width="100%" >
-										<Button text="Pack" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="Ship-Now-toolbar1__button_Pack saveBtnPack sapUiSmallMarginBegin" type="Ghost" width="auto" press="onPackPress" ></Button>
+										<Button text="Pack" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="Ship-Now-toolbar1__button_Pack saveBtnPack sapUiSmallMarginBegin" type="Ghost" width="auto" press="onHUItemsCreatePress" ></Button>
 										<Button text="Pack All" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="Ship-Now-toolbar1__button_PackAll saveBtnPackAll" type="Ghost" width="auto" press="onPackAllPress" ></Button>
 										<!-- <Button text="DG Pack" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="Ship-Now-toolbar1__button_DGPack sapUiTinyMarginEnd" type="Ghost" width="auto" ></Button>
 										<Button text="DG Pack All" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="Ship-Now-toolbar1__button_DGPackAll sapUiTinyMarginEnd" type="Ghost" width="auto" ></Button> -->
@@ -1222,7 +1222,7 @@
 									</HBox>
 									<ui:template>
 									<HBox justifyContent="End" alignItems="End">
-										<Text text="10 X 12 X 12" visible="{= ${eshipjetModel>Hunumber} > 0 ? true : false }" wrapping="false" />
+										<Text text="10 X 12 X 12" visible="{= ${eshipjetModel>HandlingUnitExternalID} > 0 ? true : false }" wrapping="false" />
 										</HBox>
 									</ui:template>
 								</ui:Column>

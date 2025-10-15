@@ -16,16 +16,16 @@
         showHeader="false"
         contentWidth="100%"
         contentHeight="80%"
-        class="myCustomDialog"
-    >
+        class="myCustomDialog" >
         <customHeader>
             <Toolbar>
                 <Title text="Add Carrier Configuration" />
                 <ToolbarSpacer />
                 <Button
-                     icon="sap-icon://decline"
+                    icon="sap-icon://decline"
                     press=" AddCarrierConfigurationCloseDialog"
-                    class="Decline_Btn ship-now-decline_btn"
+                    class="Decline_Btn ship-now-decline_btn btnInnerFocus"
+                    type="Transparent"
                 />
             </Toolbar>
         </customHeader>
@@ -46,13 +46,13 @@
         <IconTabBar
         expanded="true"
         enableTabReordering="true"
-        class="shipNow-IconTabBar-Width">
+        class="shipNow-IconTabBar-Width" >
             <!-- Carrier Info Tab -->
             <items>
                 <IconTabFilter
                     key="carrier"
-                    text="Carrier Info">
-                    	<HBox height="4.5rem" width="auto" class=" sapUiSmallMarginEnd packScreenPadding" alignItems="Center" >
+                    text="Carrier Info" >
+                    	<HBox height="4.5rem" width="auto" class="sapUiSmallMarginEnd packScreenPadding" alignItems="Center" >
 													<VBox >
 														<Label text="Location ID / Location Name" />
 														<ComboBox class="create-ship-req_input sapUiLargeMarginEnd" width="auto" enabled="{}" items="{eshipjetModel>/locations}" selectedKey="{}" selectionChange=""  >
@@ -156,7 +156,7 @@
                                             <core:Item key="Domestic" text="Domestic" />
                                             <core:Item key="International" text="International" />
                                         </ComboBox>
-                                        <Switch state="false" />
+                                        <Switch state="false" class="btnInnerFocus" />
                                     </cells>
                                 </ColumnListItem>
                             </items>
@@ -179,12 +179,14 @@
                 <!-- Additional Info Tab -->
                 <IconTabFilter
                     key="additional"
-                    text="Additional Info"
-                >
+                    text="Additional Info" >
 
                      <form:SimpleForm
-                       editable="true" layout="ColumnLayout" columnsM="2" columnsL="3" columnsXL="6"
-                    >
+                       editable="true" 
+                       layout="ColumnLayout" 
+                       columnsM="2" 
+                       columnsL="3" 
+                       columnsXL="6" >
                         <form:content>
                             <Label text="Label Type" />
                             <ComboBox class="create-ship-req_input ">
@@ -242,11 +244,10 @@
 
         <footer>
             <Toolbar>
-               
-                <Button text="Cancel" press="AddCarrierConfigurationCancelDialog" class="green-button_Master_Red" />
+                <Button text="Cancel" press="AddCarrierConfigurationCancelDialog" class="customLogOutButton btnInnerFocus" />
                  <ToolbarSpacer />
-                <Button text="Address" type="Emphasized" press="onAddressCarrierConfig" />
-                <Button text="Save"  press="AddCarrierConfigurationUpdateDialog" class="green-button_Master" />
+                <Button text="Address" type="Emphasized" press="onAddressCarrierConfig" class="addCarrierSaveBtnStyle btnInnerFocus" />
+                <Button text="Save"  press="AddCarrierConfigurationUpdateDialog" class="addCarrierSaveBtnStyle btnInnerFocus" />
             </Toolbar>
         </footer>
     </Dialog>

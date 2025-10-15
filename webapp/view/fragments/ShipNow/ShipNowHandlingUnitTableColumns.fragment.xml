@@ -9,7 +9,7 @@
 					<ToolbarSpacer id="_IDGenShipNowHandlingUnitToolbarSpacer1" ></ToolbarSpacer>					
 					<Button id="_IDShipNowHandlingUnitCloseIconPopover" icon="sap-icon://decline" press="onShipNowHandlingUnitColSelectClosePress" class="Decline_Btn ship-now-decline_btn" ></Button>
 				</Toolbar>
-				<SearchField id="_IDGenShipNowHandlingUnitSearchField" placeholder="Search Columns" class="sapUiSmallMarginEnd sapUiTinyMarginBottom columnConfigSearch"  liveChange="onShipNowHandlingUnitColNameSearch"></SearchField>
+				<SearchField id="_IDGenShipNowHandlingUnitSearchField" placeholder="Search Columns" class="sapUiSmallMarginEnd sapUiTinyMarginBottom columnConfigSearch" liveChange="onShipNowHandlingUnitColNameSearch" ></SearchField>
 			</VBox>
 		</customHeader>
 		<content>
