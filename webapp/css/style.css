@@ -2723,3 +2723,31 @@ button {
   text-align: center !important;
   margin-right: 6px !important;
 }
+
+/* ✅ Make ON state green */
+.greenSwitch.sapMSwtOn {
+  background-color: #008000 !important;  /* or your preferred green */
+  border-color: #008000 !important;
+}
+
+/* ✅ Ensure handle (circle) stays white */
+.greenSwitch.sapMSwtOn .sapMSwtHandle {
+  background-color: #ffffff !important;
+}
+
+/* Optional: keep OFF state grey (default) */
+.greenSwitch.sapMSwtOff {
+  background-color: #d3d3d3 !important;
+  border-color: #d3d3d3 !important;
+}
+
+.sapMSwtOn .sapMSwtHandle::before,
+.sapMSwtOff .sapMSwtHandle::before {
+    display: none !important;
+}
+.sapMSwtOn:not(.sapMSwtAcceptReject) .sapMSwtInner {
+    background-color: #108600 !important;
+}
+.sapMSwtOff:not(.sapMSwtAcceptReject) .sapMSwtInner {
+    background-color: #D3D3D3 !important;
+}

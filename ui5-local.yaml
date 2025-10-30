@@ -92,7 +92,7 @@ server:
             generateMockData: true
           - urlPath: /sap/opu/odata/sap/API_OUTBOUND_DELIVERY_SRV;v=0002
             metadataPath: ./webapp/localService/sap/metadata.xml
-            mockdataPath: ./webapp/localService/sap/data
+            mockdataPath: ./webapp/localService/sapS4cloud/data
             generateMockData: true
           - urlPath: /sap/opu/odata/ESHIPJET/MANIFEST_SRV
             metadataPath: ./webapp/localService/MANIFEST_SRV/metadata.xml

@@ -1,0 +1,56 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:svm="sap.ui.comp.smartvariants"
+    xmlns:ui="sap.ui.table"
+    xmlns:u="sap.ui.unified"
+    xmlns:c="sap.ui.core">
+
+    <Dialog
+        id="idCarrierAccountsValueHelpDialog"
+        showHeader="false"
+        contentWidth="80%"
+        contentHeight="70%">
+
+        <Toolbar>
+            <Text text="Select Carrier Account" />
+            <ToolbarSpacer />
+            <Button icon="sap-icon://decline"
+                    press="onCarrieraccountSearchDialogClosePress"
+                    class="Decline_Btn ship-now-decline_btn" />
+        </Toolbar>
+
+        <SearchField
+            id="carrierSearchField"
+            class="columnConfigSearch sapUiSmallMarginBegin"
+            width="98%"
+            placeholder="Search carriers..."
+            liveChange="onCarrierSearch" />
+
+        <Table id="carrierTable"
+               items="{eshipjetModel>/carriers}"
+               class="sapUiSmallMarginTop">
+            <columns>
+                <Column><Text text="Carrier ID" /></Column>
+                <Column><Text text="Carrier Name" /></Column>
+                <Column><Text text="Carrier Type" /></Column>
+                <Column><Text text="Carrier Coverage" /></Column>
+            </columns>
+            <items>
+                <ColumnListItem type="Active" press="onCarrierItemPress">
+                    <cells>
+                        <Text text="{eshipjetModel>CarrierCode}" />
+                        <Text text="{eshipjetModel>CarrierDescription}" />
+                        <Text text="{eshipjetModel>CarrierType}" />
+                        <Text text="{eshipjetModel>ServiceCoverage}" />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </Dialog>
+</core:FragmentDefinition>

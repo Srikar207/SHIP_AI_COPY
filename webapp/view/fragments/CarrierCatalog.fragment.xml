@@ -34,7 +34,7 @@
 		<Toolbar class="sapUiTinyMarginTop sapUiSmallMarginBegin sapUiSmallMarginEnd" >
 			<Button icon="sap-icon://filter" press="onCarrierCatalogFilterPopoverPress" type="Transparent" class="ordersIcons" ></Button>
 			<ToolbarSpacer ></ToolbarSpacer>
-				<SearchField width="10rem" class="sapUiSmallMarginBottom forsearchhigh" liveChange="onSearchCarrierCatalog" ></SearchField>
+				<SearchField width="10rem" class="sapUiTinyMarginBottom forsearchhigh sapUiTinyMarginTop" liveChange="onSearchCarrierCatalog" ></SearchField>
 				<Button icon="sap-icon://action" press="onCarrierCatalogExportToExcel" type="Transparent" class="ordersIcons" ></Button>
 			<Button icon="sap-icon://action-settings" press="openCarrierCatalogColNamesPopover" type="Transparent" class="ordersIcons" ></Button>
 			<customData>
@@ -47,13 +47,91 @@
 			id="_IDCarriesCatalogTable"
 			class="rowRightLine ordersTableRightBorder"
 			selectionMode="None"
+			rows="{eshipjetModel>/carriersCatalogData}"
 			visibleRowCount="13"
 			ariaLabelledBy="title">
+
+					<ui:columns>
+								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/0/visible}" >
+									<Label text="Location ID" />
+									<ui:template>
+										<Text text="{eshipjetModel>ServLoc}" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/1/visible}" width="auto" >
+									<Label text="ERP Location ID" />
+									<ui:template>
+										<Text text="{eshipjetModel>UserId}" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/2/visible}" >
+									<Label text="Carrier ID" />
+									<ui:template>
+										<Text text="{eshipjetModel>CarrierCode}" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/3/visible}" >
+									<Label text="ERP Carrier ID" />
+									<ui:template>
+										<Text text="{eshipjetModel>CarrierCode}" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/4/visible}" >
+									<Label text="Carrier Name" />
+									<ui:template>
+										<Text text="{eshipjetModel>CarrierDescription}" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/5/visible}" >
+									<Label text="Carrier Type" />
+									<ui:template>
+										<Text text="{eshipjetModel>CarrierType}" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/6/visible}" >
+									<Label text="Carrier Coverage" />
+									<ui:template>
+										<Text text="{eshipjetModel>ServiceCoverage}" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/7/visible}" >
+									<Label text="Connection Type" />
+									<ui:template>
+										<Text text="{eshipjetModel>ConnectionType}" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/8/visible}" >
+									<Label text="Color Picker" />
+									<ui:template>
+										<Text text="" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/9/visible}" >
+									<Label text="Status" />
+									<ui:template>
+										<Switch type="AcceptReject" state="{= ${eshipjetModel>IS_ACTIVE} === 'true' ? true : false}" class="btnInnerFocus" >
+											<layoutData>
+												<FlexItemData growFactor="1" />
+											</layoutData>
+										</Switch>
+									</ui:template>
+								</ui:Column>
+								<ui:Column visible="true" >
+									<Label text="Actions" />
+									<ui:template>
+										<HBox >
+											<Button text="Edit" type="Transparent" press="onEditCarrierCatalogPress" ></Button>
+											<Button icon="sap-icon://megamenu" type="Transparent" ></Button>
+										</HBox>
+									</ui:template>
+								</ui:Column>
+							</ui:columns>
 		</ui:Table>
     </VBox>
 
+
 	<Toolbar class="whiteBackgroundForTables ordersTableFooter">
-		<ToolbarSpacer/>
+		<ToolbarSpacer/>			
 			<Button  text="First" icon="sap-icon://close-command-field" class="btnInnerFocus" />
 			<Button  text="Previous" icon="sap-icon://nav-back" class="btnInnerFocus" />
 			<Text    text="1-0 of 0" />

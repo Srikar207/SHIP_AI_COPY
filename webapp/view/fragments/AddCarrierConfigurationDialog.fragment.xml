@@ -52,82 +52,89 @@
                 <IconTabFilter
                     key="carrier"
                     text="Carrier Info" >
-                    	<HBox height="4.5rem" width="auto" class="sapUiSmallMarginEnd packScreenPadding" alignItems="Center" >
-													<VBox >
-														<Label text="Location ID / Location Name" />
-														<ComboBox class="create-ship-req_input sapUiLargeMarginEnd" width="auto" enabled="{}" items="{eshipjetModel>/locations}" selectedKey="{}" selectionChange=""  >
-															<core:Item key="{eshipjetModel>id}" text="{eshipjetModel>name}" />
-														</ComboBox>
-													</VBox>
-													<VBox >
-														<Label text="Carrier Name" />
-														<ComboBox class="create-ship-req_input sapUiLargeMarginEnd"  width="auto" enabled="{}" items="{serviceNamesList>/carrierServices}"   selectionChange="onServiceNowDropdownChange"     selectedKey="{eshipjetModel>/commonValues/ShipNowShipsrvNameSelectedKey}">
-															<core:Item key="{serviceNamesList>ShippingType}" text="{serviceNamesList>ServiceName}" />
-														</ComboBox>
-													</VBox>
-													<VBox >
-														<Label text="Carrier Type" />
-															<Input value="{}" enabled="{}" class="create-ship-req_input sapUiLargeMarginEnd"  width="auto" />
-													</VBox>
-                                                    <VBox >
-														<Label text="Ship From Country" />
-															<Input value="{}" enabled="{}" class="create-ship-req_input sapUiLargeMarginEnd"  width="auto" />
-													</VBox>
-													<VBox >
-														<Label text="Ship To Country" />
-															<Input value="{}" enabled="{}" class="create-ship-req_input sapUiLargeMarginEnd"  width="auto" />
-													</VBox>
-                                                    <VBox >
-														<Label text="Cost Center" />
-														<ComboBox class="create-ship-req_input sapUiLargeMarginEnd" width="auto" enabled="{}" items="{eshipjetModel>/carrierconfiguration1}" selectedKey="{eshipjetModel>/commonValues/ShipNowShipMethodSelectedKey}" selectionChange="onShopNowShipMethodTypeChange"  >
-															<core:Item key="{eshipjetModel>CarrierName}" text="{eshipjetModel>CarrierName}" />
-														</ComboBox>
-													</VBox>
-													<VBox >
-														<Label text="Environment" />
-														<ComboBox class="create-ship-req_input sapUiLargeMarginEnd"  width="auto" enabled="{}" items="{serviceNamesList>/carrierServices}"   selectionChange="onServiceNowDropdownChange"     selectedKey="{eshipjetModel>/commonValues/ShipNowShipsrvNameSelectedKey}">
-															<core:Item key="{serviceNamesList>ShippingType}" text="{serviceNamesList>ServiceName}" />
-														</ComboBox>
-													</VBox>
-                                                    
-												</HBox>
+         <form:SimpleForm
+    id="carrierAccountsForm"
+   editable="true"
+                        layout="ColumnLayout"
+                        columnsM="2"
+                        columnsL="3"
+                        columnsXL="6">
 
-                                                <HBox height="4.5rem" width="auto" class=" sapUiSmallMarginEnd packScreenPadding" alignItems="Center" >
-													<VBox >
-														<Label text="Account Number" />
-														<ComboBox class="create-ship-req_input sapUiLargeMarginEnd" width="auto" enabled="{}" items="{eshipjetModel>/carrierconfiguration1}" selectedKey="{}" selectionChange=""  >
-															<core:Item key="{eshipjetModel>CarrierName}" text="{eshipjetModel>CarrierName}" />
-														</ComboBox>
-													</VBox>
-													<VBox >
-														<Label text="User ID" />
-														<ComboBox class="create-ship-req_input sapUiLargeMarginEnd"  width="auto" enabled="{}" items="{serviceNamesList>/carrierServices}"   selectionChange="onServiceNowDropdownChange"     selectedKey="{eshipjetModel>/commonValues/ShipNowShipsrvNameSelectedKey}">
-															<core:Item key="{serviceNamesList>ShippingType}" text="{serviceNamesList>ServiceName}" />
-														</ComboBox>
-													</VBox>
-													<VBox >
-														<Label text="Password" />
-															<Input value="{}" enabled="{}" class="create-ship-req_input sapUiLargeMarginEnd"  width="auto" />
-													</VBox>
-                                                    <VBox >
-														<Label text="Meter ID" />
-															<Input value="{}" enabled="{}" class="create-ship-req_input sapUiLargeMarginEnd"  width="auto" />
-													</VBox>
-													<VBox >
-														<Label text="Hub ID" />
-															<Input value="{}" enabled="{}" class="create-ship-req_input sapUiLargeMarginEnd"  width="auto" />
-													</VBox>
-                                                    <VBox >
-														<Label text="Connection Type" />
-														<ComboBox class="create-ship-req_input sapUiLargeMarginEnd" width="auto" enabled="{}" items="{eshipjetModel>/carrierconfiguration1}" selectedKey="{eshipjetModel>/commonValues/ShipNowShipMethodSelectedKey}" selectionChange="onShopNowShipMethodTypeChange"  >
-															<core:Item key="{eshipjetModel>CarrierName}" text="{eshipjetModel>CarrierName}" />
-														</ComboBox>
-													</VBox>
-												</HBox>
+    <!-- Row 1 -->
+    <Label text="Location ID / Location Name" />
+    <ComboBox items="{eshipjetModel>/LocationsData}" selectedKey="{eshipjetModel>/carrierAccountsLocationId}" class="create-ship-req_input ">
+        <core:Item key="{eshipjetModel>Plant}" text="{eshipjetModel>Plant} - {eshipjetModel>PlantName}" />
+    </ComboBox>
+
+   
+    <Label text="Carrier Type" />
+    <ComboBox selectedKey="{eshipjetModel>/carrierAccountsCarrierType}" class="create-ship-req_input ">
+        <core:Item key="FTL" text="FTL" />
+        <core:Item key="Generic" text="Generic" />
+        <core:Item key="LTL" text="LTL" />
+        <core:Item key="Parcel" text="Parcel" />
+        <core:Item key="TL" text="TL" />
+        <core:Item key="Other" text="Other" />
+    </ComboBox>
+
+     <Label text="Carrier Name" />
+    <Input value="{eshipjetModel>/carrierAccountsCarrierName}" showValueHelp="true" valueHelpRequest="onGetCarrierAccountValueHelpData" class="create-ship-req_input " />
+
+
+    <Label text="Ship From Country" />
+    <ComboBox items="{eshipjetModel>/countriesList}" selectedKey="{eshipjetModel>/carrierAccountsShipFromCountryName}" class="create-ship-req_input ">
+        <core:Item key="{eshipjetModel>code}" text="{eshipjetModel>name}" />
+    </ComboBox>
+
+    <Label text="Ship To Country" />
+    <ComboBox items="{eshipjetModel>/countriesList}" selectedKey="{eshipjetModel>/carrierAccountsShipToCountryName}" class="create-ship-req_input ">
+        <core:Item key="{eshipjetModel>code}" text="{eshipjetModel>name}" />
+    </ComboBox>
+
+    <!-- <Label text="Cost Center" />
+    <ComboBox selectedKey="{eshipjetModel>/carrierAccountsCostCentre}" class="create-ship-req_input ">
+        <core:Item key="Warehouse Cost Center" text="Warehouse Cost Center" />
+    </ComboBox> -->
+
+    <!-- <Label text="Environment" />
+    <ComboBox selectedKey="{eshipjetModel>/carrierAccountsEnvironment}" class="create-ship-req_input ">
+        <core:Item key="Test" text="Test" />
+        <core:Item key="Production" text="Production" />
+    </ComboBox> -->
+
+    <!-- Row 2 -->
+    <Label text="Account Number" />
+    <Input value="{eshipjetModel>/carrierAccountsAccountNumber}" class="create-ship-req_input " />
+
+    <Label text="User ID" />
+    <Input value="{eshipjetModel>/carrierAccountsUserId}" class="create-ship-req_input " />
+
+    <Label text="Password" />
+    <Input value="{eshipjetModel>/carrierAccountsPassword}" class="create-ship-req_input " />
+
+    <Label text="Access Key" />
+    <Input value="{eshipjetModel>/carrierAccountsAccessKey}" class="create-ship-req_input " />
+
+    <Label text="Meter ID" />
+    <Input value="{eshipjetModel>/carrierAccountsMeterId}" class="create-ship-req_input " />
+
+    <Label text="Hub ID" />
+    <Input value="{eshipjetModel>/carrierAccountsHubId}" class="create-ship-req_input " />
+
+    <Label text="Connection Type" />
+    <ComboBox selectedKey="{eshipjetModel>/carrierAccountsConnectionType}" class="create-ship-req_input ">
+        <core:Item key="API" text="API" />
+        <core:Item key="EDI" text="EDI" />
+        <core:Item key="FTP" text="FTP" />
+        <core:Item key="File" text="File" />
+    </ComboBox>
+
+</form:SimpleForm>
 
                     
-                 <Table
-                            id="serviceTable">
+                        <Table
+                            id="serviceTable"
+                            items="{eshipjetModel>/carrierAccountsTableItems}" >
                             <columns>
                                 <Column>
                                     <Text text="Service Name" />
@@ -145,18 +152,17 @@
                                     <Text text="Status" />
                                 </Column>
                             </columns>
-                            <!-- static empty row for user input -->
                             <items>
                                 <ColumnListItem type="Inactive">
                                     <cells>
-                                        <Input placeholder="Enter Service Name" class="create-ship-req_input" />
-                                        <Input placeholder="Enter ERP Service ID" class="create-ship-req_input"/>
-                                        <Input placeholder="Enter Service Code" class="create-ship-req_input"/>
-                                        <ComboBox class="create-ship-req_input">
+                                        <Input value="{eshipjetModel>ServDesc}" class="create-ship-req_input" />
+                                        <Input value="{eshipjetModel>ErpServId}" class="create-ship-req_input" />
+                                        <Input value="{eshipjetModel>CarrierCode}" class="create-ship-req_input" />
+                                        <ComboBox class="create-ship-req_input" selectedKey="{eshipjetModel>ServiceCoverage}" >
                                             <core:Item key="Domestic" text="Domestic" />
                                             <core:Item key="International" text="International" />
                                         </ComboBox>
-                                        <Switch state="false" class="btnInnerFocus" />
+                                        <Switch state="{eshipjetModel>IsActive}" class="btnInnerFocus" />
                                     </cells>
                                 </ColumnListItem>
                             </items>
@@ -173,7 +179,6 @@
                                 </ColumnListItem>
                             </items> -->
                         </Table>
-
                 </IconTabFilter>
 
                 <!-- Additional Info Tab -->
@@ -189,29 +194,28 @@
                        columnsXL="6" >
                         <form:content>
                             <Label text="Label Type" />
-                            <ComboBox class="create-ship-req_input ">
+                            <ComboBox class="create-ship-req_input " selectedKey="{eshipjetModel>/carrierAccountsEnvironment}">
                                 <core:Item key="" text="Select" />
                             </ComboBox>
                             <Label text="POD URL" />
-                            <ComboBox class="create-ship-req_input ">
+                            <ComboBox class="create-ship-req_input " selectedKey="{eshipjetModel>/carrierAccountsEnvironment}">
                                 <core:Item key="" text="Select" />
                             </ComboBox>
                             <Label text="Rate URL" />
-                            <ComboBox class="create-ship-req_input">
+                            <ComboBox class="create-ship-req_input" selectedKey="{eshipjetModel>/carrierAccountsEnvironment}">
                                 <core:Item key="" text="Select" />
                             </ComboBox>
-
                             	<Label text="" />
                              <CheckBox text="Rate Quote" selected="true" class="sapUiSmallMarginTop"/>
                             
                             
                             <Label text="Ship URL" />
-                            <ComboBox class="create-ship-req_input">
+                            <ComboBox class="create-ship-req_input" selectedKey="{eshipjetModel>/carrierAccountsEnvironment}">
                                 <core:Item key="" text="Select" />
                             </ComboBox>
 
                             <Label text="" />
-                             <CheckBox text="Freight Quote" selected="true" class="sapUiSmallMarginTop" />
+                             <CheckBox text="Freight Quote" selected="true" class="sapUiSmallMarginTop"  />
 
                               <Label text="Track URL" />
                             <ComboBox class="create-ship-req_input">
@@ -247,7 +251,8 @@
                 <Button text="Cancel" press="AddCarrierConfigurationCancelDialog" class="customLogOutButton btnInnerFocus" />
                  <ToolbarSpacer />
                 <Button text="Address" type="Emphasized" press="onAddressCarrierConfig" class="addCarrierSaveBtnStyle btnInnerFocus" />
-                <Button text="Save"  press="AddCarrierConfigurationUpdateDialog" class="addCarrierSaveBtnStyle btnInnerFocus" />
+                <Button text="Save"  press="AddCarrierConfigurationSaveDialog" class="addCarrierSaveBtnStyle btnInnerFocus" />
+                 <Button  text="Update" press="AddCarrierConfigurationUpdateDialog" class="addCarrierSaveBtnStyle btnInnerFocus" width="auto" />
             </Toolbar>
         </footer>
     </Dialog>

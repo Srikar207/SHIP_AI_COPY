@@ -85,7 +85,7 @@
 		<Toolbar class="sapUiTinyMarginTop sapUiSmallMarginBegin sapUiSmallMarginEnd" >
 			<Button icon="sap-icon://filter" press="onCarriesAccountsFilterPopoverPress" type="Transparent" class="ordersIcons" ></Button>
 			<ToolbarSpacer ></ToolbarSpacer>
-				<SearchField width="10rem" class="sapUiSmallMarginBottom forsearchhigh" liveChange="onSearchCarrierAccounts" ></SearchField>
+				<SearchField width="10rem" class="sapUiSmallMarginBottom forsearchhigh sapUiTinyMarginTop" liveChange="onSearchCarrierAccounts" ></SearchField>
 				<Button icon="sap-icon://action" press="onCarrierAccountsExportToExcel" type="Transparent" class="ordersIcons" ></Button>
 				<Button icon="sap-icon://action-settings" press="openCarrierAccountColNamesPopover" type="Transparent" class="ordersIcons" ></Button>
 			<customData>
@@ -98,8 +98,141 @@
 			id="_IDCarriesAccountsTable"
 			selectionMode="None"
 			class="rowRightLine ordersTableRightBorder"
+			rows="{eshipjetModel>/carriersAcccountsData}"
 			visibleRowCount="13"
 			ariaLabelledBy="title">
+
+					<ui:columns>
+								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/0/visible}" >
+									<Label text="Location ID" />
+									<ui:template>
+										<Text text="{eshipjetModel>LocationId}" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/1/visible}" width="auto" >
+									<Label text="Carrier Name" />
+									<ui:template>
+										<Text text="{eshipjetModel>CarrierCode}" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/2/visible}" >
+									<Label text="Carrier Type" />
+									<ui:template>
+										<Text text="{eshipjetModel>CarrierType}" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/3/visible}" >
+									<Label text="Connection Type" />
+									<ui:template>
+										<Text text="{eshipjetModel>ConnectionType}" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/4/visible}" >
+									<Label text="Ship From Country" />
+									<ui:template>
+										<Text text="{eshipjetModel>ShipFrmCntry}" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/5/visible}" >
+									<Label text="Ship To Country" />
+									<ui:template>
+										<Text text="{eshipjetModel>ShipToCntry}" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/6/visible}" >
+									<Label text="Ship URL" />
+									<ui:template>
+										<Text text="{eshipjetModel>ShipUrl}" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/7/visible}" >
+									<Label text="Void URL" />
+									<ui:template>
+										<Text text="{eshipjetModel>VoidUrl}" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/8/visible}" >
+									<Label text="Rate URL" />
+									<ui:template>
+										<Text text="{eshipjetModel>RateUrl}" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/9/visible}" >
+									<Label text="Track URL" />
+									<ui:template>
+										<Text text="{eshipjetModel>TrackUrl}" wrapping="false" />
+									</ui:template>
+								</ui:Column>
+								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/10/visible}" >
+									<Label text="Freight Quote" />
+									<ui:template>
+										<Switch type="AcceptReject" state="{eshipjetModel>Freight_Quote}" class="greenSwitch">
+											<layoutData>
+												<FlexItemData growFactor="1" />
+											</layoutData>
+										</Switch>
+									</ui:template>
+								</ui:Column>
+								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/11/visible}" >
+									<Label text="Rate Quote" />
+									<ui:template>
+										<Switch type="AcceptReject" state="{eshipjetModel>Rate_Quote}">
+											<layoutData>
+												<FlexItemData growFactor="1" />
+											</layoutData>
+										</Switch>
+									</ui:template>
+								</ui:Column>
+								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/12/visible}" >
+									<Label text="Automate Pro Number" />
+									<ui:template>
+										<Switch type="AcceptReject" state="{eshipjetModel>Automate_Pro_Number}">
+											<layoutData>
+												<FlexItemData growFactor="1" />
+											</layoutData>
+										</Switch>
+									</ui:template>
+								</ui:Column>
+								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/13/visible}" >
+									<Label text="Status" />
+									<ui:template>
+										<Switch type="AcceptReject" state="{= ${eshipjetModel>Is_Active} === 'true' ? true : false}" class="btnInnerFocus" >
+											<layoutData>
+												<FlexItemData growFactor="1" />
+											</layoutData>
+										</Switch>
+									</ui:template>
+								</ui:Column>
+								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/14/visible}" >
+									<Label text="End Of The Day" />
+									<ui:template>
+										<Switch type="AcceptReject" state="{eshipjetModel>End_Of_The_Day}">
+											<layoutData>
+												<FlexItemData growFactor="1" />
+											</layoutData>
+										</Switch>
+									</ui:template>
+								</ui:Column>
+								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/15/visible}" >
+									<Label text="Manual Rates" />
+									<ui:template>
+										<Switch type="AcceptReject" state="{eshipjetModel>Manual_Rates}">
+											<layoutData>
+												<FlexItemData growFactor="1" />
+											</layoutData>
+										</Switch>
+									</ui:template>
+								</ui:Column>
+								<ui:Column visible="true" >
+									<Label text="Actions" />
+									<ui:template>
+										<HBox >
+											<Button text="Edit" type="Transparent" press="onEditCarrierAccountPress" ></Button>
+											<Button icon="sap-icon://megamenu" type="Transparent" ></Button>
+										</HBox>
+									</ui:template>
+								</ui:Column>
+							</ui:columns>
 		</ui:Table>
     </VBox>
 

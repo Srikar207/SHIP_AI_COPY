@@ -125,6 +125,7 @@
     "ShipReqPrevVisible": false,
     "ShipReqNextVisible": true,
     "ShipReqLastVisible": false,
+
     "sShipAndScan": "",
     "selectedKey": "page2",
     "image": "css/images/image.png",
@@ -4090,42 +4091,7 @@
             }
         ]
     },
-    "AddIconListSet1": [
-        {
-            "name": "Users *"
-        },
-        {
-            "name": "Roles *"
-        },
-        {
-            "name": "Products *"
-        },
-        {
-            "name": "Module Status Codes"
-        },
-        {
-            "name": "Order Types"
-        },
-        {
-            "name": "ERP Configuration"
-        },
-        {
-            "name": "Freight Condition"
-        },
-        {
-            "name": "NMFC Class"
-        },
-        {
-            "name": "Peripheral Configuration"
-        },
-        {
-            "name": "Lock/Unlock User"
-        },
-        {
-            "name": "Common Error Logs"
-        }
-    ],
-    "AddIconListSet2": [
+ "AddIconListSet1": [
         {
             "name": "Carrier Catalog *"
         },
@@ -4136,59 +4102,16 @@
             "name": "Carrier Address *"
         },
         {
-            "name": "Address Book *"
-        },
-        {
-            "name": "Package Types"
-        },
-        {
-            "name": "Cost Centers"
-        },
-        {
             "name": "Payment Types"
         },
         {
             "name": "Document Catalog"
         },
-        {
-            "name": "User Audit Trail"
-        },
-        {
-            "name": "Unlock Delivery Number"
-        }
-    ],
-    "AddIconListSet3": [
-        {
-            "name": "Locations *"
-        },
-        {
-            "name": "Company Settings"
-        },
-        {
-            "name": "Pro Number Range"
-        },
-        {
+	    {
             "name": "Pkg Materials / Dims"
-        },
-        {
-            "name": "Third Party"
-        },
-        {
-            "name": "Incoterms"
-        },
-        {
-            "name": "Return Address"
-        },
-        {
-            "name": "SMTP Configuration"
-        },
-        {
-            "name": "Reset Password"
-        },
-        {
-            "name": "Shipment Error Logs"
         }
-    ],
+
+           ],
     "LocationTableColumns": [
         {
             "key": "locationName",
@@ -5500,17 +5423,17 @@
         {
             "key": "rateUrl",
             "label": "Rate Url",
-            "visible": true
+            "visible": false
         },
         {
             "key": "trackUrl",
             "label": "Track Url",
-            "visible": true
+            "visible": false
         },
         {
             "key": "environment",
             "label": "Environment",
-            "visible": true
+            "visible": false
         },
         {
             "key": "carrierType",
@@ -5525,17 +5448,17 @@
         {
             "key": "erpCarrierID",
             "label": "ERP Carrier ID",
-            "visible": true
+            "visible": false
         },
         {
             "key": "rateShop",
             "label": "Rate Shop",
-            "visible": true
+            "visible": false
         },
         {
             "key": "edoc",
             "label": "EDOC",
-            "visible": true
+            "visible": false
         },
         {
             "key": "manualRates",
@@ -9388,6 +9311,15 @@
             "ConnectionType": "",
             "Status": false,
             "Actions": "sap-icon://delete"
+        }
+    ],
+    "carrierAccountsTableItems": [
+        {
+            "carrierAcntTblSrvName":"",
+            "carrierAcntTblErpSrvName":"",
+            "carrierAcntTblSrvCode":"",
+            "carrierAcntTblSrvCoverage":"",
+            "carrierAcntTblStatus": false
         }
     ],
     "AddRoleTreeTableItems": {
@@ -13820,6 +13752,8 @@
       ],
       "CommonErrorLogsTableRows": [],
 
+      
+
       "trackTraceTableData": {
         "trackTraceColumns": [
             {
@@ -13888,7 +13822,41 @@
                 "visible": true
             }
         ]
+    },
+    "LocationsData": [
+    {
+      "Plant": "2910",
+      "PlantName": "CA Plant"
+    },
+    {
+      "Plant": "1710",
+      "PlantName": "US Plant"
+    },
+    {
+      "Plant": "1010",
+      "PlantName": "DE Plant"
     }
+  ],
+  "carrierAccountsLocationId": "",
+
+  "CarrierCoverage": "INT",
+  "carrierCoverageList": [
+    { "CoverageKey": "DOM", "CoverageText": "Domestic" },
+    { "CoverageKey": "INT", "CoverageText": "International" },
+    { "CoverageKey": "REG", "CoverageText": "Regional" },
+    { "CoverageKey": "NA", "CoverageText": "North America" },
+    { "CoverageKey": "GLOBAL", "CoverageText": "Global" }
+  ],
+
+   "CarrierType": "Parcel",
+  "carrierTypeList": [
+    { "TypeKey": "FTL", "TypeText": "FTL" },
+    { "TypeKey": "Generic", "TypeText": "Generic" },
+    { "TypeKey": "LTL", "TypeText": "LTL" },
+    { "TypeKey": "Parcel", "TypeText": "Parcel" },
+    { "TypeKey": "TL", "TypeText": "TL" },
+    { "TypeKey": "Other", "TypeText": "Other" }
+  ]
       
     
 }

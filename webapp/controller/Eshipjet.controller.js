@@ -28,7 +28,8 @@ sap.ui.define([
     return Controller.extend("com.eshipjetcopy.zeshipjetcopy.controller.Eshipjet", {
         formatter: formatter,
         onInit: function () {
-            
+            this.onGetCarrierCatalogData();
+            this.onGetCarrierAccoData();
             // this.getMasterData();
 
             // var sAudioPath = sap.ui.require.toUrl("com/eshipjetcopy/zeshipjetcopy/audio/Lock.mp3");
@@ -9362,12 +9363,12 @@ sap.ui.define([
 
             } else if (oCurrObj && oCurrObj.name === "Carrier Catalog *") {
 
-                oController._displayTables("_IDCarriesCatalogTable", "CarrierCatalogTableColumns", "CarrierCatalogTableRows", "Carrier Catalog");
+                // oController._displayTables("_IDCarriesCatalogTable", "CarrierCatalogTableColumns", "CarrierCatalogTableRows", "Carrier Catalog");
                 oPageContainer.to(oView.createId("_ID_CarrierCatalog_TableScrollContainer"));
 
             } else if (oCurrObj && oCurrObj.name === "Carrier Accounts *") {
 
-                oController._displayTables("_IDCarriesAccountsTable", "CarrierAccountsTableColumns", "CarrierAccountsTableRows", "Carrier Accounts");
+                // oController._displayTables("_IDCarriesAccountsTable", "CarrierAccountsTableColumns", "CarrierAccountsTableRows", "Carrier Accounts");
                 oPageContainer.to(oView.createId("_ID_CarrierAccounts_TableScrollContainer"));
 
             } else if (oCurrObj && oCurrObj.name === "Cost Centers") {
@@ -10963,38 +10964,40 @@ sap.ui.define([
 
         },
 
-        onCarrierCatalogColSelectOkPress: function () {
-            var oView = this.getView();
-            var oCarrierCatalogTable = oView.byId("myCarrierCatalogColumnSelectId");
-            var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
-            var oTable = oView.byId("_IDCarriesCatalogTable")
-            oTable.setModel(eshipjetModel);
+      onCarrierCatalogColSelectOkPress: function () {
+    var oView = this.getView();
+    var oCarrierCatalogTable = oView.byId("myCarrierCatalogColumnSelectId");
+    var eshipjetModel = this.getOwnerComponent().getModel("eshipjetModel");
+    var oTable = oView.byId("_IDCarriesCatalogTable");
 
-            var oCarrierCatalogTblItems = oCarrierCatalogTable.getItems();
-            var aColumnsData = eshipjetModel.getProperty("/CarrierCatalogTableColumns");
-            oCarrierCatalogTblItems.map(function (oTableItems) {
-                aColumnsData.map(function (oColObj) {
-                    if (oTableItems.getBindingContext("eshipjetModel").getObject().key === oColObj.key) {
-                        if (oTableItems.getSelected()) {
-                            oColObj.visible = true;
-                        } else {
-                            oColObj.visible = false;
-                        }
-                    }
-                })
-            });
-            eshipjetModel.updateBindings(true);
-            oCarrierCatalogTable.setModel(eshipjetModel);
-            this._handleDisplayCarrierCatalogTable();
-            this._pCarrierCatalogPopover.then(function (oPopover) {
-                oPopover.close();
-            });
-        },
-        onCarrierCatalogColSelectClosePress: function () {
-            this._pCarrierCatalogPopover.then(function (oPopover) {
-                oPopover.close();
-            });
-        },
+    // Update visibility in the model based on popover selection
+    var oCarrierCatalogTblItems = oCarrierCatalogTable.getItems();
+    var aColumnsData = eshipjetModel.getProperty("/CarrierCatalogTableColumns");
+
+    oCarrierCatalogTblItems.forEach(function (oItem) {
+        var oContext = oItem.getBindingContext("eshipjetModel").getObject();
+        aColumnsData.forEach(function (oColObj) {
+            if (oContext.key === oColObj.key) {
+                oColObj.visible = oItem.getSelected();
+            }
+        });
+    });
+
+    // Refresh model bindings
+    eshipjetModel.updateBindings(true);
+
+    // Update table column visibility dynamically
+    oTable.getColumns().forEach(function (oColumn, i) {
+        var bVisible = aColumnsData[i] ? aColumnsData[i].visible : true;
+        oColumn.setVisible(bVisible);
+    });
+
+    // Close the popover
+    this._pCarrierCatalogPopover.then(function (oPopover) {
+        oPopover.close();
+    });
+},
+
 
         _handleDisplayCarrierCatalogTable: function () {
             var that = this;
@@ -11191,98 +11194,99 @@ sap.ui.define([
 
         },
 
-        onCarrierAccountColSelectOkPress: function () {
-            var oView = this.getView();
-            var oCarrierAccountTable = oView.byId("myCarrierAccountColumnSelectId");
-            var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
-            var oTable = oView.byId("_IDCarriesAccountsTable")
-            oTable.setModel(eshipjetModel);
+       onCarrierAccountColSelectOkPress: function () {
+    var oView = this.getView();
+    var oCarrierAccountTable = oView.byId("myCarrierAccountColumnSelectId");
+    var eshipjetModel = this.getOwnerComponent().getModel("eshipjetModel");
+    var oTable = oView.byId("_IDCarriesCatalogTable");
 
-            var oCarrierAccountTblItems = oCarrierAccountTable.getItems();
-            var aColumnsData = eshipjetModel.getProperty("/CarrierAccountsTableColumns");
-            oCarrierAccountTblItems.map(function (oTableItems) {
-                aColumnsData.map(function (oColObj) {
-                    if (oTableItems.getBindingContext("eshipjetModel").getObject().key === oColObj.key) {
-                        if (oTableItems.getSelected()) {
-                            oColObj.visible = true;
-                        } else {
-                            oColObj.visible = false;
-                        }
-                    }
-                })
-            });
-            eshipjetModel.updateBindings(true);
-            oCarrierAccountTable.setModel(eshipjetModel);
-            this._handleDisplayCarrierAccountTable();
-            this._pCarrierAccountPopover.then(function (oPopover) {
-                oPopover.close();
-            });
-        },
-        onCarrierAccountColSelectClosePress: function () {
-            this._pCarrierAccountPopover.then(function (oPopover) {
-                oPopover.close();
-            });
-        },
+    // Update visibility in model
+    var oCarrierAccountTblItems = oCarrierAccountTable.getItems();
+    var aColumnsData = eshipjetModel.getProperty("/CarrierAccountsTableColumns");
 
-        _handleDisplayCarrierAccountTable: function () {
-            var that = this;
-            const oView = oController.getView();
-            var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel"), columnName, label, oTemplate, oHboxControl;
-            var CarrierAccountsTableColumns = eshipjetModel.getData().CarrierAccountsTableColumns;
-            const oTable = oView.byId("_IDCarriesAccountsTable");
-            oTable.setModel(eshipjetModel);
-            var count = 0;
-            for (var i = 0; i < CarrierAccountsTableColumns.length; i++) {
-                if (CarrierAccountsTableColumns[i].visible === true) {
-                    count += 1
-                }
+    oCarrierAccountTblItems.forEach(function (oItem) {
+        var oContext = oItem.getBindingContext("eshipjetModel").getObject();
+        aColumnsData.forEach(function (oColObj) {
+            if (oContext.key === oColObj.key) {
+                oColObj.visible = oItem.getSelected();
             }
-            oTable.bindColumns("/CarrierAccountsTableColumns", function (sId, oContext) {
-                columnName = oContext.getObject().key;
-                label = oContext.getObject().label;
-                var minWidth = "100%";
-                if (count >= 14) {
-                    var minWidth = "130px";
-                }
-                if (columnName === "actions") {
-                    var oHBox = new sap.m.HBox({}); // Create Text instance 
-                    var Btn1 = new sap.m.Button({ text: "View Now", type: "Transparent" });
-                    var Btn2 = new sap.m.Button({
-                        icon: "sap-icon://megamenu", type: "Transparent",
-                        press: function (oEvent) {
-                            that.handleDownArrowPress(oEvent);
-                        }
-                    });
-                    oHBox.addItem(Btn1);
-                    oHBox.addItem(Btn2);
-                    return new sap.ui.table.Column({
-                        label: oResourceBundle.getText(columnName),
-                        template: oHBox,
-                        visible: oContext.getObject().visible,
-                        width: minWidth,
-                        sortProperty: columnName
-                    });
-                } else if (columnName === "status" || columnName === "rateShop" || columnName === "edoc" || columnName === "manualRates") {
-                    var oSwitch = new sap.m.Switch({ type: "AcceptReject" });
-                    return new sap.ui.table.Column({
-                        label: oResourceBundle.getText(columnName),
-                        template: oSwitch,
-                        visible: oContext.getObject().visible,
-                        width: minWidth,
-                        sortProperty: columnName
-                    });
-                } else {
-                    return new sap.ui.table.Column({
-                        label: oResourceBundle.getText(columnName),
-                        template: columnName,
-                        visible: oContext.getObject().visible,
-                        width: minWidth,
-                        sortProperty: columnName
-                    });
-                }
-            });
-            oTable.bindRows("/CarrierAccountsTableRows");
-        },
+        });
+    });
+
+    eshipjetModel.updateBindings(true);
+
+    // Update table columns visibility dynamically
+    oTable.getColumns().forEach(function (oColumn, i) {
+        var bVisible = aColumnsData[i] ? aColumnsData[i].visible : true;
+        oColumn.setVisible(bVisible);
+    });
+
+    // Close popover
+    this._pCarrierAccountPopover.then(function (oPopover) {
+        oPopover.close();
+    });
+},
+
+
+        // _handleDisplayCarrierAccountTable: function () {
+        //     var that = this;
+        //     const oView = oController.getView();
+        //     var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel"), columnName, label, oTemplate, oHboxControl;
+        //     var CarrierAccountsTableColumns = eshipjetModel.getData().CarrierAccountsTableColumns;
+        //     const oTable = oView.byId("_IDCarriesAccountsTable");
+        //     oTable.setModel(eshipjetModel);
+        //     var count = 0;
+        //     for (var i = 0; i < CarrierAccountsTableColumns.length; i++) {
+        //         if (CarrierAccountsTableColumns[i].visible === true) {
+        //             count += 1
+        //         }
+        //     }
+        //     oTable.bindColumns("/CarrierAccountsTableColumns", function (sId, oContext) {
+        //         columnName = oContext.getObject().key;
+        //         label = oContext.getObject().label;
+        //         var minWidth = "100%";
+        //         if (count >= 14) {
+        //             var minWidth = "130px";
+        //         }
+        //         if (columnName === "actions") {
+        //             var oHBox = new sap.m.HBox({}); // Create Text instance 
+        //             var Btn1 = new sap.m.Button({ text: "View Now", type: "Transparent" });
+        //             var Btn2 = new sap.m.Button({
+        //                 icon: "sap-icon://megamenu", type: "Transparent",
+        //                 press: function (oEvent) {
+        //                     that.handleDownArrowPress(oEvent);
+        //                 }
+        //             });
+        //             oHBox.addItem(Btn1);
+        //             oHBox.addItem(Btn2);
+        //             return new sap.ui.table.Column({
+        //                 label: oResourceBundle.getText(columnName),
+        //                 template: oHBox,
+        //                 visible: oContext.getObject().visible,
+        //                 width: minWidth,
+        //                 sortProperty: columnName
+        //             });
+        //         } else if (columnName === "status" || columnName === "rateShop" || columnName === "edoc" || columnName === "manualRates") {
+        //             var oSwitch = new sap.m.Switch({ type: "AcceptReject" });
+        //             return new sap.ui.table.Column({
+        //                 label: oResourceBundle.getText(columnName),
+        //                 template: oSwitch,
+        //                 visible: oContext.getObject().visible,
+        //                 width: minWidth,
+        //                 sortProperty: columnName
+        //             });
+        //         } else {
+        //             return new sap.ui.table.Column({
+        //                 label: oResourceBundle.getText(columnName),
+        //                 template: columnName,
+        //                 visible: oContext.getObject().visible,
+        //                 width: minWidth,
+        //                 sortProperty: columnName
+        //             });
+        //         }
+        //     });
+        //     oTable.bindRows("/CarrierAccountsTableRows");
+        // },
 
         onSearchCarrierAccounts: function (oEvent) {
             var sQuery = oEvent.getParameter("query") || oEvent.getSource().getValue();
@@ -16959,9 +16963,7 @@ sap.ui.define([
         },
         AddCarrierConfigurationCancelDialog: function () {
             this.byId("idAddCarrierConfigurationDialog").close();
-        },
-        AddCarrierConfigurationUpdateDialog: function () {
-            this.byId("idAddCarrierConfigurationDialog").close();
+               this._clearCarrierConfigurationFields();
         },
         AddCarrierConfigurationCloseDialog: function () {
             this.byId("idAddCarrierConfigurationDialog").close();
@@ -21292,7 +21294,997 @@ sap.ui.define([
                     console.error("Error while reading Delivery Items:", oError);
                 }
             });
+        },
+        
+        // onGetCarrierCatalogData: function () {
+        //     var oController = this;
+        //     var oMainModel = oController.getOwnerComponent().getModel("CARRIERS_SRV");
+        //     var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+            
+        //     // ✅ Use correct entity set name with proper casing
+        //     oMainModel.read("/carrierSet", {  // Changed from "/Carriers" to "/carrierSet"
+        //         urlParameters: {
+        //             "$expand": "to_CarrierServices"  // Add your expand if needed
+        //         },
+        //         success: function (oData, response) {
+                    
+        //             console.log("✅ CARRIERS_SRV Response:", oData.results);
+        //             console.log("📦 Raw Response:", response);
+                    
+        //             eshipjetModel.setProperty("/carriersCatalogData", oData.results);
+        //             // sap.m.MessageToast.show("Carrier catalog data loaded successfully");
+        //         },
+        //         error: function (oError) {
+        //             console.error("❌ Error loading carrier catalog:", oError);
+                    
+        //             // Better error handling
+        //             var sErrorMsg = "Failed to load carrier catalog";
+        //             if (oError.responseText) {
+        //                 try {
+        //                     var oErrorResponse = JSON.parse(oError.responseText);
+        //                     sErrorMsg = oErrorResponse.error.message.value || sErrorMsg;
+        //                 } catch (e) {
+        //                     console.error("Could not parse error response");
+        //                 }
+        //             }
+                    
+        //             sap.m.MessageToast.show(sErrorMsg);
+        //         }
+        //     });
+        // },
+     onGetCarrierCatalogData: function () {
+    var oController = this;
+    var oMainModel = oController.getOwnerComponent().getModel("CARRIERS_SRV");
+    var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+
+    oMainModel.read("/carrier_srvSet", {
+        // urlParameters: {
+        //     "$expand": "to_CarrierServices"
+        // },
+        success: function (oData, response) {
+            eshipjetModel.setProperty("/carriersCatalogData", oData.results);
+
+        },
+        error: function (oError) {
+            console.error("❌ Error loading carrier catalog:", oError);
+
+            var sErrorMsg = "Failed to load carrier catalog";
+            if (oError.responseText) {
+                try {
+                    var oErrorResponse = JSON.parse(oError.responseText);
+                    sErrorMsg = oErrorResponse.error.message.value || sErrorMsg;
+                } catch (e) {
+                    console.error("Could not parse error response");
+                }
+            }
+            sap.m.MessageToast.show(sErrorMsg);
         }
+    });
+},
+
+ AddCarrierCatalogSaveDialog: function () {
+    var oController = this;
+    var oMainModel = oController.getOwnerComponent().getModel("CARRIERS_SRV");
+    var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+
+    oController.onOpenBusyDialog();
+
+    // ✅ Main Carrier Catalog Values
+    var sLocationId = eshipjetModel.getProperty("/CarrierCatalogLocations");
+    var sCarrierId = eshipjetModel.getProperty("/carrierId");
+    var sErpCarrierId = eshipjetModel.getProperty("/erpCarrierId");
+    var sCarrierName = eshipjetModel.getProperty("/CarrierName");
+    var sCarrierCoverage = eshipjetModel.getProperty("/ServiceCoverage");
+    var sStatus = eshipjetModel.getProperty("/IS_ACTIVE");
+    eshipjetModel.setProperty("/isEditMode", false);
+
+    // ✅ Child Service Items
+    var aServiceItems = eshipjetModel.getProperty("/addCrrierDialogItems") || [];
+
+    // ✅ Enable batch mode
+    oMainModel.setUseBatch(true);
+    oMainModel.setDeferredGroups(["batchGroup1"]);
+
+    // Create entries in deferred group
+    for (var j = 0; j < aServiceItems.length; j++) {
+        var oItem = aServiceItems[j];
+
+        var oPayload = {
+            "CarrierCode": sCarrierId,
+            "ServCode": oItem.ServiceCode,
+            "ServLoc": sLocationId,
+            "ServDesc": oItem.ServDesc,
+            "ErpServId": oItem.ErpServiceId,
+            "ServiceCoverage": oItem.ServiceCoverage,
+            "IsActive": true
+        };
+
+        oMainModel.create("/carrier_srvSet", oPayload, {
+            groupId: "batchGroup1",
+            changeSetId: "changeset1" // important!
+        });
+    }
+
+    // ✅ Submit the batch group
+    oMainModel.submitChanges({
+        groupId: "batchGroup1",
+        success: function (oData, oResponse) {
+            sap.m.MessageToast.show("✅ Carrier Catalog created successfully!");
+            oController.byId("idAddCarrierDialog").close();
+            oController.onCloseBusyDialog();
+            oController.onGetCarrierCatalogData();
+        },
+        error: function (oError) {
+            oController.onCloseBusyDialog();
+
+            var sErrorMsg = "Error while creating carrier.";
+            try {
+                if (oError && oError.responseText) {
+                    var oErrorXML = new window.DOMParser().parseFromString(oError.responseText, "text/xml");
+                    var sMsgNode = oErrorXML.getElementsByTagName("message")[0];
+                    if (sMsgNode) {
+                        sErrorMsg = sMsgNode.textContent;
+                    }
+                }
+            } catch (e) {
+                console.error("Error parsing response:", e);
+            }
+
+            sap.m.MessageBox.error(sErrorMsg);
+        }
+    });
+},
+
+onEditCarrierCatalogPress: function (oEvent) {
+    var oController = this;
+    var oMainModel = oController.getOwnerComponent().getModel("CARRIERS_SRV");
+    var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+
+    // ✅ 1️⃣ Get selected row from table
+    var oCurrentObj = oEvent.getSource().getBindingContext("eshipjetModel").getObject();
+    var sLocationId = oCurrentObj.ServLoc || oCurrentObj.Plant;
+    var sCarrierCode = oCurrentObj.CarrierCode;
+
+    if (!sLocationId || !sCarrierCode) {
+        sap.m.MessageToast.show("Missing Location ID or Carrier Code for edit.");
+        return;
+    }
+
+    oController.onOpenBusyDialog();
+
+    oMainModel.read("/carrier_srvSet", {
+    success: function (oData) {
+        oController.onCloseBusyDialog();
+
+        var aResults = oData.results || [];
+        var aFiltered = aResults.filter(function (oItem) {
+            return (
+                oItem.ServLoc === sLocationId &&
+                oItem.CarrierCode === sCarrierCode
+            );
+        });
+        eshipjetModel.setProperty("/addCrrierDialogItems", aFiltered);
+        if (aFiltered.length === 0) {
+            sap.m.MessageToast.show("No carrier data found for selected record.");
+            return;
+        }
+
+        var oCarrierData = aFiltered[0];
+        console.log("✅ Matched Carrier:", oCarrierData);
+
+        // -------------------------------
+        // Header binding
+        // -------------------------------
+        eshipjetModel.setProperty("/CarrierCatalogLocations", oCarrierData.ServLoc);
+        eshipjetModel.setProperty("/carrierId", oCarrierData.CarrierCode);
+        eshipjetModel.setProperty("/CarrierName", oCarrierData.CarrierCode || "");
+        eshipjetModel.setProperty("/erpCarrierId", oCarrierData.ErpServId || "");
+        eshipjetModel.setProperty("/CarrierType", oCarrierData.CarrierType || "");
+        eshipjetModel.setProperty("/ServiceCoverage", oCarrierData.ServiceCoverage || "");
+        eshipjetModel.setProperty("/connectionType1", oCarrierData.ConnectionType || "");
+        eshipjetModel.setProperty("/IS_ACTIVE", oCarrierData.IsActive === true || oCarrierData.IsActive === "X");
+        eshipjetModel.setProperty("/carrierColorCode", oCarrierData.ColorCode || "#808080");
+        eshipjetModel.setProperty("/isEditMode", true);
+        eshipjetModel.setProperty("/selectedCarrierKey", oCarrierData.CarrierCode);
+
+        // -------------------------------
+        // Open dialog
+        // -------------------------------
+        oController.AddCarrierDialog();
+    },
+    error: function (oError) {
+        oController.onCloseBusyDialog();
+        console.error("❌ Error reading carrier details:", oError);
+        sap.m.MessageBox.error("Failed to load carrier data for edit.");
+    }
+});
+},
+
+
+
+AddCarrierCatalogupdateDialog: function () {
+    var oController = this;
+    var oMainModel = oController.getOwnerComponent().getModel("CARRIERS_SRV");
+    var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+
+    oController.onOpenBusyDialog();
+
+    // ✅ Header-level data
+    var sLocationId = eshipjetModel.getProperty("/CarrierCatalogLocations");
+    var sCarrierId = eshipjetModel.getProperty("/carrierId");
+    var sErpCarrierId = eshipjetModel.getProperty("/erpCarrierId");
+    var sCarrierName = eshipjetModel.getProperty("/CarrierName");
+    var sCarrierCoverage = eshipjetModel.getProperty("/ServiceCoverage");
+    var sStatus = eshipjetModel.getProperty("/IS_ACTIVE");
+    var sCarrierType = eshipjetModel.getProperty("/CarrierType");
+    var sConnectionType = eshipjetModel.getProperty("/connectionType1");
+    var sColorCode = eshipjetModel.getProperty("/carrierColorCode");
+
+    // ✅ Child service line items
+    var aServiceItems = eshipjetModel.getProperty("/addCrrierDialogItems") || [];
+
+    // ✅ Enable batch processing
+    oMainModel.setUseBatch(true);
+    oMainModel.setDeferredGroups(["batchGroup1"]);
+
+    // ✅ Add update operations to the batch
+    for (var i = 0; i < aServiceItems.length; i++) {
+        var oItem = aServiceItems[i];
+
+        // Build payload for each line item
+        var oPayload = {
+            "ServLoc": sLocationId,
+            "CarrierCode": sCarrierId,
+            "ServCode": oItem.ServCode,
+            "ServDesc": oItem.ServDesc || "",
+            "ErpServId": oItem.ErpServId || "",
+            "ServiceCoverage": oItem.ServiceCoverage || sCarrierCoverage || "",
+            // "ConnectionType": oItem.ConnectionType || sConnectionType || "",
+            "IsActive": oItem.Status === true || oItem.Status === "X",
+            // "CarrierType": sCarrierType || "",
+            // "ColorCode": sColorCode || "#808080"
+        };
+
+        // Construct entity key for update path (use key fields)
+       var sPath = "/carrier_srvSet(CarrierCode='" + encodeURIComponent(sCarrierId) + "')";
+
+
+            //  var sPath =
+            // "/carrier_srvSet(ServLoc='" + encodeURIComponent(sLocationId) +
+            // "',CarrierCode='" + encodeURIComponent(sCarrierId) +
+            // "',ServCode='" + encodeURIComponent(oItem.ServCode) + "')";
+
+        // Add update request to batch
+        oMainModel.update(sPath, oPayload, {
+            groupId: "batchGroup1",
+            changeSetId: "changeset1"
+        });
+    }
+
+    // ✅ Submit the batch request
+    oMainModel.submitChanges({
+        groupId: "batchGroup1",
+        success: function (oData, oResponse) {
+            oController.onCloseBusyDialog();
+            sap.m.MessageToast.show("✅ Carrier Catalog updated successfully!");
+            oController.byId("idAddCarrierDialog").close();
+            oController.onGetCarrierCatalogData();
+        },
+        error: function (oError) {
+            oController.onCloseBusyDialog();
+
+            var sErrorMsg = "Error while updating carrier catalog.";
+            try {
+                if (oError && oError.responseText) {
+                    var oErrorXML = new window.DOMParser().parseFromString(oError.responseText, "text/xml");
+                    var sMsgNode = oErrorXML.getElementsByTagName("message")[0];
+                    if (sMsgNode) {
+                        sErrorMsg = sMsgNode.textContent;
+                    }
+                }
+            } catch (e) {
+                console.error("Error parsing error response:", e);
+            }
+
+            sap.m.MessageBox.error(sErrorMsg);
+        }
+    });
+},
+
+
+AddCarrierCancelDialog: function() {
+    // Reset all form fields in the model
+    this.getView().getModel("eshipjetModel").setProperty("/CarrierCatalogLocations", "");
+    this.getView().getModel("eshipjetModel").setProperty("/commonValues/ShipNowShipsrvNameSelectedKey", "");
+    this.getView().getModel("eshipjetModel").setProperty("/carrierId", "");
+    this.getView().getModel("eshipjetModel").setProperty("/erpCarrierId", "");
+    this.getView().getModel("eshipjetModel").setProperty("/CarrierType", "");
+    this.getView().getModel("eshipjetModel").setProperty("/ServiceCoverage", "");
+    this.getView().getModel("eshipjetModel").setProperty("/connectionType1", "");
+    
+    // Reset table items to initial state (single empty row or empty array)
+    this.getView().getModel("eshipjetModel").setProperty("/addCrrierDialogItems", [{
+        ServiceName: "",
+        ErpServiceId: "",
+        ServiceCode: "",
+        ServiceCoverage: "",
+        ConnectionType: "",
+        Status: true
+    }]);
+    
+    // Close the dialog
+    this.byId("idAddCarrierDialog").close();
+},
+
+
+
+
+
+
+
+// carrieraccountmstart
+
+
+
+
+
+ onGetCarrierAccoData: function () {
+    var oController = this;
+    var oMainModel = oController.getOwnerComponent().getModel("CARRIERS_SRV");
+    var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+
+    oMainModel.read("/carrierSet", {
+        // urlParameters: {
+        //     "$expand": "to_CarrierServices"
+        // },
+        success: function (oData, response) {
+
+             eshipjetModel.setProperty("/carriers", oData.results);
+            console.log("✅ CARRIERS_SRV Response:", oData.results);
+
+            var aResults = oData.results || [];
+
+            // Store full data (so you can use to_CarrierServices later)
+            eshipjetModel.setProperty("/carriersAcccountsData", aResults);
+
+            // --- 👇 Prepare data for dropdowns ---
+            var aCarrierList = [];
+            var aLocationList = [];
+
+            aResults.forEach(function (item) {
+                // Avoid duplicates (optional)
+                if (!aCarrierList.some(c => c.CarrierCode === item.CarrierCode)) {
+                    aCarrierList.push({
+                        CarrierCode: item.CarrierCode,
+                        CarrierDescription: item.CarrierDescription || item.CarrierCode
+                    });
+                }
+
+                if (!aLocationList.some(l => l.LocationId === item.LocationId)) {
+                    aLocationList.push({
+                        LocationId: item.LocationId
+                    });
+                }
+            });
+
+            // --- 👇 Set dropdown data in model ---
+            eshipjetModel.setProperty("/carrierList", aCarrierList);
+            eshipjetModel.setProperty("/locationList", aLocationList);
+
+            console.log("📋 Carrier dropdown:", aCarrierList);
+            console.log("📍 Location dropdown:", aLocationList);
+
+            // sap.m.MessageToast.show("Carrier catalog data loaded successfully");
+        },
+        error: function (oError) {
+            console.error("❌ Error loading carrier catalog:", oError);
+
+            var sErrorMsg = "Failed to load carrier catalog";
+            if (oError.responseText) {
+                try {
+                    var oErrorResponse = JSON.parse(oError.responseText);
+                    sErrorMsg = oErrorResponse.error.message.value || sErrorMsg;
+                } catch (e) {
+                    console.error("Could not parse error response");
+                }
+            }
+            sap.m.MessageToast.show(sErrorMsg);
+        }
+    });
+},
+
+
+
+
+
+   
+
+
+      AddCarrierConfigurationSaveDialog: function () {
+            var oController = this;
+            // ✅ Get models
+            var oMainModel = oController.getOwnerComponent().getModel("CARRIERS_SRV");
+            var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+
+            oController.onOpenBusyDialog();
+
+            // ✅ Collect all values from the eshipjetModel
+            var sLocationId = eshipjetModel.getProperty("/carrierAccountsLocationId");
+            var sCarrierCode = eshipjetModel.getProperty("/carrierAccountsCarrierName");
+            var sCarrierType = eshipjetModel.getProperty("/carrierAccountsCarrierType");
+            var sShipFrmCntry = eshipjetModel.getProperty("/carrierAccountsShipFromCountryName");
+            var sShipToCntry = eshipjetModel.getProperty("/carrierAccountsShipToCountryName");
+            var sAcntNmbr = eshipjetModel.getProperty("/carrierAccountsAccountNumber");
+            var sUserId = eshipjetModel.getProperty("/carrierAccountsUserId");
+            var sPassword = eshipjetModel.getProperty("/carrierAccountsPassword");
+            var sAccessKey = eshipjetModel.getProperty("/carrierAccountsAccessKey");
+            var sMeterId = eshipjetModel.getProperty("/carrierAccountsMeterId");
+            var sHubId = eshipjetModel.getProperty("/carrierAccountsHubId");
+            var sConnectionType = eshipjetModel.getProperty("/carrierAccountsConnectionType");
+
+            var sLabelType = eshipjetModel.getProperty("/carrierAcntsLabelType");
+            var sRateUrl = eshipjetModel.getProperty("/carrierAcntsRateUrl");
+            var sShipUrl = eshipjetModel.getProperty("/carrierAcntsShipUrl");
+            var sTrackUrl = eshipjetModel.getProperty("/carrierAcntsTrackUrl");
+            var sVoidUrl = eshipjetModel.getProperty("/carrierAcntsVoidUrl");
+            var sPodUrl = eshipjetModel.getProperty("/carrierAcntsPodUrl");
+            var sTokenUrl = eshipjetModel.getProperty("/carrierAcntsTokenUrl");
+            var sRateQuote = eshipjetModel.getProperty("/carrierAcntsRateQuote");
+            var sFreightQuote = eshipjetModel.getProperty("/carrierAcntsFreightQuote");
+            var sEndOfDay = eshipjetModel.getProperty("/carrierAcntsEndOfDay");
+            var sManualRates = eshipjetModel.getProperty("/carrierAcntsManualRates");
+            var sAutomateProNumber = eshipjetModel.getProperty("/carrierAcntsAutomaticProNum");
+
+            var sacsrvnametable = eshipjetModel.getProperty("/carrierAcntTblSrvName");
+            var carrierAcntTblErpSrvName = eshipjetModel.getProperty("/carrierAcntTblErpSrvName");
+            var carrierAcntTblSrvCode = eshipjetModel.getProperty("/carrierAcntTblSrvCode");
+            var carrierAcntTblSrvCoverage = eshipjetModel.getProperty("/carrierAcntTblSrvCoverage");
+            var carrierAcntTblStatus = eshipjetModel.getProperty("/carrierAcntTblStatus");
+
+            // ✅ Service details (child table data)
+            var aServiceItems = eshipjetModel.getProperty("/carrierAccountsTableItems") || [];
+
+            // ✅ Build OData Payload for Carrier
+            var oPayload = {
+                "LocationId": sLocationId || "",
+                "CarrierCode": sCarrierCode || "",
+                "CarrierDescription": "",
+                "CarrierType": sCarrierType || "",
+                "ShipFrmCntry": sShipFrmCntry || "",
+                "ShipToCntry": sShipToCntry || "",
+                "AcntNmbr": sAcntNmbr || "",
+                "UserId": sUserId || "",
+                "Password": sPassword || "",
+                "AccessKey": sAccessKey || "",
+                "MeterId": sMeterId || "",
+                "HubId": sHubId || "",
+                "ConnectionType": sConnectionType || "",
+                "LabelType": sLabelType || "",
+                "RateUrl": sRateUrl || "",
+                "ShipUrl": sShipUrl || "",
+                "TrackUrl": sTrackUrl || "",
+                "VoidUrl": sVoidUrl || "",
+                "PodUrl": sPodUrl || "",
+                "TokenUrl": sTokenUrl || "",
+                "RateQuote": sRateQuote || "",
+                "FreightQuote": sFreightQuote || "",
+                "EndOfDay": sEndOfDay || "",
+                "ManualRates": sManualRates || "",
+                "AutomateProNumber": sAutomateProNumber || "",
+                "CreatedOn": new Date().toISOString(),
+                "CreatedBy": "VINAY", // optional - replace dynamically if needed
+                "LastChangedOn": new Date().toISOString(),
+                "LastChangedBy": "VINAY",
+                "IsActive": true,
+                
+                // ✅ Nested child services (navigation property)
+                "to_CarrierServices": {
+                    "results": aServiceItems.map(function(item) {
+                        return {
+                            "CarrierCode": item.CarrierCode, // Ensure correct carrier code is passed
+                            "ServCode": item.ServCode || "",
+                            "ServDesc": item.ServDesc || "",
+                            "ErpServId": item.ErpServId || "",
+                            "ServiceCoverage": item.ServiceCoverage || "",
+                            "IsActive": item.IsActive
+                        };
+                    })
+                }
+            };
+
+    // ✅ Perform OData POST for Carrier
+    oMainModel.create("/carrierSet", oPayload, {
+        success: function (oData) {
+            sap.m.MessageToast.show("Carrier configuration created successfully!");
+            oController.byId("idAddCarrierConfigurationDialog").close();
+            oController.onCloseBusyDialog();
+            oController.onGetCarrierAccoData(); // Refresh table
+        },
+        error: function (oError) {
+            console.error("❌ Error creating carrier:", oError);
+            oController.onCloseBusyDialog();
+            sap.m.MessageBox.error("Failed to create carrier configuration.");
+        }
+    });
+},
+
+
+
+
+
+
+
+
+ AddCarrierConfigurationUpdateDialog: function () {
+    var oController = this;
+
+    // ✅ Get models
+    var oMainModel = oController.getOwnerComponent().getModel("CARRIERS_SRV");
+    var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+
+    oController.onOpenBusyDialog();
+
+    // ✅ Collect all values from the eshipjetModel
+    var sLocationId = eshipjetModel.getProperty("/carrierAccountsLocationId");
+    var sCarrierCode = eshipjetModel.getProperty("/carrierAccountsCarrierName");
+    var sCarrierType = eshipjetModel.getProperty("/carrierAccountsCarrierType");
+    var sShipFrmCntry = eshipjetModel.getProperty("/carrierAccountsShipFromCountryName");
+    var sShipToCntry = eshipjetModel.getProperty("/carrierAccountsShipToCountryName");
+    var sAcntNmbr = eshipjetModel.getProperty("/carrierAccountsAccountNumber");
+    var sUserId = eshipjetModel.getProperty("/carrierAccountsUserId");
+    var sPassword = eshipjetModel.getProperty("/carrierAccountsPassword");
+    var sAccessKey = eshipjetModel.getProperty("/carrierAccountsAccessKey");
+    var sMeterId = eshipjetModel.getProperty("/carrierAccountsMeterId");
+    var sHubId = eshipjetModel.getProperty("/carrierAccountsHubId");
+    var sConnectionType = eshipjetModel.getProperty("/carrierAccountsConnectionType");
+
+    var sLabelType = eshipjetModel.getProperty("/carrierAcntsLabelType");
+    var sRateUrl = eshipjetModel.getProperty("/carrierAcntsRateUrl");
+    var sShipUrl = eshipjetModel.getProperty("/carrierAcntsShipUrl");
+    var sTrackUrl = eshipjetModel.getProperty("/carrierAcntsTrackUrl");
+    var sVoidUrl = eshipjetModel.getProperty("/carrierAcntsVoidUrl");
+    var sPodUrl = eshipjetModel.getProperty("/carrierAcntsPodUrl");
+    var sTokenUrl = eshipjetModel.getProperty("/carrierAcntsTokenUrl");
+    var sRateQuote = eshipjetModel.getProperty("/carrierAcntsRateQuote");
+    var sFreightQuote = eshipjetModel.getProperty("/carrierAcntsFreightQuote");
+    var sEndOfDay = eshipjetModel.getProperty("/carrierAcntsEndOfDay");
+    var sManualRates = eshipjetModel.getProperty("/carrierAcntsManualRates");
+    var sAutomateProNumber = eshipjetModel.getProperty("/carrierAcntsAutomaticProNum");
+
+    var sacsrvnametable = eshipjetModel.getProperty("/carrierAcntTblSrvName");
+    var carrierAcntTblErpSrvName = eshipjetModel.getProperty("/carrierAcntTblErpSrvName");
+    var carrierAcntTblSrvCode = eshipjetModel.getProperty("/carrierAcntTblSrvCode");
+    var carrierAcntTblSrvCoverage = eshipjetModel.getProperty("/carrierAcntTblSrvCoverage");
+    var carrierAcntTblStatus = eshipjetModel.getProperty("/carrierAcntTblStatus");
+
+    // ✅ Service details (child table data)
+    var aServiceItems = eshipjetModel.getProperty("/carrierAccountsTableItems") || [];
+
+    // ✅ Build OData Payload for Carrier
+    var oPayload = {
+        "LocationId": sLocationId || "",
+        "CarrierCode": sCarrierCode || "",
+        "CarrierDescription": sCarrierCode,
+        "CarrierType": sCarrierType || "",
+        "ShipFrmCntry": sShipFrmCntry || "",
+        "ShipToCntry": sShipToCntry || "",
+        "AcntNmbr": sAcntNmbr || "",
+        "UserId": sUserId || "",
+        "Password": sPassword || "",
+        "AccessKey": sAccessKey || "",
+        "MeterId": sMeterId || "",
+        "HubId": sHubId || "",
+        "ConnectionType": sConnectionType || "",
+        "LabelType": sLabelType || "",
+        "RateUrl": sRateUrl || "",
+        "ShipUrl": sShipUrl || "",
+        "TrackUrl": sTrackUrl || "",
+        "VoidUrl": sVoidUrl || "",
+        "PodUrl": sPodUrl || "",
+        "TokenUrl": sTokenUrl || "",
+        "RateQuote": sRateQuote || "",
+        "FreightQuote": sFreightQuote || "",
+        "EndOfDay": sEndOfDay || "",
+        "ManualRates": sManualRates || "",
+        "AutomateProNumber": sAutomateProNumber || "",
+        "CreatedOn": new Date().toISOString(),
+        "CreatedBy": "VINAY", // optional - replace dynamically if needed
+        "LastChangedOn": new Date().toISOString(),
+        "LastChangedBy": "VINAY",
+        "IsActive": true,
+
+        //   // ✅ Nested child services (navigation property)
+        //         "to_CarrierServices": {
+        //             "results": aServiceItems.map(function(item) {
+        //                 return {
+        //                     "CarrierCode": item.CarrierCode, // Ensure correct carrier code is passed
+        //                     "ServCode": item.ServCode || "",
+        //                     "ServDesc": item.ServDesc || "",
+        //                     "ErpServId": item.ErpServId || "",
+        //                     "ServiceCoverage": item.ServiceCoverage || "",
+        //                     "IsActive": item.IsActive
+        //                 };
+        //             })
+        //         }
+    };
+
+    var sPath = "/carrierSet('" + sCarrierCode + "')";
+
+    // Show busy indicator
+    oController.onOpenBusyDialog();
+
+    // Force refresh of CSRF token safely
+    oMainModel.refreshSecurityToken(); // ensures fresh X-CSRF token
+    oMainModel.update(sPath, oPayload, {
+        headers: {
+            "X-CSRF-Token": oMainModel.getHeaders()["x-csrf-token"]
+        },
+        method: "PATCH",
+        success: function() { 
+            sap.m.MessageToast.show("Carrier configuration updated successfully!");
+                oController.byId("idAddCarrierConfigurationDialog").close();
+                oController.onCloseBusyDialog();
+               oController.onGetCarrierAccoData(); // Refresh table
+            },
+        error: function(oError) { 
+            console.error("❌ Error updating carrier:", oError);
+                oController.onCloseBusyDialog();
+                sap.m.MessageBox.error("Failed to update carrier configuration.");}
+    });
+ },
+
+
+
+onEditCarrierAccountPress: function (oEvent) {
+    var oController = this;
+    var oMainModel = oController.getOwnerComponent().getModel("CARRIERS_SRV");
+    var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+
+    // ✅ Get selected table row data
+    var oCurrentObj = oEvent.getSource().getBindingContext("eshipjetModel").getObject();
+    var sLocationId = oCurrentObj.LocationId || oCurrentObj.Plant;
+    var sCarrierCode = oCurrentObj.CarrierCode;
+    oController.onOpenBusyDialog();
+
+    oMainModel.read("/carrier_srvSet", {
+        success: function (oData) {
+            oController.onCloseBusyDialog();
+
+            var aResults = oData.results || [];
+            var aFiltered = aResults.filter(function (oItem) {
+                return (
+                    oItem.ServLoc === sLocationId &&
+                oItem.CarrierCode === sCarrierCode
+                );
+            });
+ 			eshipjetModel.setProperty("/carrierAccountsTableItems", aFiltered);
+        if (aFiltered.length === 0) {
+            sap.m.MessageToast.show("No carrier data found for selected record.");
+            aFiltered = [oCurrentObj];
+           
+        }
+
+            var oCarrierData = oCurrentObj;
+            console.log("✅ Matched Carrier Account:", oCarrierData);
+
+            // ✅ Fill all carrier account fields
+            eshipjetModel.setProperty("/carrierAccountsLocationId", oCarrierData.LocationId);
+            eshipjetModel.setProperty("/carrierAccountsCarrierName", oCarrierData.CarrierCode);
+            eshipjetModel.setProperty("/carrierAccountsCarrierType", oCarrierData.CarrierType || "");
+            eshipjetModel.setProperty("/carrierAccountsShipFromCountryName", oCarrierData.ShipFrmCntry || "");
+            eshipjetModel.setProperty("/carrierAccountsShipToCountryName", oCarrierData.ShipToCntry || "");
+            eshipjetModel.setProperty("/carrierAccountsAccountNumber", oCarrierData.AcntNmbr || "");
+            eshipjetModel.setProperty("/carrierAccountsUserId", oCarrierData.UserId || "");
+            eshipjetModel.setProperty("/carrierAccountsPassword", oCarrierData.Password || "");
+            eshipjetModel.setProperty("/carrierAccountsAccessKey", oCarrierData.AccessKey || "");
+            eshipjetModel.setProperty("/carrierAccountsMeterId", oCarrierData.MeterId || "");
+            eshipjetModel.setProperty("/carrierAccountsHubId", oCarrierData.HubId || "");
+            eshipjetModel.setProperty("/carrierAccountsConnectionType", oCarrierData.ConnectionType || "");
+            eshipjetModel.setProperty("/carrierAcntsRateUrl", oCarrierData.RateUrl || "");
+            eshipjetModel.setProperty("/carrierAcntsShipUrl", oCarrierData.ShipUrl || "");
+            eshipjetModel.setProperty("/carrierAcntsVoidUrl", oCarrierData.VoidUrl || "");
+            eshipjetModel.setProperty("/carrierAcntsTrackUrl", oCarrierData.TrackUrl || "");
+
+            // ✅ Save sub-entity (services) if available
+            // eshipjetModel.setProperty("/carrierAccountsTableItems", oCarrierData.to_CarrierServices?.results || []);
+
+            // ✅ Set edit mode flags
+            eshipjetModel.setProperty("/isEditModeCarrierAccount", true);
+            eshipjetModel.setProperty("/selectedCarrierKey", oCarrierData.CarrierCode);
+
+            // ✅ Finally, open the dialog
+            oController.AddCarrierConfigurationDialogPress();
+        },
+        error: function (oError) {
+            oController.onCloseBusyDialog();
+            console.error("❌ Error loading carrier account data:", oError);
+            sap.m.MessageBox.error("Failed to load carrier account details for edit.");
+        }
+    });
+},
+
+
+// onEditCarrierAccountPress: function (oEvent) {
+//     var oController = this;
+//     var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+
+//     // ✅ Get selected row data
+//     var oContext = oEvent.getSource().getBindingContext("eshipjetModel");
+//     var oRowData = oContext.getObject();
+//     var oCurrObj = oRowData;
+
+//     eshipjetModel.setProperty("/carrierAccountsTableItems", oCurrObj);
+
+//     // ✅ Set the selected data into model for dialog binding
+//     eshipjetModel.setProperty("/carrierAccountsLocationId", oRowData.LocationId);
+//     eshipjetModel.setProperty("/carrierAccountsCarrierName", oRowData.CarrierCode);
+//     eshipjetModel.setProperty("/carrierAccountsCarrierType", oRowData.CarrierType);
+//     eshipjetModel.setProperty("/carrierAccountsShipFromCountryName", oRowData.ShipFrmCntry);
+//     eshipjetModel.setProperty("/carrierAccountsShipToCountryName", oRowData.ShipToCntry);
+//     eshipjetModel.setProperty("/carrierAccountsAccountNumber", oRowData.AcntNmbr);
+//     eshipjetModel.setProperty("/carrierAccountsUserId", oRowData.UserId);
+//     eshipjetModel.setProperty("/carrierAccountsPassword", oRowData.Password);
+//     eshipjetModel.setProperty("/carrierAccountsAccessKey", oRowData.AccessKey);
+//     eshipjetModel.setProperty("/carrierAccountsMeterId", oRowData.MeterId);
+//     eshipjetModel.setProperty("/carrierAccountsHubId", oRowData.HubId);
+//     eshipjetModel.setProperty("/carrierAccountsConnectionType", oRowData.ConnectionType);
+//     eshipjetModel.setProperty("/carrierAcntsRateUrl", oRowData.RateUrl);
+//     eshipjetModel.setProperty("/carrierAcntsShipUrl", oRowData.ShipUrl);
+//     eshipjetModel.setProperty("/carrierAcntsVoidUrl", oRowData.VoidUrl);
+//     eshipjetModel.setProperty("/carrierAcntsTrackUrl", oRowData.TrackUrl);
+
+//     // ✅ Store key values for update path (CarrierCode or ID)
+//     eshipjetModel.setProperty("/selectedCarrierKey", oRowData.CarrierCode);
+
+//    oController.AddCarrierConfigurationDialogPress()
+// },
+
+
+ oncarrieraccountsvaluehelpSearchDialog: function () {
+            var oView = this.getView();
+            oController.ShipNowSearchDlg = oController.byId("idCarrierAccountsValueHelpDialog");
+            if (!oController.ShipNowSearchDlg) {
+                Fragment.load({
+                    id: oView.getId(),
+                    name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.carrieraccountsvaluehelp",
+                    controller: this
+                }).then(function (oShipNowSearchDialog) {
+                    oView.addDependent(oShipNowSearchDialog);
+                    oShipNowSearchDialog.open();
+                });
+            } else {
+                oController.ShipNowSearchDlg.open();
+            }
+        },
+
+        onCarrieraccountSearchDialogClosePress: function () {
+            oController.byId("idCarrierAccountsValueHelpDialog").close();
+        },
+
+        onCarrierSearch: function(oEvent) {
+            var sQuery = oEvent.getParameter("newValue");
+            var oTable = this.byId("carrierTable");
+            var oBinding = oTable.getBinding("items");
+            var oFilter = new sap.ui.model.Filter("CarrierName", sap.ui.model.FilterOperator.Contains, sQuery);
+            oBinding.filter(oFilter);
+        },
+
+//      onCarrierItemPress: function (oEvent) {
+//     var oSelectedData = oEvent.getSource().getBindingContext("eshipjetModel").getObject();
+//     var oModel = this.getOwnerComponent().getModel("eshipjetModel");
+//     var aCatalogData = oModel.getProperty("/carriersCatalogData") || [];
+//      var oController = this;
+//     var oMainModel = oController.getOwnerComponent().getModel("CARRIERS_SRV");
+//     var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+//     var carrierAccountsLocationId = eshipjetModel.getProperty("/carrierAccountsLocationId");
+//     var locationId = oSelectedData.LocationId
+//     var carrierCode = oSelectedData.CarrierCode
+//      eshipjetModel.setProperty("/carrierAccountsCarrierName", carrierCode);
+//     oMainModel.read("/carrier_srvSet", {
+//         success: function (oData) {
+//             console.log("✅ Carrier data loaded:", oData);
+
+//             var aResults = oData.results || [];
+
+//            const filtered = aResults.filter(Obj =>
+//                 Obj.LocationId === locationId && Obj.CarrierCode === carrierCode
+//                 );
+//              eshipjetModel.setProperty("/carrierAccountsTableItems", filtered[0]);
+//               eshipjetModel.setProperty("/carrierAccountsCarrierName", filtered[0].CarrierCode);
+//             // Open the dialog once data is ready
+//             // oController.oncarrieraccountsvaluehelpSearchDialog();
+//         },
+//         error: function (oError) {
+//             console.error("❌ Error loading carrier catalog:", oError);
+
+//             var sErrorMsg = "Failed to load carrier catalog";
+//             try {
+//                 if (oError.responseText) {
+//                     var oErrorResponse = JSON.parse(oError.responseText);
+//                     sErrorMsg = oErrorResponse.error?.message?.value || sErrorMsg;
+//                 }
+//             } catch (e) {
+//                 console.error("Could not parse error response");
+//             }
+
+//             sap.m.MessageToast.show(sErrorMsg);
+//         }
+//     });
+  
+//     oController.onCarrieraccountSearchDialogClosePress();
+// },
+
+
+onCarrierItemPress: function (oEvent) {
+    var oController = this;
+    var oMainModel = oController.getOwnerComponent().getModel("CARRIERS_SRV");
+    var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+
+    // Get selected carrier info
+    var oSelectedData = oEvent.getSource().getBindingContext("eshipjetModel").getObject();
+    var sLocationId = oSelectedData.LocationId;
+    var sCarrierCode = oSelectedData.CarrierCode;
+
+    // Set basic selected values immediately
+    eshipjetModel.setProperty("/carrierAccountsLocationId", sLocationId);
+    eshipjetModel.setProperty("/carrierAccountsCarrierName", sCarrierCode);
+
+    // ✅ Fetch carrier account details
+    oMainModel.read("/carrier_srvSet", {
+       success: function (oData) {
+    var aResults = oData.results || [];
+
+    // ✅ Filter all matching records
+    var resultsArray = aResults.filter(function (obj) {
+        return obj.ServLoc === sLocationId && obj.CarrierCode === sCarrierCode;
+    });
+
+    if (resultsArray.length > 0) {
+        // Get the first (main) record for header details
+        var oFiltered = resultsArray[0];
+
+        console.log("✅ Existing carrier account found:", resultsArray);
+
+        // Fill all fields from backend (using first record)
+        eshipjetModel.setProperty("/carrierAccountsCarrierType", oFiltered.CarrierType);
+        eshipjetModel.setProperty("/carrierAccountsShipFromCountryName", oFiltered.ShipFrmCntry);
+        eshipjetModel.setProperty("/carrierAccountsShipToCountryName", oFiltered.ShipToCntry);
+        eshipjetModel.setProperty("/carrierAccountsAccountNumber", oFiltered.AcntNmbr);
+        eshipjetModel.setProperty("/carrierAccountsUserId", oFiltered.UserId);
+        eshipjetModel.setProperty("/carrierAccountsPassword", oFiltered.Password);
+        eshipjetModel.setProperty("/carrierAccountsAccessKey", oFiltered.AccessKey);
+        eshipjetModel.setProperty("/carrierAccountsMeterId", oFiltered.MeterId);
+        eshipjetModel.setProperty("/carrierAccountsHubId", oFiltered.HubId);
+        eshipjetModel.setProperty("/carrierAccountsConnectionType", oFiltered.ConnectionType);
+
+        // ✅ Bind all matching child rows to table
+        eshipjetModel.setProperty("/carrierAccountsTableItems", resultsArray);
+    } else {
+        console.log("ℹ️ No existing carrier account found, new record will be created.");
+        eshipjetModel.setProperty("/carrierAccountsTableItems", []);
+    }
+
+    // Close dialog after selection
+    oController.onCarrieraccountSearchDialogClosePress();
+},
+
+        error: function (oError) {
+            console.error("❌ Error loading carrier account:", oError);
+            sap.m.MessageBox.error("Failed to load carrier account data.");
+        }
+    });
+},
+
+
+
+        onCarrierSelect: function() {
+            var oSelectedCarrier = this.getView().byId("carrierTable").getSelectedItem();
+            if (oSelectedCarrier) {
+                var oCarrierData = oSelectedCarrier.getBindingContext().getObject();
+                // Do something with the selected carrier (e.g., update fields, etc.)
+            }
+            this.onCarrierDialogClose();
+        },
+       onGetCarrierAccountValueHelpData: function () {
+    var oController = this;
+    var oMainModel = oController.getOwnerComponent().getModel("CARRIERS_SRV");
+    var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+    var carrierAccountsLocationId = eshipjetModel.getProperty("/carrierAccountsLocationId");
+
+    oMainModel.read("/carrierSet", {
+        urlParameters: { "$expand": "to_CarrierServices" },
+        success: function (oData) {
+            console.log("✅ Carrier data loaded:", oData);
+
+            var aResults = oData.results || [];
+
+            // 👉 Client-side filter (you can modify this logic)
+            var aFiltered = aResults.filter(function (carrier) {
+                // Example: Filter by LocationId field
+                return carrier.LocationId === carrierAccountsLocationId;
+            });
+
+            console.log("✅ Filtered carriers for location:", carrierAccountsLocationId, aFiltered);
+
+            // Optional: Map the first service’s ServiceCoverage for display
+            aFiltered = aFiltered.map(function (carrier) {
+                var firstService = carrier.to_CarrierServices?.results?.[0];
+                carrier.ServiceCoverage = firstService ? firstService.ServiceCoverage : "";
+                return carrier;
+            });
+
+            // Set the filtered and mapped data into JSON model
+            eshipjetModel.setProperty("/carriers", aFiltered);
+
+            // Open the dialog once data is ready
+            oController.oncarrieraccountsvaluehelpSearchDialog();
+        },
+        error: function (oError) {
+            console.error("❌ Error loading carrier catalog:", oError);
+
+            var sErrorMsg = "Failed to load carrier catalog";
+            try {
+                if (oError.responseText) {
+                    var oErrorResponse = JSON.parse(oError.responseText);
+                    sErrorMsg = oErrorResponse.error?.message?.value || sErrorMsg;
+                }
+            } catch (e) {
+                console.error("Could not parse error response");
+            }
+
+            sap.m.MessageToast.show(sErrorMsg);
+        }
+    });
+},
+
+// Method to clear all carrier configuration fields
+_clearCarrierConfigurationFields: function() {
+    var oModel = this.getView().getModel("eshipjetModel");
+    
+    // Clear all carrier account fields
+    oModel.setProperty("/carrierAccountsLocationId", "");
+    oModel.setProperty("/carrierAccountsCarrierName", "");
+    oModel.setProperty("/carrierAccountsCarrierType", "");
+    oModel.setProperty("/carrierAccountsShipFromCountryName", "");
+    oModel.setProperty("/carrierAccountsShipToCountryName", "");
+    oModel.setProperty("/carrierAccountsCostCentre", "");
+    oModel.setProperty("/carrierAccountsEnvironment", "");
+    oModel.setProperty("/carrierAccountsAccountNumber", "");
+    oModel.setProperty("/carrierAccountsUserId", "");
+    oModel.setProperty("/carrierAccountsPassword", "");
+    oModel.setProperty("/carrierAccountsAccessKey", "");
+    oModel.setProperty("/carrierAccountsMeterId", "");
+    oModel.setProperty("/carrierAccountsHubId", "");
+    oModel.setProperty("/carrierAccountsConnectionType", "");
+    
+    // Clear the table items
+    oModel.setProperty("/carrierAccountsTableItems", []);
+    
+    // Optional: Reset to default empty row if needed
+    // oModel.setProperty("/carrierAccountsTableItems", [{
+    //     ServDesc: "",
+    //     ErpServId: "",
+    //     CarrierCode: "",
+    //     ServiceCoverage: "",
+    //     IsActive: false
+    // }]);
+},
+
+// Update your close dialog handler
+AddCarrierConfigurationCloseDialog: function() {
+    var oDialog = this.byId("idAddCarrierConfigurationDialog");
+    if (oDialog) {
+        oDialog.close();
+        // Clear all fields when dialog is closed
+        this._clearCarrierConfigurationFields();
+    }
+},
+
+
+
+
+
+
 
 
     });
