@@ -64,17 +64,17 @@
         <Toolbar height="25%" class="toolbarbottomborder" >
 			<HBox width="100%" >
 				<VBox class="sapUiTinyMargin" width="33%">
-					<Text text="1" class="NumberSizeTitle1"></Text>
+					<Text text="{eshipjetModel>/totalCarriersAcccountsCount}" class="NumberSizeTitle1"></Text>
 					<Text text="Total Carrier Accounts" class="NumberSizeTitle2"></Text>
 					<Button class="totalProgress-request-button request-button btnInnerFocus" icon="false" width="100%"  ></Button>
 				</VBox>
 				<VBox class="sapUiTinyMargin" width="33%">
-					<Text text="2" class="NumberSizeTitle1"></Text>
+					<Text text="{eshipjetModel>/activeCarriersAcccountsCount}" class="NumberSizeTitle1"></Text>
 					<Text text="Active" class="NumberSizeTitle2"></Text>
 					<Button class="inTransit-request-button request-button btnInnerFocus" icon="false" width="100%" ></Button>
 				</VBox>
 				<VBox class="sapUiTinyMargin" width="33%">
-					<Text text="3" class="NumberSizeTitle1"></Text>
+					<Text text="{eshipjetModel>/inActiveCarriersAcccountsCount}" class="NumberSizeTitle1"></Text>
 					<Text text="Inactive" class="NumberSizeTitle2"></Text>
 					<Button class="InWhite-request-button request-button btnInnerFocus" icon="false" width="100%" ></Button>
 				</VBox>
@@ -98,7 +98,7 @@
 			id="_IDCarriesAccountsTable"
 			selectionMode="None"
 			class="rowRightLine ordersTableRightBorder"
-			rows="{eshipjetModel>/carriersAcccountsData}"
+			rows="{eshipjetModel>/uniqueCarriersAcccountsData}"
 			visibleRowCount="13"
 			ariaLabelledBy="title">
 

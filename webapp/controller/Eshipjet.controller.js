@@ -21333,34 +21333,60 @@ sap.ui.define([
         //     });
         // },
      onGetCarrierCatalogData: function () {
-    var oController = this;
-    var oMainModel = oController.getOwnerComponent().getModel("CARRIERS_SRV");
-    var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+        var oController = this;
+        var oMainModel = oController.getOwnerComponent().getModel("CARRIERS_SRV");
+        var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
 
-    oMainModel.read("/carrier_srvSet", {
-        // urlParameters: {
-        //     "$expand": "to_CarrierServices"
-        // },
-        success: function (oData, response) {
-            eshipjetModel.setProperty("/carriersCatalogData", oData.results);
+        oMainModel.read("/carrier_srvSet", {
+            // urlParameters: {
+            //     "$expand": "to_CarrierServices"
+            // },
+            success: function (oData, response) {
+                oController.onCloseBusyDialog();
+                var aData = oData.results;
+                eshipjetModel.setProperty("/carriersCatalogData", aData);
+                eshipjetModel.setProperty("/carrierServicesList", aData);
+                eshipjetModel.setProperty("/totalCarriersCatalogCount", aData.length);
+                
+                var uniqueCarriersList = [];
+                var seen = new Set();
 
-        },
-        error: function (oError) {
-            console.error("❌ Error loading carrier catalog:", oError);
+                var activeCarriersCatalogCount = 0;
+                var inActiveCarriersCatalogCount = 0;
+                aData.forEach(function (item) {
+                    if(item.IsActive === true){
+                        activeCarriersCatalogCount += 1;
+                    }else if(item.IsActive === false){
+                        inActiveCarriersCatalogCount += 1;
+                    }
+                    var key = item.CarrierCode + "_" + item.ServLoc;
+                    if (!seen.has(key)) {
+                        seen.add(key);
+                        uniqueCarriersList.push(item);
+                    }
+                });
+                eshipjetModel.setProperty("/uniqueCarriersCatalogData", uniqueCarriersList);
+                eshipjetModel.setProperty("/activeCarriersCatalogCount", activeCarriersCatalogCount);
+                eshipjetModel.setProperty("/inActiveCarriersCatalogCount", inActiveCarriersCatalogCount);
+                console.log("Read success:", oData.results);
 
-            var sErrorMsg = "Failed to load carrier catalog";
-            if (oError.responseText) {
-                try {
-                    var oErrorResponse = JSON.parse(oError.responseText);
-                    sErrorMsg = oErrorResponse.error.message.value || sErrorMsg;
-                } catch (e) {
-                    console.error("Could not parse error response");
+            },
+            error: function (oError) {
+                console.error("❌ Error loading carrier catalog:", oError);
+
+                var sErrorMsg = "Failed to load carrier catalog";
+                if (oError.responseText) {
+                    try {
+                        var oErrorResponse = JSON.parse(oError.responseText);
+                        sErrorMsg = oErrorResponse.error.message.value || sErrorMsg;
+                    } catch (e) {
+                        console.error("Could not parse error response");
+                    }
                 }
+                sap.m.MessageToast.show(sErrorMsg);
             }
-            sap.m.MessageToast.show(sErrorMsg);
-        }
-    });
-},
+        });
+    },
 
  AddCarrierCatalogSaveDialog: function () {
     var oController = this;
@@ -21638,43 +21664,35 @@ AddCarrierCancelDialog: function() {
         //     "$expand": "to_CarrierServices"
         // },
         success: function (oData, response) {
+            oController.onCloseBusyDialog();
+            var aData = oData.results;
+            eshipjetModel.setProperty("/carriersAcccountsData", aData);
+            
+            eshipjetModel.setProperty("/carriersList", aData);
+            eshipjetModel.setProperty("/totalCarriersAcccountsCount", aData.length);
+            
+            var uniqueCarriersAcccountsData = [];
+            var seen = new Set();
 
-             eshipjetModel.setProperty("/carriers", oData.results);
-            console.log("✅ CARRIERS_SRV Response:", oData.results);
-
-            var aResults = oData.results || [];
-
-            // Store full data (so you can use to_CarrierServices later)
-            eshipjetModel.setProperty("/carriersAcccountsData", aResults);
-
-            // --- 👇 Prepare data for dropdowns ---
-            var aCarrierList = [];
-            var aLocationList = [];
-
-            aResults.forEach(function (item) {
-                // Avoid duplicates (optional)
-                if (!aCarrierList.some(c => c.CarrierCode === item.CarrierCode)) {
-                    aCarrierList.push({
-                        CarrierCode: item.CarrierCode,
-                        CarrierDescription: item.CarrierDescription || item.CarrierCode
-                    });
+            var activeCarriersAcccountsCount = 0;
+            var inActiveCarriersAcccountsCount = 0;
+            aData.forEach(function (item) {
+                if(item.IsActive === true){
+                    activeCarriersAcccountsCount += 1;
+                }else if(item.IsActive === false){
+                    inActiveCarriersAcccountsCount += 1;
                 }
-
-                if (!aLocationList.some(l => l.LocationId === item.LocationId)) {
-                    aLocationList.push({
-                        LocationId: item.LocationId
-                    });
+                var key = item.CarrierCode + "_" + item.LocationId;
+                if (!seen.has(key)) {
+                    seen.add(key);
+                    uniqueCarriersAcccountsData.push(item);
                 }
             });
+            eshipjetModel.setProperty("/uniqueCarriersAcccountsData", uniqueCarriersAcccountsData);
+            eshipjetModel.setProperty("/activeCarriersAcccountsCount", activeCarriersAcccountsCount);
+            eshipjetModel.setProperty("/inActiveCarriersAcccountsCount", inActiveCarriersAcccountsCount);
+            console.log("Read success:", oData.results);
 
-            // --- 👇 Set dropdown data in model ---
-            eshipjetModel.setProperty("/carrierList", aCarrierList);
-            eshipjetModel.setProperty("/locationList", aLocationList);
-
-            console.log("📋 Carrier dropdown:", aCarrierList);
-            console.log("📍 Location dropdown:", aLocationList);
-
-            // sap.m.MessageToast.show("Carrier catalog data loaded successfully");
         },
         error: function (oError) {
             console.error("❌ Error loading carrier catalog:", oError);
