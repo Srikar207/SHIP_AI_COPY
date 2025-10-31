@@ -174,7 +174,7 @@
                 <Input class=" create-ship-req_input" 
                        value="{eshipjetModel>ErpServId}"></Input>
                 
-                <Input class="sapUiSmallMarginBottom create-ship-req_input" 
+                <Input class=" create-ship-req_input" 
                        value="{eshipjetModel>ServCode}" ></Input>
                 
                 <ComboBox selectedKey="{eshipjetModel>ServiceCoverage}" class=" create-ship-req_input">

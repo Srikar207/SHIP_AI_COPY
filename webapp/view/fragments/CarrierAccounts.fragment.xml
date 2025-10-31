@@ -85,7 +85,7 @@
 		<Toolbar class="sapUiTinyMarginTop sapUiSmallMarginBegin sapUiSmallMarginEnd" >
 			<Button icon="sap-icon://filter" press="onCarriesAccountsFilterPopoverPress" type="Transparent" class="ordersIcons" ></Button>
 			<ToolbarSpacer ></ToolbarSpacer>
-				<SearchField width="10rem" class="sapUiSmallMarginBottom sapUiLargeMarginBegin" liveChange="onSearchCarrierAccounts" ></SearchField>
+				<SearchField width="10rem" class="sapUiSmallMarginBottom" liveChange="onSearchCarrierAccounts" ></SearchField>
 				<Button icon="sap-icon://action" press="onCarrierAccountsExportToExcel" type="Transparent" class="ordersIcons" ></Button>
 				<Button icon="sap-icon://action-settings" press="openCarrierAccountColNamesPopover" type="Transparent" class="ordersIcons" ></Button>
 			<customData>
