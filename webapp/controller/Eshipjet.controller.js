@@ -21627,6 +21627,7 @@ AddCarrierCancelDialog: function() {
     this.getView().getModel("eshipjetModel").setProperty("/CarrierType", "");
     this.getView().getModel("eshipjetModel").setProperty("/ServiceCoverage", "");
     this.getView().getModel("eshipjetModel").setProperty("/connectionType1", "");
+    this.getView().getModel("eshipjetModel").setProperty("/CarrierName", "");
     
     // Reset table items to initial state (single empty row or empty array)
     this.getView().getModel("eshipjetModel").setProperty("/addCrrierDialogItems", [{

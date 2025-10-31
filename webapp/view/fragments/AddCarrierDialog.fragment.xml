@@ -21,30 +21,30 @@
                 <Button icon="sap-icon://decline" press="AddCarrierCancelDialog" class="Decline_Btn ship-now-decline_btn btnInnerFocus" type="Transparent" ></Button>
         </Toolbar>
         <HBox alignContent="Center" >
-												<HBox height="5rem" width="100%" class="whiteBackground sapUiSmallMarginEnd packScreenPadding" alignItems="Center" >
+												<HBox height="5rem" width="100%" class="whiteBackground  packScreenPadding" alignItems="Center" >
 													<VBox >
 														<Label text="Location ID / Location Name" />
-														<ComboBox class="create-ship-req_input sapUiSmallMarginEnd" width="auto" enabled="{}" items="{eshipjetModel>/LocationsData}" selectedKey="{eshipjetModel>/CarrierCatalogLocations}" selectionChange=""  >
+														<ComboBox class="create-ship-req_input sapUiLargeMarginEnd" width="auto" enabled="{}" items="{eshipjetModel>/LocationsData}" selectedKey="{eshipjetModel>/CarrierCatalogLocations}" selectionChange=""  >
 															 <core:Item key="{eshipjetModel>Plant}" text="{eshipjetModel>Plant} - {eshipjetModel>PlantName}" />
 														</ComboBox>
 													</VBox>
 													<VBox >
 														<Label text="Carrier Name" />
-														<Input value="{eshipjetModel>/CarrierName}" enabled="{}" class="create-ship-req_input sapUiSmallMarginEnd"  width="auto" />
+														<Input value="{eshipjetModel>/CarrierName}" enabled="{}" class="create-ship-req_input sapUiLargeMarginEnd"  width="auto" />
 
 													</VBox>
 													<VBox >
 														<Label text="Carrier ID" />
-															<Input  value="{eshipjetModel>/carrierId}" enabled="{}" class="create-ship-req_input sapUiSmallMarginEnd"  width="auto" />
+															<Input  value="{eshipjetModel>/carrierId}" enabled="{}" class="create-ship-req_input sapUiLargeMarginEnd"  width="auto" />
 													</VBox>
                                                     <VBox >
 														<Label text="ERP Carrier ID" />
-															<Input value="{eshipjetModel>/erpCarrierId}" enabled="{}" class="create-ship-req_input sapUiSmallMarginEnd"  width="auto" />
+															<Input value="{eshipjetModel>/erpCarrierId}" enabled="{}" class="create-ship-req_input sapUiLargeMarginEnd"  width="auto" />
 													</VBox>
                                                     <VBox>
                                                         <Label text="Carrier Type" />
                                                         <ComboBox
-                                                            class="create-ship-req_input sapUiSmallMarginEnd"
+                                                            class="create-ship-req_input sapUiLargeMarginEnd"
                                                             width="auto"
                                                             enabled="true"
                                                             items="{eshipjetModel>/carrierTypeList}"
@@ -57,7 +57,7 @@
 													<VBox >
 														<Label text="Carrier Coverage" />
 														<ComboBox 
-                                                            class=" create-ship-req_input sapUiSmallMarginEnd" 
+                                                            class=" create-ship-req_input sapUiLargeMarginEnd" 
                                                             items="{eshipjetModel>/CarrierCoverage}"
                                                             selectedKey="{eshipjetModel>/ServiceCoverage}">
                                                             <core:Item key="{eshipjetModel>CoverageKey}" text="{eshipjetModel>CoverageText}" />
@@ -67,7 +67,7 @@
                                                    <VBox>
                                                     <Label text="Connection Type" />
                                                     <ComboBox
-                                                        class="create-ship-req_input sapUiSmallMarginEnd"
+                                                        class="create-ship-req_input sapUiLargeMarginEnd"
                                                         width="auto"
                                                         enabled="{}"
                                                         selectedKey="{eshipjetModel>/connectionType1}"
@@ -79,12 +79,12 @@
                                                     </ComboBox>
                                                 </VBox>
 													<VBox >
-														<Label text="Color Picker" class="create-ship-req_input sapUiSmallMarginEnd"/>
-														<Button press="onOpenColorPicker" class="create-ship-req_input sapUiSmallMarginEnd"/>
+														<Label text="Color Picker" class="create-ship-req_input sapUiLargeMarginEnd"/>
+														<Button press="onOpenColorPicker" class="create-ship-req_input sapUiLargeMarginEnd"/>
 													</VBox>
                                                     <VBox >
 														<Label text="Status" />
-														 <Switch type="AcceptReject" state="true">
+														 <Switch  state="true" class="greenSwitch btnInnerFocus">
                                                             <layoutData>
                                                                 <FlexItemData growFactor="1" />
                                                             </layoutData>
@@ -190,7 +190,7 @@
                     <core:Item key="File" text="File" />
                 </ComboBox>
                 
-                <Switch type="AcceptReject" state="{eshipjetModel>Status}">
+                <Switch  state="{eshipjetModel>Status}" class="greenSwitch btnInnerFocus">
                     <layoutData>
                         <FlexItemData growFactor="1" />
                     </layoutData>
@@ -208,7 +208,7 @@
         <Button
             text="Cancel"
             press="AddCarrierCancelDialog"
-            class="customLogOutButton btnInnerFocus"
+            class="AddCarrierCancel btnInnerFocus"
             type="Transparent" />
 
         <ToolbarSpacer />

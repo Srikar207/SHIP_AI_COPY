@@ -632,9 +632,9 @@ span.sapMBtnInner.sapMBtnReject {
   height: 43px !important;
   min-height: 43px !important;
 }
-.forsearchhigh{
+/* .forsearchhigh{
   padding-top: 3px;
-}
+} */
 
 .frieghtReviewBtnShip {
   font-family: AvenirNextCyrMedium !important;
@@ -2751,3 +2751,5 @@ button {
 .sapMSwtOff:not(.sapMSwtAcceptReject) .sapMSwtInner {
     background-color: #D3D3D3 !important;
 }
+
+

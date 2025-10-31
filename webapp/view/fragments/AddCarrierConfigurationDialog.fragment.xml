@@ -248,7 +248,7 @@
 
         <footer>
             <Toolbar>
-                <Button text="Cancel" press="AddCarrierConfigurationCancelDialog" class="customLogOutButton btnInnerFocus" />
+                <Button text="Cancel" press="AddCarrierConfigurationCancelDialog" class="AddCarrierCancel btnInnerFocus" />
                  <ToolbarSpacer />
                 <Button text="Address" type="Emphasized" press="onAddressCarrierConfig" class="addCarrierSaveBtnStyle btnInnerFocus" />
                 <Button text="Save"  press="AddCarrierConfigurationSaveDialog" class="addCarrierSaveBtnStyle btnInnerFocus" />

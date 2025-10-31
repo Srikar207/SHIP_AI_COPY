@@ -2892,6 +2892,8 @@ body.dark-theme {
   color: white !important;
 }
 
+
+
 .void-button {
   background-color: #dc3545;
   color: #fff !important;
@@ -3535,3 +3537,84 @@ body.dark-theme .ReversePGIBtnStyle span {
 .sapMSwtOff:not(.sapMSwtAcceptReject) .sapMSwtInner {
     background-color: #d3d3d3 !important;
 }
+
+/* ✅ Green background when switch is ON */
+.greenSwitch.sapMSwt.sapMSwtOn .sapMSwtTrack {
+    background-color: #4CAF50 !important;  /* nice green */
+    border-color: #4CAF50 !important;
+}
+
+/* ✅ White background when switch is OFF */
+.greenSwitch.sapMSwt.sapMSwtOff .sapMSwtTrack {
+    background-color: #ffffff !important;  /* white background */
+    border: 1px solid #ccc !important;
+}
+
+/* ✅ Optional: Make handle (circle) look neat */
+.greenSwitch .sapMSwtHandle {
+    background-color: #f1f1f1 !important;  /* light gray circle */
+    border: 1px solid #999 !important;
+}
+
+
+/* ✅ Green background when switch is ON */
+.sapMSwt.greenSwitch.sapMSwtOn .sapMSwtTrack {
+    background-color: #4CAF50 !important;
+    border-color: #4CAF50 !important;
+}
+
+/* ✅ White background when switch is OFF */
+.sapMSwt.greenSwitch.sapMSwtOff .sapMSwtTrack {
+    background-color: #ffffff !important;
+    border: 1px solid #ccc !important;
+}
+
+/* ✅ Optional: Handle (circle) styling */
+.sapMSwt.greenSwitch .sapMSwtHandle {
+    background-color: #f1f1f1 !important;
+    border: 1px solid #999 !important;
+}
+
+
+
+.AddCarrierCancel.sapMBtn {
+  border: 2px solid #ff4444 !important;
+  border-radius: 2px !important;
+  background: transparent !important;
+  padding: 3px 10px !important;
+  transition: all 0.3s ease !important;
+  height: 2rem !important;
+  /* width: 6rem !important; */
+}
+
+.AddCarrierCancel .sapMBtnInner {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 2px !important;
+}
+
+.AddCarrierCancel .sapMBtnContent {
+  color: white !important;
+  font-weight: 500 !important;
+}
+
+.AddCarrierCancel .sapUiIcon {
+  color: white !important;
+  margin-right: 6px !important;
+}
+
+/* Hover state */
+.AddCarrierCancel.sapMBtn:hover {
+  background: #ff4444 !important;
+  border-color: #ff4444 !important;
+}
+
+.AddCarrierCancel:hover .sapMBtnContent {
+  color: white !important;
+}
+
+.AddCarrierCancel:hover .sapUiIcon {
+  color: white !important;
+}
+

@@ -34,7 +34,7 @@
 		<Toolbar class="sapUiTinyMarginTop sapUiSmallMarginBegin sapUiSmallMarginEnd" >
 			<Button icon="sap-icon://filter" press="onCarrierCatalogFilterPopoverPress" type="Transparent" class="ordersIcons" ></Button>
 			<ToolbarSpacer ></ToolbarSpacer>
-				<SearchField width="10rem" class="sapUiTinyMarginBottom forsearchhigh sapUiTinyMarginTop" liveChange="onSearchCarrierCatalog" ></SearchField>
+				<SearchField width="10rem" class="sapUiSmallMarginBottom" liveChange="onSearchCarrierCatalog" ></SearchField>
 				<Button icon="sap-icon://action" press="onCarrierCatalogExportToExcel" type="Transparent" class="ordersIcons" ></Button>
 			<Button icon="sap-icon://action-settings" press="openCarrierCatalogColNamesPopover" type="Transparent" class="ordersIcons" ></Button>
 			<customData>

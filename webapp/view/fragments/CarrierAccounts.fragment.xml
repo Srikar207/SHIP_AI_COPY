@@ -85,7 +85,7 @@
 		<Toolbar class="sapUiTinyMarginTop sapUiSmallMarginBegin sapUiSmallMarginEnd" >
 			<Button icon="sap-icon://filter" press="onCarriesAccountsFilterPopoverPress" type="Transparent" class="ordersIcons" ></Button>
 			<ToolbarSpacer ></ToolbarSpacer>
-				<SearchField width="10rem" class="sapUiSmallMarginBottom forsearchhigh sapUiTinyMarginTop" liveChange="onSearchCarrierAccounts" ></SearchField>
+				<SearchField width="10rem" class="sapUiSmallMarginBottom sapUiLargeMarginBegin" liveChange="onSearchCarrierAccounts" ></SearchField>
 				<Button icon="sap-icon://action" press="onCarrierAccountsExportToExcel" type="Transparent" class="ordersIcons" ></Button>
 				<Button icon="sap-icon://action-settings" press="openCarrierAccountColNamesPopover" type="Transparent" class="ordersIcons" ></Button>
 			<customData>
@@ -166,7 +166,7 @@
 								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/10/visible}" >
 									<Label text="Freight Quote" />
 									<ui:template>
-										<Switch type="AcceptReject" state="{eshipjetModel>Freight_Quote}" class="greenSwitch">
+										<Switch  state="{eshipjetModel>Freight_Quote}" class="greenSwitch">
 											<layoutData>
 												<FlexItemData growFactor="1" />
 											</layoutData>
@@ -176,7 +176,7 @@
 								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/11/visible}" >
 									<Label text="Rate Quote" />
 									<ui:template>
-										<Switch type="AcceptReject" state="{eshipjetModel>Rate_Quote}">
+										<Switch  state="{eshipjetModel>Rate_Quote}" class="greenSwitch">
 											<layoutData>
 												<FlexItemData growFactor="1" />
 											</layoutData>
@@ -186,7 +186,7 @@
 								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/12/visible}" >
 									<Label text="Automate Pro Number" />
 									<ui:template>
-										<Switch type="AcceptReject" state="{eshipjetModel>Automate_Pro_Number}">
+										<Switch  state="{eshipjetModel>Automate_Pro_Number}" class="greenSwitch">
 											<layoutData>
 												<FlexItemData growFactor="1" />
 											</layoutData>
@@ -196,7 +196,7 @@
 								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/13/visible}" >
 									<Label text="Status" />
 									<ui:template>
-										<Switch type="AcceptReject" state="{= ${eshipjetModel>Is_Active} === 'true' ? true : false}" class="btnInnerFocus" >
+										<Switch  state="{= ${eshipjetModel>Is_Active} === 'true' ? true : false}" class="greenSwitch" >
 											<layoutData>
 												<FlexItemData growFactor="1" />
 											</layoutData>
@@ -206,7 +206,7 @@
 								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/14/visible}" >
 									<Label text="End Of The Day" />
 									<ui:template>
-										<Switch type="AcceptReject" state="{eshipjetModel>End_Of_The_Day}">
+										<Switch state="{eshipjetModel>End_Of_The_Day}" class="greenSwitch">
 											<layoutData>
 												<FlexItemData growFactor="1" />
 											</layoutData>
@@ -216,7 +216,7 @@
 								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/15/visible}" >
 									<Label text="Manual Rates" />
 									<ui:template>
-										<Switch type="AcceptReject" state="{eshipjetModel>Manual_Rates}">
+										<Switch state="{eshipjetModel>Manual_Rates}" class="greenSwitch">
 											<layoutData>
 												<FlexItemData growFactor="1" />
 											</layoutData>
