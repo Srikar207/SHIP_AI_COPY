@@ -186,62 +186,56 @@
                     key="additional"
                     text="Additional Info" >
 
-                     <form:SimpleForm
-                       editable="true" 
-                       layout="ColumnLayout" 
-                       columnsM="2" 
-                       columnsL="3" 
-                       columnsXL="6" >
+                    <form:SimpleForm
+                        editable="true"
+                        layout="ColumnLayout"
+                        columnsM="2"
+                        columnsL="3"
+                        columnsXL="6">
                         <form:content>
+
                             <Label text="Label Type" />
-                            <ComboBox class="create-ship-req_input " selectedKey="{eshipjetModel>/carrierAccountsEnvironment}">
+                            <ComboBox class="create-ship-req_input"
+                                selectedKey="{eshipjetModel>/carrierAcntsLabelType}">
                                 <core:Item key="" text="Select" />
                             </ComboBox>
+
                             <Label text="POD URL" />
-                            <ComboBox class="create-ship-req_input " selectedKey="{eshipjetModel>/carrierAccountsEnvironment}">
-                                <core:Item key="" text="Select" />
-                            </ComboBox>
+                            <Input value="{eshipjetModel>/carrierAcntsPodUrl}" class="create-ship-req_input" />
+
                             <Label text="Rate URL" />
-                            <ComboBox class="create-ship-req_input" selectedKey="{eshipjetModel>/carrierAccountsEnvironment}">
-                                <core:Item key="" text="Select" />
-                            </ComboBox>
-                            	<Label text="" />
-                             <CheckBox text="Rate Quote" selected="false" class="sapUiSmallMarginTop"/>
-                            
-                            
+                            <Input value="{eshipjetModel>/carrierAcntsRateUrl}" class="create-ship-req_input" />
+
+                            <Label text="" />
+                            <CheckBox text="Rate Quote" selected="{eshipjetModel>/carrierAcntsRateQuote}" class="sapUiSmallMarginTop"/>
+
                             <Label text="Ship URL" />
-                            <ComboBox class="create-ship-req_input" selectedKey="{eshipjetModel>/carrierAccountsEnvironment}">
-                                <core:Item key="" text="Select" />
-                            </ComboBox>
+                            <Input value="{eshipjetModel>/carrierAcntsShipUrl}" class="create-ship-req_input" />
 
                             <Label text="" />
-                             <CheckBox text="Freight Quote" selected="false" class="sapUiSmallMarginTop"  />
+                            <CheckBox text="Freight Quote" selected="{eshipjetModel>/carrierAcntsFreightQuote}" class="sapUiSmallMarginTop"/>
 
-                              <Label text="Track URL" />
-                            <ComboBox class="create-ship-req_input">
-                                <core:Item key="" text="Select" />
-                            </ComboBox>
+                            <Label text="Track URL" />
+                            <Input value="{eshipjetModel>/carrierAcntsTrackUrl}" class="create-ship-req_input" />
 
                             <Label text="" />
-                             <CheckBox text="End of Day" selected="false" class="sapUiSmallMarginTop"/>
+                            <CheckBox text="End of Day" selected="{eshipjetModel>/carrierAcntsEndOfDay}" class="sapUiSmallMarginTop"/>
 
-                              <Label text="Void URL" />
-                            <ComboBox class="create-ship-req_input">
-                                <core:Item key="" text="Select" />
-                            </ComboBox>
-                           
-                             <Label text="" />
-                             <CheckBox text="Manual Rates" selected="false" class="sapUiSmallMarginTop"/>
-                           
-                            
+                            <Label text="Void URL" />
+                            <Input value="{eshipjetModel>/carrierAcntsVoidUrl}" class="create-ship-req_input" />
+
+                            <Label text="" />
+                            <CheckBox text="Manual Rates" selected="{eshipjetModel>/carrierAcntsManualRates}" class="sapUiSmallMarginTop"/>
+
                             <Label text="Token URL" />
-                            <ComboBox class="create-ship-req_input">
-                                <core:Item key="TEST" text="Test" />
-                            </ComboBox>
-                           <Label text="" />
-                             <CheckBox text="Automate Pro Number" selected="false" class="sapUiSmallMarginTop"/>
+                            <Input value="{eshipjetModel>/carrierAcntsTokenUrl}" class="create-ship-req_input" />
+
+                            <Label text="" />
+                            <CheckBox text="Automate Pro Number" selected="{eshipjetModel>/carrierAcntsAutomaticProNum}" class="sapUiSmallMarginTop"/>
+
                         </form:content>
                     </form:SimpleForm>
+
                 </IconTabFilter>
             </items>
         </IconTabBar>
