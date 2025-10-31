@@ -157,7 +157,7 @@
                                     <cells>
                                         <Input value="{eshipjetModel>ServDesc}" class="create-ship-req_input" />
                                         <Input value="{eshipjetModel>ErpServId}" class="create-ship-req_input" />
-                                        <Input value="{eshipjetModel>CarrierCode}" class="create-ship-req_input" />
+                                        <Input value="{eshipjetModel>ServCode}" class="create-ship-req_input" />
                                         <ComboBox class="create-ship-req_input" selectedKey="{eshipjetModel>ServiceCoverage}" >
                                             <core:Item key="Domestic" text="Domestic" />
                                             <core:Item key="International" text="International" />

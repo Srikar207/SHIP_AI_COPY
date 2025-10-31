@@ -175,8 +175,7 @@
                        value="{eshipjetModel>ErpServId}"></Input>
                 
                 <Input class="sapUiSmallMarginBottom create-ship-req_input" 
-                       value="{eshipjetModel>ServCode}"
-                        enabled="{= !${eshipjetModel>/isEditMode} }"></Input>
+                       value="{eshipjetModel>ServCode}" ></Input>
                 
                 <ComboBox selectedKey="{eshipjetModel>ServiceCoverage}" class="sapUiSmallMarginBottom create-ship-req_input">
                     <core:Item key="Domestic" text="Domestic" />
@@ -219,15 +218,15 @@
             press="AddCarrierCatalogSaveDialog"
             class="addCarrierSaveBtnStyle btnInnerFocus"
             width="auto"
-            visible="{= !${eshipjetModel>/isEditMode} }" />
+            visible="{eshipjetModel>/showCarrierCatalogSaveBtn}" />
 
         <!-- Update button - only visible in Edit mode -->
         <Button
             text="Update"
             press="AddCarrierCatalogupdateDialog"
             class="addCarrierSaveBtnStyle btnInnerFocus"
-            width="auto"
-            visible="{= ${eshipjetModel>/isEditMode} }" />
+            width="auto" 
+            visible="{eshipjetModel>/showCarrierCatalogUpdateBtn}" />
     </Toolbar>
 </footer>
 
