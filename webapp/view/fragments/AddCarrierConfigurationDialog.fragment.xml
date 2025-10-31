@@ -206,7 +206,7 @@
                                 <core:Item key="" text="Select" />
                             </ComboBox>
                             	<Label text="" />
-                             <CheckBox text="Rate Quote" selected="true" class="sapUiSmallMarginTop"/>
+                             <CheckBox text="Rate Quote" selected="false" class="sapUiSmallMarginTop"/>
                             
                             
                             <Label text="Ship URL" />
@@ -215,7 +215,7 @@
                             </ComboBox>
 
                             <Label text="" />
-                             <CheckBox text="Freight Quote" selected="true" class="sapUiSmallMarginTop"  />
+                             <CheckBox text="Freight Quote" selected="false" class="sapUiSmallMarginTop"  />
 
                               <Label text="Track URL" />
                             <ComboBox class="create-ship-req_input">
@@ -223,7 +223,7 @@
                             </ComboBox>
 
                             <Label text="" />
-                             <CheckBox text="End of Day" selected="true" class="sapUiSmallMarginTop"/>
+                             <CheckBox text="End of Day" selected="false" class="sapUiSmallMarginTop"/>
 
                               <Label text="Void URL" />
                             <ComboBox class="create-ship-req_input">
@@ -231,7 +231,7 @@
                             </ComboBox>
                            
                              <Label text="" />
-                             <CheckBox text="Manual Rates" selected="true" class="sapUiSmallMarginTop"/>
+                             <CheckBox text="Manual Rates" selected="false" class="sapUiSmallMarginTop"/>
                            
                             
                             <Label text="Token URL" />
@@ -239,7 +239,7 @@
                                 <core:Item key="TEST" text="Test" />
                             </ComboBox>
                            <Label text="" />
-                             <CheckBox text="Automate Pro Number" selected="true" class="sapUiSmallMarginTop"/>
+                             <CheckBox text="Automate Pro Number" selected="false" class="sapUiSmallMarginTop"/>
                         </form:content>
                     </form:SimpleForm>
                 </IconTabFilter>
