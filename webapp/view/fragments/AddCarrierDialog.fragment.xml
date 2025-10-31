@@ -54,16 +54,16 @@
                                                         </ComboBox>
                                                     </VBox>
 
-													<VBox >
-														<Label text="Carrier Coverage" />
-														<ComboBox 
-                                                            class=" create-ship-req_input sapUiLargeMarginEnd" 
-                                                            items="{eshipjetModel>/CarrierCoverage}"
-                                                            selectedKey="{eshipjetModel>/ServiceCoverage}">
+													<VBox>
+                                                        <Label text="Carrier Coverage" />
+                                                        <ComboBox 
+                                                            class="create-ship-req_input sapUiLargeMarginEnd"
+                                                            items="{eshipjetModel>/carrierCoverageList}"
+                                                            selectedKey="{eshipjetModel>/CarrierCoverage}">
                                                             <core:Item key="{eshipjetModel>CoverageKey}" text="{eshipjetModel>CoverageText}" />
                                                         </ComboBox>
+                                                    </VBox>
 
-													</VBox>
                                                    <VBox>
                                                     <Label text="Connection Type" />
                                                     <ComboBox

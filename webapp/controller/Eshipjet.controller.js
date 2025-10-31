@@ -21763,6 +21763,12 @@ AddCarrierCancelDialog: function() {
             // ✅ Service details (child table data)
             var aServiceItems = eshipjetModel.getProperty("/carrierAccountsTableItems") || [];
 
+            // ✅ Validation for mandatory fields
+            if (!sLocationId || !sCarrierCode) {
+                sap.m.MessageBox.error("Please fill in all mandatory fields: Location ID and Carrier Code.");
+                oController.onCloseBusyDialog();
+                return; // stop execution, don't continue to save
+            }
             // ✅ Build OData Payload for Carrier
             var oPayload = {
                 "LocationId": sLocationId || "",
@@ -21796,19 +21802,19 @@ AddCarrierCancelDialog: function() {
                 "LastChangedBy": "VINAY",
                 "IsActive": true,
                 
-                // ✅ Nested child services (navigation property)
-                "to_CarrierServices": {
-                    "results": aServiceItems.map(function(item) {
-                        return {
-                            "CarrierCode": item.CarrierCode, // Ensure correct carrier code is passed
-                            "ServCode": item.ServCode || "",
-                            "ServDesc": item.ServDesc || "",
-                            "ErpServId": item.ErpServId || "",
-                            "ServiceCoverage": item.ServiceCoverage || "",
-                            "IsActive": item.IsActive
-                        };
-                    })
-                }
+                // // ✅ Nested child services (navigation property)
+                // "to_CarrierServices": {
+                //     "results": aServiceItems.map(function(item) {
+                //         return {
+                //             "CarrierCode": item.CarrierCode, // Ensure correct carrier code is passed
+                //             "ServCode": item.ServCode || "",
+                //             "ServDesc": item.ServDesc || "",
+                //             "ErpServId": item.ErpServId || "",
+                //             "ServiceCoverage": item.ServiceCoverage || "",
+                //             "IsActive": item.IsActive
+                //         };
+                //     })
+                // }
             };
 
     // ✅ Perform OData POST for Carrier

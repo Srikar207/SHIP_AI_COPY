@@ -53,83 +53,83 @@
                     key="carrier"
                     text="Carrier Info" >
          <form:SimpleForm
-    id="carrierAccountsForm"
-   editable="true"
-                        layout="ColumnLayout"
-                        columnsM="2"
-                        columnsL="3"
-                        columnsXL="6">
+                    id="carrierAccountsForm"
+                    editable="true"
+                    layout="ColumnLayout"
+                    columnsM="2"
+                    columnsL="3"
+                    columnsXL="6">
 
-    <!-- Row 1 -->
-    <Label text="Location ID / Location Name" />
-    <ComboBox items="{eshipjetModel>/LocationsData}" selectedKey="{eshipjetModel>/carrierAccountsLocationId}" class="create-ship-req_input ">
-        <core:Item key="{eshipjetModel>Plant}" text="{eshipjetModel>Plant} - {eshipjetModel>PlantName}" />
-    </ComboBox>
+                    <!-- Row 1 -->
+                    <Label text="Location ID / Location Name" />
+                    <ComboBox items="{eshipjetModel>/LocationsData}" selectedKey="{eshipjetModel>/carrierAccountsLocationId}" class="create-ship-req_input ">
+                        <core:Item key="{eshipjetModel>Plant}" text="{eshipjetModel>Plant} - {eshipjetModel>PlantName}" />
+                    </ComboBox>
 
-   
-    <Label text="Carrier Type" />
-    <ComboBox selectedKey="{eshipjetModel>/carrierAccountsCarrierType}" class="create-ship-req_input ">
-        <core:Item key="FTL" text="FTL" />
-        <core:Item key="Generic" text="Generic" />
-        <core:Item key="LTL" text="LTL" />
-        <core:Item key="Parcel" text="Parcel" />
-        <core:Item key="TL" text="TL" />
-        <core:Item key="Other" text="Other" />
-    </ComboBox>
+                    <Label text="Account Number" />
+                    <Input value="{eshipjetModel>/carrierAccountsAccountNumber}" class="create-ship-req_input " />
 
-     <Label text="Carrier Name" />
-    <Input value="{eshipjetModel>/carrierAccountsCarrierName}" showValueHelp="true" valueHelpRequest="onGetCarrierAccountValueHelpData" class="create-ship-req_input " />
+                    <Label text="Carrier Name" />
+                    <Input value="{eshipjetModel>/carrierAccountsCarrierName}" showValueHelp="true" valueHelpRequest="onGetCarrierAccountValueHelpData" class="create-ship-req_input " />
+
+                    <Label text="User ID" />
+                    <Input value="{eshipjetModel>/carrierAccountsUserId}" class="create-ship-req_input " />
+
+                     <Label text="Ship From Country" />
+                    <ComboBox items="{eshipjetModel>/countriesList}" selectedKey="{eshipjetModel>/carrierAccountsShipFromCountryName}" class="create-ship-req_input ">
+                        <core:Item key="{eshipjetModel>code}" text="{eshipjetModel>name}" />
+                    </ComboBox>
+
+                     <Label text="Password" />
+                    <Input value="{eshipjetModel>/carrierAccountsPassword}" class="create-ship-req_input " />
+
+                     <Label text="Ship To Country" />
+                    <ComboBox items="{eshipjetModel>/countriesList}" selectedKey="{eshipjetModel>/carrierAccountsShipToCountryName}" class="create-ship-req_input ">
+                        <core:Item key="{eshipjetModel>code}" text="{eshipjetModel>name}" />
+                    </ComboBox>
+
+                     <Label text="Access Key" />
+                    <Input value="{eshipjetModel>/carrierAccountsAccessKey}" class="create-ship-req_input " />
 
 
-    <Label text="Ship From Country" />
-    <ComboBox items="{eshipjetModel>/countriesList}" selectedKey="{eshipjetModel>/carrierAccountsShipFromCountryName}" class="create-ship-req_input ">
-        <core:Item key="{eshipjetModel>code}" text="{eshipjetModel>name}" />
-    </ComboBox>
+                    <Label text="Carrier Type" />
+                    <ComboBox selectedKey="{eshipjetModel>/carrierAccountsCarrierType}" class="create-ship-req_input ">
+                        <core:Item key="FTL" text="FTL" />
+                        <core:Item key="Generic" text="Generic" />
+                        <core:Item key="LTL" text="LTL" />
+                        <core:Item key="Parcel" text="Parcel" />
+                        <core:Item key="TL" text="TL" />
+                        <core:Item key="Other" text="Other" />
+                    </ComboBox>
 
-    <Label text="Ship To Country" />
-    <ComboBox items="{eshipjetModel>/countriesList}" selectedKey="{eshipjetModel>/carrierAccountsShipToCountryName}" class="create-ship-req_input ">
-        <core:Item key="{eshipjetModel>code}" text="{eshipjetModel>name}" />
-    </ComboBox>
+                    <!-- <Label text="Cost Center" />
+                    <ComboBox selectedKey="{eshipjetModel>/carrierAccountsCostCentre}" class="create-ship-req_input ">
+                        <core:Item key="Warehouse Cost Center" text="Warehouse Cost Center" />
+                    </ComboBox> -->
 
-    <!-- <Label text="Cost Center" />
-    <ComboBox selectedKey="{eshipjetModel>/carrierAccountsCostCentre}" class="create-ship-req_input ">
-        <core:Item key="Warehouse Cost Center" text="Warehouse Cost Center" />
-    </ComboBox> -->
+                    <!-- <Label text="Environment" />
+                    <ComboBox selectedKey="{eshipjetModel>/carrierAccountsEnvironment}" class="create-ship-req_input ">
+                        <core:Item key="Test" text="Test" />
+                        <core:Item key="Production" text="Production" />
+                    </ComboBox> -->
 
-    <!-- <Label text="Environment" />
-    <ComboBox selectedKey="{eshipjetModel>/carrierAccountsEnvironment}" class="create-ship-req_input ">
-        <core:Item key="Test" text="Test" />
-        <core:Item key="Production" text="Production" />
-    </ComboBox> -->
+                    <!-- Row 2 -->
+                  
+                    <Label text="Meter ID" />
+                    <Input value="{eshipjetModel>/carrierAccountsMeterId}" class="create-ship-req_input " />
 
-    <!-- Row 2 -->
-    <Label text="Account Number" />
-    <Input value="{eshipjetModel>/carrierAccountsAccountNumber}" class="create-ship-req_input " />
+                    <Label text="Connection Type" />
+                    <ComboBox selectedKey="{eshipjetModel>/carrierAccountsConnectionType}" class="create-ship-req_input ">
+                        <core:Item key="API" text="API" />
+                        <core:Item key="EDI" text="EDI" />
+                        <core:Item key="FTP" text="FTP" />
+                        <core:Item key="File" text="File" />
+                    </ComboBox>
 
-    <Label text="User ID" />
-    <Input value="{eshipjetModel>/carrierAccountsUserId}" class="create-ship-req_input " />
+                    <Label text="Hub ID" />
+                    <Input value="{eshipjetModel>/carrierAccountsHubId}" class="create-ship-req_input " />
 
-    <Label text="Password" />
-    <Input value="{eshipjetModel>/carrierAccountsPassword}" class="create-ship-req_input " />
-
-    <Label text="Access Key" />
-    <Input value="{eshipjetModel>/carrierAccountsAccessKey}" class="create-ship-req_input " />
-
-    <Label text="Meter ID" />
-    <Input value="{eshipjetModel>/carrierAccountsMeterId}" class="create-ship-req_input " />
-
-    <Label text="Hub ID" />
-    <Input value="{eshipjetModel>/carrierAccountsHubId}" class="create-ship-req_input " />
-
-    <Label text="Connection Type" />
-    <ComboBox selectedKey="{eshipjetModel>/carrierAccountsConnectionType}" class="create-ship-req_input ">
-        <core:Item key="API" text="API" />
-        <core:Item key="EDI" text="EDI" />
-        <core:Item key="FTP" text="FTP" />
-        <core:Item key="File" text="File" />
-    </ComboBox>
-
-</form:SimpleForm>
+                </form:SimpleForm>
 
                     
                         <Table
