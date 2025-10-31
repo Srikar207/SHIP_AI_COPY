@@ -341,7 +341,7 @@
 													<VBox class="sapUiMediumMarginEnd" >
 														<Label text="Service Name" />
 														<ComboBox class="create-ship-req_input" id="idServiceName" width="auto" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" items="{eshipjetModel>/carrierServicesList}"   selectionChange="onServiceNowDropdownChange" selectedKey="{eshipjetModel>/commonValues/ShipNowShipsrvNameSelectedKey}" >
-															<core:Item key="{eshipjetModel>ServCode}" text="{eshipjetModel>ServDesc}" />
+															<core:Item key="{eshipjetModel>ServDesc}" text="{eshipjetModel>ServDesc}" />
 														</ComboBox>
 													</VBox>
 												<!-- </HBox>
@@ -782,14 +782,14 @@
 												<HBox height="4.5rem" width="25%" class="whiteBackground sapUiTinyMarginEnd packScreenPadding" alignItems="Center" >
 													<VBox >
 														<Label text="Carrier Name" />
-														<ComboBox class="create-ship-req_input sapUiTinyMarginEnd" width="auto" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" items="{eshipjetModel>/carrierconfiguration1}" selectedKey="{eshipjetModel>/commonValues/ShipNowShipMethodSelectedKey}" selectionChange="onShopNowShipMethodTypeChange"  >
-															<core:Item key="{eshipjetModel>CarrierName}" text="{eshipjetModel>CarrierName}" />
+														<ComboBox class="create-ship-req_input sapUiTinyMarginEnd" width="auto" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" items="{eshipjetModel>/carriersList}" selectedKey="{eshipjetModel>/commonValues/ShipNowShipMethodSelectedKey}" selectionChange="onShopNowShipMethodTypeChange"  >
+															<core:Item key="{eshipjetModel>CarrierCode}" text="{eshipjetModel>CarrierCode}" />
 														</ComboBox>
 													</VBox>
 													<VBox >
 														<Label text="Service Name" />
-														<ComboBox class="create-ship-req_input" width="auto" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" items="{serviceNamesList>/carrierServices}"   selectionChange="onServiceNowDropdownChange"     selectedKey="{eshipjetModel>/commonValues/ShipNowShipsrvNameSelectedKey}">
-															<core:Item key="{serviceNamesList>ShippingType}" text="{serviceNamesList>ServiceName}" />
+														<ComboBox class="create-ship-req_input" width="auto" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" items="{eshipjetModel>/carrierServicesList}"   selectionChange="onServiceNowDropdownChange"     selectedKey="{eshipjetModel>/commonValues/ShipNowShipsrvNameSelectedKey}">
+															<core:Item key="{eshipjetModel>ServDesc}" text="{eshipjetModel>ServDesc}" />
 														</ComboBox>
 													</VBox>
 															<!-- <Label text="Scan Product" class="sapUiTinyMargin" />

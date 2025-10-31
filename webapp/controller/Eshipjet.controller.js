@@ -17584,12 +17584,12 @@ sap.ui.define([
             var selectedKey = oEvent.getSource().getSelectedKey();
             var eshipjetModel =  this.getOwnerComponent().getModel("eshipjetModel");
             var ShipMethodKey =  eshipjetModel.getProperty("/commonValues/ShipNowShipsrvNameSelectedKey");
-            var ServiceDropdown = oController.getView().getModel("serviceNamesList").getProperty("/carrierServices");
+            var ServiceDropdown = eshipjetModel.getProperty("/carrierServicesList");
             var serviceObj = {};
             ServiceDropdown.forEach(function(item, Idx){
                 if(item.ShippingType === selectedKey){
                     // serviceObj = item;
-                    eshipjetModel.setProperty("/carrierServiceName_dis", item.ServiceName);
+                    eshipjetModel.setProperty("/carrierServiceName_dis", item.ServDesc);
                     eshipjetModel.setProperty("/carrierServiceCode_display", item.ServiceCode);
                 }
             });
@@ -17612,27 +17612,45 @@ sap.ui.define([
 
         onShopNowShipMethodAfterChange:function(selectedKey){
             var eshipjetModel =  this.getOwnerComponent().getModel("eshipjetModel");
-            var carrierconfiguration = eshipjetModel.getProperty("/carrierconfiguration1");
+            var carriersCatalogData = eshipjetModel.getProperty("/carriersCatalogData");
+            var carriersList = eshipjetModel.getProperty("/carriersList");
             var ShipNowShipMethodSelectedKey =  eshipjetModel.getProperty("/commonValues/ShipNowShipMethodSelectedKey");
-            eshipjetModel.setProperty("/commonValues/ShipNowShipsrvNameSelectedKey", "");
-            for(var i=0; i<carrierconfiguration.length; i++){
-                if(carrierconfiguration[i].CarrierName === selectedKey){
-                    var serviceNamesList = new JSONModel(carrierconfiguration[i]);
-                    this.getView().setModel(serviceNamesList, "serviceNamesList");
+
+            var tempCarrierServicesList = [];
+            for (var i = 0; i < carriersCatalogData.length; i++) {
+                if (carriersCatalogData[i].CarrierCode.toUpperCase() === selectedKey.toUpperCase()) {
+                    eshipjetModel.setProperty("/selectedCarrier", carriersCatalogData[i]);
+                    tempCarrierServicesList.push(carriersCatalogData[i]);
                 }
             };
-            eshipjetModel.setProperty("/commonValues/ShipNowShipsrvNameSelectedKey", oController.ShippingType);
-            for(var i=0; i<serviceNamesList.getProperty("/carrierServices").length; i++){
-                if(serviceNamesList.getProperty("/carrierServices")[i].ShippingType === oController.ShippingType){
-                    eshipjetModel.setProperty("/carrierServiceName_dis", serviceNamesList.getProperty("/carrierServices")[i].ServiceName);
-                    eshipjetModel.setProperty("/carrierServiceCode_display", serviceNamesList.getProperty("/carrierServices")[i].ServiceCode);
+            for (var i = 0; i < carriersList.length; i++) {
+                if (carriersList[i].CarrierCode.toUpperCase() === selectedKey.toUpperCase()) {
+                    eshipjetModel.setProperty("/selectedCarrierServices", carriersList[i]);
+                    eshipjetModel.setProperty("/accountNumber", carriersList[i].AcntNmbr);
+                    // tempCarrierServicesList.push(carriersCatalogData[i]);
                 }
-            }
-            if(selectedKey === "UPS"){                
-                eshipjetModel.setProperty("/accountNumber", "B24W72");                            
-            }else{
-                eshipjetModel.setProperty("/accountNumber", "740561073");                
-            }              
+            };
+            eshipjetModel.setProperty("/carrierServicesList", tempCarrierServicesList);
+            eshipjetModel.setProperty("/commonValues/ShipNowShipsrvNameSelectedKey", "");
+
+            // for(var i=0; i<carrierconfiguration.length; i++){
+            //     if(carrierconfiguration[i].CarrierName === selectedKey){
+            //         var serviceNamesList = new JSONModel(carrierconfiguration[i]);
+            //         this.getView().setModel(serviceNamesList, "serviceNamesList");
+            //     }
+            // };
+            // eshipjetModel.setProperty("/commonValues/ShipNowShipsrvNameSelectedKey", oController.ShippingType);
+            // for(var i=0; i<serviceNamesList.getProperty("/carrierServices").length; i++){
+            //     if(serviceNamesList.getProperty("/carrierServices")[i].ShippingType === oController.ShippingType){
+            //         eshipjetModel.setProperty("/carrierServiceName_dis", serviceNamesList.getProperty("/carrierServices")[i].ServiceName);
+            //         eshipjetModel.setProperty("/carrierServiceCode_display", serviceNamesList.getProperty("/carrierServices")[i].ServiceCode);
+            //     }
+            // }
+            // if(selectedKey === "UPS"){                
+            //     eshipjetModel.setProperty("/accountNumber", "B24W72");                            
+            // }else{
+            //     eshipjetModel.setProperty("/accountNumber", "740561073");                
+            // }              
             
             if (ShipNowShipMethodSelectedKey === "FEDEX"){
                 eshipjetModel.setProperty("/commonValues/shipNowGanderWhiteSelect", false );
@@ -21407,6 +21425,12 @@ sap.ui.define([
 
     // ✅ Child Service Items
     var aServiceItems = eshipjetModel.getProperty("/addCrrierDialogItems") || [];
+
+    if (!sLocationId || !sCarrierName) {
+        sap.m.MessageBox.error("Please fill in all mandatory fields: Location ID and Carrier Code.");
+        oController.onCloseBusyDialog();
+        return;
+    }
 
     // ✅ Enable batch mode
     oMainModel.setUseBatch(true);
