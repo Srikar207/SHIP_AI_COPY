@@ -245,8 +245,8 @@
                 <Button text="Cancel" press="AddCarrierConfigurationCancelDialog" class="AddCarrierCancel btnInnerFocus" />
                  <ToolbarSpacer />
                 <Button text="Address" type="Emphasized" press="onAddressCarrierConfig" class="addCarrierSaveBtnStyle btnInnerFocus" />
-                <Button text="Save"  press="AddCarrierConfigurationSaveDialog" class="addCarrierSaveBtnStyle btnInnerFocus" />
-                 <Button  text="Update" press="AddCarrierConfigurationUpdateDialog" class="addCarrierSaveBtnStyle btnInnerFocus" width="auto" />
+                <Button text="Save"  press="AddCarrierConfigurationSaveDialog" class="addCarrierSaveBtnStyle btnInnerFocus"  visible="{eshipjetModel>/showCarrierAccountSaveBtn}" />
+                 <Button  text="Update" press="AddCarrierConfigurationUpdateDialog" class="addCarrierSaveBtnStyle btnInnerFocus" width="auto"  visible="{eshipjetModel>/showCarrierAccountUpdateBtn}" />
             </Toolbar>
         </footer>
     </Dialog>

@@ -12,10 +12,10 @@
                 <Property Name="CarrierType" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Carrier Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ShipFrmCntry" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Ship From Country" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ShipToCntry" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Ship To Country" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="AcntNmbr" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Account Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="UserId" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:label="User ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Password" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Password" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="AccessKey" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Access Key" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AcntNmbr" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Account Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UserId" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="User ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Password" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Password" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AccessKey" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Access Key" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="MeterId" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Meter ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="HubId" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Hub ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ConnectionType" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Connection Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
@@ -43,7 +43,8 @@
                     <PropertyRef Name="CarrierCode"/>
                 </Key>
                 <Property Name="CarrierCode" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Carrier Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ServCode" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label=" Service Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ServCode" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label=" Service Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ServLoc" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Service Location" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ServDesc" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Service Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ErpServId" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="ERP Service ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ServiceCoverage" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Service Coverage" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
@@ -66,8 +67,8 @@
                 </ReferentialConstraint>
             </Association>
             <EntityContainer Name="ESHIPJET_CARRIERS_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
-                <EntitySet Name="carrierSet" EntityType="ESHIPJET.CARRIERS_SRV.carrier" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
-                <EntitySet Name="carrier_srvSet" EntityType="ESHIPJET.CARRIERS_SRV.carrier_srv" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="carrierSet" EntityType="ESHIPJET.CARRIERS_SRV.carrier" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="carrier_srvSet" EntityType="ESHIPJET.CARRIERS_SRV.carrier_srv" sap:content-version="1"/>
                 <AssociationSet Name="assoc_carr_crsrvSet" Association="ESHIPJET.CARRIERS_SRV.assoc_carr_crsrv" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="carrierSet" Role="FromRole_assoc_carr_crsrv"/>
                     <End EntitySet="carrier_srvSet" Role="ToRole_assoc_carr_crsrv"/>

@@ -45,7 +45,7 @@
                 <ColumnListItem type="Active" press="onCarrierItemPress">
                     <cells>
                         <Text text="{eshipjetModel>CarrierCode}" />
-                        <Text text="{eshipjetModel>CarrierDescription}" />
+                        <Text text="{eshipjetModel>ServDesc}" />
                         <Text text="{eshipjetModel>CarrierType}" />
                         <Text text="{eshipjetModel>ServiceCoverage}" />
                     </cells>

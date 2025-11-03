@@ -5384,93 +5384,26 @@
                 }
                 ],
     "carrierCatelogCarrierName": "",
-    "CarrierAccountsTableColumns": [
-        {
-            "key": "locationName",
-            "label": "Location Name",
-            "visible": true
-        },
-        {
-            "key": "shipMethodName",
-            "label": "Ship Method",
-            "visible": true
-        },
-        {
-            "key": "costCenter",
-            "label": "Cost Center",
-            "visible": true
-        },
-        {
-            "key": "shipFromCountry",
-            "label": "Ship From Country",
-            "visible": true
-        },
-        {
-            "key": "shipToCountry",
-            "label": "Ship To Country",
-            "visible": true
-        },
-        {
-            "key": "shipUrl",
-            "label": "Ship Url",
-            "visible": true
-        },
-        {
-            "key": "voidUrl",
-            "label": "Void Url",
-            "visible": true
-        },
-        {
-            "key": "rateUrl",
-            "label": "Rate Url",
-            "visible": false
-        },
-        {
-            "key": "trackUrl",
-            "label": "Track Url",
-            "visible": false
-        },
-        {
-            "key": "environment",
-            "label": "Environment",
-            "visible": false
-        },
-        {
-            "key": "carrierType",
-            "label": "Carrier Type",
-            "visible": true
-        },
-        {
-            "key": "status",
-            "label": "Status",
-            "visible": true
-        },
-        {
-            "key": "erpCarrierID",
-            "label": "ERP Carrier ID",
-            "visible": false
-        },
-        {
-            "key": "rateShop",
-            "label": "Rate Shop",
-            "visible": false
-        },
-        {
-            "key": "edoc",
-            "label": "EDOC",
-            "visible": false
-        },
-        {
-            "key": "manualRates",
-            "label": "Manual Rates",
-            "visible": true
-        },
-        {
-            "key": "actions",
-            "label": "Actions",
-            "visible": true
-        }
-    ],
+"CarrierAccountsTableColumns": [
+    { "key": "LocationId", "label": "Location ID", "visible": true },
+    { "key": "CarrierCode", "label": "Carrier Name", "visible": true },
+    { "key": "CarrierType", "label": "Carrier Type", "visible": true },
+    { "key": "ConnectionType", "label": "Connection Type", "visible": true },
+    { "key": "ShipFrmCntry", "label": "Ship From Country", "visible": true },
+    { "key": "ShipToCntry", "label": "Ship To Country", "visible": true },
+    { "key": "ShipUrl", "label": "Ship URL", "visible": true },
+    { "key": "VoidUrl", "label": "Void URL", "visible": false },
+    { "key": "RateUrl", "label": "Rate URL", "visible": false },
+    { "key": "TrackUrl", "label": "Track URL", "visible": false },
+    { "key": "Freight_Quote", "label": "Freight Quote", "visible": false },
+    { "key": "Rate_Quote", "label": "Rate Quote", "visible": false },
+    { "key": "Automate_Pro_Number", "label": "Automate Pro Number", "visible": false },
+    { "key": "Is_Active", "label": "Status", "visible": true },
+    { "key": "End_Of_The_Day", "label": "End Of The Day", "visible": false },
+    { "key": "Manual_Rates", "label": "Manual Rates", "visible": false },
+    { "key": "actions", "label": "Actions", "visible": true }
+],
+
     "CarrierAccountsTableRows": [
         {
             "locationName": "Eshipjet Software Inc.",
@@ -13843,6 +13776,7 @@
   "carrierCoverageList": [
     { "CoverageKey": "DOM", "CoverageText": "Domestic" },
     { "CoverageKey": "INT", "CoverageText": "International" },
+    { "CoverageKey": "Both", "CoverageText": "Both" },
     { "CoverageKey": "REG", "CoverageText": "Regional" },
     { "CoverageKey": "NA", "CoverageText": "North America" },
     { "CoverageKey": "GLOBAL", "CoverageText": "Global" }
