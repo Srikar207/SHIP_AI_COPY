@@ -17813,7 +17813,8 @@ sap.ui.define([
                 success: function (oData, response) {
                     const aFiltered = (oData.results || []).filter(item =>
                         item.ServLoc === ShippingPoint &&
-                        item.CarrierCode === selectedKey
+                        item.CarrierCode === selectedKey &&
+                        item.IsActive === true
                     );
                     eshipjetModel.setProperty("/carrierServicesDropDownData", aFiltered);
                     eshipjetModel.setProperty("/commonValues/ShipNowShipsrvNameSelectedKey", ErpServId);
@@ -21734,7 +21735,8 @@ sap.ui.define([
             oMainModel.read("/carrierSet", {
                 success: function (oData, response) {
                     const aFiltered = (oData.results || []).filter(item =>
-                        item.LocationId === ShippingPoint
+                        item.LocationId === ShippingPoint &&
+                        item.IsActive === true
                     );
                     for(var i=0; i<aFiltered.length; i++){
                         if(aFiltered[i].CarrierCode === carrierName){
@@ -21770,7 +21772,8 @@ sap.ui.define([
                 success: function (oData, response) {
                     const aFiltered = (oData.results || []).filter(item =>
                         item.ServLoc === ShippingPoint &&
-                        item.CarrierCode === carrierName
+                        item.CarrierCode === carrierName &&
+                        item.IsActive === true
                     );
                     
                     for(var i=0; i<aFiltered.length; i++){
