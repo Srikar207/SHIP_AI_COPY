@@ -52,64 +52,66 @@
 			ariaLabelledBy="title">
 
 					<ui:columns>
-								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/0/visible}" >
+								<ui:Column visible="{eshipjetModel>/CarrierCatalogTableColumns/0/visible}" >
 									<Label text="Location ID" />
 									<ui:template>
 										<Text text="{eshipjetModel>ServLoc}" wrapping="false" />
 									</ui:template>
 								</ui:Column>
-								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/1/visible}" width="auto" >
+								<ui:Column visible="{eshipjetModel>/CarrierCatalogTableColumns/1/visible}" width="auto" >
 									<Label text="ERP Location ID" />
 									<ui:template>
-										<Text text="{eshipjetModel>UserId}" wrapping="false" />
+										<Text text="{eshipjetModel>ServLoc}" wrapping="false" class="boldText"/>
 									</ui:template>
 								</ui:Column>
-								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/2/visible}" >
+								<ui:Column visible="{eshipjetModel>/CarrierCatalogTableColumns/2/visible}" >
 									<Label text="Carrier ID" />
 									<ui:template>
 										<Text text="{eshipjetModel>CarrierCode}" wrapping="false" />
 									</ui:template>
 								</ui:Column>
-								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/3/visible}" >
+								<ui:Column visible="{eshipjetModel>/CarrierCatalogTableColumns/3/visible}" >
 									<Label text="ERP Carrier ID" />
 									<ui:template>
 										<Text text="{eshipjetModel>CarrierCode}" wrapping="false" />
 									</ui:template>
 								</ui:Column>
-								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/4/visible}" >
+								<ui:Column visible="{eshipjetModel>/CarrierCatalogTableColumns/4/visible}" >
 									<Label text="Carrier Name" />
 									<ui:template>
-										<Text text="{eshipjetModel>CarrierDescription}" wrapping="false" />
+										<Text text="{eshipjetModel>CarrierCode}" wrapping="false" />
 									</ui:template>
 								</ui:Column>
-								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/5/visible}" >
+								<ui:Column visible="{eshipjetModel>/CarrierCatalogTableColumns/5/visible}" >
 									<Label text="Carrier Type" />
 									<ui:template>
 										<Text text="{eshipjetModel>CarrierType}" wrapping="false" />
 									</ui:template>
 								</ui:Column>
-								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/6/visible}" >
+								<ui:Column visible="{eshipjetModel>/CarrierCatalogTableColumns/6/visible}" >
 									<Label text="Carrier Coverage" />
 									<ui:template>
 										<Text text="{eshipjetModel>ServiceCoverage}" wrapping="false" />
 									</ui:template>
 								</ui:Column>
-								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/7/visible}" >
+								<ui:Column visible="{eshipjetModel>/CarrierCatalogTableColumns/7/visible}" >
 									<Label text="Connection Type" />
 									<ui:template>
 										<Text text="{eshipjetModel>ConnectionType}" wrapping="false" />
 									</ui:template>
 								</ui:Column>
-								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/8/visible}" >
+								<!-- <ui:Column visible="{eshipjetModel>/CarrierCatalogTableColumns/8/visible}" >
 									<Label text="Color Picker" />
 									<ui:template>
 										<Text text="" wrapping="false" />
 									</ui:template>
-								</ui:Column>
-								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/9/visible}" >
+								</ui:Column> -->
+								<ui:Column visible="{eshipjetModel>/CarrierCatalogTableColumns/8/visible}" >
 									<Label text="Status" />
 									<ui:template>
-										<Switch type="AcceptReject" state="{= ${eshipjetModel>IS_ACTIVE} === 'true' ? true : false}" class="btnInnerFocus" >
+									<Switch  state="{eshipjetModel>IsActive}" class="greenSwitch btnInnerFocus" >
+
+										<!-- <Switch type="AcceptReject" state="{eshipjetModel>IS_ACTIVE}" class="btnInnerFocus" > -->
 											<layoutData>
 												<FlexItemData growFactor="1" />
 											</layoutData>

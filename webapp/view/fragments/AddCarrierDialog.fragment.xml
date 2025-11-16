@@ -15,15 +15,15 @@
         showHeader="false"
         contentWidth="90%"
         contentHeight="50%" >
-        <Toolbar >
+        <Toolbar class="whiteBackgroundAddCarrier sapUiSmallMarginBottom">
             <Title text="Add Carrier"></Title>
             <ToolbarSpacer ></ToolbarSpacer>
                 <Button icon="sap-icon://decline" press="AddCarrierCancelDialog" class="Decline_Btn ship-now-decline_btn btnInnerFocus" type="Transparent" ></Button>
         </Toolbar>
         <HBox alignContent="Center" >
-												<HBox height="4.5rem" width="100%" class="whiteBackground  packScreenPadding" alignItems="Center" >
+												<HBox height="4.5rem" width="100%" class="  packScreenPadding" alignItems="Center" >
 													<VBox >
-														<Label text="Location ID / Location Name" />
+														<Label text="Location ID / Location Name"  />
 														<ComboBox class="create-ship-req_input sapUiLargeMarginEnd" width="auto" enabled="{}" items="{eshipjetModel>/LocationsData}" selectedKey="{eshipjetModel>/CarrierCatalogLocations}" selectionChange=""  >
 															 <core:Item key="{eshipjetModel>Plant}" text="{eshipjetModel>Plant} - {eshipjetModel>PlantName}" />
 														</ComboBox>
@@ -78,145 +78,100 @@
                                                         <core:Item key="File" text="File" />
                                                     </ComboBox>
                                                 </VBox>
-													<VBox >
+													<!-- <VBox >
 														<Label text="Color Picker" class="create-ship-req_input sapUiLargeMarginEnd"/>
 														<Button press="onOpenColorPicker" class="create-ship-req_input sapUiLargeMarginEnd"/>
-													</VBox>
+													</VBox> -->
                                                     <VBox >
 														<Label text="Status" />
-														 <Switch  state="true" class="greenSwitch btnInnerFocus">
-                                                            <layoutData>
-                                                                <FlexItemData growFactor="1" />
-                                                            </layoutData>
-                                                        </Switch>
+														<Switch 
+                                                            state="{= ${eshipjetModel>IS_ACTIVE} === true || ${eshipjetModel>IS_ACTIVE} === 'X' || ${eshipjetModel>IS_ACTIVE} === '1' }"
+                                                            class="greenSwitch btnInnerFocus" 
+                                                            change="onStatusChange" />
+
 													</VBox>
 												</HBox>
                                                 </HBox>
-       <!-- <form:SimpleForm
-    editable="true"
-    layout="ColumnLayout"
-    columnsM="2"
-    columnsL="3"
-    columnsXL="4"
->
-    <form:content>
-        <Label text="Location ID / Location Name" />
-        <ComboBox class="sapUiSmallMarginBottom create-ship-req_input">
-            <core:Item key="" text="" />
-        </ComboBox>
-        <Label text="ERP Location ID" />
-        <ComboBox class="sapUiSmallMarginBottom create-ship-req_input">
-            <core:Item key="" text="" />
-        </ComboBox>
-        <Label text="Ship Method Type" />
-        <ComboBox class="sapUiSmallMarginBottom create-ship-req_input">
-            <core:Item key="" text="" />
-        </ComboBox>
-        <Label text="Carrier ID" />
-        <Input class="sapUiSmallMarginBottom create-ship-req_input" />
-         <Label text="ERP Carrier ID" />
-        <Input class="sapUiSmallMarginBottom create-ship-req_input" />
-        <Label text="Carrier Name" />
-        <Input class="sapUiSmallMarginBottom create-ship-req_input" />
-        <Label text="Carrier Type" />
-        <ComboBox class="sapUiSmallMarginBottom create-ship-req_input">
-            <core:Item key="" text="" />
-        </ComboBox>
-        <Label text="Carrier Coverage" />
-        <ComboBox class="sapUiSmallMarginBottom create-ship-req_input">
-            <core:Item key="" text="" />
-        </ComboBox> 
-        <Label text="Connection Type" />
-        <ComboBox class="sapUiSmallMarginBottom create-ship-req_input">
-            <core:Item key="" text="" />
-        </ComboBox> 
-        <Label text="Status" />
-        <Switch type="AcceptReject" state="true">
-            <layoutData>
-                <FlexItemData growFactor="1" />
-            </layoutData>
-        </Switch>
-    </form:content>
-</form:SimpleForm> -->
-       <Table inset="false" items="{eshipjetModel>/addCrrierDialogItems}">
-    <columns>
-        <Column width="auto">
-            <Text text="Service Name" />
-        </Column>
-        <Column width="auto">
-            <Text text="ERP Service ID" />
-        </Column>
-        <Column width="auto">
-            <Text text="Service Code" />
-        </Column>
-        <Column width="auto">
-            <Text text="Service Coverage" />
-        </Column>
-        <!-- <Column width="auto" class="sapUiSmallMarginTop">
-            <Text text="Connection Type" />
-        </Column> -->
-        <Column width="auto" class="sapUiSmallMarginTop">
-            <Text text="Status" />
-        </Column>
-        <Column width="auto">
-            <HBox>
-                <Text text="Actions" class="sapUiSmallMarginTop sapUiLargeMarginEnd" />
-                <Button icon="sap-icon://add" type="Transparent" class="" press="onAddCarrierDialogPlusPress"></Button>
-            </HBox>
-        </Column>
-    </columns>
-    <items>
-        <ColumnListItem vAlign="Middle">
-            <cells>
-                <Input class="create-ship-req_input" 
-                       value="{eshipjetModel>ServDesc}"></Input>
-                
-                <Input class=" create-ship-req_input" 
-                       value="{eshipjetModel>ErpServId}"></Input>
-                
-                <Input class=" create-ship-req_input" 
-                       value="{eshipjetModel>ServCode}" ></Input>
-                
-                <ComboBox selectedKey="{eshipjetModel>ServiceCoverage}" class=" create-ship-req_input">
-                    <core:Item key="Domestic" text="Domestic" />
-                    <core:Item key="International" text="International" />
-                </ComboBox>
-                
-                <!-- <ComboBox selectedKey="{eshipjetModel>ConnectionType}" class=" create-ship-req_input">
-                    <core:Item key="API" text="API" />
-                    <core:Item key="EDI" text="EDI" />
-                    <core:Item key="FTP" text="FTP" />
-                    <core:Item key="File" text="File" />
-                </ComboBox> -->
-                
-                <Switch  state="{eshipjetModel>Status}" class="greenSwitch btnInnerFocus">
-                    <layoutData>
-                        <FlexItemData growFactor="1" />
-                    </layoutData>
-                </Switch>
-                
-                <Button icon="sap-icon://delete" type="Negative" 
-                        press="onAddCrrierDialogDeleteIconPress"></Button>
-            </cells>
-        </ColumnListItem>
-    </items>
-</Table>
-                    
-       <footer>
-    <Toolbar>
+                                    <Table inset="false" items="{eshipjetModel>/addCrrierDialogItems}">
+                                    <columns>
+                                        <Column width="auto">
+                                            <Text text="Service Name" />
+                                        </Column>
+                                        <Column width="auto">
+                                            <Text text="ERP Service ID" />
+                                        </Column>
+                                        <Column width="auto">
+                                            <Text text="Service Code" />
+                                        </Column>
+                                        <Column width="auto">
+                                            <Text text="Service Coverage" />
+                                        </Column>
+                                        <!-- <Column width="auto" class="sapUiSmallMarginTop">
+                                            <Text text="Connection Type" />
+                                        </Column> -->
+                                        <Column width="auto" class="sapUiSmallMarginTop">
+                                            <Text text="Status" />
+                                        </Column>
+                                        <Column width="auto">
+                                            <HBox>
+                                                <Text text="Actions" class="sapUiTinyMarginTop sapUiLargeMarginEnd" />
+                                                <Button icon="sap-icon://add" type="Transparent" class="" press="onAddCarrierDialogPlusPress"></Button>
+                                            </HBox>
+                                        </Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem vAlign="Middle">
+                                            <cells>
+                                                <Input class="create-ship-req_input" placeholder="Service Name" 
+                                                    value="{eshipjetModel>ServDesc}"></Input>
+                                                
+                                                <Input class=" create-ship-req_input" 
+                                                    value="{eshipjetModel>ErpServId}"></Input>
+                                                
+                                                <Input class=" create-ship-req_input" placeholder="Service Code"
+                                                    value="{eshipjetModel>ServCode}" ></Input>
+                                                
+                                                <ComboBox selectedKey="{eshipjetModel>ServiceCoverage}" class=" create-ship-req_input">
+                                                    <core:Item key="Domestic" text="Domestic" />
+                                                    <core:Item key="International" text="International" />
+                                                    <core:Item key="both" text="Both" />
+                                                </ComboBox>
+                                                
+                                                <!-- <ComboBox selectedKey="{eshipjetModel>ConnectionType}" class=" create-ship-req_input">
+                                                    <core:Item key="API" text="API" />
+                                                    <core:Item key="EDI" text="EDI" />
+                                                    <core:Item key="FTP" text="FTP" />
+                                                    <core:Item key="File" text="File" />
+                                                </ComboBox> -->
+                                                
+                                                <Switch  state="{eshipjetModel>IsActive}" class="greenSwitch btnInnerFocus">
+                                                    <layoutData>
+                                                        <FlexItemData growFactor="1" />
+                                                    </layoutData>
+                                                </Switch>
+                                                
+                                                <Button icon="sap-icon://delete" type="Negative" 
+                                                        press="onAddCrrierDialogDeleteIconPress"></Button>
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                                    <footer>  
+       <!-- <OverflowToolbar> -->
+    <Toolbar height="3rem">
         <Button
             text="Cancel"
             press="AddCarrierCancelDialog"
-            class="AddCarrierCancel btnInnerFocus"
+            class="AddCarrierCancel btnInnerFocus sapUiTinyMarginBottom"
             type="Transparent" />
 
-        <ToolbarSpacer />
+      <ToolbarSpacer ></ToolbarSpacer>
 
         <!-- Save button - only visible in Add mode -->
         <Button
             text="Save"
             press="AddCarrierCatalogSaveDialog"
-            class="addCarrierSaveBtnStyle btnInnerFocus"
+            class="addCarrierSaveBtnStyle btnInnerFocus sapUiTinyMarginBottom"
             width="auto"
             visible="{eshipjetModel>/showCarrierCatalogSaveBtn}" />
 
@@ -224,10 +179,11 @@
         <Button
             text="Update"
             press="AddCarrierCatalogupdateDialog"
-            class="addCarrierSaveBtnStyle btnInnerFocus"
+            class="addCarrierSaveBtnStyle btnInnerFocus sapUiTinyMarginBottom"
             width="auto" 
             visible="{eshipjetModel>/showCarrierCatalogUpdateBtn}" />
     </Toolbar>
+<!-- </OverflowToolbar> -->
 </footer>
 
     </Dialog>

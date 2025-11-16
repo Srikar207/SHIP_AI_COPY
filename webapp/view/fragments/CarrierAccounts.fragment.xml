@@ -166,7 +166,7 @@
 								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/10/visible}" >
 									<Label text="Freight Quote" />
 									<ui:template>
-										<Switch  state="{eshipjetModel>Freight_Quote}" class="greenSwitch">
+										<Switch  state="{eshipjetModel>FreightQuote}" class="greenSwitch">
 											<layoutData>
 												<FlexItemData growFactor="1" />
 											</layoutData>
@@ -176,7 +176,7 @@
 								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/11/visible}" >
 									<Label text="Rate Quote" />
 									<ui:template>
-										<Switch  state="{eshipjetModel>Rate_Quote}" class="greenSwitch">
+										<Switch  state="{eshipjetModel>RateQuote}" class="greenSwitch">
 											<layoutData>
 												<FlexItemData growFactor="1" />
 											</layoutData>
@@ -186,7 +186,7 @@
 								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/12/visible}" >
 									<Label text="Automate Pro Number" />
 									<ui:template>
-										<Switch  state="{eshipjetModel>Automate_Pro_Number}" class="greenSwitch">
+										<Switch  state="{eshipjetModel>AutomateProNumber}" class="greenSwitch">
 											<layoutData>
 												<FlexItemData growFactor="1" />
 											</layoutData>
@@ -196,7 +196,7 @@
 								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/13/visible}" >
 									<Label text="Status" />
 									<ui:template>
-										<Switch  state="{= ${eshipjetModel>Is_Active} === 'true' ? true : false}" class="greenSwitch" >
+										<Switch  state="{eshipjetModel>IsActive}" class="greenSwitch" >
 											<layoutData>
 												<FlexItemData growFactor="1" />
 											</layoutData>
@@ -206,7 +206,7 @@
 								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/14/visible}" >
 									<Label text="End Of The Day" />
 									<ui:template>
-										<Switch state="{eshipjetModel>End_Of_The_Day}" class="greenSwitch">
+										<Switch state="{eshipjetModel>EndOfDay}" class="greenSwitch">
 											<layoutData>
 												<FlexItemData growFactor="1" />
 											</layoutData>
@@ -216,7 +216,7 @@
 								<ui:Column visible="{eshipjetModel>/CarrierAccountsTableColumns/15/visible}" >
 									<Label text="Manual Rates" />
 									<ui:template>
-										<Switch state="{eshipjetModel>Manual_Rates}" class="greenSwitch">
+										<Switch state="{eshipjetModel>ManualRates}" class="greenSwitch">
 											<layoutData>
 												<FlexItemData growFactor="1" />
 											</layoutData>

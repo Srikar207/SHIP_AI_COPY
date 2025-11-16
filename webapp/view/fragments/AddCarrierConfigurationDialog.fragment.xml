@@ -45,8 +45,8 @@
 	</IconTabBar> -->
         <IconTabBar
         expanded="true"
-        enableTabReordering="true"
-        class="shipNow-IconTabBar-Width" >
+       selectedKey = "carrier" expandable="false" enableTabReordering="true" 
+        class="shipNow-IconTabBar-Width customTabStyle" >
             <!-- Carrier Info Tab -->
             <items>
                 <IconTabFilter

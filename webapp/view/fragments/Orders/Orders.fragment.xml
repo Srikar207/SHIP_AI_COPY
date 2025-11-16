@@ -107,7 +107,7 @@
 
 						<ui:Table
 							id="idOrdersTable"
-							rows="{eshipjetModel>/pagedOrders}"
+							rows="{eshipjetModel>/allOrders}"
 							class="sapUiSmallMarginBegin sapUiSmallMarginEnd rowRightLine ordersTableRightBorder"
 							selectionMode="None"
 							visibleRowCount="14" >
@@ -145,7 +145,7 @@
 								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '7rem' : 'auto' }" sortProperty="CarrierCode" visible="{eshipjetModel>/OrderTableData/OrderColumns/4/visible}">
 									<Label text="ERP Service ID" />
 									<ui:template>
-										<Text text="{eshipjetModel>CarrierCode}" wrapping="false" class="ordersSmallText" />
+										<Text text="{eshipjetModel>Carriertype}" wrapping="false" class="ordersSmallText" />
 									</ui:template>
 								</ui:Column>
 
@@ -214,9 +214,9 @@
 								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '6rem' : 'auto' }" sortProperty="DeliveryStatus" visible="{eshipjetModel>/OrderTableData/OrderColumns/12/visible}">
 								<Label text="Status" />
 								<ui:template>
-									<!-- <Text text="Shipped" wrapping="false"
-										class="{path: 'Shipped', formatter: '.formatter.getDeliveryStatusClass'} ordersSmallText" /> -->
-									<Text text="{path: 'eshipjetModel>Shipprocess', formatter: '.formatter.formatShipmentType'}" wrapping="false" class="greenColorForIcon ordersSmallText" />
+									<Text text="Shipped" wrapping="false"
+										class="{path: 'Shipped', formatter: '.formatter.getDeliveryStatusClass'} ordersSmallText" /> 
+									<!-- <Text text="{path: 'eshipjetModel>Shipprocess', formatter: '.formatter.formatShipmentType'}" wrapping="false" class="greenColorForIcon ordersSmallText" /> -->
 								</ui:template>
 							</ui:Column>
 

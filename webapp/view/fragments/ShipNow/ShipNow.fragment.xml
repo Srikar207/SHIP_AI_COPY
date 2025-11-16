@@ -54,7 +54,7 @@
 										<core:Item key="EWMOBD" text="EWM Outbound Delivery" />	
 										<core:Item key="manual" text="Manual" />											
 									</ComboBox>
-								<Input width="6%" placeholder="Licence Plate" class="sapUiSmallMarginBottom sapUiTinyMarginTop create-ship-req_input" />
+								<!-- <Input width="6%" placeholder="Licence Plate" class="sapUiSmallMarginBottom sapUiTinyMarginTop create-ship-req_input" /> -->
 
                                 <!-- <Input ></Input> -->
 									<!-- <Label text="SAP Delivery Number" class="sapdeliverynumberbgcolor sapUiSmallMarginTop sapUiMediumMarginEnd sapUiSmallMarginBegin" width="12%" wrapping="false" labelFor="SAPDelLabel"/> -->
@@ -80,8 +80,8 @@
 									<Label text="Ship Date" class="sapUiSmallMarginTop sapUiSmallMarginBegin" labelFor="DP1" width="6%" />
 									<DatePicker class="create-ship-req_input removeInputOutline sapUiTinyMargin" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" id="DP1" width="8%" valueFormat="MM/dd/yyyy" displayFormat="MM/dd/yyyy" change="handleChange" value="{path: 'eshipjetModel>/pickupDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'MM/dd/yyyy'}}" />
 									<ToolbarSpacer ></ToolbarSpacer>
-									 <Button text="Clear" press="onShipNowNewPress" class="Ship-Now-toolbar1__button_red removeBtnOutline clearBtn sapUiTinyMargin" type="Ghost" />
-									<Button text="New" press="onShipNowNewPress" class="Ship-Now-toolbar1__button_green removeBtnOutline saveBtn sapUiTinyMargin sapUiLargeMarginEnd" type="Ghost" ></Button>
+									 <Button text="Clear" press="onShipNowNewPress" class="clearbutton-btn removeBtnOutline clearBtn sapUiTinyMargin" type="Ghost" />
+									<Button text="New" press="onShipNowNewPress" class="Newbutton-btn removeBtnOutline saveBtn sapUiTinyMargin " type="Ghost" ></Button>
                             </Toolbar>
 							<!-- Icon Tab Bar Starts here -->			
 							<IconTabBar id="idIconTabBarFiori2" selectedKey = "Pack" expandable="false" enableTabReordering="true" class="shipNow-IconTabBar-Width customTabStyle" >
@@ -161,40 +161,40 @@
 														<Button text="Validate Address" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="validateAddress__button" type="Ghost" width="auto" press="onOpenValidateAddressDialog" />
 													</Toolbar>
 													<Label text="Contact Name" />
-													<Input class="sapUiSmallMarginBottom create-ship-req_input" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" value="{eshipjetModel>/GetDeliveryData/to_DeliveryDocumentPartner/to_Address2/BusinessPartnerName1}" />
+													<Input class="sapUiSmallMarginBottom create-ship-req_input" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" value="{eshipjetModel>/GetDeliveryData/to_ShipToParty/BusinessPartnerName1}" />
 													<Label text="Address Line 1" />
-													<Input class="sapUiSmallMarginBottom create-ship-req_input" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" value="{eshipjetModel>/GetDeliveryData/to_DeliveryDocumentPartner/to_Address2/AddressSearchTerm1}"></Input>
+													<Input class="sapUiSmallMarginBottom create-ship-req_input" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" value="{eshipjetModel>/GetDeliveryData/to_ShipToParty/AddressSearchTerm1}"></Input>
 													<Label text="City" />
-													<Input class="sapUiSmallMarginBottom create-ship-req_input" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" value="{eshipjetModel>/GetDeliveryData/to_DeliveryDocumentPartner/to_Address2/CityName}" maxLength="3" >
+													<Input class="sapUiSmallMarginBottom create-ship-req_input" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" value="{eshipjetModel>/GetDeliveryData/to_ShipToParty/CityName}" maxLength="3" >
 														<layoutData>
 															<f:ColumnElementData cellsSmall="6" cellsLarge="6" />
 														</layoutData>									
 													</Input>
-													<Input class="sapUiSmallMarginBottom create-ship-req_input" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" value="{eshipjetModel>/GetDeliveryData/to_Address2/Region}" placeholder="State" >
+													<Input class="sapUiSmallMarginBottom create-ship-req_input" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" value="{eshipjetModel>/GetDeliveryData/to_ShipToParty/Region}" placeholder="State" >
 														<layoutData>
 															<f:ColumnElementData cellsSmall="6" cellsLarge="6" />
 														</layoutData>
 													</Input>
 													<Label text="Email Address" />
-													<Input class="sapUiSmallMarginBottom create-ship-req_input" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" value="{eshipjetModel>/GetDeliveryData/to_Address2/EmailAddress}" />
+													<Input class="sapUiSmallMarginBottom create-ship-req_input" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" value="{eshipjetModel>/GetDeliveryData/to_ShipToParty/EmailAddress}" />
 													<Label text="Company Name" />
-													<Input class="sapUiSmallMarginBottom create-ship-req_input" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" value="{eshipjetModel>/GetDeliveryData/to_Address2/CustomerFullName}" />
+													<Input class="sapUiSmallMarginBottom create-ship-req_input" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" value="{eshipjetModel>/GetDeliveryData/to_ShipToParty/CustomerFullName}" />
 													<Label text="Address Line 2" />
-													<Input class="sapUiSmallMarginBottom create-ship-req_input" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" value="{eshipjetModel>/GetDeliveryData/to_Address2/StreetName}" />
+													<Input class="sapUiSmallMarginBottom create-ship-req_input" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" value="{eshipjetModel>/GetDeliveryData/to_ShipToParty/StreetName}" />
 													<Label text="Postal Code" />
-													<Input class="sapUiSmallMarginBottom create-ship-req_input" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" value="{eshipjetModel>/GetDeliveryData/to_Address2/PostalCode}" >
+													<Input class="sapUiSmallMarginBottom create-ship-req_input" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" value="{eshipjetModel>/GetDeliveryData/to_ShipToParty/PostalCode}" >
 														<layoutData>
 															<f:ColumnElementData cellsSmall="6" cellsLarge="6" />
 														</layoutData>
 													</Input>
-													<ComboBox class="sapUiSmallMarginBottom create-ship-req_input" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" selectedKey="{eshipjetModel>/GetDeliveryData/to_Address2/Country}" items="{eshipjetModel>/countriesList}" placeholder="Country">
+													<ComboBox class="sapUiSmallMarginBottom create-ship-req_input" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" selectedKey="{eshipjetModel>/GetDeliveryData/to_ShipToParty/Country}" items="{eshipjetModel>/countriesList}" placeholder="Country">
 														<core:Item key="{eshipjetModel>code}" text="{eshipjetModel>name}" />
 														<layoutData>
 															<f:ColumnElementData cellsSmall="6" cellsLarge="6" />
 														</layoutData>
 													</ComboBox>
 													<Label text="Phone Number" />
-													<Input class="sapUiSmallMarginBottom create-ship-req_input" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" value="{eshipjetModel>/GetDeliveryData/to_Address2/TelephoneNumber1}" >
+													<Input class="sapUiSmallMarginBottom create-ship-req_input" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" value="{eshipjetModel>/GetDeliveryData/to_ShipToParty/TelephoneNumber1}" >
 														<layoutData>
 															<f:ColumnElementData cellsSmall="6" cellsLarge="6" />
 														</layoutData>
@@ -218,7 +218,7 @@
 								<Title text="Business Partners"/>
 							</Toolbar>
 							<ui:Table id="idBusinessPartnersTable111"
-									rows="{eshipjetModel>/to_DeliveryDocumentPartner}"
+									rows="{eshipjetModel>/BusinessPartners}"
 									class="sapUiTinyMarginTop shipnowcustomSimpleFormShadow"
 									selectionMode="None"
 									visibleRowCount="4"
@@ -322,7 +322,7 @@
 								</ui:columns>
 							</ui:Table>
 											
-
+ 
 										
 									</IconTabFilter>
 									<!-- Routing and Billing Details Tab Starts here -->
@@ -1547,49 +1547,6 @@
 									<!-- Charges Tab Starts here -->
 									<IconTabFilter text="Shipping Charges" key="Charges" >
 							<VBox height="100%" >
-								<!-- <Table items="{eshipjetModel>/shippingCharges}" visible="{eshipjetModel>/shippingChargesLength}" class="sapUiLargeMarginBottom whiteBackground" >
-									<headerToolbar>
-										<OverflowToolbar class="customShippingDocumentsToolbar" height="2rem" >
-											<content>
-												<Title text="Shipping Charges" level="H2" />
-											</content>
-										</OverflowToolbar>
-									</headerToolbar>
-									<columns>
-										<Column>
-											<Text text="#" />
-										</Column>
-										<Column	 minScreenWidth="Tablet" demandPopin="true">
-											<Text text="Freight Condition ID" />
-										</Column>
-										<Column	 minScreenWidth="Desktop"  demandPopin="true">
-											<Text text="SAP Freight Condition ID" />
-										</Column>
-										<Column>
-											<Text text="Desctiption" />
-										</Column>
-										<Column	 minScreenWidth="Tablet"	demandPopin="true">
-											<Text text="Charges" />
-										</Column>
-										<Column	 minScreenWidth="Desktop"  demandPopin="true">
-											<Text text="Currency" />
-										</Column>
-									</columns>
-									<items>
-										<ColumnListItem vAlign="Middle">
-											<cells>
-												<Text  text="{eshipjetModel>serialNo}" />
-												<Text  text="{eshipjetModel>description}" />
-												<Text  text="" />
-												<Text  text="{eshipjetModel>description}" />
-												<Text text="{= '$ ' + ${eshipjetModel>amount} }" class="shippingChargesTotalAmount" />
-												<Text  text="{eshipjetModel>currency}" />
-											</cells>
-										</ColumnListItem>
-									</items>
-								</Table> -->
-
-
 			<ui:Table
 				rows="{eshipjetModel>/shippingCharges}" 
 				class="sapUiLargeMarginBottom whiteBackground" 
@@ -1682,7 +1639,7 @@
 											</VBox>
 											<VBox width="50%" class="sapUiSmallMargin" >
 												<Label text="Packages / Weight" class="fontBold" />
-												<Text text="{eshipjetModel>/HandlingUnitsLength} / " class="lightFontColor" />
+												<Text text="{eshipjetModel>/HandlingUnitsLength} /{eshipjetModel>/GrossWeight} " class="lightFontColor" />
 											</VBox>
 										</HBox>
 									</VBox>
@@ -1735,12 +1692,12 @@
 											</HBox>
 											<Toolbar height="1px" class="sapUiTinyMargin" ></Toolbar>
 											<Label text="Recipient: " class="fontBold sapUiSmallMarginBegin" />
-												<Text text="{ShipNowDataModel>/ShipToAddress/BusinessPartnerName1}" class="sapUiSmallMarginBegin" />
-											<Text text="{ShipNowDataModel>/ShipToAddress/StreetName}"  class="sapUiSmallMarginBegin" />
+												<Text text="{eshipjetModel>/GetDeliveryData/to_ShipToParty/BusinessPartnerName1}" class="sapUiSmallMarginBegin" />
+											<Text text="{eshipjetModel>/GetDeliveryData/to_ShipToParty/StreetName}"  class="sapUiSmallMarginBegin" />
 											<HBox>
-												<Text text="{ShipNowDataModel>/ShipToAddress/Region}" 
+												<Text text="{eshipjetModel>/GetDeliveryData/to_ShipToParty/Region}" 
 													class="sapUiSmallMarginBottom sapUiSmallMarginBegin" />
-												<Text text="{ShipNowDataModel>/ShipToAddress/CityName}" 
+												<Text text="{eshipjetModel>/GetDeliveryData/to_ShipToParty/CityName}" 
 													class="sapUiSmallMarginBottom sapUiSmallMarginBegin" />
 											</HBox>
 									</VBox>
@@ -1748,50 +1705,8 @@
 							</VBox>
 									</IconTabFilter>
 
-									<!-- Documents Tab Starts here -->
-									<IconTabFilter text="Documents" key="Documents">
-									<!-- <Table items="{eshipjetModel>/shippingDocuments}" class="whiteBackground sapUiSmallMarginBottom" >
-										<headerToolbar>
-											<OverflowToolbar class="customShippingDocumentsToolbar" height="2rem" >
-												<content>
-													<Title text="Shipping Documents" level="H2" />
-												</content>
-											</OverflowToolbar>
-										</headerToolbar>
-										<columns>
-											<Column>
-												<Text text="#" />
-											</Column>
-											<Column>
-												<Text text="Document Provider" />
-											</Column>
-											<Column>
-												<Text text="Document Type" />
-											</Column>
-											<Column >
-												<Text text="Description" />
-											</Column>
-											<Column >
-												<Text text="Action" />
-											</Column>
-										</columns>
-										<items>
-											<ColumnListItem vAlign="Middle">
-												<cells>
-													<Text  text="{eshipjetModel>srNo}" />
-													<Text  text="{eshipjetModel>docProvider}" />
-													<Text  text="{eshipjetModel>docType}" />
-													<Text  text="{eshipjetModel>contentType}" />
-													<HBox >
-														<Button text="View" type="Transparent" press="onShippingDocumentsViewPress" ></Button>
-														<Button icon="sap-icon://megamenu" type="Transparent" ></Button>
-													</HBox>
-												</cells>
-											</ColumnListItem>
-										</items>
-									</Table> -->
-
-
+							<!-- Documents Tab Starts here -->
+				<IconTabFilter text="Documents" key="Documents">
 			<ui:Table
 				rows="{eshipjetModel>/shippingDocuments}"
 				selectionMode="None"
@@ -2087,7 +2002,8 @@
 					<ui:Column width="auto" >
 						<Label text="Status" />
 						<ui:template>
-							<Text text="{path: 'eshipjetModel>TrackingStatus', formatter: '.formatter.formatShipmentType'}" class="greenColorForIcon" />
+						<Text text="Shipped" class="greenColorForIcon" />
+							<!-- <Text text="{path: 'eshipjetModel>TrackingStatus', formatter: '.formatter.formatShipmentType'}" class="greenColorForIcon" /> -->
 						</ui:template>
 					</ui:Column>
 					<ui:Column width="auto" >

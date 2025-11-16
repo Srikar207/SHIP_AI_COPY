@@ -33,7 +33,7 @@
             liveChange="onCarrierSearch" />
 
         <Table id="carrierTable"
-               items="{eshipjetModel>/carriers}"
+               items="{eshipjetModel>/uniqueCarriersAcccountsValueHelpData}"
                class="sapUiSmallMarginTop">
             <columns>
                 <Column><Text text="Carrier ID" /></Column>

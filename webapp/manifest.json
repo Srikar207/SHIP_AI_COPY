@@ -162,6 +162,11 @@
         "dataSource": "CARRIERS_SRV",
         "preload": true,
         "settings": {}
+      },
+      "MANIFEST_SRV": {
+        "dataSource": "MANIFEST_SRV",
+        "preload": true,
+        "settings": {}
       }
     },
     "resources": {

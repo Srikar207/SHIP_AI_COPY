@@ -2753,3 +2753,174 @@ button {
 }
 
 
+
+.clearbutton-btn {
+  height: 2.5rem !important;
+  min-height: 2.5rem !important;
+  background-color: #fff !important;
+  border: 1px solid red !important; /* SAP blue */
+  color: #fff !important;
+  border-radius: 6px;
+  padding: 0 1rem !important;
+}
+
+/* Inner button */
+.clearbutton-btn .sapMBtnInner {
+  height: 100% !important;
+  background: transparent !important;
+  border: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit !important; /* ensures it follows parent */
+}
+
+/* ✅ Text span fix */
+.clearbutton-btn .sapMBtnContent {
+  color: inherit !important;
+  font-weight: 500; /* optional: make text a bit bolder */
+}
+
+/* Icon inherits color */
+.clearbutton-btn .sapUiIcon {
+  color: inherit !important;
+}
+
+/* Hover */
+.clearbutton-btn:hover {
+  background-color: red !important;
+  color: #fff !important;
+  border-color: red !important;
+}
+
+.clearbutton-btn:hover .sapMBtnContent,
+.clearbutton-btn:hover .sapUiIcon {
+  color: #fff !important;
+}
+
+.clearbutton-btn:focus .sapMBtnInner {
+  outline: none !important;
+}
+
+
+
+.clearbutton-btn {
+  height: 2.5rem !important;
+  min-height: 2.5rem !important;
+  background-color: #fff !important;
+  border: 1px solid red !important; /* SAP blue */
+  color: #fff !important;
+  border-radius: 6px;
+  padding: 0 1rem !important;
+}
+
+/* Inner button */
+.clearbutton-btn .sapMBtnInner {
+  height: 100% !important;
+  background: transparent !important;
+  border: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit !important; /* ensures it follows parent */
+}
+
+/* ✅ Text span fix */
+.clearbutton-btn .sapMBtnContent {
+  color: inherit !important;
+  font-weight: 500; /* optional: make text a bit bolder */
+}
+
+/* Icon inherits color */
+.clearbutton-btn .sapUiIcon {
+  color: inherit !important;
+}
+
+/* Hover */
+.clearbutton-btn:hover {
+  background-color: red !important;
+  color: #fff !important;
+  border-color: red !important;
+}
+
+.clearbutton-btn:hover .sapMBtnContent,
+.clearbutton-btn:hover .sapUiIcon {
+  color: #fff !important;
+}
+
+.clearbutton-btn:focus .sapMBtnInner {
+  outline: none !important;
+}
+
+
+
+
+
+.Newbutton-btn {
+  height: 2.5rem !important;
+  /* width: 78px; */
+  min-height: 2.5rem !important;
+  background-color: #fff !important;
+  border: 1px solid #4E9C2D !important; /* SAP blue */
+  color: #fff !important;
+  border-radius: 6px;
+  padding: 0 1rem !important;
+}
+
+/* Inner button */
+.Newbutton-btn .sapMBtnInner {
+  height: 100% !important;
+  background: transparent !important;
+  border: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit !important; /* ensures it follows parent */
+}
+
+/* ✅ Text span fix */
+.Newbutton-btn .sapMBtnContent {
+  color: inherit !important;
+  font-weight: 500; /* optional: make text a bit bolder */
+}
+
+/* Icon inherits color */
+.Newbutton-btn .sapUiIcon {
+  color: inherit !important;
+}
+
+/* Hover */
+.Newbutton-btn:hover {
+  background-color: #4E9C2D!important;
+  color: #fff !important;
+  border-color: #4E9C2D !important;
+}
+
+.Newbutton-btn:hover .sapMBtnContent,
+.Newbutton-btn:hover .sapUiIcon {
+  color: #fff !important;
+}
+
+.Newbutton-btn:focus .sapMBtnInner {
+  outline: none !important;
+}
+
+html.sap-desktop .sapContrast .sapMIBar.sapMFooter-CTX, html.sap-desktop .sapContrast.sapMIBar.sapMFooter-CTX {
+    background-color: white;
+    border-top: 1px solid #white;
+}
+
+/* Make all labels slightly larger */
+/* .sapMLabel {
+  font-size: 1.1rem !important;  /* adjust as needed (1.2rem for bigger) */
+} */
+.largeLabel {
+  font-size: 1.2rem !important;
+  font-weight: 600; /* optional, for emphasis */
+}
+
+
+.boldText {
+    font-weight: bold;
+}
+

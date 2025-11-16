@@ -54,7 +54,7 @@
 					</tnt:NavigationListItem>
 					<tnt:NavigationListItem text="Routing Guide" icon="sap-icon://customfont/returns_icon" key="RoutingGuide">
 					</tnt:NavigationListItem>
-					<tnt:NavigationListItem text="Feight Audit Analysis" icon="sap-icon://customfont/returns_icon" key="FeightAuditAnalysis">
+					<tnt:NavigationListItem text="Freight Audit Analysis" icon="sap-icon://customfont/returns_icon" key="FeightAuditAnalysis">
 					</tnt:NavigationListItem>
 					
 				</tnt:NavigationList>
@@ -559,7 +559,7 @@
 	  </App>
 
 	  	<OverflowToolbar class="eship-footer" visible="{eshipjetModel>/commonValues/allViewsFooter}">
-	  		<Button text="Log Out" class="customLogOutButton btnInnerFocus" type="Transparent" width="6rem" press="onLogOutPress" icon="sap-icon://log" ></Button>
+	  		<!-- <Button text="Log Out" class="customLogOutButton btnInnerFocus" type="Transparent" width="6rem" press="onLogOutPress" icon="sap-icon://log" ></Button> -->
 			<ToolbarSpacer/>
 				<Text text="© copyright 2024 eshipjet.ai, Inc. All rights reserved."/>
 			<ToolbarSpacer/>

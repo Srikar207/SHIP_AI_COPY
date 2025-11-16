@@ -38,9 +38,9 @@
                 <items>
                     <ColumnListItem>
                         <cells>
-                            <Text text="{eshipjetModel>Hunumber}"/>
-                            <Text text="{= parseFloat(${eshipjetModel>Qty}).toFixed(2) }"/>
-                            <Text text="{= parseFloat(${eshipjetModel>Totalweight}).toFixed(2) }"/>
+                            <Text text="{eshipjetModel>HandlingUnitExternalID}"/>
+                            <Text text="{= parseFloat(${eshipjetModel>HandlingUnitQuantity}).toFixed(2) }"/>
+                            <Text text="{= parseFloat(${eshipjetModel>GrossWeight}).toFixed(2) }"/>
                         </cells>
                     </ColumnListItem>
                 </items>

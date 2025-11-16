@@ -595,7 +595,7 @@
             "text": "Lithium"
         }
     ],
-    "selectPaymentType": "",
+    "selectPaymentType": "Sender",
     "PaymentTypes": [
         {
             "key": "COLLECT",
@@ -1801,7 +1801,7 @@
         {
             "name": "ItemWeightUnit",
             "label": "Dimensions",
-            "visible": true
+            "visible": false
         },
         {
             "name": "ItemGrossWeight",
@@ -4993,7 +4993,6 @@
         { "key": "carrierType", "label": "Carrier Type", "visible": true },
         { "key": "carrierCoverage", "label": "Carrier Coverage", "visible": true },
         { "key": "connectionType", "label": "Connection Type", "visible": true },
-        { "key": "colorPicker", "label": "Color Picker", "visible": true },
         { "key": "status", "label": "Status", "visible": true },
         { "key": "actions", "label": "Actions", "visible": true }
       ],
@@ -5385,24 +5384,25 @@
                 ],
     "carrierCatelogCarrierName": "",
 "CarrierAccountsTableColumns": [
-    { "key": "LocationId", "label": "Location ID", "visible": true },
-    { "key": "CarrierCode", "label": "Carrier Name", "visible": true },
-    { "key": "CarrierType", "label": "Carrier Type", "visible": true },
-    { "key": "ConnectionType", "label": "Connection Type", "visible": true },
-    { "key": "ShipFrmCntry", "label": "Ship From Country", "visible": true },
-    { "key": "ShipToCntry", "label": "Ship To Country", "visible": true },
-    { "key": "ShipUrl", "label": "Ship URL", "visible": true },
-    { "key": "VoidUrl", "label": "Void URL", "visible": false },
-    { "key": "RateUrl", "label": "Rate URL", "visible": false },
-    { "key": "TrackUrl", "label": "Track URL", "visible": false },
-    { "key": "Freight_Quote", "label": "Freight Quote", "visible": false },
-    { "key": "Rate_Quote", "label": "Rate Quote", "visible": false },
-    { "key": "Automate_Pro_Number", "label": "Automate Pro Number", "visible": false },
-    { "key": "Is_Active", "label": "Status", "visible": true },
-    { "key": "End_Of_The_Day", "label": "End Of The Day", "visible": false },
-    { "key": "Manual_Rates", "label": "Manual Rates", "visible": false },
-    { "key": "actions", "label": "Actions", "visible": true }
+  { "key": "LocationId", "label": "Location ID", "visible": true },
+  { "key": "CarrierCode", "label": "Carrier Name", "visible": true },
+  { "key": "CarrierType", "label": "Carrier Type", "visible": true },
+  { "key": "ConnectionType", "label": "Connection Type", "visible": true },
+  { "key": "ShipFrmCntry", "label": "Ship From Country", "visible": true },
+  { "key": "ShipToCntry", "label": "Ship To Country", "visible": true },
+  { "key": "ShipUrl", "label": "Ship URL", "visible": true },
+  { "key": "VoidUrl", "label": "Void URL", "visible": false },
+  { "key": "RateUrl", "label": "Rate URL", "visible": false },
+  { "key": "TrackUrl", "label": "Track URL", "visible": false },
+  { "key": "FreightQuote", "label": "Freight Quote", "visible": false },
+  { "key": "RateQuote", "label": "Rate Quote", "visible": false },
+  { "key": "AutomateProNumber", "label": "Automate Pro Number", "visible": false },
+  { "key": "IsActive", "label": "Status", "visible": true },
+  { "key": "EndOfDay", "label": "End Of The Day", "visible": false },
+  { "key": "ManualRates", "label": "Manual Rates", "visible": false },
+  { "key": "Actions", "label": "Actions", "visible": true }
 ],
+
 
     "CarrierAccountsTableRows": [
         {
@@ -9238,12 +9238,11 @@
     },
     "addCrrierDialogItems": [
         {
-            "ServiceName": "",
-            "ServiceCode": "",
+            "ServDesc": "",
+            "ErpServId": "",
+            "ServCode": "",
             "ServiceCoverage": "",
-            "ConnectionType": "",
-            "Status": false,
-            "Actions": "sap-icon://delete"
+            "IsActive": false
         }
     ],
     "carrierAccountsTableItems": [
