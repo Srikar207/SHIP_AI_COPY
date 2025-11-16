@@ -28,10 +28,10 @@ sap.ui.define([
     return Controller.extend("com.eshipjetcopy.zeshipjetcopy.controller.Eshipjet", {
         formatter: formatter,
         onInit: function () {
-            this.onGetCarrierCatalogData();
-            this.onGetCarrierAccoData();
-            // this.getMasterData();
+            // this.onGetCarrierCatalogData();
+            // this.onGetCarrierAccoData();
 
+            // this.getMasterData();
             // var sAudioPath = sap.ui.require.toUrl("com/eshipjetcopy/zeshipjetcopy/audio/Lock.mp3");
             // var audio = new Audio(sAudioPath);
             // audio.play();
@@ -1786,6 +1786,7 @@ sap.ui.define([
             var ShipFromData = eshipjetModel.getProperty("/ShipFromData");
             var ShipToData = eshipjetModel.getProperty("/ShipToData");
             var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData");
+            var selectedCarrierAccountsData = eshipjetModel.getProperty("/selectedCarrierAccountsData");
             var ShippingPoint = GetDeliveryData.ShippingPoint;
             var currentDateTime = new Date().toISOString();
             var CreationDate = new Date(GetDeliveryData.CreationDate);
@@ -1856,40 +1857,61 @@ sap.ui.define([
             var currentDate = new Date();
             var shipDate = currentDate.toISOString();
 
-
             eshipjetModel.setProperty("/commonValues/shipNowGetBtn", true);
             var sapDeliveryNumber = eshipjetModel.getProperty("/commonValues/sapDeliveryNumber");
             var carrier = eshipjetModel.getProperty("/commonValues/ShipNowShipMethodSelectedKey");
             var serviceId = eshipjetModel.getProperty("/commonValues/ShipNowShipsrvNameSelectedKey");
-            var id, password, accountNumber, serviceName, oPayload, Signature_optionType;
-
-            var AccessKey = "";
-            var billingAccNumber = "";
-            if(carrier && carrier.toUpperCase() === "UPS"){
-                id = "6ljUpEbuu1OlOk7ow932lsxXHISUET0WKjTn59GzQ5MRdEbA";  
-                password = "ioZmsfcbrzlWfGh7wGMhqHL6sY4EAaKzZObullipni0cEGJGChjFmGpkcdCWQynK";
-                accountNumber = "B24W72";
-                billingAccNumber = "89W74E";
-                serviceName = "03"
-                Signature_optionType = eshipjetModel.getProperty("/UpsSignatureSelectedKey");
-            }else if(carrier && carrier.toUpperCase() === "FEDEX"){
-                 id = "l70c717f3eaf284dc9af42169e93874b6e";
-                 password = "7f271bf486084e8f8073945bb7e6a020";
-                 accountNumber = "740561073";
-                 billingAccNumber = "740561073";
-                 serviceName = "FEDEX_GROUND"
-                 Signature_optionType = eshipjetModel.getProperty("/fedExSignature_optionType");
-            }else if(carrier && carrier.toUpperCase() === "DHL"){
-                 id = "apT2vB7mV1qR1b";
-                 password = "U#3mO^1vY!5mT@0j";
-            }else if(carrier && carrier.toUpperCase() === "USPS"){
-                id = "3087617";
-                password = "October2024!";
-            }else if(carrier && carrier.toUpperCase() === "ABFS" || carrier && carrier.toUpperCase() === "SAIA" ){
-                id = "ABFESHIPJET";
-                password = "Legacy!@3";
-                AccessKey= "JVG9SX85";
+            var carrierServicesDropDownData = eshipjetModel.getProperty("/carrierServicesDropDownData");
+            for(var i=0; i<carrierServicesDropDownData.length; i++){
+                if(carrierServicesDropDownData[i].ErpServId === serviceId){
+                    eshipjetModel.setProperty("/selectedServiceNamesData", carrierServicesDropDownData[i]);
+                }
             }
+            var selectedServiceNamesData = eshipjetModel.getProperty("/selectedServiceNamesData");
+            var id = selectedCarrierAccountsData.UserId || "";
+            var password = selectedCarrierAccountsData.Password || "";
+            var accountNumber = selectedCarrierAccountsData.AcntNmbr || "";
+            var serviceName = selectedServiceNamesData.ServCode || "";
+            var AccessKey = selectedCarrierAccountsData.AccessKey || "";
+            var CarrierType = selectedCarrierAccountsData.CarrierType || "";
+            var ConnectionType = selectedCarrierAccountsData.ConnectionType || "";
+            var HubId = selectedCarrierAccountsData.HubId || "";
+            var LabelType = selectedCarrierAccountsData.LabelType || "";
+            var PodUrl = selectedCarrierAccountsData.PodUrl || "";
+            var RateQuote = selectedCarrierAccountsData.RateQuote || "";
+            var RateUrl = selectedCarrierAccountsData.RateUrl || "";
+            var ShipUrl = selectedCarrierAccountsData.ShipUrl || "";
+            var TokenUrl = selectedCarrierAccountsData.TokenUrl || "";
+            var TrackUrl = selectedCarrierAccountsData.TrackUrl || "";
+            var VoidUrl = selectedCarrierAccountsData.VoidUrl || "";
+
+            // var AccessKey = "";
+            // var billingAccNumber = "";
+            // if(carrier && carrier.toUpperCase() === "UPS"){
+            //     id = "6ljUpEbuu1OlOk7ow932lsxXHISUET0WKjTn59GzQ5MRdEbA";  
+            //     password = "ioZmsfcbrzlWfGh7wGMhqHL6sY4EAaKzZObullipni0cEGJGChjFmGpkcdCWQynK";
+            //     accountNumber = "B24W72";
+            //     billingAccNumber = "89W74E";
+            //     serviceName = "03"
+            //     Signature_optionType = eshipjetModel.getProperty("/UpsSignatureSelectedKey");
+            // }else if(carrier && carrier.toUpperCase() === "FEDEX"){
+            //      id = "l70c717f3eaf284dc9af42169e93874b6e";
+            //      password = "7f271bf486084e8f8073945bb7e6a020";
+            //      accountNumber = "740561073";
+            //      billingAccNumber = "740561073";
+            //      serviceName = "FEDEX_GROUND"
+            //      Signature_optionType = eshipjetModel.getProperty("/fedExSignature_optionType");
+            // }else if(carrier && carrier.toUpperCase() === "DHL"){
+            //      id = "apT2vB7mV1qR1b";
+            //      password = "U#3mO^1vY!5mT@0j";
+            // }else if(carrier && carrier.toUpperCase() === "USPS"){
+            //     id = "3087617";
+            //     password = "October2024!";
+            // }else if(carrier && carrier.toUpperCase() === "ABFS" || carrier && carrier.toUpperCase() === "SAIA" ){
+            //     id = "ABFESHIPJET";
+            //     password = "Legacy!@3";
+            //     AccessKey= "JVG9SX85";
+            // }
             var Notes = eshipjetModel.getProperty("/Notes")
             Notes.push({
                 "date": new Date(),
@@ -9482,12 +9504,12 @@ sap.ui.define([
                 oPageContainer.to(oView.createId("_ID_Roles_TableScrollContainer"));
 
             } else if (oCurrObj && oCurrObj.name === "Carrier Catalog *") {
-
+                oController.onGetCarrierCatalogData();
                 // oController._displayTables("_IDCarriesCatalogTable", "CarrierCatalogTableColumns", "CarrierCatalogTableRows", "Carrier Catalog");
                 oPageContainer.to(oView.createId("_ID_CarrierCatalog_TableScrollContainer"));
 
             } else if (oCurrObj && oCurrObj.name === "Carrier Accounts *") {
-
+                oController.onGetCarrierAccoData();
                 // oController._displayTables("_IDCarriesAccountsTable", "CarrierAccountsTableColumns", "CarrierAccountsTableRows", "Carrier Accounts");
                 oPageContainer.to(oView.createId("_ID_CarrierAccounts_TableScrollContainer"));
 
@@ -17771,31 +17793,70 @@ sap.ui.define([
 
         onShopNowShipMethodTypeChange : function(oEvent){
             var selectedKey = oEvent.getSource().getSelectedKey();
-            oController.onShopNowShipMethodAfterChange(selectedKey);
+            oController.onShopNowShipMethodAfterChange(selectedKey, "");
         },
 
-        onShopNowShipMethodAfterChange:function(selectedKey){
-            var eshipjetModel =  this.getOwnerComponent().getModel("eshipjetModel");
-            var carriersCatalogData = eshipjetModel.getProperty("/carriersCatalogData");
-            var carriersList = eshipjetModel.getProperty("/carriersList");
+        onShopNowShipMethodAfterChange:function(selectedKey, ErpServId){
+            var oController = this;
+            var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+            var carrierNamesDropDownData = eshipjetModel.getProperty("/carrierNamesDropDownData");
+            for(var i=0; i<carrierNamesDropDownData.length; i++){
+                if(carrierNamesDropDownData[i].CarrierCode === selectedKey){
+                    eshipjetModel.setProperty("/selectedCarrierAccountsData", carrierNamesDropDownData[i]);
+                    eshipjetModel.setProperty("/accountNumber", carrierNamesDropDownData[i].AcntNmbr);
+                }
+            };
+            
+            var oMainModel = oController.getOwnerComponent().getModel("CARRIERS_SRV");
+            var ShippingPoint = eshipjetModel.getProperty("/commonValues/plant");
+            oMainModel.read("/carrier_srvSet", {
+                success: function (oData, response) {
+                    const aFiltered = (oData.results || []).filter(item =>
+                        item.ServLoc === ShippingPoint &&
+                        item.CarrierCode === selectedKey
+                    );
+                    eshipjetModel.setProperty("/carrierServicesDropDownData", aFiltered);
+                    eshipjetModel.setProperty("/commonValues/ShipNowShipsrvNameSelectedKey", ErpServId);
+                },
+                error: function (oError) {
+                    console.error("❌ Error loading carrier catalog:", oError);
+
+                    var sErrorMsg = "Failed to load carrier catalog";
+                    if (oError.responseText) {
+                        try {
+                            var oErrorResponse = JSON.parse(oError.responseText);
+                            sErrorMsg = oErrorResponse.error.message.value || sErrorMsg;
+                        } catch (e) {
+                            console.error("Could not parse error response");
+                        }
+                    }
+                    sap.m.MessageToast.show(sErrorMsg);
+                }
+            });
             var ShipNowShipMethodSelectedKey =  eshipjetModel.getProperty("/commonValues/ShipNowShipMethodSelectedKey");
 
-            var tempCarrierServicesList = [];
-            for (var i = 0; i < carriersCatalogData.length; i++) {
-                if (carriersCatalogData[i].CarrierCode.toUpperCase() === selectedKey.toUpperCase()) {
-                    eshipjetModel.setProperty("/selectedCarrier", carriersCatalogData[i]);
-                    tempCarrierServicesList.push(carriersCatalogData[i]);
-                }
-            };
-            for (var i = 0; i < carriersList.length; i++) {
-                if (carriersList[i].CarrierCode.toUpperCase() === selectedKey.toUpperCase()) {
-                    eshipjetModel.setProperty("/selectedCarrierServices", carriersList[i]);
-                    eshipjetModel.setProperty("/accountNumber", carriersList[i].AcntNmbr);
-                    // tempCarrierServicesList.push(carriersCatalogData[i]);
-                }
-            };
-            eshipjetModel.setProperty("/carrierServicesList", tempCarrierServicesList);
-            eshipjetModel.setProperty("/commonValues/ShipNowShipsrvNameSelectedKey", "");
+
+            // var eshipjetModel =  this.getOwnerComponent().getModel("eshipjetModel");
+            // var carriersCatalogData = eshipjetModel.getProperty("/carriersCatalogData");
+            // var carriersList = eshipjetModel.getProperty("/carrierNamesDropDownData");
+            // var tempCarrierServicesList = [];
+            // // for (var i = 0; i < carriersCatalogData.length; i++) {
+            // //     if (carriersCatalogData[i].CarrierCode.toUpperCase() === selectedKey.toUpperCase()) {
+            // //         eshipjetModel.setProperty("/selectedCarrier", carriersCatalogData[i]);
+            // //         tempCarrierServicesList.push(carriersCatalogData[i]);
+            // //     }
+            // // };
+            // for (var i = 0; i < carriersList.length; i++) {
+            //     if (carriersList[i].CarrierCode.toUpperCase() === selectedKey.toUpperCase()) {
+            //         eshipjetModel.setProperty("/selectedCarrierServices", carriersList[i]);
+            //         eshipjetModel.setProperty("/accountNumber", carriersList[i].AcntNmbr);
+            //         // tempCarrierServicesList.push(carriersCatalogData[i]);
+            //     }
+            // };
+            // eshipjetModel.setProperty("/carrierServicesList", tempCarrierServicesList);
+            // eshipjetModel.setProperty("/commonValues/ShipNowShipsrvNameSelectedKey", "");
+
+
 
             // for(var i=0; i<carrierconfiguration.length; i++){
             //     if(carrierconfiguration[i].CarrierName === selectedKey){
@@ -21382,8 +21443,9 @@ sap.ui.define([
                 var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData");
 
                 eshipjetModel.setProperty("/commonValues/plant", GetDeliveryData.ShippingPoint);
-                
 
+                oController.onGetCarrierNamesDataForDropDown(GetDeliveryData.to_Carrier.Supplier);
+                
                 // Store shipping type (like "UG", "FA", etc.)
                 oController.ShippingType = GetDeliveryData.ShippingType;
 
@@ -21432,11 +21494,8 @@ sap.ui.define([
 
                 eshipjetModel.setProperty("/BusinessPartners", BusinessPartners);
 
-                // 🧭 Set the selected carrier (e.g., "UPS" / "FEDEX")
-                eshipjetModel.setProperty("/commonValues/ShipNowShipMethodSelectedKey", GetDeliveryData.to_Carrier.Supplier);
-                oController.onShopNowShipMethodAfterChange(GetDeliveryData.to_Carrier.Supplier);
-
-                console.log("✅ Delivery Data Fetched Successfully", oData);
+                // oController.onShopNowShipMethodAfterChange(GetDeliveryData.to_Carrier.Supplier);
+                oController.onGetCarrierServicesDataForDropDown(GetDeliveryData.to_Carrier.Supplier, GetDeliveryData.ShippingType);
 
                 // 🧾 Load HU data
                 oController.readHUData();
@@ -21666,6 +21725,79 @@ sap.ui.define([
         },
 
 
+        onGetCarrierNamesDataForDropDown: function (carrierName) {
+            var oController = this;
+            var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+            var ShippingPoint = eshipjetModel.getProperty("/commonValues/plant");
+            var oMainModel = oController.getOwnerComponent().getModel("CARRIERS_SRV");
+            
+            oMainModel.read("/carrierSet", {
+                success: function (oData, response) {
+                    const aFiltered = (oData.results || []).filter(item =>
+                        item.LocationId === ShippingPoint
+                    );
+                    for(var i=0; i<aFiltered.length; i++){
+                        if(aFiltered[i].CarrierCode === carrierName){
+                            eshipjetModel.setProperty("/selectedCarrierAccountsData", aFiltered[i]);
+                            eshipjetModel.setProperty("/accountNumber", aFiltered[i].AcntNmbr);
+                        }
+                    };
+                    eshipjetModel.setProperty("/carrierNamesDropDownData", aFiltered);
+                    eshipjetModel.setProperty("/commonValues/ShipNowShipMethodSelectedKey", carrierName);
+                },
+                error: function (oError) {
+                    console.error("❌ Error loading carrier catalog:", oError);
+                    var sErrorMsg = "Failed to load carrier catalog";
+                    if (oError.responseText) {
+                        try {
+                            var oErrorResponse = JSON.parse(oError.responseText);
+                            sErrorMsg = oErrorResponse.error.message.value || sErrorMsg;
+                        } catch (e) {
+                            console.error("Could not parse error response");
+                        }
+                    }
+                    sap.m.MessageToast.show(sErrorMsg);
+                }
+            });
+        },
+
+        onGetCarrierServicesDataForDropDown: function (carrierName, ShippingType) {
+            var oController = this;
+            var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+            var oMainModel = oController.getOwnerComponent().getModel("CARRIERS_SRV");
+            var ShippingPoint = eshipjetModel.getProperty("/commonValues/plant");
+            oMainModel.read("/carrier_srvSet", {
+                success: function (oData, response) {
+                    const aFiltered = (oData.results || []).filter(item =>
+                        item.ServLoc === ShippingPoint &&
+                        item.CarrierCode === carrierName
+                    );
+                    
+                    for(var i=0; i<aFiltered.length; i++){
+                        if(aFiltered[i].ErpServId === ShippingType){
+                            eshipjetModel.setProperty("/selectedServiceNamesData", aFiltered[i]);
+                        }
+                    };
+                    eshipjetModel.setProperty("/carrierServicesDropDownData", aFiltered);
+                    eshipjetModel.setProperty("/commonValues/ShipNowShipsrvNameSelectedKey", ShippingType);
+                },
+                error: function (oError) {
+                    console.error("❌ Error loading carrier catalog:", oError);
+
+                    var sErrorMsg = "Failed to load carrier catalog";
+                    if (oError.responseText) {
+                        try {
+                            var oErrorResponse = JSON.parse(oError.responseText);
+                            sErrorMsg = oErrorResponse.error.message.value || sErrorMsg;
+                        } catch (e) {
+                            console.error("Could not parse error response");
+                        }
+                    }
+                    sap.m.MessageToast.show(sErrorMsg);
+                }
+            });
+        },
+
         
      onGetCarrierCatalogData: function () {
         var oController = this;
@@ -21726,31 +21858,31 @@ sap.ui.define([
     },
 
     _mergeCarrierCatalogAndAccounts: function () {
-    var eshipjetModel = this.getOwnerComponent().getModel("eshipjetModel");
-    var aCatalog = eshipjetModel.getProperty("/uniqueCarriersCatalogData") || [];
-    var aAccounts = eshipjetModel.getProperty("/uniqueCarriersAcccountsData") || [];
+        var eshipjetModel = this.getOwnerComponent().getModel("eshipjetModel");
+        var aCatalog = eshipjetModel.getProperty("/uniqueCarriersCatalogData") || [];
+        var aAccounts = eshipjetModel.getProperty("/uniqueCarriersAcccountsData") || [];
 
-    // if either list empty, skip
-    if (!aCatalog.length || !aAccounts.length) return;
+        // if either list empty, skip
+        if (!aCatalog.length || !aAccounts.length) return;
 
-    // Merge CarrierType and ConnectionType
-    aCatalog.forEach(function (catalogItem) {
-        var match = aAccounts.find(function (acc) {
-            return acc.CarrierCode === catalogItem.CarrierCode &&
-                   acc.LocationId === catalogItem.ServLoc;
+        // Merge CarrierType and ConnectionType
+        aCatalog.forEach(function (catalogItem) {
+            var match = aAccounts.find(function (acc) {
+                return acc.CarrierCode === catalogItem.CarrierCode &&
+                    acc.LocationId === catalogItem.ServLoc;
+            });
+
+            if (match) {
+                catalogItem.CarrierType = match.CarrierType || "";
+                catalogItem.ConnectionType = match.ConnectionType || "";
+            } else {
+                catalogItem.CarrierType = catalogItem.CarrierType || "";
+                catalogItem.ConnectionType = catalogItem.ConnectionType || "";
+            }
         });
 
-        if (match) {
-            catalogItem.CarrierType = match.CarrierType || "";
-            catalogItem.ConnectionType = match.ConnectionType || "";
-        } else {
-            catalogItem.CarrierType = catalogItem.CarrierType || "";
-            catalogItem.ConnectionType = catalogItem.ConnectionType || "";
-        }
-    });
-
-    eshipjetModel.setProperty("/uniqueCarriersCatalogData", aCatalog);
-},
+        eshipjetModel.setProperty("/uniqueCarriersCatalogData", aCatalog);
+    },
 
 
  AddCarrierCatalogSaveDialog: function () {
