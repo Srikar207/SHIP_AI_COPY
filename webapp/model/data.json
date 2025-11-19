@@ -42,6 +42,7 @@
         "shipNowVoidSelectShipNow": true,
         "showShipType": false,
         "ShippingPoint": false,
+        "showPlant": true,
         "plant": ""
     },
     "hideTrackPackDetails": true,
