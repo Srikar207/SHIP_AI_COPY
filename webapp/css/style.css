@@ -2924,3 +2924,107 @@ html.sap-desktop .sapContrast .sapMIBar.sapMFooter-CTX, html.sap-desktop .sapCon
     font-weight: bold;
 }
 
+
+.pgi-Failed-style {
+  color: rgb(240, 60, 10);
+  font-size: 1.5rem;
+  font-weight: bold !important;
+}
+ 
+.pgi-Failed-style .sapUiIcon {
+  font-size: 1.5rem;
+  color: rgb(240, 60, 10);
+}
+ 
+
+.pgi-style {
+  color: rgb(11, 173, 11);
+  font-size: 1.5rem;
+  font-weight: bold !important;
+}
+ 
+.pgi-style .sapUiIcon {
+  font-size: 1.5rem;
+  color: rgb(11, 173, 11);
+}
+
+
+.wrapTable {
+    height: calc(100vh - 150px); /* adjust 150px based on header size */
+    display: flex;
+}
+
+#idOrdersTable {
+    flex: 1;                /* expands the table */
+    height: 100% !important;
+}
+
+#idOrdersTable .sapMListTblRow {
+    height: 3rem;           /* optional: increase row height */
+}
+
+
+/* Footer background, height, alignment */
+.customDialogFooter {
+    padding: 0.75rem 1rem;
+    background-color: #f7f7f7 !important;   /* Light-grey Fiori style */
+    border-top: 1px solid #d9d9d9;
+}
+
+/* Buttons inside the footer */
+.customDialogFooter .sapMBtn {
+    min-width: 6rem;       /* Make both buttons equal width */
+    margin: 0 0.5rem;      /* Space between buttons */
+}
+
+/* Emphasized button style customization */
+.customDialogFooter .sapMBtnEmphasized {
+    background-color: #0a6ed1 !important;
+    border-color: #0a6ed1 !important;
+    color: white !important;
+}
+
+/* Adjust footer toolbar spacer height */
+.customDialogFooter .sapMTBSpacer {
+    flex-grow: 1;
+}
+
+
+.pickStatusNotCompleted{
+    width: 55px !important;
+    color: #fff !important;
+    background-color: coral !important;
+    padding: 10px 24px !important;
+    margin-left: 0px;
+    margin-top: -6px !important;
+    border-radius: 6px;
+    font-weight: 700;
+    box-shadow: 2px 2px 8px #0003;
+    height: 37px;
+}
+ 
+.pickStatusCompleted{
+    width: 55px !important;
+    color: #fff !important;
+    background-color: rgb(0, 200, 47) !important;
+    padding: 10px 24px !important;
+    margin-left: 0px;
+    margin-top: -6px !important;
+    border-radius: 6px;
+    font-weight: 700;
+    box-shadow: 2px 2px 8px #0003;
+    height: 37px;
+}
+
+.pgiTitle {
+    font-size: 1.5rem !important;
+    font-weight: lighter !important;
+}
+ 
+.pgiErrorText {
+    font-size: 1rem !important;
+}
+ 
+.pgiToolbar {
+    background-color: #eeeeee;
+}

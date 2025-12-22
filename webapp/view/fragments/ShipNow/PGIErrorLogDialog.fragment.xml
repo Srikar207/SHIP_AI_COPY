@@ -1,0 +1,33 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Dialog
+        id="pgiErrorDialog"
+        class="sapUiSmallMargin"
+        showHeader="false"
+        contentWidth="30%"
+        contentHeight="30%"
+        verticalScrolling="false"
+        horizontalScrolling="false">
+
+        <Toolbar class="pgiToolbar" >
+            <Title text="PGI Error Details" class="sapUiSmallMarginBegin pgiTitle" />
+            <ToolbarSpacer />
+            <Button icon="sap-icon://decline" press="onClosePGIErrorDialog" class="shipNowCloseBtnStyle" type="Transparent" />
+        </Toolbar>
+
+        <content>
+            <Text text="{eshipjetModel>/commonValues/sapDeliveryNumber} - {eshipjetModel>/MESSAGE_TEXT}, PGI Not Completed!" class="sapUiSmallMargin pgiErrorText" ></Text>
+        </content>
+
+        <footer>
+            <Toolbar height="4rem" >
+                <OverflowToolbar class="sapMPopoverFooter1">
+                    <Button text="Print" press="onClosePGIErrorLogDialog" class="Ship-Now-toolbar1__button_green removeBtnOutline saveBtn" type="Ghost" />
+                    <ToolbarSpacer ></ToolbarSpacer>
+                        <Button text="Close" press=".onClosePGIErrorDialog" class="Ship-Now-toolbar1__button_red removeBtnOutline clearBtn sapUiSmallMarginEnd" type="Ghost" />
+                </OverflowToolbar>
+            </Toolbar>
+        </footer>
+    </Dialog>
+
+</core:FragmentDefinition>

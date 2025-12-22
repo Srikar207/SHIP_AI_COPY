@@ -85,7 +85,7 @@
                                                     <VBox >
 														<Label text="Status" />
 														<Switch 
-                                                            state="{= ${eshipjetModel>IS_ACTIVE} === true || ${eshipjetModel>IS_ACTIVE} === 'X' || ${eshipjetModel>IS_ACTIVE} === '1' }"
+                                                            state="{eshipjetModel>IS_ACTIVE}"
                                                             class="greenSwitch btnInnerFocus" 
                                                             change="onStatusChange" />
 

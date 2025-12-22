@@ -3322,6 +3322,107 @@ body.dark-theme .ReversePGIBtnStyle span {
   outline: none !important;
 }
 
+
+.voidIconBtnStyle1 {
+  height: 1.5rem !important;
+  min-height: 1.5rem !important;
+  background-color: #ff0101 !important;
+  border: 1px solid #ff0101 !important; /* SAP blue */
+  color: #ffffff !important;
+  border-radius: 6px;
+  padding: 0 1rem !important;
+}
+
+/* Inner button */
+.voidIconBtnStyle1 .sapMBtnInner {
+  height: 100% !important;
+  background: transparent !important;
+  border: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit !important; /* ensures it follows parent */
+}
+
+/* ✅ Text span fix */
+.voidIconBtnStyle1 .sapMBtnContent {
+  color: inherit !important;
+  font-weight: 500; /* optional: make text a bit bolder */
+}
+
+/* Icon inherits color */
+.voidIconBtnStyle1 .sapUiIcon {
+  color: inherit !important;
+}
+
+/* Hover */
+.voidIconBtnStyle1:hover {
+  background-color: #ffffff !important;
+  color: #ff0101 !important;
+  border-color: #ff0101 !important;
+}
+
+.voidIconBtnStyle1:hover .sapMBtnContent,
+.voidIconBtnStyle1:hover .sapUiIcon {
+  color: #ff0101 !important;
+}
+
+.voidIconBtnStyle1:focus .sapMBtnInner {
+  outline: none !important;
+}
+
+
+
+.voidIconBtnStyle2 {
+  height: 1.5rem !important;
+  min-height: 1.5rem !important;
+  background-color: #45e933 !important;
+  border: 1px solid #ff0101 !important; /* SAP blue */
+  color: #ffffff !important;
+  border-radius: 6px;
+  padding: 0 1rem !important;
+}
+
+/* Inner button */
+.voidIconBtnStyle2 .sapMBtnInner {
+  height: 100% !important;
+  background: transparent !important;
+  border: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit !important; /* ensures it follows parent */
+}
+
+/* ✅ Text span fix */
+.voidIconBtnStyle2 .sapMBtnContent {
+  color: inherit !important;
+  font-weight: 500; /* optional: make text a bit bolder */
+}
+
+/* Icon inherits color */
+.voidIconBtnStyle2 .sapUiIcon {
+  color: inherit !important;
+}
+
+/* Hover */
+.voidIconBtnStyle2:hover {
+  background-color: #ffffff !important;
+  color: #22f248 !important;
+  border-color: #3dec5d !important;
+}
+
+.voidIconBtnStyle2:hover .sapMBtnContent,
+.voidIconBtnStyle2:hover .sapUiIcon {
+  color: #65f155 !important;
+}
+
+.voidIconBtnStyle2:focus .sapMBtnInner {
+  outline: none !important;
+}
+
+
+
 .shipNowBtnStyle {
   height: 2.5rem !important;
   min-height: 2.5rem !important;

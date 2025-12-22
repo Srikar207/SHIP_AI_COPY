@@ -108,7 +108,7 @@
 						<ui:Table
 							id="idOrdersTable"
 							rows="{eshipjetModel>/allOrders}"
-							class="sapUiSmallMarginBegin sapUiSmallMarginEnd rowRightLine ordersTableRightBorder"
+							class="sapUiSmallMarginBegin sapUiSmallMarginEnd rowRightLine ordersTableRightBorder  wrapTable "
 							selectionMode="None"
 							visibleRowCount="14" >
 										<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '5rem' : 'auto' }" sortProperty="Plant" class="whiteBackground" visible="{eshipjetModel>/OrderTableData/OrderColumns/0/visible}">
@@ -152,14 +152,14 @@
 								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '7rem' : 'auto' }" sortProperty="CarrierCode" visible="{eshipjetModel>/OrderTableData/OrderColumns/5/visible}">
 									<Label text="Ship Type" />
 									<ui:template>
-										<Text text="{eshipjetModel>Shipmentid}" wrapping="false" class="ordersSmallText" />
+										<Text text="{eshipjetModel>CarrierDesc}" wrapping="false" class="ordersSmallText" />
 									</ui:template>
 								</ui:Column>
 
 								<ui:Column width="{= ${eshipjetModel>/orderColSelectedCount} >= 15 ? '7rem' : 'auto' }" sortProperty="CarrierDesc" visible="{eshipjetModel>/OrderTableData/OrderColumns/6/visible}">
 									<Label text="Service Name" />
 									<ui:template>
-										<Text text="{eshipjetModel>CarrierDesc}" wrapping="false" class="ordersSmallText" />
+										<Text text="{eshipjetModel>Shipmentid}" wrapping="false" class="ordersSmallText" />
 									</ui:template>
 								</ui:Column>
 

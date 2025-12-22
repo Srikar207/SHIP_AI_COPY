@@ -3501,8 +3501,8 @@
                 "shipToState": "TG",
                 "shipToCountry": "IN",
                 "shipToZipcode": "500081",
-                "shipToPhone": "+91 915 492 735",
-                "shipToEmail": "info@eshipjet.ai",
+                "shipToPhone": "info+91 915 492 735",
+                "shipToEmail": "@eshipjet.ai",
                 "requesterName": "info@eshipjet.ai",
                 "connectedTo": "Ship Request / Label",
                 "orderType": "Delivery Number"

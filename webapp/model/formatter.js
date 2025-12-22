@@ -128,6 +128,44 @@ sap.ui.define([
 			return "";
 		},
 
+         shippingChargesSerialNo: function (oContext) {
+            if (!oContext) return "";
+            const table = this.byId("idShippingCharges");
+            const binding = table.getBinding("rows");
+            const contexts = binding.getContexts();
+            const index = contexts.findIndex(ctx =>
+                ctx.getObject().description === oContext
+            );
+            return (index + 1);
+        },
+          formatRowNo: function (huId) {
+            if (!huId) return "";
+
+            const table = this.byId("idShipNowHandlingUnitTable");
+            const binding = table.getBinding("rows");
+
+            // get all visible row contexts
+            const contexts = binding.getContexts();
+
+            // find the index of the row by HU ID
+            const index = contexts.findIndex(ctx =>
+                ctx.getObject().HandlingUnitExternalId === huId
+            );
+
+            return (index + 1) * 10;
+        },
+
+          itemNumber: function (oContext) {
+            if (!oContext) return "";
+            const table = this.byId("HandlingUnitTableId");
+            const binding = table.getBinding("items");
+            const contexts = binding.getContexts();
+            const index = contexts.findIndex(ctx =>
+                ctx.getObject().Material === oContext
+            );
+            return (index + 1);
+        },
+
         formatShipmentType:function(shipType){
             if(shipType === "SHIP"){
                 return "Shipped";

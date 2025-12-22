@@ -57,7 +57,7 @@
         "type": "OData",
         "settings": {
           "annotations": [],
-          "localUri": "localService/sap/metadata.xml",
+          "localUri": "localService/sapS4cloud/metadata.xml",
           "odataVersion": "2.0"
         }
       },
@@ -76,6 +76,33 @@
         "settings": {
           "annotations": [],
           "localUri": "localService/CARRIERS_SRV/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "MF_LOGS_SRV": {
+        "uri": "/sap/opu/odata/ESHIPJET/MF_LOGS_SRV/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/MF_LOGS_SRV/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ESHIPJET_PLANT_CDS_VAN": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='%2FESHIPJET%2FPLANT_CDS_VAN',Version='0001')/$value/",
+        "type": "ODataAnnotation",
+        "settings": {
+          "localUri": "localService/PLANT_CDS/ESHIPJET_PLANT_CDS_VAN.xml"
+        }
+      },
+      "PLANT_CDS": {
+        "uri": "/sap/opu/odata/ESHIPJET/PLANT_CDS/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "ESHIPJET_PLANT_CDS_VAN"
+          ],
+          "localUri": "localService/PLANT_CDS/metadata.xml",
           "odataVersion": "2.0"
         }
       }
@@ -148,7 +175,7 @@
         "preload": true,
         "settings": {}
       },
-      "sapS4HanaCloudModel": {
+      "OutBoundDeliveryModel": {
         "dataSource": "sapS4cloud",
         "preload": true,
         "settings": {}
@@ -165,6 +192,16 @@
       },
       "MANIFEST_SRV": {
         "dataSource": "MANIFEST_SRV",
+        "preload": true,
+        "settings": {}
+      },
+      "MF_LOGS_SRV": {
+        "dataSource": "MF_LOGS_SRV",
+        "preload": true,
+        "settings": {}
+      },
+      "PLANT_CDS": {
+        "dataSource": "PLANT_CDS",
         "preload": true,
         "settings": {}
       }

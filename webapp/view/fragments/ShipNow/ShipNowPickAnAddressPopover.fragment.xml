@@ -3,7 +3,7 @@
     xmlns:f="sap.ui.layout.form">
 
     <Dialog id="_IDGenAlcoholEditDialogshipnow"
-            title="Alcohol"
+            title="Pick an Address"
             contentWidth="60vh"
             contentHeight="95%"
             verticalScrolling="false"
