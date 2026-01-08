@@ -3756,4 +3756,16 @@ body.dark-theme .ReversePGIBtnStyle span {
     border-color: #e60000 !important;
 }
 
+.greenColorForIcon {
+	color: green !important;
+	font-weight: bold;
+}
+
+
+.greenColorForIcon .sapUiIcon::before {
+  content: attr(data-sap-ui-icon-content);
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+  color: rgb(87, 145, 0) !important;
+}
 

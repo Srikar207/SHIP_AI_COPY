@@ -17,6 +17,31 @@ sap.ui.define([
             return oDateFormat.format(new Date(sDate));
         },
 
+        serialProfileToBoolean: function (sSerialProfile) {
+    return !!sSerialProfile; // "" → false, any value → true
+},
+
+
+        formatDate1: function (sDate) {
+            if (!sDate) {
+                return "";
+            }
+
+            // Handle /Date(1766750442792)/ format
+            var iTimeStamp = parseInt(sDate.replace(/[^0-9]/g, ""), 10);
+            if (isNaN(iTimeStamp)) {
+                return "";
+            }
+
+            var oDate = new Date(iTimeStamp);
+            var oDateFormat = sap.ui.core.format.DateFormat.getDateInstance({
+                pattern: "MM/dd/yyyy"
+            });
+
+            return oDateFormat.format(oDate);
+        },
+
+
         weightState(fValue) {
 			try {
 				fValue = parseFloat(fValue);

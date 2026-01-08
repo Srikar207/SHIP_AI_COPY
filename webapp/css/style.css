@@ -21,6 +21,11 @@
     padding-top: 7px !important;
 }
 
+
+.toolbarWrapper {
+    position: relative;
+}
+
   
   .userMessage {
     background-color: #007bff; /* Blue for user messages */
@@ -1001,6 +1006,63 @@ button {
     color: #fff !important;
   }
 }
+
+
+.serialProgressBar {
+    height: 2.5rem !important;   /* Increase bar height */
+}
+
+.serialProgressBar .sapMPIBar {
+    height: 100% !important;
+}
+
+.serialProgressBar .sapMPIText {
+    line-height: 2.5rem !important; /* Center text vertically */
+    font-size: 1rem;
+}
+
+
+.create-ship-req-footer1 {
+
+  background-color: #dd5c0c !important;
+  color: #1b1717 !important;
+  border: 1px solid #ce5221 !important;
+  /* transform: scale(1.05);
+  transition: all 0.3s ease; */
+  justify-content: space-between;
+  border-radius: 1px 1px 1px 1px !important;
+  height: 33px !important;
+  padding: 8px;
+  text-align: center;
+  bdi {
+    color: #fff;
+  }
+
+  /* background-color: #4ea732;
+  border: 1px solid #4ea732;
+  font-size: 16px !important;
+  margin-top: 0 7px 0 0 !important;
+  border-radius: 2px;
+  padding: 4px 10px;
+  color: white !important;
+  span:before {
+    display: none !important;
+  }
+  bdi {
+    color: #fff;
+  } */
+}
+.create-ship-req-footer1:hover{ 
+  background-color: #e1400a;
+  border: 1px solid #d71a37;
+  color: #fff !important;
+  bdi {
+    color: #fff !important;
+  }
+}
+
+
+
 /* Custom SAPUI5 button style */
 .packButton {
   background-color: transparent !important;
@@ -3027,4 +3089,184 @@ html.sap-desktop .sapContrast .sapMIBar.sapMFooter-CTX, html.sap-desktop .sapCon
  
 .pgiToolbar {
     background-color: #eeeeee;
+}
+
+
+/* Remove UI5 focus outline for Ghost buttons */
+.noOutlineBtn.sapMFocusable:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Remove the blue rectangle (focus pseudo element) */
+.noOutlineBtn.sapMFocusable:focus::after {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    content: "" !important;
+}
+
+
+.pgiTitle {
+    font-size: 1.5rem !important;
+    font-weight: lighter !important;
+}
+
+.pgiErrorText {
+    font-size: 1rem !important;
+}
+
+.pgiToolbar {
+    background-color: #eeeeee;
+}
+
+
+
+.toolbarWrapper {
+    position: relative;
+}
+
+/* Smooth collapse */
+.expandableToolbar {
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.billed-request-button {
+  span{
+    background-color: rgb(151, 173, 235) !important;
+    height: 20px !important;
+    border-radius: 6px !important;
+    &:hover { 
+      border-bottom: 10px solid #38608f !important;
+    }
+  }
+}
+
+.pickedUp-request-button {
+  span{
+    background-color: rgb(218, 135, 182) !important;
+    height: 20px !important;
+    border-radius: 6px !important;
+    &:hover { 
+      border-bottom: 10px solid #ab47b3 !important;
+    }
+  }
+}
+
+.delayed-request-button {
+  span{
+    background-color: rgb(255, 107, 107) !important;
+    height: 20px !important;
+    border-radius: 6px !important;
+    &:hover { 
+      border-bottom: 10px solid #f24444 !important;
+    }
+  }
+}
+
+.inTransist-request-button {
+  span{
+    background-color: rgb(237, 221, 102) !important;
+    height: 20px !important;
+    border-radius: 6px !important;
+    &:hover { 
+      border-bottom: 10px solid #cacf3a !important;
+    }
+  }
+}
+
+.delivered-request-button {
+  span{
+    background-color: rgb(62, 131, 38) !important;
+    height: 20px !important;
+    border-radius: 6px !important;
+    &:hover { 
+      border-bottom: 10px solid #2b6e2a !important;
+    }
+  }
+}
+
+.cancelled-request-button {
+  span{
+    background-color: rgb(178, 188, 190) !important;
+    height: 20px !important;
+    border-radius: 6px !important;
+    &:hover { 
+      border-bottom: 10px solid #989987 !important;
+    }
+  }
+}
+
+
+/* Arrow button */
+.expandCollapseArrow {
+    position: absolute;
+    left: 50%;
+    bottom: -16px;
+    /* transform: translateX(-50%); */
+    /* border-radius: 50%; */
+    /* background-color: #ffeb00; */
+    /* box-shadow: 0 2px 6px rgba(0,0,0,0.25); */
+    /* width: 36px;
+    height: 36px; */
+}
+
+/* Remove focus outline */
+.expandCollapseArrow:focus {
+    outline: none;
+}
+
+
+
+
+
+
+
+.shippingDocDialog .sapMDialogSection {
+    padding: 0;
+}
+
+.shippingDocHeader {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.shippingDocDialog iframe {
+    border: none;
+}
+
+.shippingDocDialog .sapMCarousel {
+    background: #ffffff;
+}
+
+.shippingDocDialog .sapMDialogFooter {
+    border-top: 1px solid #e5e5e5;
+}
+
+#idOrdersTable .sapUiTableCell {
+  display: flex;
+  align-items: center;
+}
+
+#idOrdersTable .sapUiTableCellInner {
+  display: flex;
+  align-items: center;
+  color: #6a6d70;     /* SAP standard gray */
+  font-size: 0.75rem; /* small, readable */
+}
+
+.serialProgressBar .sapMPIBar {
+    background-color: #2ecc71 !important; /* green */
+    margin-left: 318px;
+}
+
+.serialProgressBar .sapMPIText {
+    font-weight: bold;
+}
+.serialgreen{
+  color: green;
+}
+.serialred{
+  color: red;
 }

@@ -105,6 +105,24 @@
           "localUri": "localService/PLANT_CDS/metadata.xml",
           "odataVersion": "2.0"
         }
+      },
+      "API_PRODUCT_ANNO_MDL": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='API_PRODUCT_ANNO_MDL',Version='0001')/$value/",
+        "type": "ODataAnnotation",
+        "settings": {
+          "localUri": "localService/API_PRODUCT_SRV/API_PRODUCT_ANNO_MDL.xml"
+        }
+      },
+      "API_PRODUCT_SRV": {
+        "uri": "/sap/opu/odata/sap/API_PRODUCT_SRV/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "API_PRODUCT_ANNO_MDL"
+          ],
+          "localUri": "localService/API_PRODUCT_SRV/metadata.xml",
+          "odataVersion": "2.0"
+        }
       }
     }
   },
@@ -202,6 +220,11 @@
       },
       "PLANT_CDS": {
         "dataSource": "PLANT_CDS",
+        "preload": true,
+        "settings": {}
+      },
+      "API_PRODUCT_SRV": {
+        "dataSource": "API_PRODUCT_SRV",
         "preload": true,
         "settings": {}
       }

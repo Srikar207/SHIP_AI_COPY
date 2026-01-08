@@ -71,7 +71,7 @@
                     <!-- Second Row: Service Name -->
                     <HBox class="customRow" width="100%">
                       <Label text="Service Name:" class="customLabel" width="15rem" />
-                      <Text text="{eshipjetModel>/TrackingNumberTableRows/ServiceName}" class="customTextField centerText" width="15rem" />
+                      <Text text="{eshipjetModel>/TrackingNumberTableRows/Shipmentid}" class="customTextField centerText" width="15rem" />
                     </HBox>
                     
                     <!-- Third Row: Delivered To -->
@@ -83,7 +83,7 @@
                     <!-- Fourth Row: Ship Date -->
                     <HBox class="customRow" width="100%" >
                       <Label text="Ship Date:" class="customLabel" width="15rem" />  
-                      <Text text="{path: 'eshipjetModel>/TrackingNumberTableRows/ShipDate', formatter: '.formatter.formatDate'}" class="customTextField centerText" width="15rem" />
+                      <Text text="{path: 'eshipjetModel>/TrackingNumberTableRows/ShipDate', formatter: '.formatter.formatDate1'}" class="customTextField centerText" width="15rem" />
                     </HBox>
                     
                     <!-- Fifth Row: Standard Transit -->

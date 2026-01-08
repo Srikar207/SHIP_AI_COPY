@@ -147,7 +147,7 @@
 														</layoutData>													
 													</ComboBox>
 													<Label text="Phone Number" />
-													<Input class="sapUiSmallMarginBottom create-ship-req_input" editable="false" value="{eshipjetModel>/ShipFromAddress/ShipFromCOUNTRY}" >
+													<Input class="sapUiSmallMarginBottom create-ship-req_input" editable="false" value="{eshipjetModel>/ShipFromAddress/ShipFromZIPCODE}" >
 														<layoutData>
 															<f:ColumnElementData cellsSmall="6" cellsLarge="6" />
 														</layoutData>
@@ -1033,7 +1033,7 @@
 										</HBox>
 										<ui:template>
 											<HBox justifyContent="Center" alignItems="Center">
-												<CheckBox selected="{eshipjetModel>isSerialSelected}" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" select="onCheckBoxSelect"/>
+												<CheckBox selected="{eshipjetModel>isSerialSelected}" enabled="false" select="onCheckBoxSelect"/>
 											</HBox>
 										</ui:template>
 									</ui:Column>
@@ -1114,7 +1114,7 @@
 
 								<HBox height="3rem" width="37%" class="whiteBackground sapUiTinyMarginEnd" alignItems="Center" justifyContent="SpaceBetween" >
 								   <FlexBox justifyContent="SpaceBetween" width="100%" >
-										<Button text="Pack" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="Ship-Now-toolbar1__button_Pack saveBtnPack sapUiSmallMarginBegin" type="Ghost" width="auto" press="onHUItemsCreatePress" ></Button>
+										<Button text="Pack" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="Ship-Now-toolbar1__button_Pack saveBtnPack sapUiSmallMarginBegin" type="Ghost" width="auto" press="onCreateHuItems" ></Button>
 										<Button text="Pack All" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="Ship-Now-toolbar1__button_PackAll saveBtnPackAll" type="Ghost" width="auto" press="onPackAllPress" ></Button>
 										<!-- <Button text="DG Pack" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="Ship-Now-toolbar1__button_DGPack sapUiTinyMarginEnd" type="Ghost" width="auto" ></Button>
 										<Button text="DG Pack All" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="Ship-Now-toolbar1__button_DGPackAll sapUiTinyMarginEnd" type="Ghost" width="auto" ></Button> -->
@@ -1229,7 +1229,7 @@
 									<Label text="Tracking / Pro#" />
 									<ui:template>
 										<!-- <Text text="{eshipjetModel>HandlingUnitPackingObjectKey}" wrapping="false" /> -->
-										<Link text="{eshipjetModel>/trackingArray/0/TrackingNumber}" press="onTrackingNumberPress" wrapping="false" />
+										<Link text="{eshipjetModel>TrackingNumber}" press="onTrackingNumberPress" wrapping="false" />
 									</ui:template>
 								</ui:Column>
 								<ui:Column width="10rem" visible="{eshipjetModel>/ShipNowHandlingUnitTableColumns/9/visible}" >
@@ -1238,7 +1238,7 @@
 										</HBox>
 									<ui:template>
 										<HBox justifyContent="Center" alignItems="Center">
-												<Button icon="sap-icon://tag" type="Transparent" press="onSerialNumPress" enabled="{= ${eshipjetModel>Hunumber} > 0 }" ></Button>
+												<Button icon="sap-icon://tag" type="Transparent" press="onSerialNumPress" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" ></Button>
 											</HBox>
 									</ui:template>
 								</ui:Column>
@@ -1249,7 +1249,7 @@
 									<ui:template>
 									<HBox justifyContent="Center" alignItems="Center">
 										 <core:Icon src="sap-icon://circle-task-2"    class="ordersSmallText"
-                color="{= ${eshipjetModel>HandlingUnitIsClosed} ? 'green' : 'grey' }"  enabled="{= ${eshipjetModel>Hunumber} > 0 }"/>
+                color="{= ${eshipjetModel>HandlingUnitIsClosed} ? 'green' : 'grey' }"  enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}"/>
 										 </HBox>
 									</ui:template>
 								</ui:Column>
@@ -1270,7 +1270,7 @@
 										</HBox>
 									<ui:template>
 										<HBox justifyContent="Center" alignItems="Center">
-												<Button icon="sap-icon://attachment" type="Transparent" press="HUDialogPress" enabled="{= ${eshipjetModel>Hunumber} > 0 }" ></Button>
+												<Button icon="sap-icon://attachment" type="Transparent" press="HUDialogPress" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" ></Button>
 											</HBox>
 									</ui:template>
 								</ui:Column>
@@ -1546,12 +1546,12 @@
 							<Text text="{eshipjetModel>description}"/>
 						</ui:template>
 					</ui:Column>
-					<ui:Column width="auto" >
+					<!-- <ui:Column width="auto" >
 						<Label text="SAP Freight Condition ID" />
 						<ui:template>
 							<Text text="" />
 						</ui:template>
-					</ui:Column>
+					</ui:Column> -->
 					<ui:Column width="auto" >
 						<Label text="Description" />
 						<ui:template>
@@ -1927,13 +1927,13 @@
 					<ui:Column width="auto" >
 						<Label text="Ship Type" />
 						<ui:template>
-							<Text text="{eshipjetModel>ServiceName}" />
+							<Text text="{eshipjetModel>Shipmenttype}" />
 						</ui:template>
 					</ui:Column>
 					<ui:Column width="auto" >
 						<Label text="Service ID" />
 						<ui:template>
-							<Text text="{eshipjetModel>ServiceName}" />
+							<Text text="{eshipjetModel>Shipmentid}" />
 						</ui:template>
 					</ui:Column>
 					<ui:Column width="auto" >

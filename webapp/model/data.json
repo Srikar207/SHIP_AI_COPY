@@ -45,6 +45,11 @@
         "showPlant": true,
         "plant": ""
     },
+
+     "isExpandOrdersToolBar": true,
+    "expandTableOn": true,
+    "expandHUTableOn": true,
+    
     "hideTrackPackDetails": true,
     "documentsLength": false,
     "shippingChargesLength": false,
