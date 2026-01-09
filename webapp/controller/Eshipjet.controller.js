@@ -23420,9 +23420,16 @@ packParcelProducts: function () {
 },
 
 
-  
+        onHUItemsCreatePress: function () {
+            var GetDeliveryData = eshipjetModel.setProperty("/GetDeliveryData");
+            if(GetDeliveryData.Warehouse === ""){
+                oController.onPackItemsWithEWM();
+            }else{
+                oController.onPackItemsWithOutEWM();
+            }
+        },
 
-        onCreateHuItems: function () {
+        onPackItemsWithEWM: function () {
             oController.onOpenBusyDialog();
             var oTable = this.byId("idShipNowPackTable");
             var aSelectedIndices = oTable.getSelectedIndices();
