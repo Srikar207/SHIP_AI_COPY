@@ -1114,7 +1114,7 @@
 
 								<HBox height="3rem" width="37%" class="whiteBackground sapUiTinyMarginEnd" alignItems="Center" justifyContent="SpaceBetween" >
 								   <FlexBox justifyContent="SpaceBetween" width="100%" >
-										<Button text="Pack" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="Ship-Now-toolbar1__button_Pack saveBtnPack sapUiSmallMarginBegin" type="Ghost" width="auto" press="onCreateHuItems" ></Button>
+										<Button text="Pack" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="Ship-Now-toolbar1__button_Pack saveBtnPack sapUiSmallMarginBegin" type="Ghost" width="auto" press="onHUItemsCreatePress" ></Button>
 										<Button text="Pack All" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="Ship-Now-toolbar1__button_PackAll saveBtnPackAll" type="Ghost" width="auto" press="onPackAllPress" ></Button>
 										<!-- <Button text="DG Pack" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="Ship-Now-toolbar1__button_DGPack sapUiTinyMarginEnd" type="Ghost" width="auto" ></Button>
 										<Button text="DG Pack All" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="Ship-Now-toolbar1__button_DGPackAll sapUiTinyMarginEnd" type="Ghost" width="auto" ></Button> -->
@@ -1188,10 +1188,14 @@
 									</HBox>
 									<ui:template>
 									<HBox justifyContent="End" alignItems="End">
-										<Text 
+										<!-- <Text 
 											text="{= parseInt(${eshipjetModel>HandlingUnitLength}) + ' X ' 
 													+ parseInt(${eshipjetModel>HandlingUnitWidth}) + ' X ' 
 													+ parseInt(${eshipjetModel>HandlingUnitHeight}) }" 
+											visible="{= ${eshipjetModel>HandlingUnitExternalId} > 0 }"
+											wrapping="false" /> -->
+										<Text 
+											text="10 X 12 X 12"
 											visible="{= ${eshipjetModel>HandlingUnitExternalId} > 0 }"
 											wrapping="false" />
 										</HBox>
