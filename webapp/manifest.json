@@ -123,6 +123,15 @@
           "localUri": "localService/API_PRODUCT_SRV/metadata.xml",
           "odataVersion": "2.0"
         }
+      },
+      "SHIP_READ_DATA_SRV": {
+        "uri": "/sap/opu/odata/ESHIPJET/SHIP_READ_DATA_SRV/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/SHIP_READ_DATA_SRV/metadata.xml",
+          "odataVersion": "2.0"
+        }
       }
     }
   },
@@ -225,6 +234,11 @@
       },
       "API_PRODUCT_SRV": {
         "dataSource": "API_PRODUCT_SRV",
+        "preload": true,
+        "settings": {}
+      },
+      "ShipReadDataSrvModel": {
+        "dataSource": "SHIP_READ_DATA_SRV",
         "preload": true,
         "settings": {}
       }

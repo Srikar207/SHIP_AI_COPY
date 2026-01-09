@@ -1,0 +1,866 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ESHIPJET.SHIP_READ_DATA_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="ManifestData" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Vbeln"/>
+                </Key>
+                <Property Name="label_encode" Type="Edm.String" Nullable="false" MaxLength="9000" sap:unicode="false" sap:label="label encode" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Accessorial" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="surcharge amount" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Accountnumber" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="false" sap:label="3rdPty AccountNo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Addcomments" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Comment" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Address1" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Address 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Address2" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Address 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Address3" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Address 3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Aesitn" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="ITN Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Appointment" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Appointment" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ArrivalNotification" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Arrival Notification" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Auart" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Sales Doc. Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Billoflading" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:label="Bill of lading" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Bsoflag" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Broker Select" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CancDt" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Receipt of Canc" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CancTim" Type="Edm.Time" Nullable="false" Precision="0" sap:unicode="false" sap:label="Prfrm.time btch rep." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CarrierCode" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Supplier" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CarrierDesc" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Carriertype" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Carrier Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Chargweight" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:label="Gross Weight" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="City" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="City" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Closeout" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label=" Closeout" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Codamount" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="3" sap:unicode="false" sap:label="COD Amount" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CodFlag" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="COD Flag" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Company" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Consolidation" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Consolidation" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Contact" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Name 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Container" Type="Edm.String" Nullable="false" MaxLength="17" sap:unicode="false" sap:label="Container Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Country" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Country/Reg." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Createddate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Created Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Crossdock" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Crossdock" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Crossdockloc" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Crossdock Location" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CrossdockRecby" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Cross Dock Received" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CrossdockRecdate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Cross Dock Received" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CrossdockRectime" Type="Edm.Time" Nullable="false" Precision="0" sap:unicode="false" sap:label="Cross Dock Received" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CrossdockShipby" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Cross Dock Shipped B" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CrossdockShipdate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Cross Dock Shipped D" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CrossdockShiptime" Type="Edm.Time" Nullable="false" Precision="0" sap:unicode="false" sap:label="Cross Dock Shipped T" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CrossdockStatus" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="false" sap:label="Cross Dock Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Customs" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="3" sap:unicode="false" sap:label="Customs Value" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DateAdded" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Ship Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ddo" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Direct Delivery Orde" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Delivery" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Delivery" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Deliverynno" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Delivery" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DeliveryStatus" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Consolidation Delivery Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dghazmat" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Dangerous Goods" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DgUrl" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="DG URL" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DimensionFactor" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Dimension Factor" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dimensions" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Dimensions" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Discountamt" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="3" sap:unicode="false" sap:label="Discounted Freight" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Documents" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Documents" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Door" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Yes/No (X/ )" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dryweight" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:label=" DryIce Weight" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dtaccountnumber" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="false" sap:label="Dutytax Account" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dutytaxpaytype" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="DutyTax Payment Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ecsid" Type="Edm.String" Nullable="false" MaxLength="16" sap:unicode="false" sap:label="ECS ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Edi997Status" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="EDI 997 Acknowledgement Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EdiControlNo" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="EDI Control NO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Emailaddress" Type="Edm.String" Nullable="false" MaxLength="241" sap:unicode="false" sap:label="E-Mail Address" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EnteredBy" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="User Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EodTimestamp" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="false" sap:label="Time Stamp." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EtaDate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Created On" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EtaTime" Type="Edm.Time" Nullable="false" Precision="0" sap:unicode="false" sap:label="Time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EuClearance" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="EU CLEARANCE" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ExpDelDate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Current Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Externaldoc" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="External Doc" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fedexonerate" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="FedEx One Rate" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Freightamt" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="3" sap:unicode="false" sap:label="Published Freight" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fromcity" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Shipper City" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FromCompany" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Shipper company" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FromContact" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Shipper Contact" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FromCountry" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Shipper Country" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FromPhone" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Shipper Phone" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FromPostalcode" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Shipper Postalcode" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FromRegion" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Shipper State" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FromStreet" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Shipper Address1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FromStreet2" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Shipper Address2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fuel" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="surcharge amount" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Gewei" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Unit of Weight" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="HandlingUnit" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Handling Unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Hold" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Hold at Location" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Insidedel" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Inside Delivery" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Insidepickup" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Inside Pickup" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Insurance" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="3" sap:unicode="false" sap:label="Insurance" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ioraddress1" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="IOR Address1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ioraddress2" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="IOR Address2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Iorcity" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="IOR City" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Iorcode" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="false" sap:label=" IPD IOR Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Iorcompany" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="IOR Company" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Iorcontact" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="IOR Contact" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Iorcountry" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="IOR Country" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Iorpartner" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="IOR Partner" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Iorphone" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="IOR Telephone" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Iorpostalcode" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="IOR Postalcode" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Iorregion" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="IOR State" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Isc" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="International Specia" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Knota" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Departure point" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Knotz" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Dest.point" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Kunag" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Sold-to Party" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Kunnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Ship-to Party" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Labelurl" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Label URL" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Leg" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Leg Indicator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Legno" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Leg Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Lfart" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Delivery Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Licence" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="LICENSE" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Lifnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Supplier" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Liftgate" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Lift Gate" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LimitedAccess" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Limited Access" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ltlboxcount" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="LTL Boxcount" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ltlclass" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="LTL Class" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ltlhutype" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="LTL Hu type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ltlnmfccode" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="LTL NMFCCODE" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ltlpacktype" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="LTL packing type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Mandt" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Client" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Manifestid" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Manifest ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Mastertracking" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Master Tracking" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Meabm" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="Multi" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="PW ECS : Multi-Leg I" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MultiLegno" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Leg Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MultiSeq" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Leg Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ocarrier" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Original Carrier" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Odo" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="EWM ODO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Orate" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Original Rate" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Packagetype" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Package Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PackageWeight" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:label="Gross Weight" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PackURL" Type="Edm.String" Nullable="false" MaxLength="110" sap:unicode="false" sap:label="PACKURL" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Pallets" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="No of Pallets" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Paperlessinv" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Paperless Invoice" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Paymentcode" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Payment Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Phone" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Telephone" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Pkgcount" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Package Count" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Shipping Point" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PodActivity" Type="Edm.String" Nullable="false" MaxLength="75" sap:unicode="false" sap:label="POD Activity" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PodCurrentdate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Current Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Podcurrentstatus" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Pod currentstatus" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PodCurrenttime" Type="Edm.Time" Nullable="false" Precision="0" sap:unicode="false" sap:label="Time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PodDate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="POD Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Podexpstatus" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Pod expstatus" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PodLocation" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="POD Location" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PodPickupdate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Current Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PodPickuptime" Type="Edm.Time" Nullable="false" Precision="0" sap:unicode="false" sap:label="Time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PodSignature" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="POD Signature" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Podstatus" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Pod status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PodTime" Type="Edm.Time" Nullable="false" Precision="0" sap:unicode="false" sap:label="POD Time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Posnr" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="Item" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Postalcode" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Postal Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Priorityalert" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Priority Alert" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PurchaseOrder" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Cust. Reference" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Reasonforexport" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Reason for Export" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RecAddress1" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="REC_Address1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RecAddress2" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="REC_Address2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RecAddress3" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="REC_Address3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RecCity" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="City" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RecCompany" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RecContact" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Name 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RecCountry" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Country/Reg." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RecPhone" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Telephone" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RecPostalcode" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Postal Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RecRegion" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Region" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Reference1" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Reference 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Reference2" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Reference 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Region" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Region" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Residentialdel" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Residential Delivery" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ReturnTrack" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Return Tracking No." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Returntype" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Returntype" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SalesOrder" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="SD Document" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Saleterms" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Sale terms" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Sammg" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Group" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Satpickup" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Saturday Pickup" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Saturdaydel" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Saturday Delivery" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Scac" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="SCAC Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Scandate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Current Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Scanflag" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Yes/No (X/ )" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Scantime" Type="Edm.Time" Nullable="false" Precision="0" sap:unicode="false" sap:label="Time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Seal" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="PW ECS : Seal No" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Sealnumber" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Seal Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SfOrderid" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Tracking Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Shipmentid" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Shipment ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Shipmenttype" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Shipment Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Shipperacct" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Shipper AccountNo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Shipprocess" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="R/2 table" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Signaturetype" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Signature Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Stagloc" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Staging Loc" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Stceg" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="VAT Reg. No." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tcode" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Transaction code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TimeAdded" Type="Edm.Time" Nullable="false" Precision="0" sap:unicode="false" sap:label="Time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Totalpkg" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Total Packages" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tpc" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Yes/No (X/ )" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TpCity1" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="ThirdParty City" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TpCompany" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Thirdparty Company" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TpContact" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="ThirdParty Contact" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TpCountry" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="ThirdParty Country" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TpPhone" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="ThirdParty Phone" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TpPostCode1" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="ThirdParty Postcode" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TpRegion" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="ThirdParty State" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TpStreet" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="ThirdParty Address1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TpStreet2" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="ThirdParty Address2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TrackingNumber" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Tracking Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Trailerno" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Trailer number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TransitDays" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Transit Days" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Truckno" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Truck no" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tu" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="EWM Transportation U" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UpsEod" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="UPS Eod" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Upsoffline" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="UPS Offline" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Uspstracking" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Usp Tracking" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vbeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Delivery" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Venum" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Internal HU no." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vhilm" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Packaging Materials" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vkorg" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Sales Org." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Volumequote" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Volumequote" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Waerk" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Doc. Currency" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="WecloseBy" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="User Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="WecloseDate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Current Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Wecloseout" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="WE CloseOut" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="WecloseTime" Type="Edm.Time" Nullable="false" Precision="0" sap:unicode="false" sap:label="Time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="WeconsolManfid" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:label="WE Consol Manifest I" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Wemanfid" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:label="WE Manifest ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Wemshipid" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="false" sap:label="WE Master Shipment I" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Weportcode" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="Port Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Werks" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Plant" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Weshipid" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="false" sap:label="WE Shipment ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BOLURL" Type="Edm.String" Nullable="false" MaxLength="200" sap:unicode="false" sap:label="BOLURL" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ManifestHeader" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Vbeln"/>
+                </Key>
+                <Property Name="Vbeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Delivery" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="OptLogsSet" Relationship="ESHIPJET.SHIP_READ_DATA_SRV.ManifestHeader_Logs" FromRole="FromRole_ManifestHeader_Logs" ToRole="ToRole_ManifestHeader_Logs"/>
+                <NavigationProperty Name="ToManifestData" Relationship="ESHIPJET.SHIP_READ_DATA_SRV.Manifest" FromRole="FromRole_Manifest" ToRole="ToRole_Manifest"/>
+            </EntityType>
+            <EntityType Name="ReversePGI" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Document"/>
+                </Key>
+                <Property Name="Document" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Document" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="ResponseDataSet" Relationship="ESHIPJET.SHIP_READ_DATA_SRV.ReversePGI_ResponseData" FromRole="FromRole_ReversePGI_ResponseData" ToRole="ToRole_ReversePGI_ResponseData"/>
+            </EntityType>
+            <EntityType Name="LTLItems" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Vbeln"/>
+                </Key>
+                <Property Name="Vbeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Sales Document" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Bstnk" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="PO Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Exidv" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Handling Unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Matnr" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Hutype" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:label="Hutype" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Huno" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Huno" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Packtype" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:label="Pack Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Packno" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Pack No" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Nmfccode" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="false" sap:label="NMFCCODE" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Weight" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="13" sap:unicode="false" sap:unit="Weightunit" sap:label="Gross Weight" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Volume" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:label="Volume" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dimensions" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Dimensions" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Hazmat" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="HAZMAT" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Additionalinfo" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Additionalinfo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Sel" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Single Character Indicator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Weightunit" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Weight unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="Freightclass" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Freightclass" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Venum" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Internal HU no." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Unvel" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Lower-level HU" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Velin" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Item type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Palletno" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Character Field Length = 10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="PackItems" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Vbeln"/>
+                </Key>
+                <Property Name="Mandt" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Client" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vbeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Delivery" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Item" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Item" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ScanFlag" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Single-Character Ind" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Packed" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Single-Character Ind" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Weight" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:unit="Weightunit" sap:label="Gross Weight" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Weightunit" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Weight unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="Length" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Length" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Width" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="R/2 table" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Height" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Height" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dimensionunit" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="CodAmount" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="COD Amount" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="InsuranceAmt" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Insurance Amount" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Currencyunit" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Doc. Currency" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="Dryiceweight" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:unit="Dryiceweightunit" sap:label="Gross Weight" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dryiceweightunit" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Weight unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="Venum" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Internal HU no." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vhilm" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="PackMaterials" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Velin" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Item type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Piececount" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Character Field Length = 10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Class" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="false" sap:label="LTL Freight Class" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Emptyhu" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Yes/No (X/ )" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Returnshipment" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Yes/No (X/ )" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Salesorder" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Sales Document" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Purchaseorder" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="PO Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Uevel" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Higher-level HU" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Packages" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Vbeln"/>
+                </Key>
+                <Property Name="Sel" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Single Character Indicator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vbeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Delivery" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Item" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Handling Unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tanum" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="TO Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Lgnum" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Warehouse No." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Weight" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:unit="Gewei" sap:label="Gross Weight" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dryiceweight" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:unit="Gewei" sap:label="Gross Weight" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Codamunt" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="3" sap:unicode="false" sap:unit="Waerk" sap:label="Unit Value" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Insuranceamt" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="3" sap:unicode="false" sap:unit="Waerk" sap:label="Unit Value" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dimensions" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Dimensions" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ltlhutype" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="LTL Hu type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Track" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Track" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Returntrack" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Return Tracking No." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Velin" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Item type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Venum" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Internal HU no." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vhilm" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="PackMaterials" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Emptyhu" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Emptyhu" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Salesorder" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Sales Document" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Purchaseorder" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="PO Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ltlpacktype" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="LTL packing type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Piececount" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Piececount" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Class" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="LTL Class" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Nmfccode" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="false" sap:label="NMFCCODE" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Hucount" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Hucount" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Shipprocess" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="R/2 table" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Mastertracking" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Tracking Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Weightunit" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Weight Unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Currencyunit" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Currency Unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dimensionunit" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Dimension unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Gewei" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Weight unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="Waerk" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Doc. Currency" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Shipping Point" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Werks" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Plant" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dgflag" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Hazard Flag" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Length" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Length" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Width" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="R/2 table" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Height" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Height" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tempb" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Temperature" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VhilmKu" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="CustPckgingMatl" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Packed" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Packed" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Webcall" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Webcall" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Returnshipment" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Return Shipment" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Packagecount" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Package Count" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Manualwt" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Manualwt" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ScanStc" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Scanstc" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SapWeight" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:unit="Gewei" sap:label="Gross Weight" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ClearSapweight" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Clearsapweight" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Delivery" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Delivery" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Posnr" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="Item" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Matnr" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="StcQty" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:label="Delivery qty" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Url" Type="Edm.String" Nullable="false" MaxLength="225" sap:unicode="false" sap:label="URL" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dgurl" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:label="Dgurl" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Uevel" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Higher-level HU" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ShippingType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Carriertype"/>
+                    <PropertyRef Name="ServiceCode"/>
+                    <PropertyRef Name="Vsart"/>
+                </Key>
+                <Property Name="Carriertype" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Carrier Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ServiceCode" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Service Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vsart" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Shipping Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ProcessPGI" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Document"/>
+                </Key>
+                <Property Name="Document" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Document" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="ResponseDataSet" Relationship="ESHIPJET.SHIP_READ_DATA_SRV.ProcessPGI_ResponseData" FromRole="FromRole_ProcessPGI_ResponseData" ToRole="ToRole_ProcessPGI_ResponseData"/>
+            </EntityType>
+            <EntityType Name="ResponseData" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Document"/>
+                </Key>
+                <Property Name="Document" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Delivery" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Message type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Message Class" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Number" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Message Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Message" Type="Edm.String" Nullable="false" MaxLength="220" sap:unicode="false" sap:label="Message Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LogNo" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Log Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LogMsgNo" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="Message Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MessageV1" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Message Variable" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MessageV2" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Message Variable" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MessageV3" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Message Variable" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MessageV4" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Message Variable" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Parameter" Type="Edm.String" Nullable="false" MaxLength="32" sap:unicode="false" sap:label="Parameter Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Row" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="Parameter line" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Field" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Field name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="System" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Logical system" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="HuData" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Vbeln"/>
+                </Key>
+                <Property Name="Vbeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Delivery" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Posnr" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="Item" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Matnr" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Qty" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:unit="Meins" sap:label="Partial Qty" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Charg" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Batch" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Humatnr" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HuNo" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Handling Unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Msgty" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Message Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Message" Type="Edm.String" Nullable="false" MaxLength="220" sap:unicode="false" sap:label="Message Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Meins" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Base Unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <NavigationProperty Name="HuItems" Relationship="ESHIPJET.SHIP_READ_DATA_SRV.HuData_HuItems" FromRole="FromRole_HuData_HuItems" ToRole="ToRole_HuData_HuItems"/>
+            </EntityType>
+            <EntityType Name="HuDelete" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Vbeln"/>
+                </Key>
+                <Property Name="Vbeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Delivery" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HuNo" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Handling Unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Message type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Message Class" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Number" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Message Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Message" Type="Edm.String" Nullable="false" MaxLength="220" sap:unicode="false" sap:label="Message Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LogNo" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Log Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LogMsgNo" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="Message Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MessageV1" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Message Variable" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MessageV2" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Message Variable" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MessageV3" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Message Variable" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MessageV4" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Message Variable" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Parameter" Type="Edm.String" Nullable="false" MaxLength="32" sap:unicode="false" sap:label="Parameter Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Row" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="Parameter line" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Field" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Field name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="System" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Logical system" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Header" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Vbeln"/>
+                </Key>
+                <Property Name="Ffaaddress" Type="ESHIPJET.SHIP_READ_DATA_SRV.Ffaaddress" Nullable="false"/>
+                <Property Name="Vttk" Type="ESHIPJET.SHIP_READ_DATA_SRV.Vttk" Nullable="false"/>
+                <Property Name="Shipto" Type="ESHIPJET.SHIP_READ_DATA_SRV.Shipto" Nullable="false"/>
+                <Property Name="Carrierconfig" Type="ESHIPJET.SHIP_READ_DATA_SRV.Carrierconfig" Nullable="false"/>
+                <Property Name="Vbeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Delivery" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Single-Character Flag" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ShipInst" Type="Edm.String" Nullable="false" MaxLength="3000" sap:unicode="false" sap:label="Shipping Instructions" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Pickstatus" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Single-Character Flag" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Pgistatus" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Single-Character Flag" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Message" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Address String" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="License" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Character Field with Length 10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="TOPACKITEMS" Relationship="ESHIPJET.SHIP_READ_DATA_SRV.Header_PackItems" FromRole="FromRole_Header_PackItems" ToRole="ToRole_Header_PackItems"/>
+                <NavigationProperty Name="ToLTLItems" Relationship="ESHIPJET.SHIP_READ_DATA_SRV.Header_LTLItems" FromRole="FromRole_Header_LTLItems" ToRole="ToRole_Header_LTLItems"/>
+                <NavigationProperty Name="ToPackages" Relationship="ESHIPJET.SHIP_READ_DATA_SRV.Header_Packages" FromRole="FromRole_Header_Packages" ToRole="ToRole_Header_Packages"/>
+                <NavigationProperty Name="ManifestDataSet" Relationship="ESHIPJET.SHIP_READ_DATA_SRV.Header_ToManifest" FromRole="FromRole_Header_ToManifest" ToRole="ToRole_Header_ToManifest"/>
+            </EntityType>
+            <EntityType Name="HuItems" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Vbeln"/>
+                </Key>
+                <Property Name="Vbeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Delivery" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Posnr" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="Item" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Matnr" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Qty" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:label="Partial Qty" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Charg" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Batch" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Humatnr" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Meins" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Base Unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+            </EntityType>
+            <EntityType Name="OptLogs" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Vbeln"/>
+                </Key>
+                <Property Name="Vbeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="SD Document" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Message Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Message" Type="Edm.String" Nullable="false" MaxLength="220" sap:unicode="false" sap:label="Message Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <ComplexType Name="Carrierconfig">
+                <Property Name="Mandt" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Client" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Werks" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Plant" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Lifnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Supplier" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vsbed" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Shipping Conditions" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CarrierName" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Carrier Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Carriertype" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Carrier Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ServiceCode" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="Service Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="100" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AccountNo" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Char20" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FdxMeterno" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Char20" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Userid" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Char20" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Password" Type="Edm.String" Nullable="false" MaxLength="70" sap:label="Char 70" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </ComplexType>
+            <ComplexType Name="Ffaaddress">
+                <Property Name="Vstel" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Shipping Point" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Kunnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Customer" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vendor" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Supplier" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Posnr" Type="Edm.String" Nullable="false" MaxLength="6" sap:label="Item" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Adrnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Address" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Parvw" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Partner Functn" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ParvwDesc" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Company" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Contact" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Name 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Address1" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Street" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Address2" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Street" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Address3" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Street" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Address4" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Street" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Pobox" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="PO Box" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="City" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="City" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="State" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Region" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Postalcode" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Postal Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Country" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Country/Reg." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Residential" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Yes/No (X/ )" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Telephone" Type="Edm.String" Nullable="false" MaxLength="16" sap:label="Telephone 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Email" Type="Edm.String" Nullable="false" MaxLength="241" sap:label="E-Mail Address" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vat" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="VAT Reg. No." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Countryname" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="Country/Region" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fax" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Fax" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Customertype" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Customer type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vbeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Delivery" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Addresstype" Type="Edm.String" Nullable="false" MaxLength="15" sap:label="Address Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ChangeLog" Type="Edm.String" Nullable="false" MaxLength="256" sap:label="WWI callback" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Mobile" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Telephone" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vkorg" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Sales Org." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dgreceiverid" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="DG Receiverid" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Regiogroup" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Structure Group" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Location" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Street 5" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Docno" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Document Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Exidv" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Handling Unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tknum" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Shipment Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tunum" Type="Edm.String" Nullable="false" MaxLength="18" sap:label="TU Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tunumext" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="TU Number Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Docid" Type="Edm.Guid" Nullable="false" sap:label="GUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ecsdoctype" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Doc Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ecsdocno" Type="Edm.String" Nullable="false" MaxLength="100" sap:label="Doc No" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Locationcode" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Not More Closely Defined Area, Possibly Used for Patchle" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Company1" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="c" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Businessno" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="c" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Stcd1" Type="Edm.String" Nullable="false" MaxLength="16" sap:label="Tax Number 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Taxidtye" Type="Edm.String" Nullable="false" MaxLength="5" sap:label="EIN Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </ComplexType>
+            <ComplexType Name="Shipto">
+                <Property Name="Vstel" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Shipping Point" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Kunnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Customer" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vendor" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Supplier" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Posnr" Type="Edm.String" Nullable="false" MaxLength="6" sap:label="Item" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Adrnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Address" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Parvw" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Partner Functn" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ParvwDesc" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Company" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Contact" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Name 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Address1" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Street" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Address2" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Street" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Address3" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Street" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Address4" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Street" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Pobox" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="PO Box" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="City" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="City" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="State" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Region" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Postalcode" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Postal Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Country" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Country/Reg." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Residential" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Yes/No (X/ )" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Telephone" Type="Edm.String" Nullable="false" MaxLength="16" sap:label="Telephone 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Email" Type="Edm.String" Nullable="false" MaxLength="241" sap:label="E-Mail Address" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vat" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="VAT Reg. No." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Countryname" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="Country/Region" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fax" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Fax" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Customertype" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Customer type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vbeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Delivery" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Addresstype" Type="Edm.String" Nullable="false" MaxLength="15" sap:label="Address Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ChangeLog" Type="Edm.String" Nullable="false" MaxLength="256" sap:label="WWI callback" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Mobile" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Telephone" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vkorg" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Sales Org." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dgreceiverid" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="DG Receiverid" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Regiogroup" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Structure Group" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Location" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Street 5" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Docno" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Document Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Exidv" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Handling Unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tknum" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Shipment Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tunum" Type="Edm.String" Nullable="false" MaxLength="18" sap:label="TU Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tunumext" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="TU Number Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Docid" Type="Edm.Guid" Nullable="false" sap:label="GUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ecsdoctype" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Doc Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ecsdocno" Type="Edm.String" Nullable="false" MaxLength="100" sap:label="Doc No" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Locationcode" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Not More Closely Defined Area, Possibly Used for Patchle" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Company1" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="c" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Businessno" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="c" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Stcd1" Type="Edm.String" Nullable="false" MaxLength="16" sap:label="Tax Number 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Taxidtye" Type="Edm.String" Nullable="false" MaxLength="5" sap:label="EIN Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </ComplexType>
+            <ComplexType Name="Vttk">
+                <Property Name="Mandt" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Client" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tknum" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Shipment Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vbtyp" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Document Cat." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Shtyp" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Shipment Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tplst" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="TransportPlanPt" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ernam" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Created By" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Erdat" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="Created On" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Erzet" Type="Edm.Time" Nullable="false" Precision="0" sap:label="Time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Aenam" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Changed By" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Aedat" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="Changed On" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Aezet" Type="Edm.Time" Nullable="false" Precision="0" sap:label="Time of change" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Sterm" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Determine Legs" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Abfer" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="ShpmtComplType" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Abwst" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="ProcessControl" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Bfart" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Service Level" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vsart" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Shipping Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vsavl" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="ShTypePrelimLeg" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vsanl" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="SubseqLegShType" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Laufk" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Leg indicator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vsbed" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Shipping Conditions" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Route" Type="Edm.String" Nullable="false" MaxLength="6" sap:label="Shipment Route" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Signi" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Container ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Exti1" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="External ID 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Exti2" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="External ID 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tpbez" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Stdis" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Planned" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dtdis" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="Planning end" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Uzdis" Type="Edm.Time" Nullable="false" Precision="0" sap:label="Scheduling end" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Streg" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Check-In" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dpreg" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="PlanCheckInDate" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Upreg" Type="Edm.Time" Nullable="false" Precision="0" sap:label="PlannedTimeChIn" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dareg" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="Act.Date ChkIn" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Uareg" Type="Edm.Time" Nullable="false" Precision="0" sap:label="CurrentTmeChkIn" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Stlbg" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Loading Start" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dplbg" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="PlanLoadStart" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Uplbg" Type="Edm.Time" Nullable="false" Precision="0" sap:label="PlanLoadStTime" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dalbg" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="Curr.load.start" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ualbg" Type="Edm.Time" Nullable="false" Precision="0" sap:label="ActLoadStrtTime" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Stlad" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Loading End" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dplen" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="PlanLoadingEnd" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Uplen" Type="Edm.Time" Nullable="false" Precision="0" sap:label="PlanLoadEndTime" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dalen" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="Act. load. end" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ualen" Type="Edm.Time" Nullable="false" Precision="0" sap:label="ActLoadEndTime" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Stabf" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Shpmt Compl." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dpabf" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="PlanShpCmplDte" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Upabf" Type="Edm.Time" Nullable="false" Precision="0" sap:label="Pl. Time Proc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dtabf" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="DateShpmntCmpl." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Uzabf" Type="Edm.Time" Nullable="false" Precision="0" sap:label="TimeTrspProcess" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Sttbg" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Shipment Start" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dptbg" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="PlanShipStart" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Uptbg" Type="Edm.Time" Nullable="false" Precision="0" sap:label="PlanTransStTime" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Datbg" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="CurrShipmtStart" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Uatbg" Type="Edm.Time" Nullable="false" Precision="0" sap:label="ActTranspStrtTm" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Stten" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Shipment End" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dpten" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="PlanShipmentEnd" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Upten" Type="Edm.Time" Nullable="false" Precision="0" sap:label="PlanTransEndTim" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Daten" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="Act.ShipmentEnd" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Uaten" Type="Edm.Time" Nullable="false" Precision="0" sap:label="ActShipmtEndTim" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Sttrg" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Overall Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tdlnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Service Agent" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ternr" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Order" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Pkstk" Type="Edm.Boolean" Nullable="false" sap:label="Handling units" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dtmeg" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Weight unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="Dtmev" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Volume unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="Distz" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unit="Medst" sap:label="Distance" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Medst" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="UoM-Distance" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="Fahzt" Type="Edm.Decimal" Nullable="false" Precision="5" Scale="2" sap:unit="Meizt" sap:label="Travel time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Geszt" Type="Edm.Decimal" Nullable="false" Precision="5" Scale="2" sap:unit="Meizt" sap:label="Total Time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Meizt" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Trav. times" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="Stafo" Type="Edm.String" Nullable="false" MaxLength="6" sap:label="Update Group" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fbsta" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Shipm.Csts Cal" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fbgst" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="OvSts.ShCostCal" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Arsta" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Shpmt Costs Set" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Argst" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Tot.Shp.Cst Stm" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="StermDone" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Legs determined" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VseFrk" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Ship.units-ShpCostD" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Kkalsm" Type="Edm.String" Nullable="false" MaxLength="6" sap:label="Procedure" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Sdabw" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Spec.Processing" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Frkrl" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="ShpmntCostsRel." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Gesztd" Type="Edm.Decimal" Nullable="false" Precision="11" Scale="0" sap:label="Planned total time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fahztd" Type="Edm.Decimal" Nullable="false" Precision="11" Scale="0" sap:label="Planned act. durat." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Gesztda" Type="Edm.Decimal" Nullable="false" Precision="11" Scale="0" sap:label="Actual total time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fahztda" Type="Edm.Decimal" Nullable="false" Precision="11" Scale="0" sap:label="Actual duration" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RocpyDone" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Route from del." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Handle" Type="Edm.Guid" Nullable="false" sap:label="Handle" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tsegfl" Type="Edm.Boolean" Nullable="false" sap:label="TSegment exists" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tsegtp" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Template" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Add01" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Suppl. 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Add02" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Suppl. 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Add03" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Suppl. 3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Add04" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Suppl. 4" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Text1" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Addit. Text 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Text2" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Addit. Text 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Text3" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Addit. Text 3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Text4" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Addit. Text 4" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Proli" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="DG Mgmt Profile" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dgtlock" Type="Edm.Boolean" Nullable="false" sap:label="Block Ind. DG" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dgmddat" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="Selection Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ContDg" Type="Edm.Boolean" Nullable="false" sap:label="Contains DG" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Warztd" Type="Edm.Decimal" Nullable="false" Precision="11" Scale="0" sap:label="Planned Waiting Time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Warztda" Type="Edm.Decimal" Nullable="false" Precision="11" Scale="0" sap:label="Curr. waiting time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Aulwe" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Route Schedule" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tndrst" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Tender Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tndrrc" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="AccCnd/RjctRsn" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TndrText" Type="Edm.String" Nullable="false" MaxLength="80" sap:label="Tendering Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tndrdat" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="Date tender st." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tndrzet" Type="Edm.Time" Nullable="false" Precision="0" sap:label="Time tender" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TndrMaxp" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="3" sap:unit="TndrMaxc" sap:label="Maximum Price" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TndrMaxc" Type="Edm.String" Nullable="false" MaxLength="5" sap:label="Currency" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="TndrActp" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="3" sap:unit="TndrActc" sap:label="Actual Costs" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TndrActc" Type="Edm.String" Nullable="false" MaxLength="5" sap:label="Currency" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="TndrCarr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="From Fdwg Agent" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TndrCrnm" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Name of carrier" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TndrTrkid" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="FA Tracking ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TndrExpd" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="Valid to" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TndrExpt" Type="Edm.Time" Nullable="false" Precision="0" sap:label="To Time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TndrErpd" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="EarlyPickupDate" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TndrErpt" Type="Edm.Time" Nullable="false" Precision="0" sap:label="Pickup time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TndrLtpd" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="Latest Pickup" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TndrLtpt" Type="Edm.Time" Nullable="false" Precision="0" sap:label="Time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TndrErdd" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="Earl. Del. Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TndrErdt" Type="Edm.Time" Nullable="false" Precision="0" sap:label="Time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TndrLtdd" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="Latest Del.Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TndrLtdt" Type="Edm.Time" Nullable="false" Precision="0" sap:label="Time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TndrLdlg" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unit="TndrLdlu" sap:label="LgthLoadingPltf" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TndrLdlu" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="UoM load length" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="Kzhulfr" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="HUs DI-relevant" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AllowedTwgt" Type="Edm.Decimal" Nullable="false" Precision="8" Scale="0" sap:unit="Dtmeg" sap:label="Allow.Tot. Wght" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vlstk" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="StatDecntrlWhse" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Verursys" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Original System" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CmIdent" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Identification" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CmSequence" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Sequence" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ExtFreightOrd" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Frg. Ord. ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ExtTmSys" Type="Edm.String" Nullable="false" MaxLength="60" sap:label="Business System" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </ComplexType>
+            <Association Name="ReversePGI_ResponseData" sap:content-version="1">
+                <End Type="ESHIPJET.SHIP_READ_DATA_SRV.ReversePGI" Multiplicity="1" Role="FromRole_ReversePGI_ResponseData"/>
+                <End Type="ESHIPJET.SHIP_READ_DATA_SRV.ResponseData" Multiplicity="*" Role="ToRole_ReversePGI_ResponseData"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_ReversePGI_ResponseData">
+                        <PropertyRef Name="Document"/>
+                    </Principal>
+                    <Dependent Role="ToRole_ReversePGI_ResponseData">
+                        <PropertyRef Name="Document"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="HuData_HuItems" sap:content-version="1">
+                <End Type="ESHIPJET.SHIP_READ_DATA_SRV.HuData" Multiplicity="1" Role="FromRole_HuData_HuItems"/>
+                <End Type="ESHIPJET.SHIP_READ_DATA_SRV.HuItems" Multiplicity="*" Role="ToRole_HuData_HuItems"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_HuData_HuItems">
+                        <PropertyRef Name="Vbeln"/>
+                    </Principal>
+                    <Dependent Role="ToRole_HuData_HuItems">
+                        <PropertyRef Name="Vbeln"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Manifest" sap:content-version="1">
+                <End Type="ESHIPJET.SHIP_READ_DATA_SRV.ManifestHeader" Multiplicity="1" Role="FromRole_Manifest"/>
+                <End Type="ESHIPJET.SHIP_READ_DATA_SRV.ManifestData" Multiplicity="*" Role="ToRole_Manifest"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Manifest">
+                        <PropertyRef Name="Vbeln"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Manifest">
+                        <PropertyRef Name="Vbeln"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="ManifestHeader_Logs" sap:content-version="1">
+                <End Type="ESHIPJET.SHIP_READ_DATA_SRV.ManifestHeader" Multiplicity="1" Role="FromRole_ManifestHeader_Logs"/>
+                <End Type="ESHIPJET.SHIP_READ_DATA_SRV.OptLogs" Multiplicity="*" Role="ToRole_ManifestHeader_Logs"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_ManifestHeader_Logs">
+                        <PropertyRef Name="Vbeln"/>
+                    </Principal>
+                    <Dependent Role="ToRole_ManifestHeader_Logs">
+                        <PropertyRef Name="Vbeln"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Header_LTLItems" sap:content-version="1">
+                <End Type="ESHIPJET.SHIP_READ_DATA_SRV.Header" Multiplicity="1" Role="FromRole_Header_LTLItems"/>
+                <End Type="ESHIPJET.SHIP_READ_DATA_SRV.LTLItems" Multiplicity="*" Role="ToRole_Header_LTLItems"/>
+            </Association>
+            <Association Name="Header_PackItems" sap:content-version="1">
+                <End Type="ESHIPJET.SHIP_READ_DATA_SRV.Header" Multiplicity="1" Role="FromRole_Header_PackItems"/>
+                <End Type="ESHIPJET.SHIP_READ_DATA_SRV.PackItems" Multiplicity="*" Role="ToRole_Header_PackItems"/>
+            </Association>
+            <Association Name="Header_Packages" sap:content-version="1">
+                <End Type="ESHIPJET.SHIP_READ_DATA_SRV.Header" Multiplicity="1" Role="FromRole_Header_Packages"/>
+                <End Type="ESHIPJET.SHIP_READ_DATA_SRV.Packages" Multiplicity="*" Role="ToRole_Header_Packages"/>
+            </Association>
+            <Association Name="Header_ToManifest" sap:content-version="1">
+                <End Type="ESHIPJET.SHIP_READ_DATA_SRV.Header" Multiplicity="1" Role="FromRole_Header_ToManifest"/>
+                <End Type="ESHIPJET.SHIP_READ_DATA_SRV.ManifestData" Multiplicity="*" Role="ToRole_Header_ToManifest"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Header_ToManifest">
+                        <PropertyRef Name="Vbeln"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Header_ToManifest">
+                        <PropertyRef Name="Vbeln"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="ProcessPGI_ResponseData" sap:content-version="1">
+                <End Type="ESHIPJET.SHIP_READ_DATA_SRV.ProcessPGI" Multiplicity="1" Role="FromRole_ProcessPGI_ResponseData"/>
+                <End Type="ESHIPJET.SHIP_READ_DATA_SRV.ResponseData" Multiplicity="*" Role="ToRole_ProcessPGI_ResponseData"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_ProcessPGI_ResponseData">
+                        <PropertyRef Name="Document"/>
+                    </Principal>
+                    <Dependent Role="ToRole_ProcessPGI_ResponseData">
+                        <PropertyRef Name="Document"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ESHIPJET_SHIP_READ_DATA_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="HeaderSet" EntityType="ESHIPJET.SHIP_READ_DATA_SRV.Header" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="HuItemsSet" EntityType="ESHIPJET.SHIP_READ_DATA_SRV.HuItems" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="OptLogsSet" EntityType="ESHIPJET.SHIP_READ_DATA_SRV.OptLogs" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ManifestDataSet" EntityType="ESHIPJET.SHIP_READ_DATA_SRV.ManifestData" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ManifestHeaderSet" EntityType="ESHIPJET.SHIP_READ_DATA_SRV.ManifestHeader" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ReversePGISet" EntityType="ESHIPJET.SHIP_READ_DATA_SRV.ReversePGI" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="LTLItemsSet" EntityType="ESHIPJET.SHIP_READ_DATA_SRV.LTLItems" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="PackItemsSet" EntityType="ESHIPJET.SHIP_READ_DATA_SRV.PackItems" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="PackagesSet" EntityType="ESHIPJET.SHIP_READ_DATA_SRV.Packages" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ShippingTypeSet" EntityType="ESHIPJET.SHIP_READ_DATA_SRV.ShippingType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ProcessPGISet" EntityType="ESHIPJET.SHIP_READ_DATA_SRV.ProcessPGI" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ResponseDataSet" EntityType="ESHIPJET.SHIP_READ_DATA_SRV.ResponseData" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="HuDataSet" EntityType="ESHIPJET.SHIP_READ_DATA_SRV.HuData" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="HuDeleteSet" EntityType="ESHIPJET.SHIP_READ_DATA_SRV.HuDelete" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <AssociationSet Name="ManifestSet" Association="ESHIPJET.SHIP_READ_DATA_SRV.Manifest" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ManifestHeaderSet" Role="FromRole_Manifest"/>
+                    <End EntitySet="ManifestDataSet" Role="ToRole_Manifest"/>
+                </AssociationSet>
+                <AssociationSet Name="HuData_HuItemsSet" Association="ESHIPJET.SHIP_READ_DATA_SRV.HuData_HuItems" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="HuDataSet" Role="FromRole_HuData_HuItems"/>
+                    <End EntitySet="HuItemsSet" Role="ToRole_HuData_HuItems"/>
+                </AssociationSet>
+                <AssociationSet Name="ManifestHeader_LogsSet" Association="ESHIPJET.SHIP_READ_DATA_SRV.ManifestHeader_Logs" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ManifestHeaderSet" Role="FromRole_ManifestHeader_Logs"/>
+                    <End EntitySet="OptLogsSet" Role="ToRole_ManifestHeader_Logs"/>
+                </AssociationSet>
+                <AssociationSet Name="ProcessPGI_ResponseDataSet" Association="ESHIPJET.SHIP_READ_DATA_SRV.ProcessPGI_ResponseData" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ProcessPGISet" Role="FromRole_ProcessPGI_ResponseData"/>
+                    <End EntitySet="ResponseDataSet" Role="ToRole_ProcessPGI_ResponseData"/>
+                </AssociationSet>
+                <AssociationSet Name="ReversePGI_ResponseDataSet" Association="ESHIPJET.SHIP_READ_DATA_SRV.ReversePGI_ResponseData" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ReversePGISet" Role="FromRole_ReversePGI_ResponseData"/>
+                    <End EntitySet="ResponseDataSet" Role="ToRole_ReversePGI_ResponseData"/>
+                </AssociationSet>
+                <AssociationSet Name="Header_Packages_AssocSet" Association="ESHIPJET.SHIP_READ_DATA_SRV.Header_Packages" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="HeaderSet" Role="FromRole_Header_Packages"/>
+                    <End EntitySet="PackagesSet" Role="ToRole_Header_Packages"/>
+                </AssociationSet>
+                <AssociationSet Name="Header_LTLItems_AssocSet" Association="ESHIPJET.SHIP_READ_DATA_SRV.Header_LTLItems" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="HeaderSet" Role="FromRole_Header_LTLItems"/>
+                    <End EntitySet="LTLItemsSet" Role="ToRole_Header_LTLItems"/>
+                </AssociationSet>
+                <AssociationSet Name="Header_ToManifestSet" Association="ESHIPJET.SHIP_READ_DATA_SRV.Header_ToManifest" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="HeaderSet" Role="FromRole_Header_ToManifest"/>
+                    <End EntitySet="ManifestDataSet" Role="ToRole_Header_ToManifest"/>
+                </AssociationSet>
+                <AssociationSet Name="Header_PackItems_AssocSet" Association="ESHIPJET.SHIP_READ_DATA_SRV.Header_PackItems" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="HeaderSet" Role="FromRole_Header_PackItems"/>
+                    <End EntitySet="PackItemsSet" Role="ToRole_Header_PackItems"/>
+                </AssociationSet>
+            </EntityContainer>
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <atom:link rel="self" href="https://sapdemo.eshipjet.com:44300/sap/opu/odata/ESHIPJET/SHIP_READ_DATA_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://sapdemo.eshipjet.com:44300/sap/opu/odata/ESHIPJET/SHIP_READ_DATA_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
