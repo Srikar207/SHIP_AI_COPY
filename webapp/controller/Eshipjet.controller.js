@@ -23207,95 +23207,73 @@ readPGIErrorLog: function () {
         //     });
         // },
 
-        onShipNowVoidPress: function () {
-            oController.onOpenBusyDialog();
-            var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
-            var carrier = eshipjetModel.getProperty("/commonValues/ShipNowShipMethodSelectedKey");
-            var serviceId = eshipjetModel.getProperty("/commonValues/ShipNowShipsrvNameSelectedKey");
-            var sDeliveryNo = eshipjetModel.getProperty("/commonValues/sapDeliveryNumber");
-            var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData");
-            var selectedCarrierAccountsData = eshipjetModel.getProperty("/selectedCarrierAccountsData");
 
-            var trackingArray = eshipjetModel.getProperty("/trackingArray");
-            
+        _waitForCarrierIdentity: function () {
+            const m = this.getOwnerComponent().getModel("eshipjetModel");
 
-            var currentDate = new Date();
-            var shipDate = currentDate.toISOString();
-            
-            eshipjetModel.setProperty("/commonValues/shipNowGetBtn", true);
-            var sapDeliveryNumber = eshipjetModel.getProperty("/commonValues/sapDeliveryNumber");
-            var carrier = eshipjetModel.getProperty("/commonValues/ShipNowShipMethodSelectedKey");
-            var serviceName = eshipjetModel.getProperty("/commonValues/ShipNowShipsrvNameSelectedKey");
-            var id, password, accountNumber, oPayload, Signature_optionType;            
-          
-            var AccessKey = "";
-            var billingAccNumber = "";
-            if(carrier && carrier.toUpperCase() === "UPS"){
-                id = "6ljUpEbuu1OlOk7ow932lsxXHISUET0WKjTn59GzQ5MRdEbA";  
-                password = "ioZmsfcbrzlWfGh7wGMhqHL6sY4EAaKzZObullipni0cEGJGChjFmGpkcdCWQynK";
-                accountNumber = "B24W72";
-                billingAccNumber = "89W74E";
-                Signature_optionType = eshipjetModel.getProperty("/UpsSignatureSelectedKey");
-            }else if(carrier && carrier.toUpperCase() === "FEDEX"){
-                 id = "l70c717f3eaf284dc9af42169e93874b6e";
-                 password = "7f271bf486084e8f8073945bb7e6a020";
-                 accountNumber = "740561073";
-                 billingAccNumber = "740561073";
-                 Signature_optionType = eshipjetModel.getProperty("/fedExSignature_optionType");
-            }else if(carrier && carrier.toUpperCase() === "DHL"){
-                 id = "apT2vB7mV1qR1b";
-                 password = "U#3mO^1vY!5mT@0j";
-            }else if(carrier && carrier.toUpperCase() === "USPS"){
-                id = "3087617";
-                password = "October2024!";
-            }else if(carrier && carrier.toUpperCase() === "ABFS"){
-                id = "ABFESHIPJET";
-                password = "Legacy!@3";
-                AccessKey= "JVG9SX85";
-            }
-
-            // trackingArray.forEach(function(obj, idx){
-                // var TrackingNumber = obj.TrackingNumber;
-                var TrackingNumber = trackingArray[0].TrackingNumber;
-                var obj = {
-                    "CarrierDetails": {
-                        "Carrier": carrier === 'FEDEX' ? 'FedEx' : carrier,
-                        "ShippingAccount": accountNumber,
-                        "UserId": id,
-                        "Password": password,
-                        "VoidURL":"",
-                        "TokenURL":"",
-                        "AccessKey": AccessKey !== '' ? AccessKey : null
-                    },
-                    "Packages": [
-                        {
-                            "TrackingNumber": TrackingNumber
-                        }
-                    ]
-                }
-    
-                var sPath;
-                if(carrier === "ABFS"){
-                    sPath = "https://carrier-api-v1.eshipjet.site/ABFvoid";
-                }else{
-                    sPath = "https://carrier-api-v1.eshipjet.site/" + carrier + "void";
-                }
-                $.ajax({
-                    url: sPath,
-                    method: "POST",
-                    contentType: "application/json",
-                    data: JSON.stringify(obj),
-                    success: function (response) {
-                        oController.shipStstusUpdateToManifestHeaderSet("CANC");
-                        oController.onCloseBusyDialog();
-                    },
-                    error: function (error) {
-                        reject(error);
-                        console.log("Error:", error);
-                        oController.onCloseBusyDialog();
+            return new Promise(resolve => {
+                const spin = () => {
+                    const ctx = m.getProperty("/selectedCarrierAccountsData");
+                    if (ctx && ctx.CarrierCode) {
+                        resolve(ctx);
+                    } else {
+                        setTimeout(spin, 60);
                     }
-                });
-            // });
+                };
+                spin();
+            });
+        },
+
+
+        onShipNowVoidPress: async function () {
+            const m = this.getOwnerComponent().getModel("eshipjetModel");
+            this.onOpenBusyDialog();
+
+            const carrier = m.getProperty("/commonValues/ShipNowShipMethodSelectedKey");
+
+            this.onGetCarrierNamesDataForDropDown(carrier);   // fire identity fetch
+
+            const carrierCtx = await this._waitForCarrierIdentity();   // block until ready
+
+            const tracking = m.getProperty("/trackingArray")[0].TrackingNumber;
+
+            const payload = {
+                CarrierDetails: {
+                    Carrier: carrierCtx.CarrierCode,
+                    UserId: carrierCtx.UserId,
+                    Password: carrierCtx.Password,
+                    Reference1: eshipjetModel.getProperty("/commonValues/sapDeliveryNumber"),
+                    ShippingAccount: carrierCtx.AcntNmbr,
+                    TokenURL: carrierCtx.TokenUrl,
+                    VoidURL: carrierCtx.VoidUrl
+                },
+                Packages: [{ TrackingNumber: tracking }]
+            };
+
+            const url = carrier === "ABFS"
+                ? "https://carrier-api-v1.eshipjet.site/ABFvoid"
+                : `https://carrier-api-v1.eshipjet.site/${carrier}void`;
+
+            $.ajax({
+                url,
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(payload),
+                success: (oData) => {
+                    oController.shipStstusUpdateToManifestHeaderSet("CANC");
+                    oController.onCloseBusyDialog();
+                    // if(oData.status === "Success"){
+                    //     oController.shipStstusUpdateToManifestHeaderSet("CANC");
+                    //     oController.onCloseBusyDialog();
+                    // }else if(oData.status === "Error"){
+                    //     sap.m.MessageBox.error(
+                    //         oData.Errors[0],
+                    //         { title: "Void Rejected." });
+                    //     oController.onCloseBusyDialog();
+                    // }
+                },
+                error: (oError) => this.onCloseBusyDialog()
+            });
         },
 
         shipStstusUpdateToManifestHeaderSet: function (shipStatus) {
@@ -23368,6 +23346,15 @@ readPGIErrorLog: function () {
                 "DateAdded": SAPDate,
                 "Createddate": SAPDate,
                 // "CancDt": "/Date(1734480000000)/",
+                "CancTim": {
+                    ms : (
+                    (new Date().getHours() * 3600000) +
+                    (new Date().getMinutes() * 60000) +
+                    (new Date().getSeconds() * 1000) +
+                    new Date().getMilliseconds()
+                    ),
+                    __edmType : "Edm.Time"
+                },
                 "PackageWeight": grossWeight,
                 "Chargweight": grossWeight,
                 "Codamount": "0.00",
