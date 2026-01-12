@@ -23206,9 +23206,16 @@ readPGIErrorLog: function () {
         //         }
         //     });
         // },
+
         onShipNowVoidPress: function () {
             oController.onOpenBusyDialog();
             var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+            var carrier = eshipjetModel.getProperty("/commonValues/ShipNowShipMethodSelectedKey");
+            var serviceId = eshipjetModel.getProperty("/commonValues/ShipNowShipsrvNameSelectedKey");
+            var sDeliveryNo = eshipjetModel.getProperty("/commonValues/sapDeliveryNumber");
+            var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData");
+            var selectedCarrierAccountsData = eshipjetModel.getProperty("/selectedCarrierAccountsData");
+
             var trackingArray = eshipjetModel.getProperty("/trackingArray");
             
 
