@@ -26,9 +26,12 @@
 					<Text text="PGI" class="pgi-style sapUiTinyMargin" visible="{= ${eshipjetModel>/PGI_STATUS} === 'S' ? true : false }" ></Text>
 				</HBox>
 				<HBox class="pgi-Failed-style" >
-					<core:Icon src="sap-icon://sys-cancel-2" class="sapUiTinyMarginTop" visible="{= ${eshipjetModel>/PGI_STATUS} === 'F' ? true : false }" press="readPGIErrorLog" ></core:Icon>
-					<Text text="PGI" class="pgi-Failed-style sapUiTinyMargin" visible="{= ${eshipjetModel>/PGI_STATUS} === 'F' ? true : false }" ></Text>
-				</HBox>
+					<core:Icon src="sap-icon://sys-cancel-2" class="sapUiTinyMarginTop" visible="{= ${eshipjetModel>/PGI_STATUS} === 'F' || ${eshipjetModel>/PGI_STATUS} === 'E' }" press="readPGIErrorLog" ></core:Icon>
+					<Text
+    text="PGI"
+    class="pgi-Failed-style sapUiTinyMargin"
+    visible="{= ${eshipjetModel>/PGI_STATUS} === 'F' || ${eshipjetModel>/PGI_STATUS} === 'E' }" />
+</HBox>
 				<!-- <HBox class="pgi-style" >
 					<core:Icon src="sap-icon://sys-enter-2" class="sapUiTinyMarginTop" visible="{= ${eshipjetModel>/commonValues/OverallGoodsMovementStatus} === 'C' || ${eshipjetModel>/commonValues/OverallGoodsMovementStatus} === 'B' ? true : false }" ></core:Icon>
 					<Text text="PGI" class="pgi-style sapUiTinyMargin" visible="{= ${eshipjetModel>/commonValues/OverallGoodsMovementStatus} === 'C' || ${eshipjetModel>/commonValues/OverallGoodsMovementStatus} === 'B' ? true : false }" ></Text>
@@ -904,7 +907,8 @@
 							id="idShipNowPackTable"
 							rows="{eshipjetModel>/to_DeliveryDocumentItem}"
 							class="sapUiSmallMarginTop"
-							selectionMode="MultiToggle"
+							selectionMode="None"
+
 							visibleRowCountMode="Fixed"
 							visibleRowCount="4" 
 							visible="{eshipjetModel>/expandProductTableOn}"
@@ -1136,7 +1140,7 @@
 							rows="{eshipjetModel>/to_HandlingUnitHeaderDelivery/results}"
 							
 							class="sapUiTinyMarginTop"
-							selectionMode="Single"
+							selectionMode="None"
 							visibleRowCount="6"
     						visibleRowCountMode="Fixed" 
 							visible="{eshipjetModel>/expandHUTableOn}">

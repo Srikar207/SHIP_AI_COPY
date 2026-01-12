@@ -2594,6 +2594,19 @@ body.dark-theme {
 }
 
 
+.clearBtn1 {
+  height: 38px !important;
+  border-color: coral !important;
+  color: red !important;
+}
+.saveBtn1 {
+  height: 38px !important;
+  width: 78px !important;
+   border-color: #4E9C2D !important;
+  border-color: green !important;
+  color: green !important;
+}
+
 .saveBtn {
   height: 40px !important;
   width: 78px !important;

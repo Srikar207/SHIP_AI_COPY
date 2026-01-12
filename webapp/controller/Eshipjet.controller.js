@@ -2336,7 +2336,7 @@ sap.ui.define([
                                             eshipjetModel.setProperty("/shippingChargesLength", true);
                                         }
                                     }
-                                    oController.onPostGoodsIssue(sDeliveryNo);      
+                                    oController.onPostGoodsIssuePress(sDeliveryNo);      
 
                                 }else if(response && response.status === "Error"){
                                     var sError = "Shipment process failed reasons:\n";
@@ -2906,7 +2906,7 @@ sap.ui.define([
                                     // oController.getManifestData(response);
                                     
                                     //    oController.updateManifestHeaderSet();  
-                                     oController.onPostGoodsIssue(sDeliveryNo);      
+                                     oController.onPostGoodsIssuePress(sDeliveryNo);      
                                     // oController.showLabelAfterShipmentSuccess(response);
 
                                 }else if(response && response.status === "Error"){
@@ -6085,9 +6085,9 @@ onShippingDocumentsViewPress: async function (oEvent) {
 
                         PackagingMaterial: item.Carriertype || "",            // Packaging Material
                         Material: item.ProductCode || "",
-                        MaterialName: item.ProductDesc || "",
+                        MaterialName: item.ProductDescription || "",
                         HandlingUnitQuantity: item.ProductQuantity || 0,
-                        HandlingUnitQuantityUnit: item.ProductUOM || "",
+                        HandlingUnitQuantityUnit: item.ProductUnitOfMeasurement || "",
 
                         CARRIER_TYPE: item.Carriertype,
                         SERVICE_NAME: item.ServiceName,
@@ -6170,26 +6170,7 @@ onShippingDocumentsViewPress: async function (oEvent) {
     });
 },
 
-
-        checkPostGoodsIssueStatus:function(sDeveliveryNumber){
-            var CreateHUSrvModel = oController.getOwnerComponent().getModel("CreateHUSrvModel");
-            var aFilters = [];
-            aFilters.push(new Filter("Delivery", "EQ", sDeveliveryNumber));
-            CreateHUSrvModel.read("/PGICREATESet", {
-                filters: aFilters,
-                success: function (oData) {
-                    // oController.getShippingDataAfterPGI(sapDeliveryNumber);
-                    eshipjetModel.setProperty("/commonValues/OverallGoodsMovementStatus", oData.results[0].Msgtyp);
-                    oController.onCloseBusyDialog();
-                },
-                error: function (oError) {
-                    oController.onCloseBusyDialog();
-                    var errMsg = JSON.parse(oError.responseText).error.message.value;
-                    sap.m.MessageBox.error(errMsg);
-                }
-            });
-        },
-
+      
         getHandlingUnit:function(sapDeliveryNumber){
             var CreateHUSrvModel = oController.getOwnerComponent().getModel("CreateHUSrvModel");
             let aFilters = [] ;
@@ -19839,43 +19820,6 @@ onHandlingUnitDialogClosePress: function () {
             }
         },
 
-        createPostGoodsIssue:function(sapDeliveryNumber){
-            // var ShipReadDataSrvModel = oController.getOwnerComponent().getModel("ShipReadDataSrvModel");
-            // var oPayload = {
-            //     "Document": sapDeliveryNumber,
-            //     "ResponseDataSet" : []
-            // };
-            // ShipReadDataSrvModel.create("/ProcessPGISet", oPayload, {
-            //     success: function (oData) {
-            //         // MessageBox.success(oData.ResponseDataSet.results[0].Message);
-            //         console.log("Success:", oData);
-            //         oController.getShippingDataAfterPGI(sapDeliveryNumber);
-            //         oController.onCloseBusyDialog();
-            //     },
-            //     error: function (oError) {
-            //         oController.onCloseBusyDialog();
-            //         var errMsg = JSON.parse(oError.responseText).error.message.value;
-            //         sap.m.MessageBox.error(errMsg);
-            //     }
-            // });
-
-            var CreateHUSrvModel = oController.getOwnerComponent().getModel("CreateHUSrvModel");
-            var oPayload = {
-                "Delivery": sapDeliveryNumber
-            };
-            CreateHUSrvModel.create("/PGICREATESet", oPayload, {
-                success: function (oData) {
-                    // oController.getShippingDataAfterPGI(sapDeliveryNumber);
-                    eshipjetModel.setProperty("/commonValues/OverallGoodsMovementStatus", oData.results[0].Msgtyp);
-                    oController.onCloseBusyDialog();
-                },
-                error: function (oError) {
-                    oController.onCloseBusyDialog();
-                    var errMsg = JSON.parse(oError.responseText).error.message.value;
-                    sap.m.MessageBox.error(errMsg);
-                }
-            });
-        },
             // ===============================================
             //  MAIN FUNCTION TO TRIGGER PGI
             // ===============================================
@@ -20025,7 +19969,110 @@ onHandlingUnitDialogClosePress: function () {
         //     });
         // },
 
-    onPostGoodsIssue: function (sDeliveryNo) {
+
+        onPostGoodsIssuePress: function (sDeliveryNo) {
+    var eshipjetModel = this.getOwnerComponent().getModel("eshipjetModel");
+    var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData");
+
+    if (GetDeliveryData && GetDeliveryData.Warehouse) {
+        // WITH EWM
+        this.onPostGoodsIssueWithEWM(sDeliveryNo);
+    } else {
+        // WITHOUT EWM
+        this.onPostGoodsIssueWithoutEWM(sDeliveryNo);
+    }
+},
+
+         onPostGoodsIssueWithEWM: function (sDeliveryNo) {
+    var oController = this;
+
+    if (!sDeliveryNo) {
+        sap.m.MessageBox.error("Invalid Delivery Number");
+        return;
+    }
+
+    oController.onOpenBusyDialog();
+
+    var CreateHUSrvModel = oController.getOwnerComponent().getModel("CreateHUSrvModel");
+
+    var oPayload = {
+        Delivery: sDeliveryNo
+    };
+
+    CreateHUSrvModel.create("/PGICREATESet", oPayload, {
+        success: function (oData) {
+            var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+
+            eshipjetModel.setProperty("/PGIStatus", oData.Msgtyp);
+            eshipjetModel.setProperty("/PGIMessage", oData.Message1);
+            oController._logPGIResult( oData.Msgtyp,  oData.Message1);
+
+            oController.onManifestCreatePress();   // PGI Success → Update Manifest
+
+            oController.onCloseBusyDialog();
+            sap.m.MessageToast.show("PGI Successful (EWM)");
+        },
+        error: function (oError) {
+            oController.onCloseBusyDialog();
+
+            var errMsg = JSON.parse(oError.responseText).error.message.value;
+
+            oController._logPGIResult("F", errMsg);
+            oController.onManifestCreatePress();   // PGI Success → Update Manifest
+            sap.m.MessageBox.error(errMsg);
+        }
+    });
+},
+
+
+        checkPostGoodsIssueStatus:function(sDeliveryNo){
+            var CreateHUSrvModel = oController.getOwnerComponent().getModel("CreateHUSrvModel");
+            var aFilters = [];
+            aFilters.push(new Filter("Delivery", "EQ", sDeliveryNo));
+            CreateHUSrvModel.read("/PGICREATESet", {
+                filters: aFilters,
+                success: function (oData) {
+                    // oController.getShippingDataAfterPGI(sapDeliveryNumber);
+                    eshipjetModel.setProperty("/commonValues/OverallGoodsMovementStatus", oData.results[0].Msgtyp);
+                    oController.onCloseBusyDialog();
+                },
+                error: function (oError) {
+                    oController.onCloseBusyDialog();
+                    var errMsg = JSON.parse(oError.responseText).error.message.value;
+                    sap.m.MessageBox.error(errMsg);
+                }
+            });
+        },
+
+
+         getShippingDataAfterPGI:function(sDeliveryNo){
+            var oDeliveryModel = oController.getView().getModel("OutBoundDeliveryModel");                    
+            var oHandlingUnitModel = oController.getView().getModel("HandlingUnitModel");           
+            var sPath = "/A_OutbDeliveryHeader('"+ sDeliveryNo +"')/to_DeliveryDocumentPartner";
+            var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+            if(sDeliveryNo && sDeliveryNo.length >= 7){
+                oController.onOpenBusyDialog();
+                
+                var path = "/A_OutbDeliveryHeader('"+ sDeliveryNo +"')"
+                oDeliveryModel.read(path,{
+                    urlParameters: {
+                        "$expand": "to_DeliveryDocumentItem,to_DeliveryDocumentPartner"
+                    },
+                    success:function(oData){                        
+                        oController.etag = oData.__metadata.etag;
+                        oController.ShippingType = oData.ShippingType;
+                        eshipjetModel.setProperty("/commonValues/OverallGoodsMovementStatus", oData.OverallGoodsMovementStatus);
+                        oController.onCloseBusyDialog();
+                    },
+                    error: function(oErr){
+                        oController.onCloseBusyDialog();
+                    }
+                });
+            }
+        },
+
+
+    onPostGoodsIssueWithoutEWM: function (sDeliveryNo) {
         var oController = this;
         var oModel = oController.getView().getModel("OutBoundDeliveryModel");
 
@@ -20345,31 +20392,7 @@ readPGIErrorLog: function () {
 
 
 
-        // getShippingDataAfterPGI:function(sDeveliveryNumber){
-        //     var oDeliveryModel = oController.getView().getModel("OutBoundDeliveryModel");                    
-        //     var oHandlingUnitModel = oController.getView().getModel("HandlingUnitModel");           
-        //     var sPath = "/A_OutbDeliveryHeader('"+ sDeveliveryNumber +"')/to_DeliveryDocumentPartner";
-        //     var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
-        //     if(sDeveliveryNumber && sDeveliveryNumber.length >= 7){
-        //         oController.onOpenBusyDialog();
-                
-        //         var path = "/A_OutbDeliveryHeader('"+ sDeveliveryNumber +"')"
-        //         oDeliveryModel.read(path,{
-        //             urlParameters: {
-        //                 "$expand": "to_DeliveryDocumentItem,to_DeliveryDocumentPartner"
-        //             },
-        //             success:function(oData){                        
-        //                 oController.etag = oData.__metadata.etag;
-        //                 oController.ShippingType = oData.ShippingType;
-        //                 eshipjetModel.setProperty("/commonValues/OverallGoodsMovementStatus", oData.OverallGoodsMovementStatus);
-        //                 oController.onCloseBusyDialog();
-        //             },
-        //             error: function(oErr){
-        //                 oController.onCloseBusyDialog();
-        //             }
-        //         });
-        //     }
-        // },
+       
 
         createReversePostGoodsIssue:function(sapDeliveryNumber){
             var ShipReadDataSrvModel = oController.getOwnerComponent().getModel("ShipReadDataSrvModel");

@@ -20,11 +20,11 @@
         </content>
 
         <footer>
-            <Toolbar height="4rem" >
+            <Toolbar height="3rem" >
                 <OverflowToolbar class="sapMPopoverFooter1">
-                    <Button text="Print" press="onClosePGIErrorLogDialog" class="Ship-Now-toolbar1__button_green removeBtnOutline saveBtn" type="Ghost" />
+                    <Button text="Print" press="onClosePGIErrorLogDialog" class="Ship-Now-toolbar1__button_green removeBtnOutline saveBtn1" type="Ghost" />
                     <ToolbarSpacer ></ToolbarSpacer>
-                        <Button text="Close" press=".onClosePGIErrorDialog" class="Ship-Now-toolbar1__button_red removeBtnOutline clearBtn sapUiSmallMarginEnd" type="Ghost" />
+                        <Button text="Close" press=".onClosePGIErrorDialog" class="Ship-Now-toolbar1__button_red removeBtnOutline clearBtn1 sapUiSmallMarginEnd" type="Ghost" />
                 </OverflowToolbar>
             </Toolbar>
         </footer>
