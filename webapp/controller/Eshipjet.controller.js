@@ -24982,7 +24982,7 @@ packParcelProducts: function () {
         oMainModel.submitChanges({
             groupId: "batchGroup1",
             success: function (oData, oResponse) {
-                sap.m.MessageToast.show("✅ Carrier Catalog created successfully!");
+                // sap.m.MessageToast.show("✅ Carrier Catalog created successfully!");
                 oController.byId("idAddCarrierDialog").close();
                 oController.onCloseBusyDialog();
                 oController.onGetCarrierCatalogData();
@@ -25449,7 +25449,7 @@ AddCarrierCancelDialog: function() {
             },
             method: "PATCH",
             success: function() { 
-                sap.m.MessageToast.show("Carrier configuration updated successfully!");
+                // sap.m.MessageToast.show("Carrier configuration updated successfully!");
                     oController.byId("idAddCarrierConfigurationDialog").close();
                     oController.onCloseBusyDialog();
                 oController.onGetCarrierAccoData(); // Refresh table
@@ -25895,6 +25895,7 @@ AddCarrierCancelDialog: function() {
 
                 if (partner.PartnerFunction === "SH") {
                     eshipjetModel.setProperty("/ShipToAddress", addr);
+                     eshipjetModel.setProperty("/ShipToAddress/LocationType", "Residential");
                     return { PartnerType: "Ship-to Party", ...base };
                 } 
 
@@ -26146,7 +26147,8 @@ readProductPlant: function () {
                     ShipFromCOUNTRY: p.Country || "",
                     ShipFromEMAIL: p.EmailAddress || "",
                     ShipFromPHONE: "",          // not provided by PLANT_CDS
-                    LocationType: "PLANT"
+                    // LocationType: "PLANT",
+                    LocationType:"Commercial"
                 });
 
             } else {
@@ -26301,7 +26303,7 @@ readProductPlant: function () {
 
                         errorHandler: false,
                         success: function () {
-                            sap.m.MessageToast.show("Bill Of Lading updated successfully");
+                            // sap.m.MessageToast.show("Bill Of Lading updated successfully");
                             oController.onCloseBusyDialog();
                         },
                         error: function (oError) {
