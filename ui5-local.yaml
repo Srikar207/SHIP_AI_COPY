@@ -40,11 +40,6 @@ server:
             client: '200'
             destination: Eshipjet-ESJ
             authenticationType: BasicAuthentication
-          - path: /sap/opu/odata/ESHIPJET/MANFEST_SRV/
-            url: https://sapdemo.eshipjet.com:44300
-            client: '200'
-            destination: Eshipjet-ESJ
-            authenticationType: BasicAuthentication
           - url: https://sapdemo.eshipjet.com:44300
             client: '200'
             authenticationType: BasicAuthentication
@@ -99,10 +94,6 @@ server:
       configuration:
         mountPath: /
         services:
-          - urlPath: /sap/opu/odata/ESHIPJET/MANFEST_SRV
-            metadataPath: ./webapp/localService/MANFEST_SRV1/metadata.xml
-            mockdataPath: ./webapp/localService/MANFEST_SRV1/data
-            generateMockData: true
           - urlPath: /sap/opu/odata/sap/ZCDS_DLVR_DATA_CDS
             metadataPath: ./webapp/localService/ZCDS_DLVR_DATA_CDS/metadata.xml
             mockdataPath: ./webapp/localService/ZCDS_DLVR_DATA_CDS/data

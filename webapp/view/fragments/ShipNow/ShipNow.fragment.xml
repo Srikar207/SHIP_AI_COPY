@@ -910,17 +910,11 @@
 							selectionMode="None"
 
 							visibleRowCountMode="Fixed"
-							visibleRowCount="4" 
+							visibleRowCount="5" 
 							visible="{eshipjetModel>/expandProductTableOn}"
 							noData="">
 
 							<!-- <ui:extension>
-								<OverflowToolbar class="scan-ship-table__toolbar">
-									<ToolbarSpacer ></ToolbarSpacer>
-									<Button icon="sap-icon://action-settings" press="openShipNowPrdctColNamesPopover" ></Button>
-								</OverflowToolbar>
-							</ui:extension> -->
-							<ui:extension>
 							<OverflowToolbar style="Clear">
 								<Button
 									id="idToggleRowsBtn"
@@ -928,11 +922,15 @@
 									type="Transparent"
 									press=".onToggleProductTableRows" />
 							</OverflowToolbar>
-						</ui:extension>
+						</ui:extension> -->
 
 							<ui:columns>
 								<ui:Column visible="true" width="3%" >
-									<Label text="#" />
+									<Button
+										id="idToggleRowsBtn"
+										icon="sap-icon://inspect"
+										type="Transparent"
+										press=".onToggleProductTableRows" />
 									<ui:template>
 										<Text text="{eshipjetModel>DistributionChannel}" wrapping="false" />
 									</ui:template>
@@ -1141,11 +1139,11 @@
 							
 							class="sapUiTinyMarginTop"
 							selectionMode="None"
-							visibleRowCount="6"
+							visibleRowCount="7"
     						visibleRowCountMode="Fixed" 
 							visible="{eshipjetModel>/expandHUTableOn}">
 
-							<ui:extension>
+							<!-- <ui:extension>
 								<OverflowToolbar style="Clear">
 									<Button
 										id="idToggleHURowsBtn"
@@ -1153,11 +1151,15 @@
 										type="Transparent"
 										press=".onToggleHandlingUnitsTableRows" />
 								</OverflowToolbar>
-							</ui:extension>
+							</ui:extension> -->
 							
 							<ui:columns>
 								<ui:Column visible="true" width="5rem" >
-									<Label text="#" />
+									<Button
+										id="idToggleHURowsBtn"
+										icon="sap-icon://inspect"
+										type="Transparent"
+										press=".onToggleHandlingUnitsTableRows" />
 									<ui:template>
 										<Text text="{path: 'eshipjetModel>HandlingUnitExternalId', formatter: '.formatter.formatRowNo'}" wrapping="false" />
 									</ui:template>

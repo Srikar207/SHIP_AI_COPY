@@ -16,15 +16,6 @@
       "toolsId": "d1fc7917-d11d-4531-827c-52e7b742fe43"
     },
     "dataSources": {
-      "MANFEST_SRV1": {
-        "uri": "/sap/opu/odata/ESHIPJET/MANFEST_SRV/",
-        "type": "OData",
-        "settings": {
-          "annotations": [],
-          "localUri": "localService/MANFEST_SRV1/metadata.xml",
-          "odataVersion": "2.0"
-        }
-      },
       "ZCDS_DLVR_DATA_CDS_VAN": {
         "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZCDS_DLVR_DATA_CDS_VAN',Version='0001')/$value/",
         "type": "ODataAnnotation",
@@ -179,18 +170,6 @@
       "eshipjetModel": {
         "type": "sap.ui.model.json.JSONModel",
         "uri": "model/data.json"
-      },
-      "ManifestSrvModel": {
-        "dataSource": "MANFEST_SRV1",
-        "preload": true,
-        "settings": {
-          "defaultBindingMode": "TwoWay",
-          "defaultCountMode": "Inline",
-          "refreshAfterChange": false,
-          "metadataUrlParams": {
-            "sap-value-list": "none"
-          }
-        }
       },
       "GetDeliveryDataModel": {
         "dataSource": "ZCDS_DLVR_DATA_CDS",
