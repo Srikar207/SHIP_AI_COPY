@@ -19,7 +19,7 @@
 			  	<Text text="{eshipjetModel>Vbeln}" class="customObjectStatus"  width="auto"  />
 				<Text text="{eshipjetModel>Plant}"  width="3rem" class="firebrickColor" ></Text>
 				<Text text="KUMAR"  width="auto" class="namecolorrc" ></Text>
-                <Text text="{ path: 'eshipjetModel>CreatedOn', formatter: '.formatter.formatCustomDateTimeForRecentShipments' }"  width="auto" />	
+                <Text text="{ path: 'eshipjetModel>LastChangedOn', formatter: '.formatter.formatCustomDateTimeForRecentShipments' }"  width="auto" />	
                 <!-- <Text text="{eshipjetModel>Company}"  wrapping="false" />	 -->
                 <Text text="{eshipjetModel>Carriertype}"  width="auto" class="carriercolortext" />
 			</cells>
