@@ -126,7 +126,7 @@
 														</layoutData>
 													</Input>
 													<!-- <Label text="State / Province" /> -->
-													<Input class="sapUiSmallMarginBottom create-ship-req_input" editable="false" maxLength="3" value="{ShipNowDataModel>/ShipFromAddress/ShipFromSTATE}" placeholder="State" >
+													<Input class="sapUiSmallMarginBottom create-ship-req_input" editable="false" maxLength="3" value="{eshipjetModel>/ShipFromAddress/ShipFromSTATE}" placeholder="State" >
 														<layoutData>
 															<f:ColumnElementData cellsSmall="6" cellsLarge="6" />
 														</layoutData>
@@ -157,7 +157,7 @@
 													</Input>
 													<ComboBox class="sapUiSmallMarginBottom create-ship-req_input"
 														editable="false" 
-														selectedKey="{ShipNowDataModel>/ShipFromAddress/LocationType}"
+														selectedKey="{eshipjetModel>/ShipFromAddress/LocationType}"
 														items="{eshipjetModel>/shipNowAddressType}" 
 														placeholder="Address Type">
 														<core:Item key="{eshipjetModel>key}" text="{eshipjetModel>text}" />
@@ -219,7 +219,7 @@
 													</Input>
 													<ComboBox class="sapUiSmallMarginBottom create-ship-req_input" 
 														editable="{eshipjetModel>/commonValues/shipNowBtnStatus}"
-														selectedKey="{ShipNowDataModel>/ShipToAddress/LocationType}" 
+														selectedKey="{eshipjetModel>/ShipToAddress/LocationType}" 
 														items="{eshipjetModel>/shipNowAddressType}" 
 														placeholder="Address Type">
 														<core:Item key="{eshipjetModel>key}" text="{eshipjetModel>text}" />

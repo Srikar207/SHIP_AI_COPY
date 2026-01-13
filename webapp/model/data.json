@@ -1777,6 +1777,13 @@
             "text": "Print"
         }
     ],
+    "ShipToAddress": {
+    "LocationType": "Residential"
+},
+
+"ShipFromAddress": {
+    "LocationType": "Commercial"
+},
     "shipNowAddressType": [
         {
             "key": "Residential",

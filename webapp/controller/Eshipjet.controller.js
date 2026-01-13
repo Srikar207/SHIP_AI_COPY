@@ -111,8 +111,15 @@ sap.ui.define([
                 "ShipToZIPCODE": "",
                 "ShipToADDRESS_LINE1": "",
                 "ShipToADDRESS_LINE2": "",
-                "ShipToADDRESS_LINE3": ""
+                "ShipToADDRESS_LINE3": "",
+                 ShipToAddress: {
+        LocationType: "Residential"   // ✅ ALWAYS set
+    }
             };
+
+            var oShipNowModel = new sap.ui.model.json.JSONModel(ShipNowDataModel);
+this.getOwnerComponent().setModel(oShipNowModel, "ShipNowDataModel");
+
             var ShipNowDataModel = new JSONModel(ShipNowDataModel);
             this.getOwnerComponent().setModel(ShipNowDataModel, "ShipNowDataModel");
             oController.oBusyDialog = new sap.m.BusyDialog({});
@@ -1516,8 +1523,10 @@ sap.ui.define([
                 "ShipFromADDRESS_LINE2": "Suite 250",
                 "LocationType": "Commercial"
             };
-            eshipjetModel.setProperty("/to_HandlingUnitHeaderDelivery/results", []);
+            // Reset expand states
             
+            eshipjetModel.setProperty("/to_HandlingUnitHeaderDelivery/results", []);
+            eshipjetModel.setProperty("/to_DeliveryDocumentItem", []);
             eshipjetModel.setProperty("/GetDeliveryData/to_Items/results", []);
             eshipjetModel.setProperty("/GetDeliveryData/to_ShipToParty", {});
             eshipjetModel.setProperty("/shipNowShipFromInputStatus", false);
@@ -1646,6 +1655,8 @@ sap.ui.define([
             };
             ShipNowDataModel.setProperty("/ShipFromAddress", shipFromObj); 
             eshipjetModel.setProperty("/BusinessPartners", []);
+
+             eshipjetModel.setProperty("/to_DeliveryDocumentItem", []);
             eshipjetModel.setProperty("/commonValues/ShipNowShipMethodSelectedKey", "");
             eshipjetModel.setProperty("/commonValues/ShipNowShipsrvNameSelectedKey", "");
             eshipjetModel.setProperty("/accountNumber", "");
@@ -1968,7 +1979,7 @@ sap.ui.define([
                 };
 
             oController.onOpenBusyDialog();
-            sap.m.MessageToast.show("Ship Now triggered!");
+            // sap.m.MessageToast.show("Ship Now triggered!");
             var currentDate = new Date();
             var shipDate = currentDate.toISOString();
             var  ShipmentLevelSpecialServices;
@@ -2503,7 +2514,7 @@ sap.ui.define([
                 packagesArray.push(packageObj);
             };
             oController.onOpenBusyDialog();
-            sap.m.MessageToast.show("Ship Now triggered!");
+            // sap.m.MessageToast.show("Ship Now triggered!");
             var currentDate = new Date();
             var shipDate = currentDate.toISOString();
             var  ShipmentLevelSpecialServices;
@@ -3401,7 +3412,7 @@ onManifestCreatePress: function () {
                         }
 
                         if (!bError) {
-                            sap.m.MessageToast.show("All shipment records created successfully!");
+                            // sap.m.MessageToast.show("All shipment records created successfully!");
                             // oController.getTodayShipments();
                             oController.createPostGoodsIssue(sapDeliveryNumber);
 
@@ -3768,7 +3779,7 @@ onManifestCreatePress: function () {
                         }
 
                         if (!bError) {
-                            sap.m.MessageToast.show("All shipment records created successfully!");
+                            // sap.m.MessageToast.show("All shipment records created successfully!");
                             // oController.getTodayShipments();
                             oController.createPostGoodsIssue(sapDeliveryNumber);
 
@@ -3859,7 +3870,7 @@ onManifestCreatePress: function () {
             OutBoundDeliveryModel.create(sPath, oPayload, {
                 urlParameters: urlParameters,
                 success: function (oData) {
-                    MessageToast.show("Handling Unit Created Successfully");
+                    // MessageToast.show("Handling Unit Created Successfully");
                     console.log("Success:", oData);
                     oController.oBusyDialog.close();
                 },
@@ -19883,7 +19894,7 @@ onHandlingUnitDialogClosePress: function () {
                      eshipjetModel.setProperty("/PGIStatus", "S");  // <-- NEW
                         oController.onManifestCreatePress();   // PGI Success → Update Manifest
                         oController.onCloseBusyDialog();
-                        sap.m.MessageToast.show("PGI Successful");
+                        // sap.m.MessageToast.show("PGI Successful");
 
                     }).catch(function (oError) {
 
@@ -25710,6 +25721,7 @@ AddCarrierCancelDialog: function() {
                     }
 
                     eshipjetModel.setProperty("/selectPaymentType", "Sender");
+                    
 
                     eshipjetModel.setProperty("/to_HandlingUnitHeaderDelivery/results",
                         firstRow.to_HandlingUnitHeaderDelivery);
