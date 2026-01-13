@@ -147,6 +147,8 @@ this.getOwnerComponent().setModel(oShipNowModel, "ShipNowDataModel");
             // oController.getTodayShipments();
             // oController.getManifestHeaderForTodaysShipmentCount();
             oController.getManifestHeaderForTodaysShipmentCount();
+
+            // oController._initCreateHUSrvSecurity();
             // oController.onPackSectionEmptyRows();
             function sanitizeDescription(desc, maxLength = 40) {
                 if (!desc) return "";
@@ -3414,7 +3416,7 @@ onManifestCreatePress: function () {
                         if (!bError) {
                             // sap.m.MessageToast.show("All shipment records created successfully!");
                             // oController.getTodayShipments();
-                            oController.createPostGoodsIssue(sapDeliveryNumber);
+                            // oController.createPostGoodsIssue(sapDeliveryNumber);
 
                             var sFromViewName = eshipjetModel.getProperty("/sFromViewName");
                             if (sFromViewName === "SCAN_SHIP") {
@@ -3781,7 +3783,7 @@ onManifestCreatePress: function () {
                         if (!bError) {
                             // sap.m.MessageToast.show("All shipment records created successfully!");
                             // oController.getTodayShipments();
-                            oController.createPostGoodsIssue(sapDeliveryNumber);
+                            // oController.createPostGoodsIssue(sapDeliveryNumber);
 
                             var sFromViewName = eshipjetModel.getProperty("/sFromViewName");
                             if (sFromViewName === "SCAN_SHIP") {
@@ -4911,13 +4913,13 @@ onShippingDocumentsViewPress: async function (oEvent) {
    onToggleProductTableRows: function () {
             const oTable = this.byId("idShipNowPackTable");
             const oBtn = this.byId("idToggleRowsBtn");
-            const isExpanded = oTable.getVisibleRowCount() > 4;
+            const isExpanded = oTable.getVisibleRowCount() > 5;
             if (isExpanded) {
                 // Collapse
                 eshipjetModel.setProperty("/expandTableOn", true);
                 eshipjetModel.setProperty("/expandProductTableOn", true);
                 eshipjetModel.setProperty("/expandHUTableOn", true);
-                oTable.setVisibleRowCount(4);
+                oTable.setVisibleRowCount(5);
                 oBtn.setIcon("sap-icon://inspect");
             } else {
                 // Expand
@@ -4931,13 +4933,13 @@ onShippingDocumentsViewPress: async function (oEvent) {
          onToggleHandlingUnitsTableRows: function () {
             const oTable = this.byId("idShipNowHandlingUnitTable");
             const oBtn = this.byId("idToggleHURowsBtn");
-            const isExpanded = oTable.getVisibleRowCount() > 6;
+            const isExpanded = oTable.getVisibleRowCount() > 7;
             if (isExpanded) {
                 // Collapse
                 eshipjetModel.setProperty("/expandTableOn", true);
                 eshipjetModel.setProperty("/expandProductTableOn", true);
                 eshipjetModel.setProperty("/expandHUTableOn", true);
-                oTable.setVisibleRowCount(6);
+                oTable.setVisibleRowCount(7);
                 oBtn.setIcon("sap-icon://inspect");
             } else {
                 // Expand
@@ -19766,41 +19768,118 @@ onHandlingUnitDialogClosePress: function () {
 
         onPostGoodsIssueWithEWM: function (sDeliveryNo) {
             var oController = this;
-
-            if (!sDeliveryNo) {
-                sap.m.MessageBox.error("Invalid Delivery Number");
-                return;
-            }
-
             oController.onOpenBusyDialog();
-
+            
             var CreateHUSrvModel = oController.getOwnerComponent().getModel("CreateHUSrvModel");
-
-            var oPayload = {
-                Delivery: sDeliveryNo
-            };
-
-            CreateHUSrvModel.create("/PGICREATESet", oPayload, {
-                success: function (oData) {
-                    var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
-
-                    eshipjetModel.setProperty("/PGIStatus", oData.Msgtyp);
-                    eshipjetModel.setProperty("/PGIMessage", oData.Message1);
-                    oController._logPGIResult( oData.Msgtyp,  oData.Message1);
-
-                    oController.onManifestCreatePress();   // PGI Success → Update Manifest
-
+            CreateHUSrvModel.refreshSecurityToken(function () {
+                var sToken = CreateHUSrvModel.getSecurityToken();
+                if (!sToken) {
+                    sap.m.MessageBox.error("CSRF token missing");
                     oController.onCloseBusyDialog();
-                    sap.m.MessageToast.show("PGI Successful (EWM)");
+                    return;
+                }
+                CreateHUSrvModel.read("/PGICREATESet", {
+                    success: function (oData, oResponse) {
+                        var sETag = oResponse?.headers?.etag;
+                        // if (!sETag) {
+                        //     sap.m.MessageBox.error("ETag not found in response headers");
+                        //     oController.onCloseBusyDialog();
+                        //     return;
+                        // }
+                        oController.onCreatePostGoodsIssue(sDeliveryNo, sETag, sToken);
+                    },
+                    error: function () {
+                        sap.m.MessageBox.error("Failed to read PGI ETag Value");
+                        oController.onCloseBusyDialog();
+                    }
+                });
+            });
+        },
+
+
+        onCreatePostGoodsIssue:function(sDeliveryNo, sETag, sToken){
+            var oController = this;
+            var CreateHUSrvModel = oController.getOwnerComponent().getModel("CreateHUSrvModel");
+            var oPayload = { Delivery: sDeliveryNo };
+
+            CreateHUSrvModel.create(
+                "/PGICREATESet",
+                oPayload,
+                {
+                    method: "POST",
+                    headers: {
+                        "X-CSRF-Token": sToken,
+                        // "If-Match": sETag,
+                        "Content-Type": "application/json"
+                    },
+
+                    errorHandler: false,
+                    success: function (oData) {
+                        var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+                        eshipjetModel.setProperty("/PGIStatus", oData.Msgtyp);
+                        eshipjetModel.setProperty("/PGIMessage", oData.Message1);
+                        oController._logPGIResult(oData.Msgtyp, oData.Message1);
+                        oController.onManifestCreatePress();
+                        oController.onCloseBusyDialog();
+                        sap.m.MessageToast.show("PGI Successful (EWM)");
+                    },
+                    error: function (oError) {
+                        console.warn("PGI Creation failed:", jQuery.parseXML(oError.responseText).getElementsByTagName("message")[0].textContent);
+                        oController.onCloseBusyDialog();
+                    }
+                }
+            );
+
+
+            // var oController = this;
+            // if (!sDeliveryNo) return sap.m.MessageBox.error("Invalid Delivery Number");
+            // oController.onOpenBusyDialog();
+            // oController._fetchDeliveryETag(sDeliveryNo, function (sETag) {
+            //     var oModel = oController.getOwnerComponent().getModel("CreateHUSrvModel");
+            //     var oPayload = { Delivery: sDeliveryNo };
+            //     oModel.create("/PGICREATESet", oPayload, {
+            //         headers: sETag ? { "If-Match": sETag } : {},
+            //         success: function (oData) {
+            //             var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+            //             eshipjetModel.setProperty("/PGIStatus", oData.Msgtyp);
+            //             eshipjetModel.setProperty("/PGIMessage", oData.Message1);
+            //             oController._logPGIResult(oData.Msgtyp, oData.Message1);
+            //             oController.onManifestCreatePress();
+            //             oController.onCloseBusyDialog();
+            //             sap.m.MessageToast.show("PGI Successful (EWM)");
+            //         },
+            //         error: function (oError) {
+            //             oController.onCloseBusyDialog();
+            //             var errMsg = jQuery.parseXML(oError.responseText)
+            //                 .getElementsByTagName("message")[0].textContent;
+            //             oController._logPGIResult("F", errMsg);
+            //             oController.onManifestCreatePress();
+            //             sap.m.MessageBox.error(errMsg);
+            //         }
+            //     });
+            // });
+        },
+
+        _initCreateHUSrvSecurity: function () {
+            var oModel = this.getOwnerComponent().getModel("CreateHUSrvModel");
+
+            oModel.refreshSecurityToken();   // fetches X-CSRF-TOKEN
+
+            // force metadata load to enable automatic ETag handling
+            oModel.attachMetadataLoaded(function () {
+                oModel.setUseBatch(false);
+            });
+        },
+
+        _fetchDeliveryETag: function (sDeliveryNo, fnNext) {
+            var oModel = this.getOwnerComponent().getModel("CreateHUSrvModel");
+
+            oModel.read("/PGICREATESet('" + sDeliveryNo + "')", {
+                success: function (oData, oResponse) {
+                    fnNext(oResponse.headers["etag"]);
                 },
-                error: function (oError) {
-                    oController.onCloseBusyDialog();
-
-                    var errMsg = jQuery.parseXML(oError.responseText).getElementsByTagName("message")[0].textContent;
-
-                    oController._logPGIResult("F", errMsg);
-                    oController.onManifestCreatePress();   // PGI Success → Update Manifest
-                    sap.m.MessageBox.error(errMsg);
+                error: function () {
+                    fnNext(null);
                 }
             });
         },
