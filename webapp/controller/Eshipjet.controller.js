@@ -26309,7 +26309,7 @@ readProductPlant: function () {
                             // var sMessage = oErrorResponse.error.message.value;
                             // sap.m.MessageBox.warning( sMessage );
                             // // console.warn("BOL Update failed:", jQuery.parseXML(oError.responseText).getElementsByTagName("message")[0].textContent);
-                            // oController.onCloseBusyDialog();
+                            oController.onCloseBusyDialog();
                             // return;
                         }
                     }
