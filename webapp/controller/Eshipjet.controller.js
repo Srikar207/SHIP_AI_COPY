@@ -1855,10 +1855,15 @@ this.getOwnerComponent().setModel(oShipNowModel, "ShipNowDataModel");
 
        onShipNowWithEWMCall: async function () {
             var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+
+            var oShipFrom = eshipjetModel.getProperty("/ShipFromAddress") || {};
+
             var carrier = eshipjetModel.getProperty("/commonValues/ShipNowShipMethodSelectedKey");
             var serviceId = eshipjetModel.getProperty("/commonValues/ShipNowShipsrvNameSelectedKey");
             var sDeliveryNo = eshipjetModel.getProperty("/commonValues/sapDeliveryNumber");
             var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData");
+           
+
             var selectedCarrierAccountsData = eshipjetModel.getProperty("/selectedCarrierAccountsData");
 
              if (!carrier || !serviceId) {
@@ -2168,25 +2173,26 @@ this.getOwnerComponent().setModel(oShipNowModel, "ShipNowDataModel");
                     
                     
                     
-                    "ShipFrom": {
-                        "COMPANY": "Eshipjet Software Inc.",
-                        "CONTACT": "Steve Marsh",
-                        "ADDRESS_LINE1": "5717 Legacy",
-                        "ADDRESS_LINE2": "Suite 250",
-                        "ADDRESS_LINE3": "",
-                        "CITY": "Plano",
-                        "STATE": "TX",
-                        "ZIPCODE": "75024",
-                        "COUNTRY": "US",
-                        "PHONE": "(888) 464-2360",
-                        "EMAIL": "info@eshipjet.ai",
-                        "AddressType": "",
-                        "TAXID": "",
-                        "VAT": "",
-                        "EORI": "",
-                        "LocationType": "",
-                        "HSNShipment": false
-                    },
+                   "ShipFrom": {
+   "COMPANY": oShipFrom.ShipFromCOMPANY || "",
+   "CONTACT": oShipFrom.ShipFromCONTACT || "",
+   "ADDRESS_LINE1": oShipFrom.ShipFromADDRESS_LINE1 || "",
+   "ADDRESS_LINE2": oShipFrom.ShipFromADDRESS_LINE2 || "",
+   "ADDRESS_LINE3": "",
+   "CITY": oShipFrom.ShipFromCITY || "",
+   "STATE": oShipFrom.ShipFromSTATE || "",
+   "ZIPCODE": oShipFrom.ShipFromZIPCODE || "",
+   "COUNTRY": oShipFrom.ShipFromCOUNTRY || "",
+   "PHONE": oShipFrom.ShipFromPHONE || "",
+   "EMAIL": oShipFrom.ShipFromEMAIL || "",
+   "AddressType": "",
+   "TAXID": "",
+   "VAT": "",
+   "EORI": "",
+   "LocationType": oShipFrom.LocationType || "",
+   "HSNShipment": false
+},
+
                     "Shipper": {
                         "COMPANY": "Eshipjet Software Inc.",
                         "CONTACT": "Steve Marsh",
@@ -3325,6 +3331,7 @@ onManifestCreatePress: function () {
                                 "ShipFromPostalcode": shipFrom.ShipFromZIPCODE || "",
                                 "ShipFromEmail": shipFrom.ShipFromEMAIL || "",
                                 "ShipFromPhoneNumber": shipFrom.ShipFromPHONE || "",
+                                "ShipFromAddressType":"Commercial",
 
 
                                 // -------------------------
@@ -3354,6 +3361,7 @@ onManifestCreatePress: function () {
                                 "ShipToPostalcode": ShipNowResponse.ShipTo?.ZIPCODE || "",
                                 "ShipToEmail": ShipNowResponse.ShipTo?.EMAIL || "",
                                 "ShipToPhoneNumber": ShipNowResponse.ShipTo?.PHONE || "",
+                                "ShipToAddressType" :ShipNowResponse.ShipTo?.PHONE || "",
 
                                 // "Country":GetDeliveryData.to_SoldToParty?.Country,
 
@@ -3498,11 +3506,15 @@ onManifestCreatePress: function () {
                     );
 
                     // SLOT 1
-                    if (remainingCharges[0] !== undefined) {
-                        ShippingChargeDescription1 = remainingCharges[0].description || null;
-                        ShippingCharges1 = remainingCharges[0].amount !== undefined ? remainingCharges[0].amount.toString() : null;
-                        ShippingCurrency1 = remainingCharges[0].currency || null;
-                    }
+                    // SLOT 1  ✅ FIXED
+if (remainingCharges[0] !== undefined) {
+    ShippingChargeDescription1 = remainingCharges[0].description || null;
+    ShippingCharges1 = remainingCharges[0].amount !== undefined 
+        ? Number(remainingCharges[0].amount).toFixed(2) 
+        : null;
+    ShippingCurrency1 = remainingCharges[0].currency || null;
+}
+
 
                     // SLOT 2
                     if (remainingCharges[1] !== undefined) {
@@ -3692,6 +3704,7 @@ onManifestCreatePress: function () {
                                 "ShipFromPostalcode": shipFrom.ShipFromZIPCODE || "",
                                 "ShipFromEmail": shipFrom.ShipFromEMAIL || "",
                                 "ShipFromPhoneNumber": shipFrom.ShipFromPHONE || "",
+                                 "ShipFromAddressType": "Commercial",
 
 
                                 // -------------------------
@@ -3721,6 +3734,7 @@ onManifestCreatePress: function () {
                                 "ShipToPostalcode": ShipNowResponse.ShipTo?.ZIPCODE || "",
                                 "ShipToEmail": ShipNowResponse.ShipTo?.EMAIL || "",
                                 "ShipToPhoneNumber": ShipNowResponse.ShipTo?.PHONE || "",
+                                "ShipToAddressType": "Residential",
 
                                 // "Country":GetDeliveryData.to_SoldToParty?.Country,
 
@@ -5779,7 +5793,8 @@ onShippingDocumentsViewPress: async function (oEvent) {
                         ShipFromZIPCODE: m.ShipFromPostalcode || "",
                         ShipFromCOUNTRY: m.ShipFromCountry || "",
                         ShipFromPHONE: m.ShipFromPhoneNumber || "",
-                        ShipFromEMAIL: m.ShipFromEmail || ""
+                        ShipFromEMAIL: m.ShipFromEmail || "",
+                        LocationType: m.ShipToAddressType || ""
                     };
                     eshipjetModel.setProperty("/ShipFromAddress", ShipFrom);
 
