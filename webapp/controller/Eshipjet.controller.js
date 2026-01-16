@@ -2357,7 +2357,7 @@ this.getOwnerComponent().setModel(oShipNowModel, "ShipNowDataModel");
                                         }
                                     }
 
-                                    oController.ApiOutboundDeliverySrvData(response);
+                                    // oController.ApiOutboundDeliverySrvData(response);
                                     oController.onPostGoodsIssuePress(sDeliveryNo);      
 
                                 }else if(response && response.status === "Error"){
@@ -2932,8 +2932,8 @@ this.getOwnerComponent().setModel(oShipNowModel, "ShipNowDataModel");
                                     // oController.getManifestData(response);
                                     
                                     //    oController.updateManifestHeaderSet();
-                                    oController.ApiOutboundDeliverySrvData(response);
-                                     oController.onPostGoodsIssuePress(sDeliveryNo);      
+                                    
+                                    oController.onPostGoodsIssuePress(sDeliveryNo);      
                                     // oController.showLabelAfterShipmentSuccess(response);
 
                                 }else if(response && response.status === "Error"){
@@ -3077,20 +3077,19 @@ formatNumberForSAP: function (val) {
 
 
 
-onManifestCreatePress: function () {
+            onManifestCreatePress: function () {
+                var oController = this;
+                var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+                var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData") || {};
 
-    var oController = this;
-    var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
-    var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData") || {};
-
-    if (GetDeliveryData.Warehouse === "" || !GetDeliveryData.Warehouse) {
-        // NON EWM FLOW
-        oController.updateManifestWithoutEWM();
-    } else {
-        // EWM FLOW
-        oController.updateManifestWithEWM();
-    }
-},
+                if (GetDeliveryData.Warehouse === "" || !GetDeliveryData.Warehouse) {
+                    // NON EWM FLOW
+                    oController.updateManifestWithoutEWM();
+                } else {
+                    // EWM FLOW
+                    oController.updateManifestWithEWM();
+                }
+            },
 
 updateManifestWithoutEWM: function () {
 
@@ -4965,116 +4964,115 @@ updateManifestWithEWM: function () {
 
 
        showLabelAfterShipmentSuccess: function (response) {
+            var oController = this;
+            var oView = this.getView();
+            oController.onOpenBusyDialog();
 
-    var oController = this;
-    var oView = this.getView();
-    oController.onOpenBusyDialog();
+            var eshipjetModel = oView.getModel("eshipjetModel");
+            var shippingDocuments = eshipjetModel.getProperty("/shippingDocuments");
 
-    var eshipjetModel = oView.getModel("eshipjetModel");
-    var shippingDocuments = eshipjetModel.getProperty("/shippingDocuments");
+            var oCarousel = new sap.m.Carousel({});
+            var aZplList = [];
 
-    var oCarousel = new sap.m.Carousel({});
-    var aZplList = [];
+            // -------------------------------
+            // STEP 1: Loop PDF / PNG / ZPL
+            // -------------------------------
+            for (var i = 0; i < shippingDocuments.length; i++) {
 
-    // -------------------------------
-    // STEP 1: Loop PDF / PNG / ZPL
-    // -------------------------------
-    for (var i = 0; i < shippingDocuments.length; i++) {
+                var doc = shippingDocuments[i];
+                var docType = doc.docType.toUpperCase();
+                var contentType = doc.contentType.toUpperCase();
 
-        var doc = shippingDocuments[i];
-        var docType = doc.docType.toUpperCase();
-        var contentType = doc.contentType.toUpperCase();
+                // Skip Packing Slip & Bill of Lading
+                var skipDoc = (contentType === "PACKING SLIP" || contentType === "BILL OF LADING");
+                if (skipDoc) continue;
 
-        // Skip Packing Slip & Bill of Lading
-        var skipDoc = (contentType === "PACKING SLIP" || contentType === "BILL OF LADING");
-        if (skipDoc) continue;
+                // PDF
+                if (docType === "PDF") {
+                    oCarousel.addPage(
+                        new sap.ui.core.HTML({
+                            content: "<iframe src='" + doc.docName + "' width='500px' height='600px'></iframe>"
+                        })
+                    );
+                }
 
-        // PDF
-        if (docType === "PDF") {
-            oCarousel.addPage(
-                new sap.ui.core.HTML({
-                    content: "<iframe src='" + doc.docName + "' width='500px' height='600px'></iframe>"
-                })
-            );
-        }
+                // PNG
+                else if (docType === "PNG") {
+                    oCarousel.addPage(
+                        new sap.m.Image({
+                            src: doc.docName,
+                            width: "500px",
+                            height: "620px",
+                            class: "sapUiSmallMargin"
+                        })
+                    );
+                }
 
-        // PNG
-        else if (docType === "PNG") {
-            oCarousel.addPage(
-                new sap.m.Image({
-                    src: doc.docName,
-                    width: "500px",
-                    height: "620px",
-                    class: "sapUiSmallMargin"
-                })
-            );
-        }
+                // ZPL / ZPLII
+                else if (docType === "ZPL" || docType === "ZPLII") {
 
-        // ZPL / ZPLII
-        else if (docType === "ZPL" || docType === "ZPLII") {
-
-            var encoded = response.shippingDocuments[i]?.encodedLabel;
-            if (encoded) {
-                aZplList.push(encoded);
-            }
-        }
-    }
-
-    // If ZPL exists → convert sequentially
-    if (aZplList.length > 0) {
-
-        // -----------------------
-        // STEP 2: Sequential convert
-        // -----------------------
-        const convertAllSequentially = async () => {
-
-            let results = [];
-
-            for (let k = 0; k < aZplList.length; k++) {
-
-                // Avoid Labelary throttling
-                await new Promise(res => setTimeout(res, 1000));
-
-                try {
-                    const pngUrl = await oController.convertZplToPng(aZplList[k]);
-                    results.push(pngUrl);
-                } catch (err) {
-                    console.error("ZPL conversion failed:", err);
+                    var encoded = response.shippingDocuments[i]?.encodedLabel;
+                    if (encoded) {
+                        aZplList.push(encoded);
+                    }
                 }
             }
-            return results;
-        };
 
-        convertAllSequentially().then(aPngUrls => {
+            // If ZPL exists → convert sequentially
+            if (aZplList.length > 0) {
 
-            // Add converted ZPL PNGs
-            aPngUrls.forEach(url => {
-                oCarousel.addPage(
-                    new sap.m.Image({
-                        src: url,
-                        width: "500px",
-                        height: "620px"
-                    })
-                );
-            });
+                // -----------------------
+                // STEP 2: Sequential convert
+                // -----------------------
+                const convertAllSequentially = async () => {
 
-            // Display final dialog
-            oController.creatingCarouseltodisplay(oCarousel);
-            oController.openDialogWithCarousel();
-            // oController.updateManifestHeaderSet();
-            oController.onCloseBusyDialog();
+                    let results = [];
 
-        });
+                    for (let k = 0; k < aZplList.length; k++) {
 
-    } else {
+                        // Avoid Labelary throttling
+                        await new Promise(res => setTimeout(res, 1000));
 
-        // No ZPL → normal flow
-        oController.creatingCarouseltodisplay(oCarousel);
-        oController.openDialogWithCarousel();
-        oController.updateManifestHeaderSet();
-        oController.onCloseBusyDialog();
-    }
-},
+                        try {
+                            const pngUrl = await oController.convertZplToPng(aZplList[k]);
+                            results.push(pngUrl);
+                        } catch (err) {
+                            console.error("ZPL conversion failed:", err);
+                        }
+                    }
+                    return results;
+                };
+
+                convertAllSequentially().then(aPngUrls => {
+
+                    // Add converted ZPL PNGs
+                    aPngUrls.forEach(url => {
+                        oCarousel.addPage(
+                            new sap.m.Image({
+                                src: url,
+                                width: "500px",
+                                height: "620px"
+                            })
+                        );
+                    });
+
+                    // Display final dialog
+                    oController.creatingCarouseltodisplay(oCarousel);
+                    oController.openDialogWithCarousel();
+                    // oController.updateManifestHeaderSet();
+                    oController.onCloseBusyDialog();
+
+                });
+
+            } else {
+
+                // No ZPL → normal flow
+                oController.creatingCarouseltodisplay(oCarousel);
+                oController.openDialogWithCarousel();
+                oController.updateManifestHeaderSet();
+                oController.onCloseBusyDialog();
+            }
+        },
 
 // -------------------------------------------
 // CREATE DIALOG WITH CAROUSEL
@@ -20334,17 +20332,17 @@ onHandlingUnitDialogClosePress: function () {
 
 
         onPostGoodsIssuePress: function (sDeliveryNo) {
-    var eshipjetModel = this.getOwnerComponent().getModel("eshipjetModel");
-    var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData");
+            var eshipjetModel = this.getOwnerComponent().getModel("eshipjetModel");
+            var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData");
 
-    if (GetDeliveryData && GetDeliveryData.Warehouse) {
-        // WITH EWM
-        this.onPostGoodsIssueWithEWM(sDeliveryNo);
-    } else {
-        // WITHOUT EWM
-        this.onPostGoodsIssueWithoutEWM(sDeliveryNo);
-    }
-},
+            if (GetDeliveryData && GetDeliveryData.Warehouse) {
+                // WITH EWM
+                this.onPostGoodsIssueWithEWM(sDeliveryNo);
+            } else {
+                // WITHOUT EWM
+                this.onPostGoodsIssueWithoutEWM(sDeliveryNo);
+            }
+        },
 
         onPostGoodsIssueWithEWM: function (sDeliveryNo) {
             var oController = this;
@@ -20377,29 +20375,31 @@ onHandlingUnitDialogClosePress: function () {
         },
 
 
-        onCreatePostGoodsIssue:function(sDeliveryNo, sETag, sToken){
+        onCreatePostGoodsIssue: function (sDeliveryNo, sETag, sToken) {
             var oController = this;
-            var CreateHUSrvModel = oController.getOwnerComponent().getModel("CreateHUSrvModel");
-            var oPayload = { Delivery: sDeliveryNo };
+            var oModel = oController.getOwnerComponent().getModel("CreateHUSrvModel");
 
-            CreateHUSrvModel.create(
-                "/PGICREATESet",
-                oPayload,
-                {
-                    method: "POST",
-                    headers: {
-                        "X-CSRF-Token": sToken,
-                        // "If-Match": sETag,
-                        "Content-Type": "application/json"
-                    },
+            var ship = eshipjetModel.getProperty("/ShipNowPostResponse") || {};
+            var TrackingNo = ship?.Packages?.[0]?.TrackingNumber;
 
-                    errorHandler: false,
-                    success: function (oData) {
-                        var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
-                        eshipjetModel.setProperty("/PGIStatus", oData.Msgtyp);
-                        eshipjetModel.setProperty("/PGIMessage", oData.Message1);
-                        oController._logPGIResult(oData.Msgtyp, oData.Message1);
+            oModel.create("/PGICREATESet", { Delivery: sDeliveryNo, TrackingNo: TrackingNo }, {
+            headers: { "X-CSRF-Token": sToken },
+
+            success: function (oData) {
+                eshipjetModel.setProperty("/PGIStatus", oData.Msgtyp);
+                eshipjetModel.setProperty("/PGIMessage", oData.Message1);
+                oController._logPGIResult(oData.Msgtyp, oData.Message1)
+                    .then(function () {
+                        if (oData.Msgtyp === "S") {
+                        return oController.ApiOutboundDeliverySrvData();
+                    }
+
+                })
+                    .then(function () {
+                        // Executes only after PGI + BOL patch pipeline is fully committed
                         oController.onManifestCreatePress();
+                    })
+                    .finally(function () {
                         oController.onCloseBusyDialog();
                         // sap.m.MessageToast.show("PGI Successful (EWM)");
                     },
@@ -20576,6 +20576,9 @@ onHandlingUnitDialogClosePress: function () {
                         oController._logPGIResult("F", sMessage);
                         eshipjetModel.setProperty("/PGIStatus", "F");  // <-- NEW
 
+                        if(oData.Msgtyp === "S"){
+                            oController.ApiOutboundDeliverySrvData();
+                        }
                         // ADD THIS
                         oController.onManifestCreatePress();   // PGI Failed → Update Manifest
 
@@ -26803,62 +26806,45 @@ readProductPlant: function () {
         },
 
 
-        ApiOutboundDeliverySrvData: function (response) {
+        ApiOutboundDeliverySrvData: function () {
             var oController = this;
-            oController.onOpenBusyDialog();
-            var BillOfLading = response?.Packages?.[0]?.TrackingNumber || "";
-            var DocumentNumber = response?.HeaderInfo?.DocumentNumber;
+            var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
 
-            if (!DocumentNumber || !BillOfLading) {
-                sap.m.MessageBox.error("Delivery number or Bill Of Lading missing.");
-                oController.onCloseBusyDialog();
-                return;
-            }
-            var cleanDelivery = String(Number(DocumentNumber));
-            var oModel = oController.getOwnerComponent().getModel("OutBoundDeliveryModel");
-            oModel.refreshSecurityToken(function () {
-                var sToken = oModel.getSecurityToken();
-                if (!sToken) {
-                    sap.m.MessageBox.error("CSRF token missing");
-                    oController.onCloseBusyDialog();
-                    return;
-                }
-                oModel.read(
-                    "/A_OutbDeliveryHeader(DeliveryDocument='" + cleanDelivery + "')",
-                    {
-                        success: function (oData, oResponse) {
+            return new Promise(function (resolve, reject) {
 
-                            var sETag = oResponse?.headers?.etag;
-                            if (!sETag) {
-                                sap.m.MessageBox.error("ETag not found in response headers");
-                                oController.onCloseBusyDialog();
-                                return;
-                            }
-                            var oPayload = {
-                                BillOfLading: BillOfLading
-                            };
+                var ship = eshipjetModel.getProperty("/ShipNowPostResponse") || {};
+                var BillOfLading = ship?.Packages?.[0]?.TrackingNumber;
+                var DocumentNumber = ship?.HeaderInfo?.DocumentNumber;
 
-                            oController.updateBillOfLading(cleanDelivery, sETag, sToken, oPayload);
-                            
-                        },
-                        error: function () {
-                            sap.m.MessageBox.error("Failed to read delivery for ETag");
-                            oController.onCloseBusyDialog();
-                        }
-                    }
-                );
+                if (!BillOfLading || !DocumentNumber) return reject("Missing data");
+
+                var cleanDelivery = String(Number(DocumentNumber));
+                var oModel = oController.getOwnerComponent().getModel("OutBoundDeliveryModel");
+
+                oModel.read("/A_OutbDeliveryHeader(DeliveryDocument='" + cleanDelivery + "')", {
+                    success: function (oData, oResponse) {
+
+                        var sETag = oResponse?.headers?.etag;
+                        if (!sETag) return reject("ETag missing");
+
+                        oController.updateBillOfLading(cleanDelivery, sETag, BillOfLading)
+                            .then(resolve)
+                            .catch(reject);
+                    },
+                    error: () => reject("Delivery read failed")
+                });
             });
         },
 
 
-            updateBillOfLading: function (cleanDelivery, sETag, sToken, oPayload) {
+            updateBillOfLading: function (cleanDelivery, sETag, BillOfLading) {
                 var oController = this;
                 var oModel = oController.getOwnerComponent().getModel("OutBoundDeliveryModel");
 
-                oModel.update(
-                    "/A_OutbDeliveryHeader(DeliveryDocument='" + cleanDelivery + "')",
-                    oPayload,
-                    {
+                return new Promise(function (resolve, reject) {
+
+                    oModel.update("/A_OutbDeliveryHeader(DeliveryDocument='" + cleanDelivery + "')",
+                    { BillOfLading: BillOfLading }, {
                         method: "PATCH",
                         headers: {
                             "X-CSRF-Token": sToken,
