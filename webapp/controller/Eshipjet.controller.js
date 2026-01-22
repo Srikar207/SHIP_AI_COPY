@@ -148,7 +148,6 @@ this.getOwnerComponent().setModel(oShipNowModel, "ShipNowDataModel");
             // oController.getManifestHeaderForTodaysShipmentCount();
             oController.getManifestHeaderForTodaysShipmentCount();
 
-            // oController._initCreateHUSrvSecurity();
             // oController.onPackSectionEmptyRows();
             function sanitizeDescription(desc, maxLength = 40) {
                 if (!desc) return "";
@@ -3091,245 +3090,250 @@ formatNumberForSAP: function (val) {
                 }
             },
 
-updateManifestWithoutEWM: function () {
+            updateManifestWithoutEWM: function () {
 
-    var oController = this;
-    var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
-    var ManifestModel = oController.getOwnerComponent().getModel("ManifestModel");
+                var oController = this;
+                var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+                var ManifestModel = oController.getOwnerComponent().getModel("ManifestModel");
 
-    var ShipNowResponse = eshipjetModel.getProperty("/ShipNowPostResponse");
-    var status = eshipjetModel.getProperty("/PGIStatus");
+                var ShipNowResponse = eshipjetModel.getProperty("/ShipNowPostResponse");
+                var status = eshipjetModel.getProperty("/PGIStatus");
 
-    var selectedServiceNamesData = eshipjetModel.getProperty("/selectedServiceNamesData");
-    var sapDeliveryNumber = eshipjetModel.getProperty("/commonValues/sapDeliveryNumber");
+                var selectedServiceNamesData = eshipjetModel.getProperty("/selectedServiceNamesData");
+                var sapDeliveryNumber = eshipjetModel.getProperty("/commonValues/sapDeliveryNumber");
 
-    var shippingDocuments = eshipjetModel.getProperty("/shippingDocuments") || [];
-    var shippingCharges = eshipjetModel.getProperty("/shippingCharges") || [];
-    var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData") || {};
+                var shippingDocuments = eshipjetModel.getProperty("/shippingDocuments") || [];
+                var shippingCharges = eshipjetModel.getProperty("/shippingCharges") || [];
+                var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData") || {};
 
-    var ServiceName = selectedServiceNamesData.ServDesc || "";
-    var SHIP_METHOD = eshipjetModel.getProperty("/SHIP_METHOD");
+                var ServiceName = selectedServiceNamesData.ServDesc || "";
+                var SHIP_METHOD = eshipjetModel.getProperty("/SHIP_METHOD");
+                var selectPaymentType = eshipjetModel.getProperty("/selectPaymentType");
 
-    var shipFrom = eshipjetModel.getProperty("/ShipFromAddress") || {};
-    var trackingArray = eshipjetModel.getProperty("/trackingArray") || [];
-    var handlingUnitsData = eshipjetModel.getProperty("/to_HandlingUnitHeaderDelivery/results") || [];
+                var shipFrom = eshipjetModel.getProperty("/ShipFromAddress") || {};
+                var trackingArray = eshipjetModel.getProperty("/trackingArray") || [];
+                var handlingUnitsData = eshipjetModel.getProperty("/to_HandlingUnitHeaderDelivery/results") || [];
 
-    /* ------------------- SHIPPING CHARGES ------------------- */
+                /* ------------------- SHIPPING CHARGES ------------------- */
 
-    var FreightAmt = "0.00", DiscountAmt = "0.00";
+                var FreightAmt = "0.00", DiscountAmt = "0.00";
 
-    var ShippingChargeDescription1 = "", ShippingCharges1 = "0.0", ShippingCurrency1 = "";
-    var ShippingChargesDescription2 = "", ShippingCharges2 = "0.0", ShippingChargesCurrency2 = "";
-    var ShippingChargesDescription3 = "", ShippingCharges3 = "0.0", ShippingChargesCurrency3 = "";
-    var ShippingChargesDescription4 = "", ShippingCharges4 = "0.0", ShippingChargesCurrency4 = "";
-    var ShippingChargesDescription5 = "", ShippingCharges5 = "0.0", ShippingChargesCurrency5 = "";
+                var ShippingChargeDescription1 = "", ShippingCharges1 = "0.0", ShippingCurrency1 = "";
+                var ShippingChargesDescription2 = "", ShippingCharges2 = "0.0", ShippingChargesCurrency2 = "";
+                var ShippingChargesDescription3 = "", ShippingCharges3 = "0.0", ShippingChargesCurrency3 = "";
+                var ShippingChargesDescription4 = "", ShippingCharges4 = "0.0", ShippingChargesCurrency4 = "";
+                var ShippingChargesDescription5 = "", ShippingCharges5 = "0.0", ShippingChargesCurrency5 = "";
 
-    if (shippingCharges.length) {
+                if (shippingCharges.length) {
 
-        var freightObj = shippingCharges.find(o => o.description === "Published Freight");
-        var discountObj = shippingCharges.find(o => o.description === "Discount Freight");
+                    var freightObj = shippingCharges.find(o => o.description === "Published Freight");
+                    var discountObj = shippingCharges.find(o => o.description === "Discount Freight");
 
-        FreightAmt = freightObj ? Number(freightObj.amount).toFixed(2) : "0.00";
-        DiscountAmt = discountObj ? Number(discountObj.amount).toFixed(2) : "0.00";
+                    FreightAmt = freightObj ? Number(freightObj.amount).toFixed(2) : "0.00";
+                    DiscountAmt = discountObj ? Number(discountObj.amount).toFixed(2) : "0.00";
 
-        var remaining = shippingCharges.filter(o =>
-            o.description !== "Published Freight" &&
-            o.description !== "Discount Freight"
-        );
+                    var remaining = shippingCharges.filter(o =>
+                        o.description !== undefined &&
+                        o.description !== "Published Freight" &&
+                        o.description !== "Discount Freight"
+                    );
 
-        if (remaining[0]) {
-            ShippingChargeDescription1 = remaining[0].description || "";
-            ShippingCharges1 = Number(remaining[0].amount || 0).toFixed(2);
-            ShippingCurrency1 = remaining[0].currency || "";
-        }
-        if (remaining[1]) {
-            ShippingChargesDescription2 = remaining[1].description || "";
-            ShippingCharges2 = Number(remaining[1].amount || 0).toFixed(2);
-            ShippingChargesCurrency2 = remaining[1].currency || "";
-        }
-        if (remaining[2]) {
-            ShippingChargesDescription3 = remaining[2].description || "";
-            ShippingCharges3 = Number(remaining[2].amount || 0).toFixed(2);
-            ShippingChargesCurrency3 = remaining[2].currency || "";
-        }
-        if (remaining[3]) {
-            ShippingChargesDescription4 = remaining[3].description || "";
-            ShippingCharges4 = Number(remaining[3].amount || 0).toFixed(2);
-            ShippingChargesCurrency4 = remaining[3].currency || "";
-        }
-        if (remaining[4]) {
-            ShippingChargesDescription5 = remaining[4].description || "";
-            ShippingCharges5 = Number(remaining[4].amount || 0).toFixed(2);
-            ShippingChargesCurrency5 = remaining[4].currency || "";
-        }
-    }
+                    if (remaining[0]) {
+                        ShippingChargeDescription1 = remaining[0].description || "";
+                        ShippingCharges1 = Number(remaining[0].amount || 0).toFixed(2);
+                        ShippingCurrency1 = remaining[0].currency || "";
+                    }
+                    if (remaining[1]) {
+                        ShippingChargesDescription2 = remaining[1].description || "";
+                        ShippingCharges2 = Number(remaining[1].amount || 0).toFixed(2);
+                        ShippingChargesCurrency2 = remaining[1].currency || "";
+                    }
+                    if (remaining[2]) {
+                        ShippingChargesDescription3 = remaining[2].description || "";
+                        ShippingCharges3 = Number(remaining[2].amount || 0).toFixed(2);
+                        ShippingChargesCurrency3 = remaining[2].currency || "";
+                    }
+                    if (remaining[3]) {
+                        ShippingChargesDescription4 = remaining[3].description || "";
+                        ShippingCharges4 = Number(remaining[3].amount || 0).toFixed(2);
+                        ShippingChargesCurrency4 = remaining[3].currency || "";
+                    }
+                    if (remaining[4]) {
+                        ShippingChargesDescription5 = remaining[4].description || "";
+                        ShippingCharges5 = Number(remaining[4].amount || 0).toFixed(2);
+                        ShippingChargesCurrency5 = remaining[4].currency || "";
+                    }
+                }
 
-    /* ------------------- DOCUMENTS ------------------- */
+                /* ------------------- DOCUMENTS ------------------- */
 
-    var labelDocs = shippingDocuments.filter(o => o.contentType === "Label");
-    var packingSlipObj = shippingDocuments.find(o => o.contentType === "Packing Slip");
-    var billOfLadingObj = shippingDocuments.find(o => o.contentType === "Bill of Lading");
+                var labelDocs = shippingDocuments.filter(o => o.contentType === "Label");
+                var packingSlipObj = shippingDocuments.find(o => o.contentType === "Packing Slip");
+                var billOfLadingObj = shippingDocuments.find(o => o.contentType === "Bill of Lading");
 
-    var PACKING_SLIP = packingSlipObj ? packingSlipObj.docName : "";
-    var BILL_OF_LADING = billOfLadingObj ? billOfLadingObj.docName : "";
+                var PACKING_SLIP = packingSlipObj ? packingSlipObj.docName : "";
+                var BILL_OF_LADING = billOfLadingObj ? billOfLadingObj.docName : "";
 
-    /* ------------------- HELPER ------------------- */
+                /* ------------------- HELPER ------------------- */
 
-    function sanitizeDescription(desc) {
-        if (!desc) return "";
-        desc = desc.replace(/[^a-zA-Z0-9 ]/g, "");
-        return desc.replace(/\s+/g, " ").substring(0, 40).trim();
-    }
+                function sanitizeDescription(desc) {
+                    if (!desc) return "";
+                    desc = desc.replace(/[^a-zA-Z0-9 ]/g, "");
+                    return desc.replace(/\s+/g, " ").substring(0, 40).trim();
+                }
 
-    /* ------------------- BUILD BULK ITEMS ------------------- */
+                /* ------------------- BUILD BULK ITEMS ------------------- */
 
-    var aBulkItems = [];
+                var aBulkItems = [];
 
-    labelDocs.forEach(function (doc, i) {
+                labelDocs.forEach(function (doc, i) {
 
-        var oItem = {
+                    var oItem = {
 
-            Vbeln: sapDeliveryNumber,
-            GUID: eshipjetModel.getProperty("/GU_ID"),
-            Count: (i + 1).toString().padStart(3, "0"),
+                        Vbeln: sapDeliveryNumber,
+                        GUID: eshipjetModel.getProperty("/GU_ID"),
+                        Count: (i + 1).toString().padStart(3, "0"),
 
-            Plant: GetDeliveryData.ShippingPoint,
-            Posnr: "000000",
+                        Plant: GetDeliveryData.ShippingPoint,
+                        Posnr: "000000",
 
-            HandlingUnit: handlingUnitsData[i]?.HandlingUnitExternalId || "",
-            Weight: handlingUnitsData[i]?.GrossWeight || "0.0",
+                        HandlingUnit: handlingUnitsData[i]?.HandlingUnitExternalId || "",
+                        Weight: Number(handlingUnitsData[i]?.GrossWeight).toFixed(2) || "00.00",
 
-            Carriertype: eshipjetModel.getProperty("/commonValues/ShipNowShipMethodSelectedKey"),
-            CarrierDesc: eshipjetModel.getProperty("/commonValues/ShipNowShipsrvNameSelectedKey"),
-            ServiceName: ServiceName,
-            ShipMethod: eshipjetModel.oData.CarrierType,
+                        Carriertype: eshipjetModel.getProperty("/commonValues/ShipNowShipMethodSelectedKey"),
+                        CarrierDesc: eshipjetModel.getProperty("/commonValues/ShipNowShipMethodSelectedKey"),
+                        ServiceName: ServiceName,
+                        ShipMethod: eshipjetModel.oData.CarrierType,
 
-            Paymentcode: SHIP_METHOD,
-            Shipperacct: ShipNowResponse?.CarrierDetails?.ShippingAccount,
-            Accountnumber: ShipNowResponse?.CarrierDetails?.ShippingAccount,
+                        Paymentcode: selectPaymentType,
+                        Shipperacct: ShipNowResponse?.CarrierDetails?.ShippingAccount,
+                        Accountnumber: ShipNowResponse?.CarrierDetails?.ShippingAccount,
 
-            Dimensions: ShipNowResponse?.Dimension || "10X10X10",
+                        Dimensions: ShipNowResponse?.Dimension || "10X10X10",
 
-            FreightAmt: FreightAmt,
-            DiscountAmt: DiscountAmt,
+                        FreightAmt: FreightAmt,
+                        DiscountAmt: DiscountAmt,
 
-            ShippingChargeDescription1: ShippingChargeDescription1,
-            ShippingCharges1: ShippingCharges1,
-            ShippingCurrency1: ShippingCurrency1,
+                        ShippingChargeDescription1: ShippingChargeDescription1,
+                        ShippingCharges1: ShippingCharges1,
+                        ShippingCurrency1: ShippingCurrency1,
 
-            ShippingChargesDescription2: ShippingChargesDescription2,
-            ShippingCharges2: ShippingCharges2,
-            ShippingChargesCurrency2: ShippingChargesCurrency2,
+                        ShippingChargesDescription2: ShippingChargesDescription2,
+                        ShippingCharges2: ShippingCharges2,
+                        ShippingChargesCurrency2: ShippingChargesCurrency2,
 
-            ShippingChargesDescription3: ShippingChargesDescription3,
-            ShippingCharges3: ShippingCharges3,
-            ShippingChargesCurrency3: ShippingChargesCurrency3,
+                        ShippingChargesDescription3: ShippingChargesDescription3,
+                        ShippingCharges3: ShippingCharges3,
+                        ShippingChargesCurrency3: ShippingChargesCurrency3,
 
-            ShippingChargesDescription4: ShippingChargesDescription4,
-            ShippingCharges4: ShippingCharges4,
-            ShippingChargesCurrency4: ShippingChargesCurrency4,
+                        ShippingChargesDescription4: ShippingChargesDescription4,
+                        ShippingCharges4: ShippingCharges4,
+                        ShippingChargesCurrency4: ShippingChargesCurrency4,
 
-            ShippingChargesDescription5: ShippingChargesDescription5,
-            ShippingCharges5: ShippingCharges5,
-            ShippingChargesCurrency5: ShippingChargesCurrency5,
+                        ShippingChargesDescription5: ShippingChargesDescription5,
+                        ShippingCharges5: ShippingCharges5,
+                        ShippingChargesCurrency5: ShippingChargesCurrency5,
 
-            eShipjetPGIStatus: status || "",
-            eShipjetPickStatus: "C",
+                        eShipjetPGIStatus: status || "",
+                        eShipjetPickStatus: "C",
 
-            PackingSlip: PACKING_SLIP,
-            DocName: doc.fileName || "",
-            Label: doc.encodedLabel || "",
-            BillofLading: BILL_OF_LADING,
+                        PackingSlip: PACKING_SLIP,
+                        DocName: doc.docName || "",
+                        Label: doc.encodedLabel || "",
+                        BillofLading: BILL_OF_LADING,
 
-            Mastertracking: "99999999",
-            TrackingNumber: trackingArray?.[0]?.TrackingNumber || "",
+                        Mastertracking: trackingArray?.[0]?.TrackingNumber || "",
+                        TrackingNumber: trackingArray?.[0]?.TrackingNumber || "",
 
-            PurchaseOrder: GetDeliveryData.PurchaseOrder || sapDeliveryNumber,
-            SalesOrder: GetDeliveryData.SalesOrder || "",
+                        PurchaseOrder: GetDeliveryData.PurchaseOrder || sapDeliveryNumber,
+                        SalesOrder: GetDeliveryData.SalesOrder || "",
 
-            ShipStatus: "Shipped",
+                        ShipStatus: "Shipped",
 
-            // SHIP FROM
-            ShipFromContact: shipFrom.ShipFromCONTACT || "",
-            ShipFromCompany: shipFrom.ShipFromCOMPANY || "",
-            ShipFromAddressLine1: shipFrom.ShipFromADDRESS_LINE1 || "",
-            ShipFromAddressLine2: shipFrom.ShipFromADDRESS_LINE2 || "",
-            ShipFromCity: shipFrom.ShipFromCITY || "",
-            ShipFromState: shipFrom.ShipFromSTATE || "",
-            ShipFromCountry: shipFrom.ShipFromCOUNTRY || "",
-            ShipFromPostalcode: shipFrom.ShipFromZIPCODE || "",
-            ShipFromEmail: shipFrom.ShipFromEMAIL || "",
-            ShipFromPhoneNumber: shipFrom.ShipFromPHONE || "",
-            ShipFromAddressType: "Commercial",
+                        // SHIP FROM
+                        ShipFromContact: shipFrom.ShipFromCONTACT || "",
+                        ShipFromCompany: shipFrom.ShipFromCOMPANY || "",
+                        ShipFromAddressLine1: shipFrom.ShipFromADDRESS_LINE1 || "",
+                        ShipFromAddressLine2: shipFrom.ShipFromADDRESS_LINE2 || "",
+                        ShipFromCity: shipFrom.ShipFromCITY || "",
+                        ShipFromState: shipFrom.ShipFromSTATE || "",
+                        ShipFromCountry: shipFrom.ShipFromCOUNTRY || "",
+                        ShipFromPostalcode: shipFrom.ShipFromZIPCODE || "",
+                        ShipFromEmail: shipFrom.ShipFromEMAIL || "",
+                        ShipFromPhoneNumber: shipFrom.ShipFromPHONE || "",
+                        ShipFromAddressType: "Commercial",
 
-            // SHIP TO
-            ShipToContact: ShipNowResponse.ShipTo?.CONTACT || "",
-            ShipToCompany: ShipNowResponse.ShipTo?.COMPANY || "",
-            ShipToAddressLine1: ShipNowResponse.ShipTo?.ADDRESS_LINE1 || "",
-            ShipToAddressLine2: ShipNowResponse.ShipTo?.ADDRESS_LINE2 || "",
-            ShipToCity: ShipNowResponse.ShipTo?.CITY || "",
-            ShipToState: ShipNowResponse.ShipTo?.STATE || "",
-            ShipToCountry: ShipNowResponse.ShipTo?.COUNTRY || "",
-            ShipToPostalcode: ShipNowResponse.ShipTo?.ZIPCODE || "",
-            ShipToEmail: ShipNowResponse.ShipTo?.EMAIL || "",
-            ShipToPhoneNumber: ShipNowResponse.ShipTo?.PHONE || "",
+                        // SHIP TO
+                        ShipToContact: ShipNowResponse.ShipTo?.CONTACT || "",
+                        ShipToCompany: ShipNowResponse.ShipTo?.COMPANY || "",
+                        ShipToAddressLine1: ShipNowResponse.ShipTo?.ADDRESS_LINE1 || "",
+                        ShipToAddressLine2: ShipNowResponse.ShipTo?.ADDRESS_LINE2 || "",
+                        ShipToCity: ShipNowResponse.ShipTo?.CITY || "",
+                        ShipToState: ShipNowResponse.ShipTo?.STATE || "",
+                        ShipToCountry: ShipNowResponse.ShipTo?.COUNTRY || "",
+                        ShipToPostalcode: ShipNowResponse.ShipTo?.ZIPCODE || "",
+                        ShipToEmail: ShipNowResponse.ShipTo?.EMAIL || "",
+                        ShipToPhoneNumber: ShipNowResponse.ShipTo?.PHONE || "",
 
-            // PRODUCT
-            ProductCode: ShipNowResponse.Packages[i].ItemsInfo[0].ItCa || "",
-            ProductDescription: sanitizeDescription(
-                ShipNowResponse.Packages[i].ItemsInfo[0].Description
-            ),
-            ProductQuantity: ShipNowResponse.Packages[i].ItemsInfo[0].totalQuantity || "0",
-            ProductUnitOfMeasurement:
-                ShipNowResponse.Packages[i].ItemsInfo[0].UOM || "CV"
-        };
+                        // PRODUCT
+                        ProductCode: ShipNowResponse.Packages[i].ItemsInfo[0].ItCa || "",
+                        ProductDescription: sanitizeDescription(
+                            ShipNowResponse.Packages[i].ItemsInfo[0].Description
+                        ),
+                        ProductQuantity: ShipNowResponse.Packages[i].ItemsInfo[0].totalQuantity || "0",
+                        ProductUnitOfMeasurement: ShipNowResponse.Packages[i].ItemsInfo[0].UOM || "CV",
 
-        aBulkItems.push(oItem);
-    });
+                        Totalpkg: String(eshipjetModel.getProperty("/to_HandlingUnitHeaderDelivery/results").length || 0).padStart(5, '0'),
 
-    /* ------------------- HEADER PAYLOAD ------------------- */
+                        /* DOCUMENT */
+                        ShippingDocumentProvider: doc.docProvider || "",
+                        ShippingDocumentSapOutputType: doc.contentType || "",
+                        ShippingDocumentDescription: doc.docType || "",
+                        ShippingDocumentType: doc.docType || "",
 
-    var oDeepPayload = {
-        GUID: eshipjetModel.getProperty("/GU_ID"),
-        Vbeln: sapDeliveryNumber,
-        Count: "000",
-        Posnr: "000000",
+                        LastChangedOn: new Date().toISOString().split("T")[0],
+                        LastChangedBy: eshipjetModel.getProperty("/userName") || "SYSTEM"
+                    };
 
-        FreightAmt: "0.0",
-        DiscountAmt: "0.0",
+                    aBulkItems.push(oItem);
+                });
 
-        Totalpkg: String(aBulkItems.length).padStart(5, "0"),
+                /* ------------------- HEADER PAYLOAD ------------------- */
 
-        ManifestSingleToBulk: aBulkItems   // 🔥 Deep Entity
-    };
+                var oDeepPayload = {
+                    GUID: eshipjetModel.getProperty("/GU_ID"),
+                    Vbeln: sapDeliveryNumber,
 
-    /* ------------------- CREATE CALL ------------------- */
+                    ManifestSingleToBulk: aBulkItems   // 🔥 Deep Entity
+                };
 
-    oController.onOpenBusyDialog();
+                /* ------------------- CREATE CALL ------------------- */
 
-    ManifestModel.create("/Manifest_detSet", oDeepPayload, {
-        success: function () {
+                oController.onOpenBusyDialog();
 
-            sap.m.MessageToast.show("Manifest created successfully");
+                ManifestModel.create("/Manifest_detSet", oDeepPayload, {
+                    success: function (oData) {
 
-            oController.getManifestHeaderForTodaysShipmentCount();
-            oController.onShipNowNewPress();
+                        sap.m.MessageToast.show("Manifest created successfully");
 
-            oController.onCloseBusyDialog();
-        },
-        error: function (oError) {
+                        oController.getManifestHeaderForTodaysShipmentCount();
+                        oController.onShipNowNewPress();
 
-            var errMsg = "Manifest creation failed";
+                        oController.onCloseBusyDialog();
+                    },
+                    error: function (oError) {
 
-            try {
-                errMsg = JSON.parse(oError.responseText).error.message.value;
-            } catch (e) {}
+                        var errMsg = "Manifest creation failed";
 
-            sap.m.MessageBox.error(errMsg);
-            oController.onCloseBusyDialog();
-        }
-    });
-},
+                        try {
+                            errMsg = JSON.parse(oError.responseText).error.message.value;
+                        } catch (e) {}
+
+                        sap.m.MessageBox.error(errMsg);
+                        oController.onCloseBusyDialog();
+                    }
+                });
+            },
 
 
 
@@ -3690,325 +3694,252 @@ updateManifestWithoutEWM: function () {
 //             },
 
             cleanQuantity: function (val) {
-    if (val === null || val === undefined) {
-        return "0.000";
-    }
-
-    var num = parseFloat(String(val).trim());
-    return isNaN(num) ? "0.000" : num.toFixed(3);
-},
-updateManifestWithEWM: function () {
-
-    var oController = this;
-    var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
-    var ManifestModel = oController.getOwnerComponent().getModel("ManifestModel");
-
-    var ShipNowResponse = eshipjetModel.getProperty("/ShipNowPostResponse");
-    var status = eshipjetModel.getProperty("/PGIStatus");
-
-    var selectedServiceNamesData = eshipjetModel.getProperty("/selectedServiceNamesData");
-    var sapDeliveryNumber = eshipjetModel.getProperty("/commonValues/sapDeliveryNumber");
-
-    var shippingDocuments = eshipjetModel.getProperty("/shippingDocuments") || [];
-    var shippingCharges = eshipjetModel.getProperty("/shippingCharges") || [];
-    var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData") || {};
-
-    var ServiceName = selectedServiceNamesData.ServDesc || "";
-    var SHIP_METHOD = eshipjetModel.getProperty("/SHIP_METHOD");
-
-    var shipFrom = eshipjetModel.getProperty("/ShipFromAddress") || {};
-    var trackingArray = eshipjetModel.getProperty("/trackingArray") || [];
-    var handlingUnitsData =
-        eshipjetModel.getProperty("/to_HandlingUnitHeaderDelivery/results") || [];
-
-    /* ------------------- SHIPPING CHARGES ------------------- */
-
-    var FreightAmt = "0.00", DiscountAmt = "0.00";
-
-    var ShippingChargeDescription1 = "", ShippingCharges1 = "0.0", ShippingCurrency1 = "";
-    var ShippingChargesDescription2 = "", ShippingCharges2 = "0.0", ShippingChargesCurrency2 = "";
-    var ShippingChargesDescription3 = "", ShippingCharges3 = "0.0", ShippingChargesCurrency3 = "";
-    var ShippingChargesDescription4 = "", ShippingCharges4 = "0.0", ShippingChargesCurrency4 = "";
-    var ShippingChargesDescription5 = "", ShippingCharges5 = "0.0", ShippingChargesCurrency5 = "";
-
-    if (shippingCharges.length) {
-
-        var freightObj = shippingCharges.find(o => o.description === "Published Freight");
-        var discountObj = shippingCharges.find(o => o.description === "Discount Freight");
-
-        FreightAmt = freightObj ? Number(freightObj.amount).toFixed(2) : "0.00";
-        DiscountAmt = discountObj ? Number(discountObj.amount).toFixed(2) : "0.00";
-
-        var remaining = shippingCharges.filter(o =>
-            o.description !== "Published Freight" &&
-            o.description !== "Discount Freight"
-        );
-
-        if (remaining[0]) {
-            ShippingChargeDescription1 = remaining[0].description || "";
-            ShippingCharges1 = Number(remaining[0].amount || 0).toFixed(2);
-            ShippingCurrency1 = remaining[0].currency || "";
-        }
-        if (remaining[1]) {
-            ShippingChargesDescription2 = remaining[1].description || "";
-            ShippingCharges2 = Number(remaining[1].amount || 0).toFixed(2);
-            ShippingChargesCurrency2 = remaining[1].currency || "";
-        }
-        if (remaining[2]) {
-            ShippingChargesDescription3 = remaining[2].description || "";
-            ShippingCharges3 = Number(remaining[2].amount || 0).toFixed(2);
-            ShippingChargesCurrency3 = remaining[2].currency || "";
-        }
-        if (remaining[3]) {
-            ShippingChargesDescription4 = remaining[3].description || "";
-            ShippingCharges4 = Number(remaining[3].amount || 0).toFixed(2);
-            ShippingChargesCurrency4 = remaining[3].currency || "";
-        }
-        if (remaining[4]) {
-            ShippingChargesDescription5 = remaining[4].description || "";
-            ShippingCharges5 = Number(remaining[4].amount || 0).toFixed(2);
-            ShippingChargesCurrency5 = remaining[4].currency || "";
-        }
-    }
-
-    /* ------------------- DOCUMENTS ------------------- */
-
-    var labelDocs = shippingDocuments.filter(o => o.contentType === "Label");
-    var packingSlipObj = shippingDocuments.find(o => o.contentType === "Packing Slip");
-    var billOfLadingObj = shippingDocuments.find(o => o.contentType === "Bill of Lading");
-
-    var PACKING_SLIP = packingSlipObj ? packingSlipObj.docName : "";
-    var BILL_OF_LADING = billOfLadingObj ? billOfLadingObj.docName : "";
-
-    /* ------------------- HELPERS ------------------- */
-
-    function sanitizeDescription(desc) {
-        if (!desc) return "";
-        desc = desc.replace(/[^a-zA-Z0-9 ]/g, "");
-        return desc.replace(/\s+/g, " ").substring(0, 40).trim();
-    }
-
-    /* ------------------- BUILD BULK ITEMS ------------------- */
-
-    var aBulkItems = [];
-
-    labelDocs.forEach(function (doc, i) {
-
-        var oItem = {
-
-            Vbeln: sapDeliveryNumber,
-            GUID: eshipjetModel.getProperty("/GU_ID"),
-            Count: (i + 1).toString().padStart(3, "0"),
-
-            Plant: GetDeliveryData.ShippingPoint,
-            Posnr: "000000",
-
-            HandlingUnit:
-                handlingUnitsData[i]?.HandlingUnitExternalId || "",
-
-            Weight: oController.cleanWeight(
-                handlingUnitsData[i]?.GrossWeight
-            ),
-
-            Carriertype:
-                eshipjetModel.getProperty("/commonValues/ShipNowShipMethodSelectedKey"),
-            CarrierDesc:
-                eshipjetModel.getProperty("/commonValues/ShipNowShipsrvNameSelectedKey"),
-            ServiceName: ServiceName,
-            ShipMethod: eshipjetModel.oData.CarrierType,
-
-            Paymentcode: SHIP_METHOD,
-            Shipperacct:
-                ShipNowResponse?.CarrierDetails?.ShippingAccount,
-            Accountnumber:
-                ShipNowResponse?.CarrierDetails?.ShippingAccount,
-
-            Dimensions:
-                ShipNowResponse?.Dimension || "10X10X10",
-
-            FreightAmt: FreightAmt,
-            DiscountAmt: DiscountAmt,
-
-            ShippingChargeDescription1:
-                ShippingChargeDescription1,
-            ShippingCharges1: ShippingCharges1,
-            ShippingCurrency1: ShippingCurrency1,
-
-            ShippingChargesDescription2:
-                ShippingChargesDescription2,
-            ShippingCharges2: ShippingCharges2,
-            ShippingChargesCurrency2:
-                ShippingChargesCurrency2,
-
-            ShippingChargesDescription3:
-                ShippingChargesDescription3,
-            ShippingCharges3: ShippingCharges3,
-            ShippingChargesCurrency3:
-                ShippingChargesCurrency3,
-
-            ShippingChargesDescription4:
-                ShippingChargesDescription4,
-            ShippingCharges4: ShippingCharges4,
-            ShippingChargesCurrency4:
-                ShippingChargesCurrency4,
-
-            ShippingChargesDescription5:
-                ShippingChargesDescription5,
-            ShippingCharges5: ShippingCharges5,
-            ShippingChargesCurrency5:
-                ShippingChargesCurrency5,
-
-            eShipjetPGIStatus: status || "",
-            eShipjetPickStatus: "C",
-
-            PackingSlip: PACKING_SLIP,
-            DocName: doc.fileName || "",
-            Label: doc.encodedLabel || "",
-            BillofLading: BILL_OF_LADING,
-
-            Mastertracking: "99999999",
-            TrackingNumber:
-                trackingArray?.[0]?.TrackingNumber || "",
-
-            PurchaseOrder:
-                GetDeliveryData.PurchaseOrder || sapDeliveryNumber,
-            SalesOrder:
-                GetDeliveryData.SalesOrder || "",
-
-            ShipStatus: "Shipped",
-
-            /* SHIP FROM */
-            ShipFromContact:
-                shipFrom.ShipFromCONTACT || "",
-            ShipFromCompany:
-                shipFrom.ShipFromCOMPANY || "",
-            ShipFromAddressLine1:
-                shipFrom.ShipFromADDRESS_LINE1 || "",
-            ShipFromAddressLine2:
-                shipFrom.ShipFromADDRESS_LINE2 || "",
-            ShipFromCity:
-                shipFrom.ShipFromCITY || "",
-            ShipFromState:
-                shipFrom.ShipFromSTATE || "",
-            ShipFromCountry:
-                shipFrom.ShipFromCOUNTRY || "",
-            ShipFromPostalcode:
-                shipFrom.ShipFromZIPCODE || "",
-            ShipFromEmail:
-                shipFrom.ShipFromEMAIL || "",
-            ShipFromPhoneNumber:
-                shipFrom.ShipFromPHONE || "",
-            ShipFromAddressType: "Commercial",
-
-            /* SHIP TO */
-            ShipToContact:
-                ShipNowResponse.ShipTo?.CONTACT || "",
-            ShipToCompany:
-                ShipNowResponse.ShipTo?.COMPANY || "",
-            ShipToAddressLine1:
-                ShipNowResponse.ShipTo?.ADDRESS_LINE1 || "",
-            ShipToAddressLine2:
-                ShipNowResponse.ShipTo?.ADDRESS_LINE2 || "",
-            ShipToCity:
-                ShipNowResponse.ShipTo?.CITY || "",
-            ShipToState:
-                ShipNowResponse.ShipTo?.STATE || "",
-            ShipToCountry:
-                ShipNowResponse.ShipTo?.COUNTRY || "",
-            ShipToPostalcode:
-                ShipNowResponse.ShipTo?.ZIPCODE || "",
-            ShipToEmail:
-                ShipNowResponse.ShipTo?.EMAIL || "",
-            ShipToPhoneNumber:
-                ShipNowResponse.ShipTo?.PHONE || "",
-            ShipToAddressType: "Residential",
-
-            /* PRODUCT */
-            ProductCode:
-                ShipNowResponse.Packages[i].ItemsInfo[0].ItCa || "",
-            ProductDescription: sanitizeDescription(
-                ShipNowResponse.Packages[i].ItemsInfo[0].Description
-            ),
-            ProductQuantity:
-                oController.cleanQuantity(
-                    ShipNowResponse.Packages[i].ItemsInfo[0].totalQuantity
-                ),
-            ProductUnitOfMeasurement:
-                ShipNowResponse.Packages[i].ItemsInfo[0].UOM || "CV",
-
-            /* DOCUMENT */
-            ShippingDocumentProvider:
-                doc.docProvider || "",
-            ShippingDocumentSapOutputType:
-                doc.contentType || "",
-            ShippingDocumentDescription:
-                doc.docType || "",
-            ShippingDocumentType:
-                doc.docType || "",
-
-            LastChangedOn:
-                new Date().toISOString().split("T")[0],
-            LastChangedBy:
-                eshipjetModel.getProperty("/userName") || "SYSTEM"
-        };
-
-        aBulkItems.push(oItem);
-    });
-
-    /* ------------------- HEADER PAYLOAD ------------------- */
-
-    var oDeepPayload = {
-
-        GUID: eshipjetModel.getProperty("/GU_ID"),
-        Vbeln: sapDeliveryNumber,
-        Count: "000",
-        Posnr: "000000",
-
-        FreightAmt: "0.0",
-        DiscountAmt: "0.0",
-
-        Totalpkg:
-            String(aBulkItems.length).padStart(5, "0"),
-
-        ManifestSingleToBulk: aBulkItems
-    };
-
-    /* ------------------- CREATE ------------------- */
-
-    oController.onOpenBusyDialog();
-
-    ManifestModel.create("/Manifest_detSet", oDeepPayload, {
-        success: function () {
-
-            sap.m.MessageToast.show("Manifest created successfully");
-
-            oController.getManifestHeaderForTodaysShipmentCount();
-            oController.onShipNowNewPress();
-
-            var sFromViewName =
-                eshipjetModel.getProperty("/sFromViewName");
-
-            if (sFromViewName === "SCAN_SHIP") {
-                oController.getScanShipHistoryShipments();
-            }
-
-            oController.onCloseBusyDialog();
-        },
-        error: function (oError) {
-
-            var errMsg = "Manifest creation failed";
-
-            try {
-                errMsg =
-                    JSON.parse(oError.responseText)
-                        .error.message.value;
-            } catch (e) {}
-
-            sap.m.MessageBox.error(errMsg);
-            oController.onCloseBusyDialog();
-        }
-    });
-},
+                if (val === null || val === undefined) {
+                    return "0.000";
+                }
+                var num = parseFloat(String(val).trim());
+                return isNaN(num) ? "0.000" : num.toFixed(3);
+            },
+
+
+            updateManifestWithEWM: function () {
+                var oController = this;
+                var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+                var ManifestModel = oController.getOwnerComponent().getModel("ManifestModel");
+
+                var ShipNowResponse = eshipjetModel.getProperty("/ShipNowPostResponse");
+                var status = eshipjetModel.getProperty("/PGIStatus");
+
+                var selectedServiceNamesData = eshipjetModel.getProperty("/selectedServiceNamesData");
+                var sapDeliveryNumber = eshipjetModel.getProperty("/commonValues/sapDeliveryNumber");
+
+                var shippingDocuments = eshipjetModel.getProperty("/shippingDocuments") || [];
+                var shippingCharges = eshipjetModel.getProperty("/shippingCharges") || [];
+                var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData") || {};
+
+                var ServiceName = selectedServiceNamesData.ServDesc || "";
+                var SHIP_METHOD = eshipjetModel.getProperty("/SHIP_METHOD");
+                var selectPaymentType = eshipjetModel.getProperty("/selectPaymentType");
+
+                var shipFrom = eshipjetModel.getProperty("/ShipFromAddress") || {};
+                var trackingArray = eshipjetModel.getProperty("/trackingArray") || [];
+                var handlingUnitsData =
+                    eshipjetModel.getProperty("/to_HandlingUnitHeaderDelivery/results") || [];
+
+                /* ------------------- SHIPPING CHARGES ------------------- */
+
+                var FreightAmt = "0.00", DiscountAmt = "0.00";
+
+                var ShippingChargeDescription1 = "", ShippingCharges1 = "0.0", ShippingCurrency1 = "";
+                var ShippingChargesDescription2 = "", ShippingCharges2 = "0.0", ShippingChargesCurrency2 = "";
+                var ShippingChargesDescription3 = "", ShippingCharges3 = "0.0", ShippingChargesCurrency3 = "";
+                var ShippingChargesDescription4 = "", ShippingCharges4 = "0.0", ShippingChargesCurrency4 = "";
+                var ShippingChargesDescription5 = "", ShippingCharges5 = "0.0", ShippingChargesCurrency5 = "";
+
+                if (shippingCharges.length) {
+                    var freightObj = shippingCharges.find(o => o.description === "Published Freight");
+                    var discountObj = shippingCharges.find(o => o.description === "Discount Freight");
+                    FreightAmt = freightObj ? Number(freightObj.amount).toFixed(2) : "0.00";
+                    DiscountAmt = discountObj ? Number(discountObj.amount).toFixed(2) : "0.00";
+                    var remaining = shippingCharges.filter(o =>
+                        o.description !== undefined &&
+                        o.description !== "Published Freight" &&
+                        o.description !== "Discount Freight"
+                    );
+
+                    if (remaining[0]) {
+                        ShippingChargeDescription1 = remaining[0].description || "";
+                        ShippingCharges1 = Number(remaining[0].amount || 0).toFixed(2);
+                        ShippingCurrency1 = remaining[0].currency || "";
+                    }
+                    if (remaining[1]) {
+                        ShippingChargesDescription2 = remaining[1].description || "";
+                        ShippingCharges2 = Number(remaining[1].amount || 0).toFixed(2);
+                        ShippingChargesCurrency2 = remaining[1].currency || "";
+                    }
+                    if (remaining[2]) {
+                        ShippingChargesDescription3 = remaining[2].description || "";
+                        ShippingCharges3 = Number(remaining[2].amount || 0).toFixed(2);
+                        ShippingChargesCurrency3 = remaining[2].currency || "";
+                    }
+                    if (remaining[3]) {
+                        ShippingChargesDescription4 = remaining[3].description || "";
+                        ShippingCharges4 = Number(remaining[3].amount || 0).toFixed(2);
+                        ShippingChargesCurrency4 = remaining[3].currency || "";
+                    }
+                    if (remaining[4]) {
+                        ShippingChargesDescription5 = remaining[4].description || "";
+                        ShippingCharges5 = Number(remaining[4].amount || 0).toFixed(2);
+                        ShippingChargesCurrency5 = remaining[4].currency || "";
+                    }
+                }
+
+                /* ------------------- DOCUMENTS ------------------- */
+
+                var labelDocs = shippingDocuments.filter(o => o.contentType === "Label");
+                var packingSlipObj = shippingDocuments.find(o => o.contentType === "Packing Slip");
+                var billOfLadingObj = shippingDocuments.find(o => o.contentType === "Bill of Lading");
+
+                var PACKING_SLIP = packingSlipObj ? packingSlipObj.docName : "";
+                var BILL_OF_LADING = billOfLadingObj ? billOfLadingObj.docName : "";
+
+                /* ------------------- HELPERS ------------------- */
+
+                function sanitizeDescription(desc) {
+                    if (!desc) return "";
+                    desc = desc.replace(/[^a-zA-Z0-9 ]/g, "");
+                    return desc.replace(/\s+/g, " ").substring(0, 40).trim();
+                }
+
+                /* ------------------- BUILD BULK ITEMS ------------------- */
+
+                var aBulkItems = [];
+
+                labelDocs.forEach(function (doc, i) {
+                    var oItem = {
+                        Vbeln: sapDeliveryNumber,
+                        GUID: eshipjetModel.getProperty("/GU_ID"),
+                        Count: (i + 1).toString().padStart(3, "0"),
+
+                        Plant: GetDeliveryData.ShippingPoint,
+                        Posnr: "000000",
+
+                        HandlingUnit: handlingUnitsData[i]?.HandlingUnitExternalId || "",
+
+                        Weight: Number(handlingUnitsData[i]?.GrossWeight).toFixed(2) || "00.00",
+
+                        Carriertype: eshipjetModel.getProperty("/commonValues/ShipNowShipMethodSelectedKey"),
+                        CarrierDesc: eshipjetModel.getProperty("/commonValues/ShipNowShipMethodSelectedKey"),
+                        ServiceName: ServiceName,
+                        ShipMethod: eshipjetModel.oData.CarrierType,
+
+                        Paymentcode: selectPaymentType,
+                        Shipperacct: ShipNowResponse?.CarrierDetails?.ShippingAccount,
+                        Accountnumber: ShipNowResponse?.CarrierDetails?.ShippingAccount,
+
+                        Dimensions: ShipNowResponse.Packages[0]?.Dimension || "10X10X10",
+
+                        FreightAmt: FreightAmt,
+                        DiscountAmt: DiscountAmt,
+
+                        ShippingChargeDescription1: ShippingChargeDescription1,
+                        ShippingCharges1: ShippingCharges1,
+                        ShippingCurrency1: ShippingCurrency1,
+
+                        ShippingChargesDescription2: ShippingChargesDescription2,
+                        ShippingCharges2: ShippingCharges2,
+                        ShippingChargesCurrency2: ShippingChargesCurrency2,
+
+                        ShippingChargesDescription3: ShippingChargesDescription3,
+                        ShippingCharges3: ShippingCharges3,
+                        ShippingChargesCurrency3: ShippingChargesCurrency3,
+
+                        ShippingChargesDescription4: ShippingChargesDescription4,
+                        ShippingCharges4: ShippingCharges4,
+                        ShippingChargesCurrency4: ShippingChargesCurrency4,
+
+                        ShippingChargesDescription5: ShippingChargesDescription5,
+                        ShippingCharges5: ShippingCharges5,
+                        ShippingChargesCurrency5: ShippingChargesCurrency5,
+
+                        eShipjetPGIStatus: status || "",
+                        eShipjetPickStatus: "C",
+
+                        PackingSlip: PACKING_SLIP,
+                        DocName: doc.docName || "",
+                        Label: doc.encodedLabel || "",
+                        BillofLading: BILL_OF_LADING || "",
+
+                        Mastertracking: trackingArray?.[0]?.TrackingNumber || "",
+                        TrackingNumber: trackingArray?.[i]?.TrackingNumber || "",
+
+                        PurchaseOrder: GetDeliveryData.PurchaseOrder || sapDeliveryNumber,
+                        SalesOrder: GetDeliveryData.SalesOrder || "",
+
+                        ShipStatus: "Shipped",
+
+                        /* SHIP FROM */
+                        ShipFromContact: shipFrom.ShipFromCONTACT || "",
+                        ShipFromCompany: shipFrom.ShipFromCOMPANY || "",
+                        ShipFromAddressLine1: shipFrom.ShipFromADDRESS_LINE1 || "",
+                        ShipFromAddressLine2: shipFrom.ShipFromADDRESS_LINE2 || "",
+                        ShipFromCity: shipFrom.ShipFromCITY || "",
+                        ShipFromState: shipFrom.ShipFromSTATE || "",
+                        ShipFromCountry: shipFrom.ShipFromCOUNTRY || "",
+                        ShipFromPostalcode: shipFrom.ShipFromZIPCODE || "",
+                        ShipFromEmail: shipFrom.ShipFromEMAIL || "",
+                        ShipFromPhoneNumber: shipFrom.ShipFromPHONE || "",
+                        ShipFromAddressType: "Commercial",
+
+                        /* SHIP TO */
+                        ShipToContact: ShipNowResponse.ShipTo?.CONTACT || "",
+                        ShipToCompany: ShipNowResponse.ShipTo?.COMPANY || "",
+                        ShipToAddressLine1: ShipNowResponse.ShipTo?.ADDRESS_LINE1 || "",
+                        ShipToAddressLine2: ShipNowResponse.ShipTo?.ADDRESS_LINE2 || "",
+                        ShipToCity: ShipNowResponse.ShipTo?.CITY || "",
+                        ShipToState: ShipNowResponse.ShipTo?.STATE || "",
+                        ShipToCountry: ShipNowResponse.ShipTo?.COUNTRY || "",
+                        ShipToPostalcode: ShipNowResponse.ShipTo?.ZIPCODE || "",
+                        ShipToEmail: ShipNowResponse.ShipTo?.EMAIL || "",
+                        ShipToPhoneNumber: ShipNowResponse.ShipTo?.PHONE || "",
+                        ShipToAddressType: "Residential",
+
+                        /* PRODUCT */
+                        ProductCode: ShipNowResponse.Packages[i].ItemsInfo[0].ItCa || "",
+                        ProductDescription: sanitizeDescription(ShipNowResponse.Packages[i].ItemsInfo[0].Description),
+                        ProductQuantity: Number(ShipNowResponse.Packages[i].ItemsInfo[0].totalQuantity).toFixed(2) || "0.00",
+                        ProductUnitOfMeasurement: ShipNowResponse.Packages[i].ItemsInfo[0].Meins || "CV",
+
+                        Totalpkg: String(eshipjetModel.getProperty("/to_HandlingUnitHeaderDelivery/results").length || 0).padStart(5, '0'),
+
+                        /* DOCUMENT */
+                        ShippingDocumentProvider: doc.docProvider || "",
+                        ShippingDocumentSapOutputType: doc.contentType || "",
+                        ShippingDocumentDescription: doc.docType || "",
+                        ShippingDocumentType: doc.docType || "",
+
+                        LastChangedOn: new Date().toISOString().split("T")[0],
+                        LastChangedBy: eshipjetModel.getProperty("/userName") || "SYSTEM"
+                    };
+                    aBulkItems.push(oItem);
+                });
+
+                /* ------------------- HEADER PAYLOAD ------------------- */
+
+                var oDeepPayload = {
+                    GUID: eshipjetModel.getProperty("/GU_ID"),
+                    Vbeln: sapDeliveryNumber,
+
+                    ManifestSingleToBulk: aBulkItems
+                };
+
+                /* ------------------- CREATE ------------------- */
+
+                oController.onOpenBusyDialog();
+
+                ManifestModel.create("/Manifest_detSet", oDeepPayload, {
+                    success: function (oData) {
+                        sap.m.MessageToast.show("Manifest created successfully");
+                        oController.getManifestHeaderForTodaysShipmentCount();
+                        oController.onShipNowNewPress();
+                        var sFromViewName = eshipjetModel.getProperty("/sFromViewName");
+                        if (sFromViewName === "SCAN_SHIP") {
+                            oController.getScanShipHistoryShipments();
+                        }
+                        oController.onCloseBusyDialog();
+                    },
+                    error: function (oError) {
+                        var errMsg = "Manifest creation failed";
+                        try {
+                            errMsg = JSON.parse(oError.responseText).error.message.value;
+                        } catch (e) {
+                            
+                        }
+                        sap.m.MessageBox.error(errMsg);
+                        oController.onCloseBusyDialog();
+                    }
+                });
+            },
 
 
             
@@ -5877,659 +5808,459 @@ onShippingDocumentsViewPress: async function (oEvent) {
             }
         },
 
-        // getManifestHeaderForCharges:function(sDeveliveryNumber){
-        //     oController.onOpenBusyDialog();
-        //     var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
-        //     var ManifestSrvModel = oController.getOwnerComponent().getModel("ManifestModel");
-        //     var aFilters = [
-        //         new sap.ui.model.Filter("Vbeln", sap.ui.model.FilterOperator.EQ, sDeveliveryNumber)
-        //     ];
 
-        //     ManifestSrvModel.read("/Manifest_detSet",{
-        //         filters: aFilters,
-        //         success:function(response){
-        //             eshipjetModel.setProperty("/getManifestHeader", response.results);
-                    
-        //             if (response && response.results.length > 0) {
-        //             // oController.onShopNowShipMethodChangeFromQuoteNow(response.results[0].CarrierCode, response.results[0].CarrierDesc);
-        //                 // Apply filtering after receiving the response
-        //                 var aFilteredData = response.results.filter(function (item) {
-        //                     return item.Vbeln === sDeveliveryNumber;
-        //                 });
-        //                 var OverallGoodsMovementStatus = eshipjetModel.getProperty("/commonValues/OverallGoodsMovementStatus");
-        //                 var shipNowStatus = true;
-        //                 var shipNowVoidStatus = false;
-        //                 var shipNowVoidStatusSave = true;
-        //                 var shipNowVoidStatusShipNow = true;
-        //                 if(response.results.length > 0){
-        //                     shipNowStatus = false;
-        //                     shipNowVoidStatus = true;
-        //                     shipNowVoidStatusSave = false;
-        //                     shipNowVoidStatusShipNow = false;
-        //                 };
-        //                 eshipjetModel.setProperty("/commonValues/shipNowBtnStatus", shipNowStatus);
-        //                 eshipjetModel.setProperty("/commonValues/shipNowVoidSelect", shipNowVoidStatus);
-        //                 eshipjetModel.setProperty("/commonValues/shipNowVoidSelectSave", shipNowVoidStatusSave);
-        //                 eshipjetModel.setProperty("/commonValues/shipNowVoidSelectShipNow", shipNowVoidStatusShipNow);
-        //                 if(aFilteredData && aFilteredData.length > 0){
-        //                     var aShippingCharges = [
-        //                         { "serialNo": "1", "description": "Freight Amount", "amount": parseInt(aFilteredData[0].FreightAmt).toFixed(2), "currency": "USD" },
-        //                         { "serialNo": "2", "description": "Discount Amount", "amount": parseInt(aFilteredData[0].DiscountAmt).toFixed(2), "currency": "USD" },
-        //                         { "serialNo": "3", "description": "Fuel", "amount": aFilteredData[0].Fuel && aFilteredData[0].Fuel !== "" ? parseFloat(aFilteredData[0].Fuel).toFixed(2) : "0.00", "currency": "USD" }
-        //                     ];
-        //                     eshipjetModel.setProperty("/shippingCharges", aShippingCharges);
-        //                     eshipjetModel.setProperty("/shippingChargesArrayLength", aShippingCharges.length);
-        //                     if(aShippingCharges.length > 0){
-        //                         eshipjetModel.setProperty("/shippingChargesLength", true);
-        //                     }
-        //                     var shippingDocuments = response.shippingDocuments;
-        //                     var ashippingDocuments = [];
-        //                     var tepmShippingDocs = [];
+            getManifestHeaderForCharges: function (sDeliveryNumber) {
+                const oController = this;
+                oController.onOpenBusyDialog();
+                // oController.onShipNowNewPress();
+                const eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+                var sDeveliveryNumber = eshipjetModel.getProperty("/commonValues/sapDeliveryNumber");
+                const ManifestSrvModel = oController.getOwnerComponent().getModel("ManifestModel");
+                var oShipTo   = eshipjetModel.getProperty("/ShipToAddress")   || {};
+                var oShipFrom = eshipjetModel.getProperty("/ShipFromAddress") || {};
 
-        //                     var freight = parseFloat(aFilteredData[0].Freightamt) || 0;
-        //                     var fuel = parseFloat(aFilteredData[0].Fuel) || 0;
-        //                     var totalAmount = (freight + fuel).toFixed(2);
+                oShipTo.LocationType   = "Residential";
+                oShipFrom.LocationType = "Commercial";
 
-        //                     eshipjetModel.setProperty("/totalFreightFuel", totalAmount);
+                eshipjetModel.setProperty("/ShipToAddress", oShipTo);
+                eshipjetModel.setProperty("/ShipFromAddress", oShipFrom);
 
-        //                     tepmShippingDocs.push({
-        //                         "srNo": 1,
-        //                         "contentType": "Label",
-        //                         "copiesToPrint": 1,
-        //                         "encodedLabel": aFilteredData[0].Label,
-        //                         "docProvider": aFilteredData[0].Carriertype,
-        //                         "docType": aFilteredData[0].Labelurl.split(".")[aFilteredData[0].Labelurl.split(".").length-1],
-        //                         "docName": aFilteredData[0].Labelurl,
-        //                     });
+
+                ManifestSrvModel.read("/Manifest_detSet", {
+                    success: function (oData) {
+                        const aFilteredResults = oData.results.filter(item => item.Vbeln === sDeveliveryNumber);
+                        console.log("Manifest_detSet Success:", oData);
+
+                        if (!aFilteredResults || aFilteredResults.length === 0) {
+                            // MessageToast.show("No Manifest data found for delivery " + sDeveliveryNumber);
+                            eshipjetModel.setProperty("/shippingCharges", []);
+                            eshipjetModel.setProperty("/shippingDocuments", []);
+                            eshipjetModel.setProperty("/shippingChargesLength", false);
+                            eshipjetModel.setProperty("/documentsLength", false);
+                            oController.onCloseBusyDialog();
+                            return;
+                        }else if(aFilteredResults.length !== 0){
+                            var shipNowStatus = true;
+                            var shipNowVoidStatus = false;
+                            var shipNowVoidStatusSave = true;
+                            var shipNowVoidStatusShipNow = true;
+                            if(aFilteredResults.length > 0){
+                                shipNowStatus = false;
+                                shipNowVoidStatus = true;
+                                shipNowVoidStatusSave = false;
+                                shipNowVoidStatusShipNow = false;
+                            };
+                            eshipjetModel.setProperty("/commonValues/shipNowBtnStatus", shipNowStatus);
+                            eshipjetModel.setProperty("/commonValues/shipNowVoidSelect", shipNowVoidStatus);
+                            eshipjetModel.setProperty("/commonValues/shipNowVoidSelectSave", shipNowVoidStatusSave);
+                            eshipjetModel.setProperty("/commonValues/shipNowVoidSelectShipNow", shipNowVoidStatusShipNow);
+                            // // --- SHIPPING CHARGES ---
+                            // const freight = parseFloat(aFilteredResults[0].FreightAmt) || 0;
+                            // const discount = parseFloat(aFilteredResults[0].DiscountAmt) || 0;
+                            // const fuel = parseFloat(aFilteredResults[0].Fuel) || 0;
+
+                            // const aShippingCharges = [
+                            //     { serialNo: "1", description: "Freight Amount", amount: freight.toFixed(2), currency: "USD" },
+                            //     { serialNo: "2", description: "Discount Amount", amount: discount.toFixed(2), currency: "USD" },
+                            //     { serialNo: "3", description: "Fuel", amount: fuel.toFixed(2), currency: "USD" }
+                            // ];
+
+                            // eshipjetModel.setProperty("/shippingCharges", aShippingCharges);
+                            // eshipjetModel.setProperty("/shippingChargesArrayLength", aShippingCharges.length);
+                            // eshipjetModel.setProperty("/shippingChargesLength", aShippingCharges.length > 0);
+                            // eshipjetModel.setProperty("/totalFreightFuel", (freight + fuel - discount).toFixed(2));
+
+
+                                // ---------------------------------------------------
+                                // SHIPPING CHARGES (Manifest - using new field names)
+                                // ---------------------------------------------------
+                                var m = aFilteredResults[0];   // Manifest record
+
+
+                                // -----------------------------
+                                // BUSINESS PARTNERS MAPPING
+                                // -----------------------------
+                                var BusinessPartners = [];
+
+                                var SoldToParty = {
+                                    PartnerType: "Sold-To-Party",
+                                    PartnerID: "",                                     // You can map real ID if you have it
+                                    CompanyName: aFilteredResults[0].ShipToCompany || "",
+                                    ContactName: aFilteredResults[0].ShipToContact || "",
+                                    AddressLine1: aFilteredResults[0].ShipToAddressLine1 || "",
+                                    AddressLine1: aFilteredResults[0].ShipToAddressLine2 || "",
+                                    City: aFilteredResults[0].ShipToCity || "",
+                                    State: aFilteredResults[0].ShipToState || "",
+                                    PostalCode: aFilteredResults[0].ShipToPostalcode || "",
+                                    Country: aFilteredResults[0].ShipToCountry || "",
+                                    PhoneNumber: aFilteredResults[0].ShipToPhoneNumber || "",
+                                    EmailAddress: aFilteredResults[0].ShipToEmail || ""
+                                };
+
+                                var ShipToParty = {
+                                    PartnerType: "Ship-to Party",
+                                    PartnerID: "",                                     // You can map real ID if you have it
+                                    CompanyName: aFilteredResults[0].ShipToCompany || "",
+                                    ContactName: aFilteredResults[0].ShipToContact || "",
+                                    AddressLine1: aFilteredResults[0].ShipToAddressLine1 || "",
+                                    AddressLine1: aFilteredResults[0].ShipToAddressLine2 || "",
+                                    City: aFilteredResults[0].ShipToCity || "",
+                                    State: aFilteredResults[0].ShipToState || "",
+                                    PostalCode: aFilteredResults[0].ShipToPostalcode || "",
+                                    Country: aFilteredResults[0].ShipToCountry || "",
+                                    PhoneNumber: aFilteredResults[0].ShipToPhoneNumber || "",
+                                    EmailAddress: aFilteredResults[0].ShipToEmail || ""
+                                };
+
+                                // Push to array
+                                BusinessPartners.push(SoldToParty);
+                                BusinessPartners.push(ShipToParty);
+
+                                // Set model
+                                eshipjetModel.setProperty("/BusinessPartners", BusinessPartners);
+
+                                console.log("Business Partners:", BusinessPartners);
+
+                            var aShippingCharges = [
+                                {
+                                    description: "Freight Amount",
+                                    amount: m.FreightAmt ? Number(m.FreightAmt).toFixed(2) : null,
+                                    currency: "USD"
+                                },
+                                {
+                                    description: "Discount Amount",
+                                    amount: m.DiscountAmt ? Number(m.DiscountAmt).toFixed(2) : null,
+                                    currency: "USD"
+                                },
+                                {
+                                    description: m.ShippingChargeDescription1 || null,
+                                    amount: m.ShippingCharges1 && m.ShippingCharges1 !== "0.00" ? Number(m.ShippingCharges1).toFixed(2) : null,
+                                    currency: m.ShippingCurrency1 || null
+                                },
+                                {
+                                    description: m.ShippingChargesDescription2 || null,
+                                    amount: m.ShippingCharges2 && m.ShippingCharges2 !== "0.00" ? Number(m.ShippingCharges2).toFixed(2) : null,
+                                    currency: m.ShippingChargesCurrency2 || null
+                                },
+                                {
+                                    description: m.ShippingChargesDescription3 || null,
+                                    amount: m.ShippingCharges3 && m.ShippingCharges3 !== "0.00" ? Number(m.ShippingCharges3).toFixed(2) : null,
+                                    currency: m.ShippingChargesCurrency3 || null
+                                },
+                                {
+                                    description: m.ShippingChargesDescription4 || null,
+                                    amount: m.ShippingCharges4 && m.ShippingCharges4 !== "0.00" ? Number(m.ShippingCharges4).toFixed(2) : null,
+                                    currency: m.ShippingChargesCurrency4 || null
+                                },
+                                {
+                                    description: m.ShippingChargesDescription5 || null,
+                                    amount: m.ShippingCharges5 && m.ShippingCharges5 !== "0.00" ? Number(m.ShippingCharges5).toFixed(2) : null,
+                                    currency: m.ShippingChargesCurrency5 || null
+                                }
+                            ];
+
+                            // Filter out empty rows
+                            aShippingCharges = aShippingCharges.filter(item =>
+                                item.description &&
+                                item.amount &&
+                                item.currency
+                            );
+
+                            // Update model
+                            eshipjetModel.setProperty("/shippingCharges", aShippingCharges);
+                            eshipjetModel.setProperty("/shippingChargesArrayLength", aShippingCharges.length);
+                            eshipjetModel.setProperty("/shippingChargesLength", aShippingCharges.length > 0);
+
+                            // -----------------------------------------
+                            // TOTAL FREIGHT + FUEL - DISCOUNT (Manifest)
+                            // -----------------------------------------
+                            var freightVal = Number(m.FreightAmt || 0);
+                            var discountVal = Number(m.DiscountAmt || 0);
+
+                            // Fuel may come from ShippingCharges1..5, find "Fuel Surcharge"
+                            var fuelVal = 0;
+
+                            aShippingCharges.forEach(sc => {
+                                if (sc.description && sc.description.toLowerCase().includes("fuel")) {
+                                    fuelVal = Number(sc.amount || 0);
+                                }
+                            });
+
+                            // FINAL TOTAL
+                            var totalFF = (freightVal + fuelVal - discountVal).toFixed(2);
+                            eshipjetModel.setProperty("/totalFreightFuel", totalFF);
+
+                            // --- DOCUMENTS ---
+                            const aDocuments = [];
+                            var tepmShippingDocs = [];
+
+                                // ZPL label
+                                if (aFilteredResults[0].Label && aFilteredResults[0].Label.trim() !== "") {
+                                    aDocuments.push({
+                                        srNo: 1,
+                                        contentType: "Label",
+                                        docProvider: aFilteredResults[0].Carriertype || "",
+                                        docType: "ZPL",
+                                        docName: aFilteredResults[0].Label,
+                                        encodedLabel: aFilteredResults[0].Label
+                                    });
+                                }
+
+                                // Packing Slip
+                                if (aFilteredResults[0].PackingSlip && aFilteredResults[0].PackingSlip !== "") {
+                                    aDocuments.push({
+                                        srNo: 2,
+                                        contentType: "Packing Slip",
+                                        docProvider: "Eshipjet",
+                                        docType: "PDF",
+                                        docName: aFilteredResults[0].PackingSlip
+                                    });
+                                }
+
+                                // Bill of Lading
+                                if (aFilteredResults[0].BillofLading && aFilteredResults[0].BillofLading !== "") {
+                                    aDocuments.push({
+                                        srNo: 3,
+                                        contentType: "Bill of Lading",
+                                        docProvider: "Eshipjet",
+                                        docType: "PDF",
+                                        docName: aFilteredResults[0].BillofLading
+                                    });
+                                }
+
+                            aFilteredResults.forEach((item, idx) => {
+                                if (item.Label && item.Label.trim() !== "") {
+                                    tepmShippingDocs.push({
+                                        srNo: idx + 1,
+                                        contentType: "Label",
+                                        docProvider: item.Carriertype || "",
+                                        docType: "ZPL",
+                                        docName: item.Label,
+                                        encodedLabel: item.Label
+                                    });
+                                }
+                            });
+                            console.log("Documents generated:", aDocuments);
+
+                            eshipjetModel.setProperty("/shippingDocuments", aDocuments);
+                            eshipjetModel.setProperty("/tepmShippingDocs", tepmShippingDocs);
+                            eshipjetModel.setProperty("/shippingDocumentsLength", aDocuments.length);
+                            eshipjetModel.setProperty("/documentsLength", aDocuments.length > 0);
+
+                            var trackingArray = [];
+                            for(var i=0; i<aFilteredResults.length; i++){
+                                var trackingObj = {
+                                    "Plant":aFilteredResults[i].Plant,
+                                    "Delivery": aFilteredResults[i].Vbeln,
+                                    "CarrierCode": aFilteredResults[i].Carriertype,
+                                    "Shipmentid": aFilteredResults[i].ServiceName,
+                                    "ServiceID": aFilteredResults[i].CarrierDesc,
+                                    "ServiceName": aFilteredResults[i].CarrierDesc,
+                                    "Shipmenttype": aFilteredResults[i].CarrierDesc,
+                                    "PGI": "Successful",
+                                    "ShipDate": aFilteredResults[i].CreatedOn,
+                                    "DateAdded": aFilteredResults[i].CreatedOn,
+                                    "TrackingNumber": aFilteredResults[i].TrackingNumber,
+                                    "TrackingStatus": aFilteredResults[i].ShipStatus,
+                                    "SAPUserID": "KUMAR"
+                                };
+                                trackingArray.push(trackingObj);
+                                eshipjetModel.setProperty("/trackingArray", trackingArray);
+                                eshipjetModel.setProperty("/trackingArrayLength", trackingArray.length);
+                                if(trackingArray.length > 0){
+                                    eshipjetModel.setProperty("/trackingLength", true);
+                                }
+                            }
+
+                            // PACK HU MAPPING
+                            var aManifestHUs = aFilteredResults.map(function(item, idx) {
+                                return {
+                                    SerialNumber: idx + 1,
+                                    HandlingUnitExternalID: item.HandlingUnit,
+                                    CreatedByUser: item.CreatedBy,
+                                    GrossWeight: "",                      // optional
+                                    Dimensions: item.Dimensions,
+                                    HandlingUnitPackingObjectType: item.Totalpkg,
+                                    HandlingUnitInternalID: "",
+                                    Hunumber: item.Hunumber,
+                                    HandlingUnitIsClosed: true,
+                                    PackagingMaterial: "",
+                                    HuLabel: "",
+                                    GrossWeight: item.Weight
+                                };
+                            });
+
+                            eshipjetModel.setProperty("/ShipNowHandlingUnits", aManifestHUs);
+
+
+                            // -----------------------------------------
+                            // SHIP FROM (MANIFEST FLOW)
+                            // -----------------------------------------
+                            var m = aFilteredResults[0];
+
+                            var ShipFrom = {
+                                    ShipFromCOMPANY: m.ShipFromCompany || "",
+                                    ShipFromCONTACT: m.ShipFromContact || "",
+                                    ShipFromADDRESS_LINE1: m.ShipFromAddressLine1 || "",
+                                    ShipFromADDRESS_LINE2: m.ShipFromAddressLine2 || "",
+                                    ShipFromCITY: m.ShipFromCity || "",
+                                    ShipFromSTATE: m.ShipFromState || "",
+                                    ShipFromZIPCODE: m.ShipFromPostalcode || "",
+                                    ShipFromCOUNTRY: m.ShipFromCountry || "",
+                                    ShipFromPHONE: m.ShipFromPhoneNumber || "",
+                                    ShipFromEMAIL: m.ShipFromEmail || "",
+                                    LocationType: m.ShipToAddressType || ""
+                                };
+                                eshipjetModel.setProperty("/ShipFromAddress", ShipFrom);
+
+                            // -----------------------------------------
+                            // SHIP TO (MANIFEST FLOW)
+                            // -----------------------------------------
+                            var ShipTo = {
+                                    BusinessPartnerName1: m.ShipToContact || "",
+                                    FullName: m.ShipToCompany || m.ShipToContact || "",
+                                    StreetName: m.ShipToAddressLine1 || "",
+                                    HouseNumber: m.ShipToAddressLine1 || "",
+                                    CityName: m.ShipToCity || "",
+                                    Region: m.ShipToState || "",
+                                    PostalCode: m.ShipToPostalcode || "",
+                                    Country: m.ShipToCountry || "",
+                                    PhoneNumber: m.ShipToPhoneNumber || "",
+                                    EMAIL: m.ShipToEmail && m.ShipToEmail.trim() !== ""
+                                        ? m.ShipToEmail
+                                        : "info@eshipjet.ai"
+                                };
+                            eshipjetModel.setProperty("/ShipToAddress", ShipTo);
+                            eshipjetModel.setProperty("/carrierNamesDropDownData", [
+                                    { CarrierCode: m.Carriertype }
+                                ]);
+                                // Auto-select carrier
+                                eshipjetModel.setProperty("/commonValues/ShipNowShipMethodSelectedKey", m.Carriertype);
+
+                                eshipjetModel.setProperty("/carrierServicesDropDownData", [
+                                {
+                                    ErpServId: m.ServiceName,
+                                    ServDesc: m.ServiceName
+                                }
+                            ]);
+
+                            // Auto-select service
+                            eshipjetModel.setProperty("/commonValues/ShipNowShipsrvNameSelectedKey", m.ServiceName);
+
+                            eshipjetModel.setProperty("/accountNumber", m.Accountnumber || "");
                             
-        //                     for(var i=0; i<aFilteredData.length; i++){
-        //                         var obj = {
-        //                                 "srNo": i+1,
-        //                                 "contentType": "Label",
-        //                                 "copiesToPrint": 1,
-        //                                 "encodedLabel": aFilteredData[i].Label,
-        //                                 "docProvider": aFilteredData[i].Carriertype,
-        //                                 "docType": aFilteredData[i].Labelurl.split(".")[aFilteredData[i].Labelurl.split(".").length-1],
-        //                                 "docName": aFilteredData[i].Labelurl,
-        //                         };
-                                
-        //                         ashippingDocuments.push(obj);
-        //                     }
+                            eshipjetModel.setProperty("/selectPaymentType", m.Paymentcode || "Sender");
 
-        //                 if(aFilteredData[0].PackURL !== "" && aFilteredData[0].PackURL !== undefined){
-        //                     var packObj = {
-        //                         "srNo": 2,
-        //                         "contentType": "Packing Slip",
-        //                         "copiesToPrint": 1,
-        //                         "encodedLabel": aFilteredData[0].Label,
-        //                         "docProvider": "Eshipjet",
-        //                         "docType": aFilteredData[0].PackURL.split(".")[aFilteredData[0].PackURL.split(".").length-1],
-        //                         "docName": aFilteredData[0].PackURL,
-        //                     };
-        //                     tepmShippingDocs.push(packObj);
-        //                 }
-        //                 if(aFilteredData[0].BolURL !== "" && aFilteredData[0].BolURL !== undefined){    
-        //                     var billOfLading = {
-        //                             "srNo": 3,
-        //                             "contentType": "Bill Of lading",
-        //                             "copiesToPrint": 1,
-        //                             "encodedLabel": "",
-        //                             "docProvider": "Eshipjet",
-        //                             "docType": aFilteredData[0].BolURL.split(".")[aFilteredData[0].BolURL.split(".").length-1],
-        //                             "docName": aFilteredData[0].BolURL,
-        //                     }
-        //                     tepmShippingDocs.push(billOfLading);
-        //                 }
-                        
-        //                     eshipjetModel.setProperty("/shippingDocuments", tepmShippingDocs);
-        //                     eshipjetModel.setProperty("/tepmShippingDocs", ashippingDocuments );
-        //                     eshipjetModel.setProperty("/shippingDocumentsLength", tepmShippingDocs.length);
-        //                     if(ashippingDocuments.length > 0){
-        //                         eshipjetModel.setProperty("/documentsLength", true);
-        //                     };
+                            eshipjetModel.setProperty("/currentDeliveryNumber", m.Vbeln);
 
-        //                     var trackingArray = [];
-        //                     for(var i=0; i<aFilteredData.length; i++){
-        //                         var trackingObj = {
-        //                             "Plant":aFilteredData[i].Plant,
-        //                             "Delivery": aFilteredData[i].Delivery,
-        //                             "CarrierCode": aFilteredData[i].CarrierCode,
-        //                             "Shipmentid": aFilteredData[i].Shipmentid,
-        //                             "ServiceID": aFilteredData[i].CarrierDesc,
-        //                             "ServiceName": aFilteredData[i].CarrierDesc,
-        //                             "Shipmenttype": aFilteredData[i].Shipmenttype,
-        //                             "PGI": "Successful",
-        //                             "ShipDate": aFilteredData[i].Createddate,
-        //                             "DateAdded": aFilteredData[i].DateAdded,
-        //                             "TrackingNumber": aFilteredData[i].TrackingNumber,
-        //                             "TrackingStatus": aFilteredData[i].Shipprocess,
-        //                             "SAPUserID": "KUMAR"
-        //                         };
-        //                         trackingArray.push(trackingObj);
-        //                         eshipjetModel.setProperty("/trackingArray", trackingArray);
-        //                         eshipjetModel.setProperty("/trackingArrayLength", trackingArray.length);
-        //                         if(trackingArray.length > 0){
-        //                             eshipjetModel.setProperty("/trackingLength", true);
-        //                         }
-        //                     }
-        //                     eshipjetModel.updateBindings(true);
+                            eshipjetModel.setProperty("/PGI_STATUS", m.eShipjetPGIStatus || "");
 
-        //                     var invoiceNums = "";
-        //                     aFilteredData.forEach(function(item, idx) {
-        //                         if (idx === 0) {
-        //                             invoiceNums = item.HandlingUnit;
-        //                         } else {
-        //                             invoiceNums = invoiceNums + ", " + item.HandlingUnit;
-        //                         }
-        //                     });
-        //                     eshipjetModel.setProperty("/invoiceNo", invoiceNums);
-                            
-        //                 }
+                            eshipjetModel.setProperty("/manifestGUID", m.GUID || "");
 
-        //                 var ShipNowShipMethodSelectedKey = eshipjetModel.getProperty("/commonValues/ShipNowShipMethodSelectedKey");
-        //                 var carrierName = ShipNowShipMethodSelectedKey.toUpperCase();
-        //                 if(carrierName === "UPS" || carrierName === "FEDEX" || carrierName === "USPS"){
-        //                     eshipjetModel.setProperty("/hideTrackPackDetails", false);
-        //                 }else{
-        //                     eshipjetModel.setProperty("/hideTrackPackDetails", true);
-        //                     eshipjetModel.setProperty("/commonValues/lengthOfDimensions", "40");
-        //                     eshipjetModel.setProperty("/commonValues/widthOfDimensions", "48");
-        //                     eshipjetModel.setProperty("/commonValues/heightOfDimensions", "");
-        //                 }
-        //                 oController.getHandlingUnit(sDeveliveryNumber);
-        //                 oController.checkPostGoodsIssueStatus(sDeveliveryNumber);
-        //             }
-        //             // oController.onCloseBusyDialog();
-        //         },
-        //         error: function(error){
-        //             MessageBox.warning(error.responseText);
-        //             oController.onCloseBusyDialog();
-        //         }
-        //     });
-        // },
+                            // -----------------------------
+                            // SET PLANT (for recent shipment)
+                            // -----------------------------
+                            var m = aFilteredResults[0];
 
-  getManifestHeaderForCharges: function (sDeliveryNumber) {
-    const oController = this;
-    oController.onOpenBusyDialog();
-    // oController.onShipNowNewPress();
-    const eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
-    var sDeveliveryNumber = eshipjetModel.getProperty("/commonValues/sapDeliveryNumber");
-    const ManifestSrvModel = oController.getOwnerComponent().getModel("ManifestModel");
-    var oShipTo   = eshipjetModel.getProperty("/ShipToAddress")   || {};
-    var oShipFrom = eshipjetModel.getProperty("/ShipFromAddress") || {};
+                            // Backend field where Plant comes (adjust name if different)
+                            var manifestPlant = m.Plant || m.ShipmentPlant || m.SHIPFROMPLANT || "";  
 
-    oShipTo.LocationType   = "Residential";
-    oShipFrom.LocationType = "Commercial";
+                            if (manifestPlant) {
+                                eshipjetModel.setProperty("/commonValues/plant", manifestPlant);
+                                eshipjetModel.setProperty("/commonValues/showPlant", true);
+                            } else {
+                                eshipjetModel.setProperty("/commonValues/showPlant", false);
+                            }
 
-    eshipjetModel.setProperty("/ShipToAddress", oShipTo);
-    eshipjetModel.setProperty("/ShipFromAddress", oShipFrom);
+                            eshipjetModel.setProperty("/HandlingUnitsLength", m.Totalpkgs || 0);
 
 
-    ManifestSrvModel.read("/Manifest_detSet", {
-        success: function (oData) {
-            const aFilteredResults = oData.results.filter(item => item.Vbeln === sDeveliveryNumber);
-            console.log("Manifest_detSet Success:", oData);
+                                // ----------------------
+                                // MAP HU DATA FOR SHIPNOW UI
+                                // ----------------------
+                                var handlingUnitsArray = aFilteredResults.map(item => ({
+                                    HandlingUnitExternalId: item.HandlingUnit?.trim() || "",
+                                    CreatedByUser: item.CreatedBy || "",
+                                    GrossWeight: item.GrossWeight || 10,
 
-            if (!aFilteredResults || aFilteredResults.length === 0) {
-                // MessageToast.show("No Manifest data found for delivery " + sDeveliveryNumber);
-                eshipjetModel.setProperty("/shippingCharges", []);
-                eshipjetModel.setProperty("/shippingDocuments", []);
-                eshipjetModel.setProperty("/shippingChargesLength", false);
-                eshipjetModel.setProperty("/documentsLength", false);
-                oController.onCloseBusyDialog();
-                return;
-            }else if(aFilteredResults.length !== 0){
-                var shipNowStatus = true;
-                var shipNowVoidStatus = false;
-                var shipNowVoidStatusSave = true;
-                var shipNowVoidStatusShipNow = true;
-                if(aFilteredResults.length > 0){
-                    shipNowStatus = false;
-                    shipNowVoidStatus = true;
-                    shipNowVoidStatusSave = false;
-                    shipNowVoidStatusShipNow = false;
-                };
-                eshipjetModel.setProperty("/commonValues/shipNowBtnStatus", shipNowStatus);
-                eshipjetModel.setProperty("/commonValues/shipNowVoidSelect", shipNowVoidStatus);
-                eshipjetModel.setProperty("/commonValues/shipNowVoidSelectSave", shipNowVoidStatusSave);
-                eshipjetModel.setProperty("/commonValues/shipNowVoidSelectShipNow", shipNowVoidStatusShipNow);
-                // // --- SHIPPING CHARGES ---
-                // const freight = parseFloat(aFilteredResults[0].FreightAmt) || 0;
-                // const discount = parseFloat(aFilteredResults[0].DiscountAmt) || 0;
-                // const fuel = parseFloat(aFilteredResults[0].Fuel) || 0;
+                                    HandlingUnitLength: item.Length || 10,
+                                    HandlingUnitWidth: item.Width || 12,
+                                    HandlingUnitHeight: item.Height || 12,
 
-                // const aShippingCharges = [
-                //     { serialNo: "1", description: "Freight Amount", amount: freight.toFixed(2), currency: "USD" },
-                //     { serialNo: "2", description: "Discount Amount", amount: discount.toFixed(2), currency: "USD" },
-                //     { serialNo: "3", description: "Fuel", amount: fuel.toFixed(2), currency: "USD" }
-                // ];
+                                    HandlingUnitPackingObjectType: item.Totalpkg || "",
+                                    HandlingUnitInternalID: item.Hunumber || "",
+                                    TrackingNumber: item.TrackingNumber || "",
 
-                // eshipjetModel.setProperty("/shippingCharges", aShippingCharges);
-                // eshipjetModel.setProperty("/shippingChargesArrayLength", aShippingCharges.length);
-                // eshipjetModel.setProperty("/shippingChargesLength", aShippingCharges.length > 0);
-                // eshipjetModel.setProperty("/totalFreightFuel", (freight + fuel - discount).toFixed(2));
+                                    PackagingMaterial: item.Carriertype || "",
+                                    Material: item.ProductCode || "",
+                                    MaterialName: item.ProductDescription || "",
+                                    HandlingUnitQuantity: item.ProductQuantity || 0,
+                                    HandlingUnitQuantityUnit: item.ProductUnitOfMeasurement || "",
 
+                                    CARRIER_TYPE: item.Carriertype,
+                                    SERVICE_NAME: item.ServiceName,
+                                    CARRIER_DESC: item.CarrierDesc
+                                }));
 
-                    // ---------------------------------------------------
-                    // SHIPPING CHARGES (Manifest - using new field names)
-                    // ---------------------------------------------------
-                    var m = aFilteredResults[0];   // Manifest record
+                                // 🔄 Reset before updating
+                                eshipjetModel.setProperty("/to_HandlingUnitHeaderDelivery", { results: [] });
+
+                                // ✅ Update ShipNow HU table data
+                                eshipjetModel.setProperty("/to_HandlingUnitHeaderDelivery/results", handlingUnitsArray);
+
+                                // Count of HUs
+                                eshipjetModel.setProperty("/HandlingUnitsLength", handlingUnitsArray.length);
+
+                                console.log("Updated HU Data:", handlingUnitsArray);
+                                oController.onPackSectionEmptyRows();
+
+                                // ---------------------------
+                                // PICK STATUS (Recent Shipment)
+                                // ---------------------------
+                                var pickStatus = aFilteredResults[0].eShipjetPickStatus || "";
+                                eshipjetModel.setProperty("/commonValues/OverallGoodsMovementStatus", pickStatus);
+                                var grossWeight = aFilteredResults?.[0]?.Weight || "";
+                                eshipjetModel.setProperty("/GrossWeight", grossWeight);
 
 
-                    // -----------------------------
-                    // BUSINESS PARTNERS MAPPING
-                    // -----------------------------
-                    var BusinessPartners = [];
+                                // -------------------------------------------------
+                                // PRODUCT DETAILS FOR HU DIALOG (Recent Shipment)
+                                // -------------------------------------------------
+                                var handlingUnitItems = [];
 
-                    var SoldToParty = {
-                        PartnerType: "Sold-To-Party",
-                        PartnerID: "",                                     // You can map real ID if you have it
-                        CompanyName: aFilteredResults[0].ShipToCompany || "",
-                        ContactName: aFilteredResults[0].ShipToContact || "",
-                        AddressLine1: aFilteredResults[0].ShipToAddressLine1 || "",
-                        AddressLine1: aFilteredResults[0].ShipToAddressLine2 || "",
-                        City: aFilteredResults[0].ShipToCity || "",
-                        State: aFilteredResults[0].ShipToState || "",
-                        PostalCode: aFilteredResults[0].ShipToPostalcode || "",
-                        Country: aFilteredResults[0].ShipToCountry || "",
-                        PhoneNumber: aFilteredResults[0].ShipToPhoneNumber || "",
-                        EmailAddress: aFilteredResults[0].ShipToEmail || ""
-                    };
+                                aFilteredResults.forEach(function (item) {
+                                    handlingUnitItems.push({
+                                        Material: item.ProductCode || "",
+                                        MaterialName: item.ProductDescription || "",
+                                        HandlingUnitQuantity: item.ProductQuantity || 0,
+                                        HandlingUnitQuantityUnit: item.ProductUnitOfMeasurement || ""
+                                    });
+                                });
 
-                    var ShipToParty = {
-                        PartnerType: "Ship-to Party",
-                        PartnerID: "",                                     // You can map real ID if you have it
-                        CompanyName: aFilteredResults[0].ShipToCompany || "",
-                        ContactName: aFilteredResults[0].ShipToContact || "",
-                        AddressLine1: aFilteredResults[0].ShipToAddressLine1 || "",
-                        AddressLine1: aFilteredResults[0].ShipToAddressLine2 || "",
-                        City: aFilteredResults[0].ShipToCity || "",
-                        State: aFilteredResults[0].ShipToState || "",
-                        PostalCode: aFilteredResults[0].ShipToPostalcode || "",
-                        Country: aFilteredResults[0].ShipToCountry || "",
-                        PhoneNumber: aFilteredResults[0].ShipToPhoneNumber || "",
-                        EmailAddress: aFilteredResults[0].ShipToEmail || ""
-                    };
+                                // Set to model for fragment binding
+                            eshipjetModel.setProperty("/handlingUnitItems", handlingUnitItems);
+                            eshipjetModel.updateBindings(true);
 
-                    // Push to array
-                    BusinessPartners.push(SoldToParty);
-                    BusinessPartners.push(ShipToParty);
-
-                    // Set model
-                    eshipjetModel.setProperty("/BusinessPartners", BusinessPartners);
-
-                    console.log("Business Partners:", BusinessPartners);
-
-
-                var aShippingCharges = [
-                    {
-                        description: "Freight Amount",
-                        amount: m.FreightAmt ? Number(m.FreightAmt).toFixed(2) : null,
-                        currency: "USD"
+                            var invoiceNums = "";
+                            aFilteredResults.forEach(function(item, idx) {
+                                if (idx === 0) {
+                                    invoiceNums = item.HandlingUnit;
+                                } else {
+                                    invoiceNums = invoiceNums + ", " + item.HandlingUnit;
+                                }
+                            });
+                            eshipjetModel.setProperty("/invoiceNo", invoiceNums);
+                            eshipjetModel.updateBindings(true);
+                        }
+                        oController.onCloseBusyDialog();
                     },
-                    {
-                        description: "Discount Amount",
-                        amount: m.DiscountAmt ? Number(m.DiscountAmt).toFixed(2) : null,
-                        currency: "USD"
-                    },
-                    {
-                        description: m.ShippingChargeDescription1 || null,
-                        amount: m.ShippingCharges1 && m.ShippingCharges1 !== "0.00" ? Number(m.ShippingCharges1).toFixed(2) : null,
-                        currency: m.ShippingCurrency1 || null
-                    },
-                    {
-                        description: m.ShippingChargesDescription2 || null,
-                        amount: m.ShippingCharges2 && m.ShippingCharges2 !== "0.00" ? Number(m.ShippingCharges2).toFixed(2) : null,
-                        currency: m.ShippingChargesCurrency2 || null
-                    },
-                    {
-                        description: m.ShippingChargesDescription3 || null,
-                        amount: m.ShippingCharges3 && m.ShippingCharges3 !== "0.00" ? Number(m.ShippingCharges3).toFixed(2) : null,
-                        currency: m.ShippingChargesCurrency3 || null
-                    },
-                    {
-                        description: m.ShippingChargesDescription4 || null,
-                        amount: m.ShippingCharges4 && m.ShippingCharges4 !== "0.00" ? Number(m.ShippingCharges4).toFixed(2) : null,
-                        currency: m.ShippingChargesCurrency4 || null
-                    },
-                    {
-                        description: m.ShippingChargesDescription5 || null,
-                        amount: m.ShippingCharges5 && m.ShippingCharges5 !== "0.00" ? Number(m.ShippingCharges5).toFixed(2) : null,
-                        currency: m.ShippingChargesCurrency5 || null
-                    }
-                ];
-
-                // Filter out empty rows
-                aShippingCharges = aShippingCharges.filter(item =>
-                    item.description &&
-                    item.amount &&
-                    item.currency
-                );
-
-                // Update model
-                eshipjetModel.setProperty("/shippingCharges", aShippingCharges);
-                eshipjetModel.setProperty("/shippingChargesArrayLength", aShippingCharges.length);
-                eshipjetModel.setProperty("/shippingChargesLength", aShippingCharges.length > 0);
-
-                // -----------------------------------------
-                // TOTAL FREIGHT + FUEL - DISCOUNT (Manifest)
-                // -----------------------------------------
-                var freightVal = Number(m.FreightAmt || 0);
-                var discountVal = Number(m.DiscountAmt || 0);
-
-                // Fuel may come from ShippingCharges1..5, find "Fuel Surcharge"
-                var fuelVal = 0;
-
-                aShippingCharges.forEach(sc => {
-                    if (sc.description && sc.description.toLowerCase().includes("fuel")) {
-                        fuelVal = Number(sc.amount || 0);
+                    error: function (err) {
+                        console.error("❌ Manifest_detSet Error:", err);
+                        MessageBox.error("Failed to load manifest data. Check console for details.");
+                        oController.onCloseBusyDialog();
                     }
                 });
-
-                // FINAL TOTAL
-                var totalFF = (freightVal + fuelVal - discountVal).toFixed(2);
-
-                eshipjetModel.setProperty("/totalFreightFuel", totalFF);
-
-            
-
-
-                // --- DOCUMENTS ---
-                const aDocuments = [];
-                var tepmShippingDocs = [];
-
-                    // ZPL label
-                    if (aFilteredResults[0].Label && aFilteredResults[0].Label.trim() !== "") {
-                        aDocuments.push({
-                            srNo: 1,
-                            contentType: "Label",
-                            docProvider: aFilteredResults[0].Carriertype || "",
-                            docType: "ZPL",
-                            docName: aFilteredResults[0].Label,
-                            encodedLabel: aFilteredResults[0].Label
-                        });
-                    }
-
-                    // Packing Slip
-                    if (aFilteredResults[0].PackingSlip && aFilteredResults[0].PackingSlip !== "") {
-                        aDocuments.push({
-                            srNo: 2,
-                            contentType: "Packing Slip",
-                            docProvider: "Eshipjet",
-                            docType: "PDF",
-                            docName: aFilteredResults[0].PackingSlip
-                        });
-                    }
-
-                    // Bill of Lading
-                    if (aFilteredResults[0].BillofLading && aFilteredResults[0].BillofLading !== "") {
-                        aDocuments.push({
-                            srNo: 3,
-                            contentType: "Bill of Lading",
-                            docProvider: "Eshipjet",
-                            docType: "PDF",
-                            docName: aFilteredResults[0].BillofLading
-                        });
-                    }
-
-                aFilteredResults.forEach((item, idx) => {
-                    // ZPL label
-                    if (item.Label && item.Label.trim() !== "") {
-                        tepmShippingDocs.push({
-                            srNo: idx + 1,
-                            contentType: "Label",
-                            docProvider: item.Carriertype || "",
-                            docType: "ZPL",
-                            docName: item.Label,
-                            encodedLabel: item.Label
-                        });
-                    }
-                });
-
-                console.log("Documents generated:", aDocuments);
-
-                eshipjetModel.setProperty("/shippingDocuments", aDocuments);
-                eshipjetModel.setProperty("/tepmShippingDocs", tepmShippingDocs);
-                eshipjetModel.setProperty("/shippingDocumentsLength", aDocuments.length);
-                eshipjetModel.setProperty("/documentsLength", aDocuments.length > 0);
-
-                
-
-                var trackingArray = [];
-                for(var i=0; i<aFilteredResults.length; i++){
-                    var trackingObj = {
-                        "Plant":aFilteredResults[i].Plant,
-                        "Delivery": aFilteredResults[i].Vbeln,
-                        "CarrierCode": aFilteredResults[i].Carriertype,
-                        "Shipmentid": aFilteredResults[i].ServiceName,
-                        "ServiceID": aFilteredResults[i].CarrierDesc,
-                        "ServiceName": aFilteredResults[i].CarrierDesc,
-                        "Shipmenttype": aFilteredResults[i].CarrierDesc,
-                        "PGI": "Successful",
-                        "ShipDate": aFilteredResults[i].CreatedOn,
-                        "DateAdded": aFilteredResults[i].CreatedOn,
-                        "TrackingNumber": aFilteredResults[i].TrackingNumber,
-                        "TrackingStatus": aFilteredResults[i].ShipStatus,
-                        "SAPUserID": "KUMAR"
-                    };
-                    trackingArray.push(trackingObj);
-                    eshipjetModel.setProperty("/trackingArray", trackingArray);
-                    eshipjetModel.setProperty("/trackingArrayLength", trackingArray.length);
-                    if(trackingArray.length > 0){
-                        eshipjetModel.setProperty("/trackingLength", true);
-                    }
-                }
-
-                // PACK HU MAPPING
-                var aManifestHUs = aFilteredResults.map(function(item, idx) {
-                    return {
-                        SerialNumber: idx + 1,
-                        HandlingUnitExternalID: item.HandlingUnit,
-                        CreatedByUser: item.CreatedBy,
-                        GrossWeight: "",                      // optional
-                        Dimensions: item.Dimensions,
-                        HandlingUnitPackingObjectType: item.Totalpkg,
-                        HandlingUnitInternalID: "",
-                        Hunumber: item.Hunumber,
-                        HandlingUnitIsClosed: true,
-                        PackagingMaterial: "",
-                        HuLabel: "",
-                        GrossWeight: item.Weight
-                    };
-                });
-
-                eshipjetModel.setProperty("/ShipNowHandlingUnits", aManifestHUs);
-
-
-               // -----------------------------------------
-                // SHIP FROM (MANIFEST FLOW)
-                // -----------------------------------------
-                var m = aFilteredResults[0];
-
-                var ShipFrom = {
-                        ShipFromCOMPANY: m.ShipFromCompany || "",
-                        ShipFromCONTACT: m.ShipFromContact || "",
-                        ShipFromADDRESS_LINE1: m.ShipFromAddressLine1 || "",
-                        ShipFromADDRESS_LINE2: m.ShipFromAddressLine2 || "",
-                        ShipFromCITY: m.ShipFromCity || "",
-                        ShipFromSTATE: m.ShipFromState || "",
-                        ShipFromZIPCODE: m.ShipFromPostalcode || "",
-                        ShipFromCOUNTRY: m.ShipFromCountry || "",
-                        ShipFromPHONE: m.ShipFromPhoneNumber || "",
-                        ShipFromEMAIL: m.ShipFromEmail || "",
-                        LocationType: m.ShipToAddressType || ""
-                    };
-                    eshipjetModel.setProperty("/ShipFromAddress", ShipFrom);
-
-
-                // -----------------------------------------
-                // SHIP TO (MANIFEST FLOW)
-                // -----------------------------------------
-                var ShipTo = {
-                        BusinessPartnerName1: m.ShipToContact || "",
-                        FullName: m.ShipToCompany || m.ShipToContact || "",
-                        StreetName: m.ShipToAddressLine1 || "",
-                        HouseNumber: m.ShipToAddressLine1 || "",
-                        CityName: m.ShipToCity || "",
-                        Region: m.ShipToState || "",
-                        PostalCode: m.ShipToPostalcode || "",
-                        Country: m.ShipToCountry || "",
-                        PhoneNumber: m.ShipToPhoneNumber || "",
-                        EMAIL: m.ShipToEmail && m.ShipToEmail.trim() !== ""
-                            ? m.ShipToEmail
-                            : "info@eshipjet.ai"
-                    };
-                    eshipjetModel.setProperty("/ShipToAddress", ShipTo);
-
-
-
-                eshipjetModel.setProperty("/carrierNamesDropDownData", [
-                        { CarrierCode: m.Carriertype }   // UPS
-                    ]);
-
-                    // Auto-select carrier
-                    eshipjetModel.setProperty("/commonValues/ShipNowShipMethodSelectedKey", m.Carriertype);
-
-                    eshipjetModel.setProperty("/carrierServicesDropDownData", [
-                    {
-                        ErpServId: m.ServiceName,   // "UPS Ground"
-                        ServDesc: m.ServiceName     // visible text
-                    }
-                ]);
-
-                // Auto-select service
-                eshipjetModel.setProperty("/commonValues/ShipNowShipsrvNameSelectedKey", m.ServiceName);
-
-                eshipjetModel.setProperty("/accountNumber", m.Accountnumber || "");
-                
-                eshipjetModel.setProperty("/selectPaymentType", m.Paymentcode || "Sender");
-
-                eshipjetModel.setProperty("/currentDeliveryNumber", m.Vbeln);
-
-                eshipjetModel.setProperty("/PGI_STATUS", m.eShipjetPGIStatus || "");
-
-                eshipjetModel.setProperty("/manifestGUID", m.GUID || "");
-
-                // -----------------------------
-                // SET PLANT (for recent shipment)
-                // -----------------------------
-                var m = aFilteredResults[0];
-
-                // Backend field where Plant comes (adjust name if different)
-                var manifestPlant = m.Plant || m.ShipmentPlant || m.SHIPFROMPLANT || "";  
-
-                if (manifestPlant) {
-                    eshipjetModel.setProperty("/commonValues/plant", manifestPlant);
-                    eshipjetModel.setProperty("/commonValues/showPlant", true);
-                } else {
-                    eshipjetModel.setProperty("/commonValues/showPlant", false);
-                }
-
-                eshipjetModel.setProperty("/HandlingUnitsLength", m.Totalpkgs || 0);
-
-
-                    // ----------------------
-                    // MAP HU DATA FOR SHIPNOW UI
-                    // ----------------------
-                    var handlingUnitsArray = aFilteredResults.map(item => ({
-                        HandlingUnitExternalId: item.HandlingUnit?.trim() || "",
-                        CreatedByUser: item.CreatedBy || "",
-                        GrossWeight: item.GrossWeight || 10,
-
-                        HandlingUnitLength: item.Length || 10,
-                        HandlingUnitWidth: item.Width || 12,
-                        HandlingUnitHeight: item.Height || 12,
-
-                        HandlingUnitPackingObjectType: item.Totalpkg || "",   // Box Count
-                        HandlingUnitInternalID: item.Hunumber || "",          // Class
-                        TrackingNumber: item.TrackingNumber || "",
-
-                        PackagingMaterial: item.Carriertype || "",            // Packaging Material
-                        Material: item.ProductCode || "",
-                        MaterialName: item.ProductDescription || "",
-                        HandlingUnitQuantity: item.ProductQuantity || 0,
-                        HandlingUnitQuantityUnit: item.ProductUnitOfMeasurement || "",
-
-                        CARRIER_TYPE: item.Carriertype,
-                        SERVICE_NAME: item.ServiceName,
-                        CARRIER_DESC: item.CarrierDesc
-                    }));
-
-                    // 🔄 Reset before updating
-                    eshipjetModel.setProperty("/to_HandlingUnitHeaderDelivery", { results: [] });
-
-                    // ✅ Update ShipNow HU table data
-                    eshipjetModel.setProperty("/to_HandlingUnitHeaderDelivery/results", handlingUnitsArray);
-
-                    // Count of HUs
-                    eshipjetModel.setProperty("/HandlingUnitsLength", handlingUnitsArray.length);
-
-                    console.log("Updated HU Data:", handlingUnitsArray);
-                     oController.onPackSectionEmptyRows();
-
-                    // ---------------------------
-                    // PICK STATUS (Recent Shipment)
-                    // ---------------------------
-                    var pickStatus = aFilteredResults[0].eShipjetPickStatus || "";
-
-                    eshipjetModel.setProperty("/commonValues/OverallGoodsMovementStatus", pickStatus);
-
-                
-
-                   var grossWeight = aFilteredResults?.[0]?.Weight || "";
-                    eshipjetModel.setProperty("/GrossWeight", grossWeight);
-
-
-                    // -------------------------------------------------
-                    // PRODUCT DETAILS FOR HU DIALOG (Recent Shipment)
-                    // -------------------------------------------------
-                    var handlingUnitItems = [];
-
-                    aFilteredResults.forEach(function (item) {
-                        handlingUnitItems.push({
-                            Material: item.ProductCode || "",                 // Product Code
-                            MaterialName: item.ProductDescription || "",             // Description
-                            HandlingUnitQuantity: item.ProductQuantity || 0,  // Quantity
-                            HandlingUnitQuantityUnit: item.ProductUnitOfMeasurement || ""   // UOM
-                        });
-                    });
-
-                    // Set to model for fragment binding
-                    eshipjetModel.setProperty("/handlingUnitItems", handlingUnitItems);
-                    eshipjetModel.updateBindings(true);
-
-
-
-
-
-
-
-
-
-
-
-                eshipjetModel.updateBindings(true);
-
-                var invoiceNums = "";
-                aFilteredResults.forEach(function(item, idx) {
-                    if (idx === 0) {
-                        invoiceNums = item.HandlingUnit;
-                    } else {
-                        invoiceNums = invoiceNums + ", " + item.HandlingUnit;
-                    }
-                });
-                eshipjetModel.setProperty("/invoiceNo", invoiceNums);
-                eshipjetModel.updateBindings(true);
-            }
-            oController.onCloseBusyDialog();
-        },
-        error: function (err) {
-            console.error("❌ Manifest_detSet Error:", err);
-            MessageBox.error("Failed to load manifest data. Check console for details.");
-            oController.onCloseBusyDialog();
-        }
-    });
-},
+            },
 
       
         getHandlingUnit:function(sapDeliveryNumber){
@@ -20378,114 +20109,36 @@ onHandlingUnitDialogClosePress: function () {
         onCreatePostGoodsIssue: function (sDeliveryNo, sETag, sToken) {
             var oController = this;
             var oModel = oController.getOwnerComponent().getModel("CreateHUSrvModel");
-
             var ship = eshipjetModel.getProperty("/ShipNowPostResponse") || {};
             var TrackingNo = ship?.Packages?.[0]?.TrackingNumber;
 
             oModel.create("/PGICREATESet", { Delivery: sDeliveryNo, TrackingNo: TrackingNo }, {
-            headers: { "X-CSRF-Token": sToken },
-
-            success: function (oData) {
-                eshipjetModel.setProperty("/PGIStatus", oData.Msgtyp);
-                eshipjetModel.setProperty("/PGIMessage", oData.Message1);
-                oController._logPGIResult(oData.Msgtyp, oData.Message1)
-                    .then(function () {
-                        if (oData.Msgtyp === "S") {
-                        return oController.ApiOutboundDeliverySrvData();
-                    }
-
-                })
-                    .then(function () {
-                        // Executes only after PGI + BOL patch pipeline is fully committed
-                        oController.onManifestCreatePress();
-                    })
-                    .finally(function () {
-                        oController.onCloseBusyDialog();
-                        // sap.m.MessageToast.show("PGI Successful (EWM)");
-                    },
-                    error: function (oError) {
-                        console.warn("PGI Creation failed:", jQuery.parseXML(oError.responseText).getElementsByTagName("message")[0].textContent);
-                        oController.onCloseBusyDialog();
-                    }
-                }
-            );
-
-
-            // var oController = this;
-            // if (!sDeliveryNo) return sap.m.MessageBox.error("Invalid Delivery Number");
-            // oController.onOpenBusyDialog();
-            // oController._fetchDeliveryETag(sDeliveryNo, function (sETag) {
-            //     var oModel = oController.getOwnerComponent().getModel("CreateHUSrvModel");
-            //     var oPayload = { Delivery: sDeliveryNo };
-            //     oModel.create("/PGICREATESet", oPayload, {
-            //         headers: sETag ? { "If-Match": sETag } : {},
-            //         success: function (oData) {
-            //             var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
-            //             eshipjetModel.setProperty("/PGIStatus", oData.Msgtyp);
-            //             eshipjetModel.setProperty("/PGIMessage", oData.Message1);
-            //             oController._logPGIResult(oData.Msgtyp, oData.Message1);
-            //             oController.onManifestCreatePress();
-            //             oController.onCloseBusyDialog();
-            //             sap.m.MessageToast.show("PGI Successful (EWM)");
-            //         },
-            //         error: function (oError) {
-            //             oController.onCloseBusyDialog();
-            //             var errMsg = jQuery.parseXML(oError.responseText)
-            //                 .getElementsByTagName("message")[0].textContent;
-            //             oController._logPGIResult("F", errMsg);
-            //             oController.onManifestCreatePress();
-            //             sap.m.MessageBox.error(errMsg);
-            //         }
-            //     });
-            // });
-        },
-
-        _initCreateHUSrvSecurity: function () {
-            var oModel = this.getOwnerComponent().getModel("CreateHUSrvModel");
-
-            oModel.refreshSecurityToken();   // fetches X-CSRF-TOKEN
-
-            // force metadata load to enable automatic ETag handling
-            oModel.attachMetadataLoaded(function () {
-                oModel.setUseBatch(false);
-            });
-        },
-
-        _fetchDeliveryETag: function (sDeliveryNo, fnNext) {
-            var oModel = this.getOwnerComponent().getModel("CreateHUSrvModel");
-
-            oModel.read("/PGICREATESet('" + sDeliveryNo + "')", {
-                success: function (oData, oResponse) {
-                    fnNext(oResponse.headers["etag"]);
-                },
-                error: function () {
-                    fnNext(null);
-                }
-            });
-        },
-
-
-        checkPostGoodsIssueStatus:function(sDeliveryNo){
-            var CreateHUSrvModel = oController.getOwnerComponent().getModel("CreateHUSrvModel");
-            var aFilters = [];
-            aFilters.push(new Filter("Delivery", "EQ", sDeliveryNo));
-            CreateHUSrvModel.read("/PGICREATESet", {
-                filters: aFilters,
+                headers: { "X-CSRF-Token": sToken },
                 success: function (oData) {
-                    // oController.getShippingDataAfterPGI(sapDeliveryNumber);
-                    eshipjetModel.setProperty("/commonValues/OverallGoodsMovementStatus", oData.results[0].Msgtyp);
-                    oController.onCloseBusyDialog();
-                },
+                    eshipjetModel.setProperty("/PGIStatus", oData.Msgtyp);
+                    eshipjetModel.setProperty("/PGIMessage", oData.Message1);
+                    oController._logPGIResult(oData.Msgtyp, oData.Message1)
+                        .then(function () {
+                            if (oData.Msgtyp === "S") {
+                                oController.ApiOutboundDeliverySrvData();
+                            }
+                        })
+                        .then(function () {
+                            oController.onManifestCreatePress();
+                        })
+                        .finally(function () {
+                            oController.onCloseBusyDialog();
+                            });
+                        },
                 error: function (oError) {
+                    console.warn("PGI Creation failed:", jQuery.parseXML(oError.responseText).getElementsByTagName("message")[0].textContent);
                     oController.onCloseBusyDialog();
-                    var errMsg = JSON.parse(oError.responseText).error.message.value;
-                    sap.m.MessageBox.error(errMsg);
                 }
             });
         },
 
 
-         getShippingDataAfterPGI:function(sDeliveryNo){
+        getShippingDataAfterPGI:function(sDeliveryNo){
             var oDeliveryModel = oController.getView().getModel("OutBoundDeliveryModel");                    
             var oHandlingUnitModel = oController.getView().getModel("HandlingUnitModel");           
             var sPath = "/A_OutbDeliveryHeader('"+ sDeliveryNo +"')/to_DeliveryDocumentPartner";
@@ -20512,86 +20165,123 @@ onHandlingUnitDialogClosePress: function () {
         },
 
 
-    onPostGoodsIssueWithoutEWM: function (sDeliveryNo) {
-        var oController = this;
-        var oModel = oController.getView().getModel("OutBoundDeliveryModel");
+    // onPostGoodsIssueWithoutEWM: function (sDeliveryNo) {
+    //     var oController = this;
+    //     var oModel = oController.getView().getModel("OutBoundDeliveryModel");
 
-        if (!sDeliveryNo || sDeliveryNo.length < 7) {
-            sap.m.MessageBox.error("Invalid Delivery Number");
-            return;
-        }
-        oController.onOpenBusyDialog();
+    //     if (!sDeliveryNo || sDeliveryNo.length < 7) {
+    //         sap.m.MessageBox.error("Invalid Delivery Number");
+    //         return;
+    //     }
+    //     oController.onOpenBusyDialog();
 
-        // STEP 1: Read ETag from Delivery Header
-        var sPath = "/A_OutbDeliveryHeader('" + sDeliveryNo + "')";
+    //     // STEP 1: Read ETag from Delivery Header
+    //     var sPath = "/A_OutbDeliveryHeader('" + sDeliveryNo + "')";
 
-        oModel.refreshSecurityToken();
+    //     oModel.refreshSecurityToken();
 
-        oModel.read(sPath, {
-            headers: {
-                "X-Csrf-Token": "Fetch"
-            },
-            success: function (oData, response) {
-                var token = response.headers["X-Csrf-Token"];
-                var etag = oData.__metadata.etag;
+    //     oModel.read(sPath, {
+    //         headers: {
+    //             "X-Csrf-Token": "Fetch"
+    //         },
+    //         success: function (oData, response) {
+    //             var token = response.headers["X-Csrf-Token"];
+    //             var etag = oData.__metadata.etag;
 
-                // STEP 2: Trigger PGI
-                oController._triggerPGIWithOData(sDeliveryNo, token, etag)
+    //             // STEP 2: Trigger PGI
+    //             oController._triggerPGIWithOData(sDeliveryNo, token, etag)
 
-                    .then(function () {
+    //                 .then(function () {
 
-                        // LOG SUCCESS
-                        return oController._logPGIResult("S", "PGI Successful for Delivery " + sDeliveryNo);
+    //                     // LOG SUCCESS
+    //                     return oController._logPGIResult("S", "PGI Successful for Delivery " + sDeliveryNo);
                         
-                    }).then(function () {
+    //                 }).then(function () {
 
-                        // REFRESH DELIVERY STATUS
-                        return oController.getShippingDataAfterPGI(sDeliveryNo);
+    //                     // REFRESH DELIVERY STATUS
+    //                     return oController.getShippingDataAfterPGI(sDeliveryNo);
 
-                    }).then(function () {
-                    // ADD THIS
-                     eshipjetModel.setProperty("/PGIStatus", "S");  // <-- NEW
-                        oController.onManifestCreatePress();   // PGI Success → Update Manifest
+    //                 }).then(function () {
+    //                     // ADD THIS
+    //                     eshipjetModel.setProperty("/PGIStatus", "S");  // <-- NEW
+    //                     oController.onManifestCreatePress();   // PGI Success → Update Manifest
+    //                     oController.onCloseBusyDialog();
+    //                     // sap.m.MessageToast.show("PGI Successful");
+
+    //                 }).catch(function (oError) {
+
+    //                     oController.onCloseBusyDialog();
+
+    //                     var sMessage = "Something went wrong";
+
+    //                     if (oError && oError.responseText) {
+    //                         try {
+    //                             var oResponse = JSON.parse(oError.responseText);
+    //                             sMessage = oResponse?.error?.message?.value || sMessage;
+    //                         } catch (e) {}
+    //                     }
+
+    //                     // STORE ERROR MESSAGE
+    //                     var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+    //                     eshipjetModel.setProperty("/commonValues/PGIErrorMessage", sMessage);
+
+    //                     // LOG FAILURE
+    //                     oController._logPGIResult("F", sMessage);
+    //                     eshipjetModel.setProperty("/PGIStatus", "F");  // <-- NEW
+
+    //                     if(oData.Msgtyp === "S"){
+    //                         oController.ApiOutboundDeliverySrvData();
+    //                     }
+    //                     // ADD THIS
+    //                     // oController.onManifestCreatePress();   // PGI Failed → Update Manifest
+
+    //                     // OPEN ERROR DIALOG
+    //                     // oController.OpenErrorLogDialog();
+    //                 });
+    //         },
+    //         error: function () {
+    //             oController.onCloseBusyDialog();
+    //             sap.m.MessageBox.error("Failed to read delivery header");
+    //         }
+    //     });
+    // },
+
+            onPostGoodsIssueWithoutEWM:function(sDeliveryNo){
+                var oController = this;
+                oController.onOpenBusyDialog();
+                
+                var OutBoundDeliveryModel = oController.getOwnerComponent().getModel("OutBoundDeliveryModel");
+                var sPath = "/A_OutbDeliveryHeader('" + sDeliveryNo + "')";
+                OutBoundDeliveryModel.refreshSecurityToken(function () {
+                    var sToken = OutBoundDeliveryModel.getSecurityToken();
+                    if (!sToken) {
+                        sap.m.MessageBox.error("CSRF token missing");
                         oController.onCloseBusyDialog();
-                        // sap.m.MessageToast.show("PGI Successful");
-
-                    }).catch(function (oError) {
-
-                        oController.onCloseBusyDialog();
-
-                        var sMessage = "Something went wrong";
-
-                        if (oError && oError.responseText) {
-                            try {
-                                var oResponse = JSON.parse(oError.responseText);
-                                sMessage = oResponse?.error?.message?.value || sMessage;
-                            } catch (e) {}
+                        return;
+                    }
+                    OutBoundDeliveryModel.read(sPath, {
+                        success: function (oData, oResponse) {
+                            var sETag = oResponse?.headers?.etag;
+                            oController._triggerPGIWithOData(sDeliveryNo, sToken, sETag)
+                            .then(function () {
+                                return oController._logPGIResult("S", "PGI Successful for Delivery " + sDeliveryNo);
+                            }).then(function () {
+                                oController.ApiOutboundDeliverySrvData();
+                            })
+                            .then(function () {
+                                oController.onManifestCreatePress();
+                            })
+                            .finally(function () {
+                                oController.onCloseBusyDialog();
+                                });
+                            },
+                        error: function () {
+                            sap.m.MessageBox.error("Failed to read PGI ETag Value");
+                            oController.onCloseBusyDialog();
                         }
-
-                        // STORE ERROR MESSAGE
-                        var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
-                        eshipjetModel.setProperty("/commonValues/PGIErrorMessage", sMessage);
-
-                        // LOG FAILURE
-                        oController._logPGIResult("F", sMessage);
-                        eshipjetModel.setProperty("/PGIStatus", "F");  // <-- NEW
-
-                        if(oData.Msgtyp === "S"){
-                            oController.ApiOutboundDeliverySrvData();
-                        }
-                        // ADD THIS
-                        oController.onManifestCreatePress();   // PGI Failed → Update Manifest
-
-                        // OPEN ERROR DIALOG
-                        // oController.OpenErrorLogDialog();
                     });
+                });
             },
-            error: function () {
-                oController.onCloseBusyDialog();
-                sap.m.MessageBox.error("Failed to read delivery header");
-            }
-        });
-    },
 
 
 
@@ -20702,37 +20392,37 @@ onClosePGIErrorDialog: function () {
 /* ============================================================
    MF_LOGS_SRV → LOG PGI SUCCESS / FAILURE
    ============================================================ */
-_logPGIResult: function (type, message) {
-    var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
-    var oManifestModel = oController.getOwnerComponent().getModel("ManifestModel");
-    var oModel = this.getOwnerComponent().getModel("MF_LOGS_SRV");
+            _logPGIResult: function (type, message) {
+                var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+                var oManifestModel = oController.getOwnerComponent().getModel("ManifestModel");
+                var oModel = this.getOwnerComponent().getModel("MF_LOGS_SRV");
 
-    var GU_ID = crypto.randomUUID();
-    eshipjetModel.setProperty("/GU_ID", GU_ID);
+                var GU_ID = crypto.randomUUID();
+                eshipjetModel.setProperty("/GU_ID", GU_ID);
 
-     // Save type S/F into model if needed elsewhere
-    eshipjetModel.setProperty("/pgisetFS", type);
+                // Save type S/F into model if needed elsewhere
+                eshipjetModel.setProperty("/pgisetFS", type);
 
-    var payload = {
-        GuId: GU_ID,
-        MessageType: type,        // 'S' or 'F'
-        MessageText: message,
-        CreatedOn: new Date().toISOString()
-    };
+                var payload = {
+                    GuId: GU_ID,
+                    MessageType: type,        // 'S' or 'F'
+                    MessageText: message,
+                    CreatedOn: new Date().toISOString()
+                };
 
-    return new Promise(function (resolve, reject) {
-        oModel.create("/MFLogsSet", payload, {
-            success: function (data) {
-                console.log("PGI Log Saved:", data);
-                resolve(data);
+                return new Promise(function (resolve, reject) {
+                    oModel.create("/MFLogsSet", payload, {
+                        success: function (data) {
+                            console.log("PGI Log Saved:", data);
+                            resolve(data);
+                        },
+                        error: function (err) {
+                            console.error("PGI Log Failed:", err);
+                            reject(err);
+                        }
+                    });
+                });
             },
-            error: function (err) {
-                console.error("PGI Log Failed:", err);
-                reject(err);
-            }
-        });
-    });
-},
 
 
 // /* ============================================================
@@ -20870,17 +20560,18 @@ readPGIErrorLog: function () {
                 }, 100); // Small delay to ensure UI is fully rendered
             }
         },
+
         onServiceNowDropdownChange:function(oEvent){
             var selectedKey = oEvent.getSource().getSelectedKey();
             var eshipjetModel =  this.getOwnerComponent().getModel("eshipjetModel");
             var ShipMethodKey =  eshipjetModel.getProperty("/commonValues/ShipNowShipsrvNameSelectedKey");
-            var ServiceDropdown = eshipjetModel.getProperty("/carrierServicesList");
+            var ServiceDropdown = eshipjetModel.getProperty("/carrierServicesDropDownData");
             var serviceObj = {};
             ServiceDropdown.forEach(function(item, Idx){
                 if(item.ShippingType === selectedKey){
                     // serviceObj = item;
                     eshipjetModel.setProperty("/carrierServiceName_dis", item.ServDesc);
-                    eshipjetModel.setProperty("/carrierServiceCode_display", item.ServiceCode);
+                    eshipjetModel.setProperty("/carrierServiceCode_display", item.ServCode);
                 }
             });
             var ShipNowShipMethodSelectedKey = eshipjetModel.getProperty("/commonValues/ShipNowShipMethodSelectedKey");
@@ -22505,7 +22196,7 @@ readPGIErrorLog: function () {
 
         oController.onShipNowGetPress();
         oController.onRecentShipmentClosePress();
-        oController.getManifestHeaderForCharges()
+        // oController.getManifestHeaderForCharges()
     },
 
 
@@ -25226,6 +24917,7 @@ packParcelProducts: function () {
             if (aRows.length === 1) {
                 if (!aRows[0].partialQty || parseFloat(aRows[0].partialQty) <= 0) {
                     sap.m.MessageBox.error("Please enter Partial Qty for the item.");
+                    oController.onCloseBusyDialog();
                     return;
                 // }else if (!aRows[0].partialQty || parseFloat(aRows[0].partialQty) > 0 && aRows[0].isSerialSelected === true) {
                 //     oController.onCloseBusyDialog();
@@ -25236,23 +24928,35 @@ packParcelProducts: function () {
             } else {
                 if (aSelectedIndices.length === 0) {
                     sap.m.MessageBox.error("Please select at least one row.");
+                    oController.onCloseBusyDialog();
                     return;
                 }
                 for (let i of aSelectedIndices) {
                     let oRow = aRows[i];
                     if (!oRow.partialQty || parseFloat(oRow.partialQty) <= 0) {
                         sap.m.MessageBox.error("Please enter Partial Qty for all selected items.");
+                        oController.onCloseBusyDialog();
                         return;
                     }
                 }
             }
+            if(eshipjetModel.getProperty("/commonValues/heightOfDimensions") === "" || eshipjetModel.getProperty("/commonValues/widthOfDimensions") === "" || eshipjetModel.getProperty("/commonValues/lengthOfDimensions") === ""){
+                sap.m.MessageBox.error("Please Enter Dimentions.");
+                oController.onCloseBusyDialog();
+                return;
+            }
             oModel.setUseBatch(true);
             oModel.setDeferredGroups(["isProjectUploadBatch"]);
+            var Dimensions = eshipjetModel.getProperty("/commonValues/lengthOfDimensions") +"X"+ eshipjetModel.getProperty("/commonValues/widthOfDimensions") +"X"+ eshipjetModel.getProperty("/commonValues/heightOfDimensions");
             oModel.refreshSecurityToken(function () {
                 var headerDataObj = {
                     HandlingUnitExternalId: "$1",
                     PackagingMaterial: "CARTON BOX",
-                    DeliveryDocument: GetDeliveryData.DeliveryDocument
+                    DeliveryDocument: GetDeliveryData.DeliveryDocument,
+                    // HandlingUnitUoMDimension: Dimensions
+                    // HandlingUnitHeight: eshipjetModel.getProperty("/commonValues/heightOfDimensions"),
+                    // HandlingUnitWidth: eshipjetModel.getProperty("/commonValues/widthOfDimensions"),
+                    // HandlingUnitLength: eshipjetModel.getProperty("/commonValues/lengthOfDimensions")
                 };
                 oModel.create("/A_HandlingUnitHeaderDelivery", headerDataObj, {
                     groupId: "isProjectUploadBatch"
@@ -25261,13 +24965,14 @@ packParcelProducts: function () {
                 aSelectedIndices.forEach(i => {
                     let oRow = aRows[i];
                     let oItem = {
-                        HandlingUnitExternalId: "$1",
-                        HandlingUnitTypeOfContent: "1",
                         DeliveryDocument: GetDeliveryData.DeliveryDocument,
                         DeliveryDocumentItem: oRow.DeliveryDocumentItem,
+                        HandlingUnitExternalId: "$1",
+                        HandlingUnitTypeOfContent: "1",
                         HandlingUnitQuantity: oRow.partialQty,
                         HandlingUnitQuantityUnit: oRow.BaseUnit || "PC",
-                        Material: oRow.Material
+                        Material: oRow.Material,
+                        MaterialName: oRow.DeliveryDocumentItemText
                     };
                     oModel.create("/A_HandlingUnitItemDelivery", oItem, {
                         groupId: "isProjectUploadBatch"
@@ -25288,7 +24993,7 @@ packParcelProducts: function () {
                         console.log("HU Header queued for batch:", oData);
                     }.bind(this),
                     error: function (oError) {
-                        this._showODataError(oError);
+                        oController._showODataError(oError);
                     }.bind(this)
                 });
 
@@ -26806,38 +26511,78 @@ readProductPlant: function () {
         },
 
 
-        ApiOutboundDeliverySrvData: function () {
-            var oController = this;
-            var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+        // ApiOutboundDeliverySrvData: function () {
+        //     var oController = this;
+        //     var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
 
-            return new Promise(function (resolve, reject) {
+        //     return new Promise(function (resolve, reject) {
 
-                var ship = eshipjetModel.getProperty("/ShipNowPostResponse") || {};
-                var BillOfLading = ship?.Packages?.[0]?.TrackingNumber;
-                var DocumentNumber = ship?.HeaderInfo?.DocumentNumber;
+        //         var ship = eshipjetModel.getProperty("/ShipNowPostResponse") || {};
+        //         var BillOfLading = ship?.Packages?.[0]?.TrackingNumber;
+        //         var DocumentNumber = ship?.HeaderInfo?.DocumentNumber;
 
-                if (!BillOfLading || !DocumentNumber) return reject("Missing data");
+        //         if (!BillOfLading || !DocumentNumber) return reject("Missing data");
 
-                var cleanDelivery = String(Number(DocumentNumber));
-                var oModel = oController.getOwnerComponent().getModel("OutBoundDeliveryModel");
+        //         var cleanDelivery = String(Number(DocumentNumber));
+        //         var oModel = oController.getOwnerComponent().getModel("OutBoundDeliveryModel");
 
-                oModel.read("/A_OutbDeliveryHeader(DeliveryDocument='" + cleanDelivery + "')", {
-                    success: function (oData, oResponse) {
+        //         oModel.read("/A_OutbDeliveryHeader(DeliveryDocument='" + cleanDelivery + "')", {
+        //             success: function (oData, oResponse) {
 
-                        var sETag = oResponse?.headers?.etag;
-                        if (!sETag) return reject("ETag missing");
+        //                 var sETag = oResponse?.headers?.etag;
+        //                 if (!sETag) return reject("ETag missing");
 
-                        oController.updateBillOfLading(cleanDelivery, sETag, BillOfLading)
-                            .then(resolve)
-                            .catch(reject);
-                    },
-                    error: () => reject("Delivery read failed")
+        //                 oController.updateBillOfLading(cleanDelivery, sETag, BillOfLading)
+        //                     .then(resolve)
+        //                     .catch(reject);
+        //             },
+        //             error: () => reject("Delivery read failed")
+        //         });
+        //     });
+        // },
+
+            ApiOutboundDeliverySrvData: function () {
+                var oController = this;
+                var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+                return new Promise(function (resolve, reject) {
+                    var ship = eshipjetModel.getProperty("/ShipNowPostResponse") || {};
+                    var BillOfLading = ship?.Packages?.[0]?.TrackingNumber;
+                    var DocumentNumber = ship?.HeaderInfo?.DocumentNumber;
+                    if (!BillOfLading || !DocumentNumber) {
+                        return reject("Missing data");
+                    }
+                    var cleanDelivery = String(Number(DocumentNumber));
+                    var oModel = oController.getOwnerComponent().getModel("OutBoundDeliveryModel");
+                    oModel.refreshSecurityToken(function () {
+                        var sToken = oModel.getSecurityToken();
+                        if (!sToken) {
+                            return reject("CSRF token missing");
+                        }
+                        oModel.read("/A_OutbDeliveryHeader(DeliveryDocument='" + cleanDelivery + "')", {
+                            success: function (oData, oResponse) {
+                                var sETag = oResponse?.headers?.etag;
+                                if (!sETag) {
+                                    return reject("ETag missing");
+                                }
+                                oController.updateBillOfLading(
+                                    cleanDelivery,
+                                    sETag,
+                                    BillOfLading,
+                                    sToken
+                                ).then(resolve)
+                                .catch(reject);
+                            },
+                            error: function () {
+                                reject("Delivery read failed");
+                            }
+                        });
+                    });
                 });
-            });
-        },
+            },
 
 
-            updateBillOfLading: function (cleanDelivery, sETag, BillOfLading) {
+
+            updateBillOfLading: function (cleanDelivery, sETag, BillOfLading, sToken) {
                 var oController = this;
                 var oModel = oController.getOwnerComponent().getModel("OutBoundDeliveryModel");
 
@@ -26867,7 +26612,8 @@ readProductPlant: function () {
                         }
                     }
                 );
-            },
+            });
+        },
 
 
             updateSerialProgress: function () {
@@ -27065,19 +26811,5 @@ readProductPlant: function () {
         },
 
         
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     });
 });

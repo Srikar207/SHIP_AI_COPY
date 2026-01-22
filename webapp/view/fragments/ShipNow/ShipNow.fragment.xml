@@ -115,7 +115,7 @@
 														<Button icon="sap-icon://customer-briefing" enabled="false" press="ShipNowPickAnAddressPopoverPress" id="idShipFromAddressBtn" />
 													</Toolbar>
 													
-													<Label text="Contact Name" class="sapUiTinyMarginTop" />
+													<Label text="Contact Name" />
 													<Input value="{eshipjetModel>/ShipFromAddress/ShipFromCONTACT}" editable="false" class="sapUiSmallMarginBottom create-ship-req_input" />
 													<Label text="Address Line 1" />
 													<Input class="sapUiSmallMarginBottom create-ship-req_input" editable="false" value="{eshipjetModel>/ShipFromAddress/ShipFromADDRESS_LINE1}"></Input>
@@ -133,7 +133,7 @@
 													</Input>
 													<Label text="Email Address" />
 													<Input class="sapUiSmallMarginBottom create-ship-req_input" editable="false" value="{eshipjetModel>/ShipFromAddress/ShipFromEMAIL}" />
-													<Label text="Company Name" class="sapUiTinyMarginTop" />
+													<Label text="Company Name" />
 													<Input class="sapUiSmallMarginBottom create-ship-req_input" editable="false" value="{eshipjetModel>/ShipFromAddress/ShipFromCONTACT}" />
 													<Label text="Address Line 2" />
 													<Input class="sapUiSmallMarginBottom create-ship-req_input" editable="false" value="{eshipjetModel>/ShipFromAddress/ShipFromADDRESS_LINE2}" />
@@ -1107,7 +1107,7 @@
 											<core:Item key="{eshipjetModel>Product}" text="{eshipjetModel>Product}" />
 										</ComboBox>
 									</FlexBox>
-									<FlexBox visible="{eshipjetModel>/hideTrackPackDetails}" >
+									<FlexBox visible="true" >
 										<Input value="{eshipjetModel>/commonValues/lengthOfDimensions}" placeholder="L" class="create-ship-req_input sapUiTinyMarginBegin" width="3rem" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" ></Input>
 										<Input value="{eshipjetModel>/commonValues/widthOfDimensions}" placeholder="W" class="create-ship-req_input sapUiTinyMarginBegin" width="3rem" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" ></Input>
 										<Input value="{eshipjetModel>/commonValues/heightOfDimensions}" placeholder="H" class="create-ship-req_input sapUiTinyMarginBegin" width="3rem" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" ></Input>
