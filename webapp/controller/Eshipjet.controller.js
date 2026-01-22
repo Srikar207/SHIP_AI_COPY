@@ -2994,9 +2994,9 @@ getManifestHeaderForTodaysShipmentCount: function () {
 
             // Filter entries created today
             const todaysShipments = (response.results || []).filter(item => {
-                if (!item.CreatedOn) return false;
+                if (!item.LastChangedOn) return false;
 
-                const dateObj = oController._formatSAPDate(item.CreatedOn);
+                const dateObj = oController._formatSAPDate(item.LastChangedOn);
                 if (!dateObj) return false;
 
                 dateObj.setHours(0, 0, 0, 0);
@@ -3024,6 +3024,7 @@ getManifestHeaderForTodaysShipmentCount: function () {
         }
     });
 },
+
 
 
 _formatSAPDate: function (sapDate) {
@@ -3314,7 +3315,7 @@ formatNumberForSAP: function (val) {
                 ManifestModel.create("/Manifest_detSet", oDeepPayload, {
                     success: function (oData) {
 
-                        sap.m.MessageToast.show("Manifest created successfully");
+                        // sap.m.MessageToast.show("Manifest created successfully");
 
                         oController.getManifestHeaderForTodaysShipmentCount();
                         oController.onShipNowNewPress();
@@ -3919,7 +3920,7 @@ formatNumberForSAP: function (val) {
 
                 ManifestModel.create("/Manifest_detSet", oDeepPayload, {
                     success: function (oData) {
-                        sap.m.MessageToast.show("Manifest created successfully");
+                        // sap.m.MessageToast.show("Manifest created successfully");
                         oController.getManifestHeaderForTodaysShipmentCount();
                         oController.onShipNowNewPress();
                         var sFromViewName = eshipjetModel.getProperty("/sFromViewName");
@@ -6845,7 +6846,7 @@ onShippingDocumentsViewPress: async function (oEvent) {
                         // oController.readTodayHUData();
                         oController.onCloseBusyDialog();
 
-                        sap.m.MessageToast.show("All items packed successfully.");
+                        // sap.m.MessageToast.show("All items packed successfully.");
                         console.log("HU Batch created:", oData);
                     },
                     error: function (oError) {
@@ -24811,7 +24812,7 @@ packParcelProducts: function () {
                     success: function () {
                         oController.readHUData();
                         oController.onCloseBusyDialog();
-                        MessageToast.show("All items packed successfully.");
+                        // MessageToast.show("All items packed successfully.");
                     },
                     error: function (err) {
                         oController.onCloseBusyDialog();
@@ -24888,7 +24889,7 @@ packParcelProducts: function () {
                         CreateHUSrvModel.create("/HUHEADERSet", oPayload, {
                             success: function (oData) {
                                 // oController.readHUDataSet(sapDeliveryNumber);
-                                MessageToast.show("Handling Unit Created Successfully");
+                                // MessageToast.show("Handling Unit Created Successfully");
                                 currentObj.partialQty = "";
                                 eshipjetModel.updateBindings(true);
                                 oController.getHandlingUnit(sapDeliveryNumber);
