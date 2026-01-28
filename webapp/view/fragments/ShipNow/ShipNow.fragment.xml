@@ -1107,12 +1107,29 @@
 								</HBox> -->
 								
 								<HBox height="3rem" width="35%" class="whiteBackground sapUiTinyMarginEnd" alignItems="Center" justifyContent="SpaceBetween" >
-									<FlexBox >
-										<Label text="Pkg Material" class="sapUiSmallMarginTop" width="auto" />
-										<ComboBox items="{eshipjetModel>/packageMaterial}" editable="{eshipjetModel>/commonValues/shipNowBtnStatus}" selectedKey="{eshipjetModel>/selectedPackageMat}" class="create-ship-req_input sapUiTinyMarginBegin" width="11rem" >
-											<core:Item key="{eshipjetModel>Product}" text="{eshipjetModel>Product}" />
-										</ComboBox>
-									</FlexBox>
+									<FlexBox>
+    <Label
+        text="Pkg Material"
+        class="sapUiSmallMarginTop"
+        width="auto" />
+
+   <ComboBox
+    id="idPackageMat"
+    width="11rem"
+    class="create-ship-req_input sapUiTinyMarginBegin"
+    items="{eshipjetModel>/packageMaterial}"
+    selectedKey="{eshipjetModel>/selectedPackageMat}"
+    editable="{eshipjetModel>/commonValues/shipNowBtnStatus}"
+    showSecondaryValues="true">
+
+  <core:Item
+    key="{eshipjetModel>Product}"
+    text="{eshipjetModel>Product}" />
+
+</ComboBox>
+
+</FlexBox>
+
 									<FlexBox visible="true" >
 										<Input value="{eshipjetModel>/commonValues/lengthOfDimensions}" placeholder="L" class="create-ship-req_input sapUiTinyMarginBegin" width="3rem" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" ></Input>
 										<Input value="{eshipjetModel>/commonValues/widthOfDimensions}" placeholder="W" class="create-ship-req_input sapUiTinyMarginBegin" width="3rem" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" ></Input>

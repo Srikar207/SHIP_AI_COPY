@@ -37,7 +37,7 @@ sap.ui.define([
             // var sAudioPath = sap.ui.require.toUrl("com/eshipjetcopy/zeshipjetcopy/audio/Lock.mp3");
             // var audio = new Audio(sAudioPath);
             // audio.play();
-
+           
             
             var oTimerModel = new sap.ui.model.json.JSONModel({
                 hours: "00",
@@ -144,7 +144,19 @@ sap.ui.define([
             // oController.getTodayShipments();
             // oController.getManifestHeaderForTodaysShipmentCount();
             oController.getManifestHeaderForTodaysShipmentCount();
-            oController.onPackSectionEmptyRows();
+             oController.loadPackageMaterials();
+
+            // oController.onPackSectionEmptyRows();
+            function sanitizeDescription(desc, maxLength = 40) {
+                if (!desc) return "";
+
+                // Remove commas and other invalid characters
+                desc = desc.replace(/,/g, " ");  
+                desc = desc.replace(/[^a-zA-Z0-9 .\-]/g, "");
+
+                // Trim to max length allowed by OData metadata (40 assumed)
+                return desc.substring(0, maxLength);
+            }
         },
 
         readAPIProductSrvModel:function(){
@@ -1492,6 +1504,8 @@ sap.ui.define([
                 "ShipFromADDRESS_LINE2": "Suite 250",
                 "LocationType": "Commercial"
             };
+            // Reset expand states
+            eshipjetModel.setProperty("/selectedPackageMat", "");
 
             eshipjetModel.setProperty("/to_HandlingUnitHeaderDelivery/results", []);
             eshipjetModel.setProperty("/to_DeliveryDocumentItem", []);
@@ -1622,6 +1636,8 @@ sap.ui.define([
             ShipNowDataModel.setProperty("/ShipFromAddress", shipFromObj); 
             eshipjetModel.setProperty("/BusinessPartners", []);
 
+            eshipjetModel.setProperty("/selectedPackageMat", "");
+            
              eshipjetModel.setProperty("/to_DeliveryDocumentItem", []);
             eshipjetModel.setProperty("/commonValues/ShipNowShipMethodSelectedKey", "");
             eshipjetModel.setProperty("/commonValues/ShipNowShipsrvNameSelectedKey", "");
@@ -3001,6 +3017,7 @@ formatNumberForSAP: function (val) {
                 var oController = this;
                 var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
                 var ManifestModel = oController.getOwnerComponent().getModel("ManifestModel");
+                var selectedPackageMat = eshipjetModel.getProperty("/selectedPackageMat") || "";
 
                 var ShipNowResponse = eshipjetModel.getProperty("/ShipNowPostResponse");
                 var status = eshipjetModel.getProperty("/PGIStatus");
@@ -3079,6 +3096,12 @@ formatNumberForSAP: function (val) {
 
                 var PACKING_SLIP = packingSlipObj ? packingSlipObj.docName : "";
                 var BILL_OF_LADING = billOfLadingObj ? billOfLadingObj.docName : "";
+
+                // ✅ Read Packaging Material from HU (FIRST HU – PackAll creates only one)
+                var packagingMaterial = handlingUnitsData.length
+                    ? handlingUnitsData[0].PackagingMaterial
+                    : "";
+
 
                 /* ------------------- HELPER ------------------- */
 
@@ -3212,6 +3235,7 @@ formatNumberForSAP: function (val) {
                 var oDeepPayload = {
                     GUID: eshipjetModel.getProperty("/GU_ID"),
                     Vbeln: sapDeliveryNumber,
+                    MaterialNumber: selectedPackageMat,
 
                     ManifestSingleToBulk: aBulkItems   // 🔥 Deep Entity
                 };
@@ -3615,6 +3639,8 @@ formatNumberForSAP: function (val) {
                 var oController = this;
                 var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
                 var ManifestModel = oController.getOwnerComponent().getModel("ManifestModel");
+                var selectedPackageMat = eshipjetModel.getProperty("/selectedPackageMat") || "";
+
 
                 var ShipNowResponse = eshipjetModel.getProperty("/ShipNowPostResponse");
                 var status = eshipjetModel.getProperty("/PGIStatus");
@@ -3691,6 +3717,11 @@ formatNumberForSAP: function (val) {
 
                 var PACKING_SLIP = packingSlipObj ? packingSlipObj.docName : "";
                 var BILL_OF_LADING = billOfLadingObj ? billOfLadingObj.docName : "";
+
+                 // ✅ Read Packaging Material from HU (FIRST HU – PackAll creates only one)
+                var packagingMaterial = handlingUnitsData.length
+                    ? handlingUnitsData[0].PackagingMaterial
+                    : "";
 
                 /* ------------------- HELPERS ------------------- */
 
@@ -3821,6 +3852,7 @@ formatNumberForSAP: function (val) {
                 var oDeepPayload = {
                     GUID: eshipjetModel.getProperty("/GU_ID"),
                     Vbeln: sapDeliveryNumber,
+                    
 
                     ManifestSingleToBulk: aBulkItems
                 };
@@ -5468,6 +5500,13 @@ onShippingDocumentsViewPress: async function (oEvent) {
                                     ServDesc: m.ServiceName
                                 }
                             ]);
+                            // ✅ PACKAGE MATERIAL FROM MANIFEST
+                            var manifestPkgMaterial = m.MaterialNumber || "";
+
+                            console.log("Recent Shipment Package Material:", manifestPkgMaterial);
+
+                            // Store in model
+                            eshipjetModel.setProperty("/selectedPackageMat", manifestPkgMaterial);
 
                             // Auto-select service
                             eshipjetModel.setProperty("/commonValues/ShipNowShipsrvNameSelectedKey", m.ServiceName);
@@ -6066,125 +6105,300 @@ onShippingDocumentsViewPress: async function (oEvent) {
         },
 
         onPackAllPress: function () {
-            var oController = this;
-            var oModel = this.getOwnerComponent().getModel("OutBoundDeliveryModel");
-            var eshipjetModel = this.getOwnerComponent().getModel("eshipjetModel");
-            var currentHUList = eshipjetModel.getProperty("/ShipNowHandlingUnits") || [];
-            var oTable = this.byId("idShipNowPackTable");
-            var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData");
-            var packAddProductTable = GetDeliveryData.to_Items.results;
-            var selectedPackageMat = eshipjetModel.getProperty("/selectedPackageMat");
+    var oController = this;
+    var eshipjetModel = this.getOwnerComponent().getModel("eshipjetModel");
+    var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData");
 
-            // 🟡 Validate package material
-            if (!selectedPackageMat || selectedPackageMat === "") {
-                sap.m.MessageBox.warning("Please select Package Material");
-                return;
-            }
+    if (!GetDeliveryData || GetDeliveryData.Warehouse === "") {
+        // NON-EWM FLOW
+        oController.onPackAllWithOutEWMCall();
+    } else {
+        // EWM FLOW
+        oController.onPackAllWithEWMCall();
+    }
+},
 
-            // 🟢 Add note
-            var Notes = eshipjetModel.getProperty("/Notes");
-            Notes.push({
-                "date": new Date(),
-                "name": eshipjetModel.getProperty("/userName"),
-                "notes": "All Items are packed successfully"
+
+ onPackAllWithOutEWMCall: function () {
+
+var oController   = this;
+    var eshipjetModel = this.getOwnerComponent().getModel("eshipjetModel");
+    var oModel        = this.getOwnerComponent().getModel("OutBoundDeliveryModel");
+
+    // ✅ Read from model (as you requested)
+    var selectedPackageMat = eshipjetModel.getProperty("/selectedPackageMat");
+
+    console.log("Packaging Material (PackAll):", selectedPackageMat);
+
+    if (!selectedPackageMat) {
+        sap.m.MessageBox.warning("Please select Package Material");
+        return;
+    }
+
+    var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData");
+    var packItems = eshipjetModel.getProperty("/to_DeliveryDocumentItem") || [];
+
+    // Only items with balance qty
+    var validItems = packItems.filter(function (item) {
+        return item.BalanceQty && parseInt(item.BalanceQty, 10) > 0;
+    });
+
+    if (validItems.length === 0) {
+        sap.m.MessageBox.warning("No items available to pack.");
+        return;
+    }
+
+    oController.onOpenBusyDialog();
+
+    // Batch setup
+    oModel.setUseBatch(true);
+    oModel.setDeferredGroups(["PackAllBatch"]);
+
+    oModel.refreshSecurityToken(function () {
+
+        // 🔵 1️⃣ CREATE ONE HU HEADER ONLY
+        oModel.create("/A_HandlingUnitHeaderDelivery", {
+            HandlingUnitExternalId: "$1",
+            PackagingMaterial: selectedPackageMat,
+            DeliveryDocument: GetDeliveryData.DeliveryDocument
+        }, {
+            groupId: "PackAllBatch"
+        });
+
+        // 🔵 2️⃣ CREATE HU ITEMS (ONE PER DELIVERY ITEM)
+        validItems.forEach(function (item) {
+
+            oModel.create("/A_HandlingUnitItemDelivery", {
+                HandlingUnitExternalId: "$1",           // SAME HU
+                HandlingUnitTypeOfContent: "1",
+                DeliveryDocument: GetDeliveryData.DeliveryDocument,
+                DeliveryDocumentItem: item.DeliveryDocumentItem,
+                HandlingUnitQuantity: item.BalanceQty.toString(), // ✅ TOTAL QTY
+                HandlingUnitQuantityUnit: item.BaseUnit || "PC",
+                Material: item.Material
+            }, {
+                groupId: "PackAllBatch"
             });
-            eshipjetModel.updateBindings(true);
+        });
 
-            // 🟢 Filter only valid rows (with DeliveryDocument)
-            var validItems = packAddProductTable.filter(function (item) {
-                return item.DeliveryDocument !== undefined && item.BalanceQty > 0;
-            });
-
-            if (validItems.length === 0) {
-                sap.m.MessageBox.warning("No valid items found to pack.");
-                return;
-            }
-
-            // 🟢 Start Busy Indicator
-            oController.onOpenBusyDialog();
-
-            // 🟢 Prepare batch operations
-            oModel.setUseBatch(true);
-            oModel.setDeferredGroups(["isProjectUploadBatch"]);
-
-            oModel.refreshSecurityToken(function () {
-                // 🔹 1. Create HU Header
-                var headerDataObj = {
-                    HandlingUnitExternalId: "$1",
-                    PackagingMaterial: selectedPackageMat,
-                    DeliveryDocument: GetDeliveryData.DeliveryDocument
-                };
-
-                oModel.create("/A_HandlingUnitHeaderDelivery", headerDataObj, {
-                    groupId: "isProjectUploadBatch"
-                });
-
-                // 🔹 2. Create HU Items for each line
-                validItems.forEach(function (currentObj) {
-                    var oItem = {
-                        HandlingUnitExternalId: "$1", // link to the same HU
-                        HandlingUnitTypeOfContent: "1",
-                        DeliveryDocument: GetDeliveryData.DeliveryDocument,
-                        DeliveryDocumentItem: currentObj.DeliveryDocumentItem,
-                        HandlingUnitQuantity: currentObj.BalanceQty.toString(),
-                        HandlingUnitQuantityUnit: currentObj.BaseUnit || "PC",
-                        Material: currentObj.Material
-                    };
-
-                    oModel.create("/A_HandlingUnitItemDelivery", oItem, {
-                        groupId: "isProjectUploadBatch"
-                    });
-                });
-
-                // 🔹 3. Submit batch
-                oModel.submitChanges({
-                    groupId: "isProjectUploadBatch",
-                    success: function (oData) {
-                        oController.readHUData();
-
-                            // 2. Also update the table immediately (optimistic update)
-                            var currentHUList = eshipjetModel.getProperty("/ShipNowHandlingUnits") || [];
-
-                            // Add new HU header entry
-                            var newHU = {
-                                SerialNumber: currentHUList.length + 1,
-                                HandlingUnitExternalID: "$1",     // backend will replace
-                                CreatedByUser: eshipjetModel.getProperty("/userName") || "User",
-                                GrossWeight: "",
-                                Dimensions: "",
-                                HandlingUnitPackingObjectType: selectedPackageMat || "",
-                                HandlingUnitInternalID: "",
-                                Hunumber: "",
-                                HandlingUnitIsClosed: false,
-                                PackagingMaterial: selectedPackageMat || "",
-                                HuLabel: ""
-                            };
-
-                            currentHUList.push(newHU);
-
-                            eshipjetModel.setProperty("/ShipNowHandlingUnits", currentHUList);
-                            eshipjetModel.updateBindings(true);
-
-                            oController.onCloseBusyDialog();
-                            // sap.m.MessageToast.show("All items packed successfully.");
-                        // oController.readTodayHUData();
-                        oController.onCloseBusyDialog();
-
-                        // sap.m.MessageToast.show("All items packed successfully.");
-                        console.log("HU Batch created:", oData);
-                    },
-                    error: function (oError) {
-                        oController.onCloseBusyDialog();
-                        oController._showODataError(oError);
-                    }
-                });
-
-            }, function (err) {
+        // 🔵 3️⃣ SUBMIT ONCE
+        oModel.submitChanges({
+            groupId: "PackAllBatch",
+            success: function () {
+                oController.readHUData();
                 oController.onCloseBusyDialog();
-                console.error("CSRF token refresh failed:", err);
-                sap.m.MessageBox.error("Could not fetch CSRF token!");
+                sap.m.MessageToast.show("All items packed into ONE HU successfully");
+            },
+            error: function (err) {
+                oController.onCloseBusyDialog();
+                oController._showODataError(err);
+            }
+        });
+
+    }, function () {
+        oController.onCloseBusyDialog();
+        sap.m.MessageBox.error("CSRF Token Failed");
+    });
+},
+
+
+
+
+  onPackAllWithEWMCall: function () {
+
+    var oController   = this;
+    var eshipjetModel = this.getOwnerComponent().getModel("eshipjetModel");
+    var CreateHUSrvModel = this.getOwnerComponent().getModel("CreateHUSrvModel");
+
+    var selectedPackageMat = eshipjetModel.getProperty("/selectedPackageMat");
+    if (!selectedPackageMat) {
+        sap.m.MessageBox.warning("Please select Package Material");
+        return;
+    }
+
+    var sapDeliveryNumber = eshipjetModel.getProperty("/commonValues/sapDeliveryNumber");
+    var items = eshipjetModel.getProperty("/to_DeliveryDocumentItem") || [];
+
+    // ✅ EXACT SAME QTY SOURCE AS WITHOUT-EWM
+    var totalQty = 0;
+    for (var i = 0; i < items.length; i++) {
+        if (items[i].BalanceQty && Number(items[i].BalanceQty) > 0) {
+            totalQty += Number(items[i].BalanceQty);
+        }
+    }
+
+    if (totalQty === 0) {
+        sap.m.MessageBox.warning("No items available to pack");
+        return;
+    }
+
+    oController.onOpenBusyDialog();
+
+    // 🔵 SINGLE EWM CALL = ONE HU
+    CreateHUSrvModel.create("/HUHEADERSet", {
+        Pacmatnr: selectedPackageMat,
+        Delivery: sapDeliveryNumber,
+        Qty: totalQty.toString(),   // ✅ BalanceQty ONLY
+        Itemno: "10"
+    }, {
+        success: function () {
+
+            // Notes (optional)
+            var Notes = eshipjetModel.getProperty("/Notes") || [];
+            Notes.push({
+                date: new Date(),
+                name: eshipjetModel.getProperty("/userName"),
+                notes: "All Items are packed successfully"
             });
+            eshipjetModel.setProperty("/Notes", Notes);
+
+            oController.getHandlingUnit(sapDeliveryNumber);
+            oController.onCloseBusyDialog();
+            sap.m.MessageToast.show("All items packed successfully");
         },
+        error: function (oError) {
+            var errMsg = new DOMParser()
+                .parseFromString(oError.responseText, "text/xml")
+                .getElementsByTagName("message")[0].textContent;
+
+            sap.m.MessageBox.error(errMsg);
+            oController.onCloseBusyDialog();
+        }
+    });
+},
+
+
+
+
+
+
+
+        // onPackAllPress: function () {
+        //     var oController = this;
+        //     var oModel = this.getOwnerComponent().getModel("OutBoundDeliveryModel");
+        //     var eshipjetModel = this.getOwnerComponent().getModel("eshipjetModel");
+        //     var currentHUList = eshipjetModel.getProperty("/ShipNowHandlingUnits") || [];
+        //     var oTable = this.byId("idShipNowPackTable");
+        //     var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData");
+        //     var packAddProductTable = GetDeliveryData.to_Items.results;
+        //     var selectedPackageMat = eshipjetModel.getProperty("/selectedPackageMat");
+
+        //     // 🟡 Validate package material
+        //     if (!selectedPackageMat || selectedPackageMat === "") {
+        //         sap.m.MessageBox.warning("Please select Package Material");
+        //         return;
+        //     }
+
+        //     // 🟢 Add note
+        //     var Notes = eshipjetModel.getProperty("/Notes");
+        //     Notes.push({
+        //         "date": new Date(),
+        //         "name": eshipjetModel.getProperty("/userName"),
+        //         "notes": "All Items are packed successfully"
+        //     });
+        //     eshipjetModel.updateBindings(true);
+
+        //     // 🟢 Filter only valid rows (with DeliveryDocument)
+        //     var validItems = packAddProductTable.filter(function (item) {
+        //         return item.DeliveryDocument !== undefined && item.BalanceQty > 0;
+        //     });
+
+        //     if (validItems.length === 0) {
+        //         sap.m.MessageBox.warning("No valid items found to pack.");
+        //         return;
+        //     }
+
+        //     // 🟢 Start Busy Indicator
+        //     oController.onOpenBusyDialog();
+
+        //     // 🟢 Prepare batch operations
+        //     oModel.setUseBatch(true);
+        //     oModel.setDeferredGroups(["isProjectUploadBatch"]);
+
+        //     oModel.refreshSecurityToken(function () {
+        //         // 🔹 1. Create HU Header
+        //         var headerDataObj = {
+        //             HandlingUnitExternalId: "$1",
+        //             PackagingMaterial: selectedPackageMat,
+        //             DeliveryDocument: GetDeliveryData.DeliveryDocument
+        //         };
+
+        //         oModel.create("/A_HandlingUnitHeaderDelivery", headerDataObj, {
+        //             groupId: "isProjectUploadBatch"
+        //         });
+
+        //         // 🔹 2. Create HU Items for each line
+        //         validItems.forEach(function (currentObj) {
+        //             var oItem = {
+        //                 HandlingUnitExternalId: "$1", // link to the same HU
+        //                 HandlingUnitTypeOfContent: "1",
+        //                 DeliveryDocument: GetDeliveryData.DeliveryDocument,
+        //                 DeliveryDocumentItem: currentObj.DeliveryDocumentItem,
+        //                 HandlingUnitQuantity: currentObj.BalanceQty.toString(),
+        //                 HandlingUnitQuantityUnit: currentObj.BaseUnit || "PC",
+        //                 Material: currentObj.Material
+        //             };
+
+        //             oModel.create("/A_HandlingUnitItemDelivery", oItem, {
+        //                 groupId: "isProjectUploadBatch"
+        //             });
+        //         });
+
+        //         // 🔹 3. Submit batch
+        //         oModel.submitChanges({
+        //             groupId: "isProjectUploadBatch",
+        //             success: function (oData) {
+        //                 oController.readHUData();
+
+        //                     // 2. Also update the table immediately (optimistic update)
+        //                     var currentHUList = eshipjetModel.getProperty("/ShipNowHandlingUnits") || [];
+
+        //                     // Add new HU header entry
+        //                     var newHU = {
+        //                         SerialNumber: currentHUList.length + 1,
+        //                         HandlingUnitExternalID: "$1",     // backend will replace
+        //                         CreatedByUser: eshipjetModel.getProperty("/userName") || "User",
+        //                         GrossWeight: "",
+        //                         Dimensions: "",
+        //                         HandlingUnitPackingObjectType: selectedPackageMat || "",
+        //                         HandlingUnitInternalID: "",
+        //                         Hunumber: "",
+        //                         HandlingUnitIsClosed: false,
+        //                         PackagingMaterial: selectedPackageMat || "",
+        //                         HuLabel: ""
+        //                     };
+
+        //                     currentHUList.push(newHU);
+
+        //                     eshipjetModel.setProperty("/ShipNowHandlingUnits", currentHUList);
+        //                     eshipjetModel.updateBindings(true);
+
+        //                     oController.onCloseBusyDialog();
+        //                     // sap.m.MessageToast.show("All items packed successfully.");
+        //                 // oController.readTodayHUData();
+        //                 oController.onCloseBusyDialog();
+
+        //                 // sap.m.MessageToast.show("All items packed successfully.");
+        //                 console.log("HU Batch created:", oData);
+        //             },
+        //             error: function (oError) {
+        //                 oController.onCloseBusyDialog();
+        //                 oController._showODataError(oError);
+        //             }
+        //         });
+
+        //     }, function (err) {
+        //         oController.onCloseBusyDialog();
+        //         console.error("CSRF token refresh failed:", err);
+        //         sap.m.MessageBox.error("Could not fetch CSRF token!");
+        //     });
+        // },
+
+
+
+
+
+
 
         // onShipNowCodEditPress:function(){
         //     var oView = this.getView();
@@ -10394,9 +10608,9 @@ getOrdersHistoryShipments: function () {
             const normalized = response.results.map(item => {
 
                 let createdDate = null;
-                if (item.CreatedOn) {
+                if (item.LastChangedOn) {
                     // SAP /Date(1763424000000)/
-                    const ts = Number(item.CreatedOn.replace(/\D/g, ""));
+                    const ts = Number(item.LastChangedOn.replace(/\D/g, ""));
                     createdDate = isNaN(ts) ? null : new Date(ts);
                 }
 
@@ -10863,8 +11077,8 @@ getOrdersHistoryShipments: function () {
         getShipReqLabelHistoryShipments:function(){
             oController.onOpenBusyDialog();
             var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
-            var ManifestSrvModel = oController.getOwnerComponent().getModel("ManifestSrvModel");
-            ManifestSrvModel.read("/EshipjetManfestSet",{
+            var ManifestSrvModel = oController.getOwnerComponent().getModel("ManifestModel");
+            ManifestSrvModel.read("/Manifest_detSet",{
                 // urlParameters: {
                 //     "$expand": "to_DeliveryDocumentItem,to_DeliveryDocumentPartner"
                 // },
@@ -24075,87 +24289,88 @@ packParcelProducts: function () {
 
 
 
+// onPackAllPress: function () {
 
-   onPackAllPress: function () {
-            var oController = this;
-            var eshipjetModel = this.getOwnerComponent().getModel("eshipjetModel");
-            var oModel = this.getOwnerComponent().getModel("OutBoundDeliveryModel");
+//     var oController   = this;
+//     var eshipjetModel = this.getOwnerComponent().getModel("eshipjetModel");
+//     var oModel        = this.getOwnerComponent().getModel("OutBoundDeliveryModel");
 
-            var selectedPackageMat = eshipjetModel.getProperty("/selectedPackageMat");
+//     // ✅ Read from model (as you requested)
+//     var selectedPackageMat = eshipjetModel.getProperty("/selectedPackageMat");
 
-            if (!selectedPackageMat) {
-                MessageBox.warning("Please select Package Material");
-                return;
-            }
+//     console.log("Packaging Material (PackAll):", selectedPackageMat);
 
-            var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData");
-            var packItems = eshipjetModel.getProperty("/to_DeliveryDocumentItem");
+//     if (!selectedPackageMat) {
+//         sap.m.MessageBox.warning("Please select Package Material");
+//         return;
+//     }
 
-            // Filter only items with remaining qty
-            var validItems = packItems.filter(item =>
-                item.BalanceQty && parseFloat(item.BalanceQty) > 0
-            );
+//     var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData");
+//     var packItems = eshipjetModel.getProperty("/to_DeliveryDocumentItem") || [];
 
-            if (validItems.length === 0) {
-                MessageBox.warning("No items available to pack.");
-                return;
-            }
+//     // Only items with balance qty
+//     var validItems = packItems.filter(function (item) {
+//         return item.BalanceQty && parseInt(item.BalanceQty, 10) > 0;
+//     });
 
-            oController.onOpenBusyDialog();
+//     if (validItems.length === 0) {
+//         sap.m.MessageBox.warning("No items available to pack.");
+//         return;
+//     }
 
-            // Batch setup
-            oModel.setUseBatch(true);
-            oModel.setDeferredGroups(["PackAllBatch"]);
+//     oController.onOpenBusyDialog();
 
-            oModel.refreshSecurityToken(() => {
+//     // Batch setup
+//     oModel.setUseBatch(true);
+//     oModel.setDeferredGroups(["PackAllBatch"]);
 
-                // 1️⃣ Create HU header
-                var headerObj = {
-                    HandlingUnitExternalId: "$1",
-                    PackagingMaterial: selectedPackageMat,
-                    DeliveryDocument: GetDeliveryData.DeliveryDocument
-                };
+//     oModel.refreshSecurityToken(function () {
 
-                oModel.create("/A_HandlingUnitHeaderDelivery", headerObj, {
-                    groupId: "PackAllBatch"
-                });
+//         // 🔵 1️⃣ CREATE ONE HU HEADER ONLY
+//         oModel.create("/A_HandlingUnitHeaderDelivery", {
+//             HandlingUnitExternalId: "$1",
+//             PackagingMaterial: selectedPackageMat,
+//             DeliveryDocument: GetDeliveryData.DeliveryDocument
+//         }, {
+//             groupId: "PackAllBatch"
+//         });
 
-                // 2️⃣ Create HU items for all rows
-                validItems.forEach(item => {
-                    var huItem = {
-                        HandlingUnitExternalId: "$1",
-                        HandlingUnitTypeOfContent: "1",
-                        DeliveryDocument: GetDeliveryData.DeliveryDocument,
-                        DeliveryDocumentItem: item.DeliveryDocumentItem,
-                        HandlingUnitQuantity: item.BalanceQty.toString(),
-                        HandlingUnitQuantityUnit: item.BaseUnit || "PC",
-                        Material: item.Material
-                    };
+//         // 🔵 2️⃣ CREATE HU ITEMS (ONE PER DELIVERY ITEM)
+//         validItems.forEach(function (item) {
 
-                    oModel.create("/A_HandlingUnitItemDelivery", huItem, {
-                        groupId: "PackAllBatch"
-                    });
-                });
+//             oModel.create("/A_HandlingUnitItemDelivery", {
+//                 HandlingUnitExternalId: "$1",           // SAME HU
+//                 HandlingUnitTypeOfContent: "1",
+//                 DeliveryDocument: GetDeliveryData.DeliveryDocument,
+//                 DeliveryDocumentItem: item.DeliveryDocumentItem,
+//                 HandlingUnitQuantity: item.BalanceQty.toString(), // ✅ TOTAL QTY
+//                 HandlingUnitQuantityUnit: item.BaseUnit || "PC",
+//                 Material: item.Material
+//             }, {
+//                 groupId: "PackAllBatch"
+//             });
+//         });
 
-                // 3️⃣ Submit batch
-                oModel.submitChanges({
-                    groupId: "PackAllBatch",
-                    success: function () {
-                        oController.readHUData();
-                        oController.onCloseBusyDialog();
-                        // MessageToast.show("All items packed successfully.");
-                    },
-                    error: function (err) {
-                        oController.onCloseBusyDialog();
-                        oController._showODataError(err);
-                    }
-                });
+//         // 🔵 3️⃣ SUBMIT ONCE
+//         oModel.submitChanges({
+//             groupId: "PackAllBatch",
+//             success: function () {
+//                 oController.readHUData();
+//                 oController.onCloseBusyDialog();
+//                 sap.m.MessageToast.show("All items packed into ONE HU successfully");
+//             },
+//             error: function (err) {
+//                 oController.onCloseBusyDialog();
+//                 oController._showODataError(err);
+//             }
+//         });
 
-            }, function (err) {
-                oController.onCloseBusyDialog();
-                MessageBox.error("CSRF Token Failed");
-            });
-},
+//     }, function () {
+//         oController.onCloseBusyDialog();
+//         sap.m.MessageBox.error("CSRF Token Failed");
+//     });
+// },
+
 
 
         onHUItemsCreatePress: function () {
@@ -24650,7 +24865,7 @@ onEditCarrierCatalogPress: function (oEvent) {
         });
         eshipjetModel.setProperty("/addCrrierDialogItems", aFiltered);
         if (aFiltered.length === 0) {
-            sap.m.MessageToast.show("No carrier data found for selected record.");
+            // sap.m.MessageToast.show("No carrier data found for selected record.");
             return;
         }
 
@@ -24754,7 +24969,7 @@ AddCarrierCatalogupdateDialog: function () {
         groupId: "batchGroup1",
         success: function (oData, oResponse) {
             oController.onCloseBusyDialog();
-            sap.m.MessageToast.show("✅ Carrier Catalog updated successfully!");
+            // sap.m.MessageToast.show("✅ Carrier Catalog updated successfully!");
             oController.byId("idAddCarrierDialog").close();
             oController.onGetCarrierCatalogData();
         },
@@ -25675,6 +25890,40 @@ AddCarrierCancelDialog: function() {
 //         });
 //     });
 // },
+loadPackageMaterials: function () {
+
+    var APIProductSrvModel = this.getOwnerComponent().getModel("API_PRODUCT_SRV");
+    var eshipjetModel     = this.getOwnerComponent().getModel("eshipjetModel");
+
+    eshipjetModel.setProperty("/packageMaterial", []);
+
+    APIProductSrvModel.read("/A_Product", {
+        filters: [
+            new sap.ui.model.Filter(
+                "ProductType",
+                sap.ui.model.FilterOperator.EQ,
+                "VERP"
+            )
+        ],
+        success: function (oData) {
+
+            console.log("Packaging materials from API:", oData.results);
+
+            var aPkgMaterials = oData.results.map(function (item) {
+                return {
+                    Product: item.Product   // CARTON BOX, EWMS4-PAL00, etc.
+                };
+            });
+
+            eshipjetModel.setProperty("/packageMaterial", aPkgMaterials);
+            eshipjetModel.updateBindings(true);
+        },
+        error: function () {
+            sap.m.MessageBox.error("Failed to load Package Materials");
+        }
+    });
+},
+
 
 
 readProductPlant: function () {
