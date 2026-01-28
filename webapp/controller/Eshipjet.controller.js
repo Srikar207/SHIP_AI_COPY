@@ -146,7 +146,7 @@ sap.ui.define([
             oController.getManifestHeaderForTodaysShipmentCount();
              oController.loadPackageMaterials();
 
-            // oController.onPackSectionEmptyRows();
+             oController.onPackSectionEmptyRows();
             function sanitizeDescription(desc, maxLength = 40) {
                 if (!desc) return "";
 
@@ -3216,7 +3216,7 @@ formatNumberForSAP: function (val) {
                         ProductUnitOfMeasurement: ShipNowResponse.Packages[i].ItemsInfo[0].UOM || "CV",
 
                         Totalpkg: String(to_HandlingUnitHeaderDelivery.length || 0).padStart(5, '0'),
-
+                        MaterialNumber: selectedPackageMat,
                         /* DOCUMENT */
                         ShippingDocumentProvider: doc.docProvider || "",
                         ShippingDocumentSapOutputType: doc.contentType || "",
@@ -3235,7 +3235,7 @@ formatNumberForSAP: function (val) {
                 var oDeepPayload = {
                     GUID: eshipjetModel.getProperty("/GU_ID"),
                     Vbeln: sapDeliveryNumber,
-                    MaterialNumber: selectedPackageMat,
+                    
 
                     ManifestSingleToBulk: aBulkItems   // 🔥 Deep Entity
                 };
@@ -3834,6 +3834,8 @@ formatNumberForSAP: function (val) {
                         ProductUnitOfMeasurement: to_HandlingUnitHeaderDelivery[i].HandlingUnitQuantityUnit || "CV",
 
                         Totalpkg: String(to_HandlingUnitHeaderDelivery.length || 0).padStart(5, '0'),
+
+                        MaterialNumber: selectedPackageMat,
 
                         /* DOCUMENT */
                         ShippingDocumentProvider: doc.docProvider || "",
