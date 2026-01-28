@@ -58,10 +58,10 @@
 
 
 
-						<Button  icon="sap-icon://decline" press="onShipNowClosePress" class="shipNowCloseBtnStyle removeBtnOutline" type="Ghost" />
+						<Button  icon="sap-icon://decline" press="onShipNowClosePress" class="shipNowCloseBtnStyle removeBtnOutline" type="Transparent" />
 				</Toolbar>
 							<Toolbar class="sapUiTinyMarginBottom scan-ship-toolbar1" height="10%">
-									<ComboBox class="create-ship-req_input sapUiTinyMargin sapUiSmallMarginBegin removeInputOutline" width="16%" selectedKey="SAPS4HANAPrivate" >
+									<ComboBox editable="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="create-ship-req_input sapUiTinyMargin sapUiSmallMarginBegin removeInputOutline" width="16%" selectedKey="SAPS4HANAPrivate" >
 										<core:Item key="SAPS4HANAPublic" text="SAP S/4 HANA Public Cloud Edition" />
 										<core:Item key="SAPS4HANAPrivate" text="SAP S/4 HANA Private Cloud Edition" />	
 										<core:Item key="EWMOBD" text="EWM Outbound Delivery" />	
@@ -82,9 +82,10 @@
 						press="onOpenSAPDeliveryList" />
 
 									<!-- <SearchField class="sapUiSmallMarginBottum sapUiSmallMargin" id="idShipNowSearch" value="{eshipjetModel>/commonValues/sapDeliveryNumber}" search="onShipNowSearchDialog"  width="15%" /> -->
-									<Input id="idSapDeliveryNumber" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" value="{eshipjetModel>/commonValues/sapDeliveryNumber}" submit="onShipNowGetPress" class="customInputStyle sapDeliveryNumberInptBold create-ship-req_input sapUiTinyMarginTop sapUiSmallMarginEnd custom-input2 removeInputOutline" width="10%" editable="true" valueHelpOnly="false"  placeholder="Delivery Number" liveChange="onDeliveryNumberLiveChange" ></Input>
+									<!-- <Input id="idSapDeliveryNumber" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" value="{eshipjetModel>/commonValues/sapDeliveryNumber}" submit="onShipNowGetPress" class="customInputStyle sapDeliveryNumberInptBold create-ship-req_input sapUiTinyMarginTop sapUiSmallMarginEnd custom-input2 removeInputOutline" width="10%" editable="true" valueHelpOnly="false"  placeholder="Delivery Number" liveChange="onDeliveryNumberLiveChange" ></Input> -->
+									<Input id="idSapDeliveryNumber" editable="{= ${eshipjetModel>/commonValues/shipNowBtnStatus} &amp;&amp; ${eshipjetModel>/diableGetBtn} }" value="{eshipjetModel>/commonValues/sapDeliveryNumber}" submit="onShipNowGetPress" class="customInputStyle sapDeliveryNumberInptBold create-ship-req_input sapUiTinyMarginTop sapUiSmallMarginEnd custom-input2 removeInputOutline" width="10%" valueHelpOnly="false" showValueHelp="false" valueHelpRequest="onShipNowSearchDialog"  liveChange="onDeliveryNumberLiveChange" ></Input>
 									<!-- showValueHelp="true" valueHelpRequest="onShipNowSearchDialog" -->
-									<Button text="Get" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" type="Ghost" class="Ship-Now-toolbar1__button_green_Get removeBtnOutline saveBtn sapUiTinyMarginTop sapUiTinyMarginBottom sapUiSmallMarginEnd" press="onShipNowGetPress" width="4%"></Button>
+									<Button text="Get" enabled="{= ${eshipjetModel>/commonValues/shipNowBtnStatus} &amp;&amp; ${eshipjetModel>/diableGetBtn} }" type="Ghost" class="Ship-Now-toolbar1__button_green_Get removeBtnOutline saveBtn sapUiTinyMarginTop sapUiTinyMarginBottom sapUiSmallMarginEnd" press="onShipNowGetPress" width="4%"></Button>
 									<Label text="Ship Type" visible="{eshipjetModel>/commonValues/showShipType}" class="sapUiSmallMargin" ></Label>
 									<Text width="3%" text="{eshipjetModel>/commonValues/ShipNowShipsrvNameSelectedKey}" visible="{eshipjetModel>/commonValues/showShipType}" class="ship-type-value sapUiTinyMarginTop sapUiTinyMarginBottom sapUiSmallMarginEnd" ></Text>
 
@@ -96,7 +97,7 @@
 
 									<!-- <Button text="Consolidation" class="scan-ship-toolbar1__button sapUiTinyMarginTop sapUiTinyMarginBottom sapUiSmallMarginEnd" type="Ghost" press="handleConsolidationPress" width="8%"></Button> -->
 									<Label text="Ship Date" class="sapUiSmallMarginTop sapUiSmallMarginBegin" labelFor="DP1" width="6%" />
-									<DatePicker class="create-ship-req_input removeInputOutline sapUiTinyMargin" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" id="DP1" width="8%" valueFormat="MM/dd/yyyy" displayFormat="MM/dd/yyyy" change="handleChange" value="{path: 'eshipjetModel>/pickupDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'MM/dd/yyyy'}}" />
+									<DatePicker class="create-ship-req_input removeInputOutline sapUiTinyMargin" editable="{eshipjetModel>/commonValues/shipNowBtnStatus}" id="DP1" width="8%" valueFormat="MM/dd/yyyy" displayFormat="MM/dd/yyyy" change="handleChange" value="{path: 'eshipjetModel>/pickupDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'MM/dd/yyyy'}}" />
 									<ToolbarSpacer ></ToolbarSpacer>
 									 <Button text="Clear" press="onShipNowNewPress" class="clearbutton-btn removeBtnOutline clearBtn sapUiTinyMargin" type="Ghost" />
 									<Button text="New" press="onShipNowNewPress" class="Newbutton-btn removeBtnOutline saveBtn sapUiTinyMargin " type="Ghost" ></Button>
@@ -995,7 +996,12 @@
 									</HBox>
 									<ui:template>
 									<HBox justifyContent="End" alignItems="End" width="100%">
-										<Input value="{eshipjetModel>partialQty}" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" liveChange="onPartialQtyChange" />
+										<!-- <Input value="{eshipjetModel>partialQty}" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" liveChange="onPartialQtyChange" /> -->
+										<Input
+											value="{eshipjetModel>partialQty}"
+											enabled="{= !!${eshipjetModel>BalanceQty} }"
+											editable="{eshipjetModel>/commonValues/shipNowBtnStatus}"
+											liveChange="onPartialQtyChange" />
 									</HBox>
 									</ui:template>
 								</ui:Column>
@@ -1248,7 +1254,7 @@
 										</HBox>
 									<ui:template>
 										<HBox justifyContent="Center" alignItems="Center">
-												<Button icon="sap-icon://tag" type="Transparent" press="onSerialNumPress" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" ></Button>
+												<Button icon="sap-icon://tag" type="Transparent" press="onSerialNumPress" enabled="{= ${eshipjetModel>HandlingUnitExternalId} > 0 }" ></Button>
 											</HBox>
 									</ui:template>
 								</ui:Column>
@@ -1259,7 +1265,7 @@
 									<ui:template>
 									<HBox justifyContent="Center" alignItems="Center">
 										 <core:Icon src="sap-icon://circle-task-2"    class="ordersSmallText"
-                color="{= ${eshipjetModel>HandlingUnitIsClosed} ? 'green' : 'grey' }"  enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}"/>
+                color="{= ${eshipjetModel>HandlingUnitIsClosed} ? 'green' : 'grey' }"  enabled="{= ${eshipjetModel>HandlingUnitExternalId} > 0 }"/>
 										 </HBox>
 									</ui:template>
 								</ui:Column>
@@ -1280,7 +1286,7 @@
 										</HBox>
 									<ui:template>
 										<HBox justifyContent="Center" alignItems="Center">
-												<Button icon="sap-icon://attachment" type="Transparent" press="HUDialogPress" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" ></Button>
+												<Button icon="sap-icon://attachment" type="Transparent" press="HUDialogPress" enabled="{= ${eshipjetModel>HandlingUnitExternalId} > 0 }" ></Button>
 											</HBox>
 									</ui:template>
 								</ui:Column>
@@ -1931,7 +1937,7 @@
 					<ui:Column width="auto" >
 						<Label text="Carrier Name" />
 						<ui:template>
-							<Text text="{eshipjetModel>CarrierCode}" />
+							<Text text="{eshipjetModel>CARRIER_TYPE}" />
 						</ui:template>
 					</ui:Column>
 					<ui:Column width="auto" >
