@@ -147,16 +147,7 @@ sap.ui.define([
              oController.loadPackageMaterials();
 
              oController.onPackSectionEmptyRows();
-            function sanitizeDescription(desc, maxLength = 40) {
-                if (!desc) return "";
-
-                // Remove commas and other invalid characters
-                desc = desc.replace(/,/g, " ");  
-                desc = desc.replace(/[^a-zA-Z0-9 .\-]/g, "");
-
-                // Trim to max length allowed by OData metadata (40 assumed)
-                return desc.substring(0, maxLength);
-            }
+            
         },
 
         readAPIProductSrvModel:function(){
