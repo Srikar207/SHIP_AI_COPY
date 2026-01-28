@@ -72,7 +72,7 @@
     "createShipReqPersonalSelect": false,
     "toolPageDarkHeader": false,
     "HandlingUnitsLength": 0,
-    "selectedPackageMat": "PALLET",
+    "selectedPackageMat": "",
     "sFromViewName": "",
     "DgUpdate": false,
     "DgAdd": false,

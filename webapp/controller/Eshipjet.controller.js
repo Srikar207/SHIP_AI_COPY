@@ -24418,10 +24418,9 @@ packParcelProducts: function () {
                         var sapDeliveryNumber = eshipjetModel.getProperty("/commonValues/sapDeliveryNumber");
                         var partialQty = eshipjetModel.getProperty("/partialQty");
                         var Material = eshipjetModel.getProperty("/Material");
-                        var pkgMaterial = eshipjetModel.getProperty("/selectedPackageMat")
 
                         var oPayload = {
-                            "Pacmatnr": "EWMS4-WBTRO00",
+                            "Pacmatnr": selectedPackageMat,
                             "Delivery": sapDeliveryNumber,
                             "Qty": currentObj.partialQty,
                             "Itemno": "10"
@@ -24461,11 +24460,17 @@ packParcelProducts: function () {
             var aRows = oTable.getBinding("rows").getContexts().map(c => c.getObject());
             var oModel = this.getOwnerComponent().getModel("OutBoundDeliveryModel");
             var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData");
+            var selectedPackageMat = eshipjetModel.getProperty("/selectedPackageMat");
 
             const aValidRows = aRows.filter(row =>
                 row && row.ActualDeliveryQuantity // or any real business key
             );
 
+            if(selectedPackageMat === ""){
+                sap.m.MessageBox.error("Please Select Package Material.");
+                oController.onCloseBusyDialog();
+                return;
+            }
             if (aValidRows.length === 1) {
                 const oRow = aValidRows[0];
 
@@ -24503,7 +24508,7 @@ packParcelProducts: function () {
             oModel.refreshSecurityToken(function () {
                 var headerDataObj = {
                     HandlingUnitExternalId: "$1",
-                    PackagingMaterial: "CARTON BOX",
+                    PackagingMaterial: selectedPackageMat,
                     DeliveryDocument: GetDeliveryData.DeliveryDocument,
                     // HandlingUnitUoMDimension: Dimensions
                     // HandlingUnitHeight: eshipjetModel.getProperty("/commonValues/heightOfDimensions"),
