@@ -4579,6 +4579,7 @@ convertZplToPng: function (zplData) {
 
         eshipjetModel.setProperty("/BusinessPartners", aBusinessPartnersTable);
 
+
         },
 
         
@@ -4728,11 +4729,13 @@ onShippingDocumentsViewPress: async function (oEvent) {
         content: [
             new sap.m.Button({
                 text: "Close",
+                type: "Transparent",
                 press: () => oDialog.close()
             }).addStyleClass("Ship-Now-toolbar1__button_red"),
             new sap.m.ToolbarSpacer(),
             new sap.m.Button({
                 text: "Print",
+                type: "Transparent",
                 press: () => window.print()
             }).addStyleClass("Ship-Now-toolbar1__button_green")
         ]

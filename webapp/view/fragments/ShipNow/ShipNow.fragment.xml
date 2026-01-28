@@ -1392,17 +1392,17 @@
 											<f:SimpleForm id="InternationalDetails" class="whiteBackground" editable="true" layout="ColumnLayout" columnsM="2" columnsL="3" columnsXL="6">
 												<f:content>
 													<Label text="Customs Declared Value" />
-													<Input value="{eshipjetModel>/payorCountryCode}" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="create-ship-req_input" />
+													<Input value="{eshipjetModel>/payorCountryCode}" editable="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="create-ship-req_input" />
 													<Label text="Currency" />
-													<Input value="{eshipjetModel>/permitNo}" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="create-ship-req_input" />
+													<Input value="{eshipjetModel>/permitNo}" editable="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="create-ship-req_input" />
 													<Label text="INT Duties/Taxes" />
-													<ComboBox items="{eshipjetModel>/Packages/Weight}" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="create-ship-req_input" >
+													<ComboBox items="{eshipjetModel>/Packages/Weight}" editable="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="create-ship-req_input" >
 														<core:Item key="{eshipjetModel>key}" text="{eshipjetModel>key}" />
 													</ComboBox>
 													<Label text="Duties Account No" />
-													<Input value="{eshipjetModel>/dutiesAccountNo}" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="create-ship-req_input" ></Input>
+													<Input value="{eshipjetModel>/dutiesAccountNo}" editable="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="create-ship-req_input" ></Input>
 													<Label text="ITN/XTN (SED/EEI)" />
-													<Input value="{eshipjetModel>/itn_xtn}" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="create-ship-req_input" />
+													<Input value="{eshipjetModel>/itn_xtn}" editable="{eshipjetModel>/commonValues/shipNowBtnStatus}" class="create-ship-req_input" />
 
 
 													<!-- <Label text="Payor Zip Code" />
@@ -1801,11 +1801,11 @@
 											singleContainerFullSize="false" >
 											<f:content>
 												<Label text="Shipped By" />
-												<Input value="{eshipjetModel>/userName}" class="create-ship-req_input" enabled="false" />
+												<Input value="{eshipjetModel>/userName}" class="create-ship-req_input" editable="false" />
 												<Label text="SAP User ID" />
-												<Input value="{eshipjetModel>/userName}" class="create-ship-req_input" enabled="false" />
+												<Input value="{eshipjetModel>/userName}" class="create-ship-req_input" editable="false" />
 												<Label text="Ship Date-Time" />
-												<DatePicker valueFormat="MM/dd/yyyy" displayFormat="MM/dd/yyyy" change="handleChange" value="{path: 'eshipjetModel>/pickupDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'MM/dd/yyyy'}}" enabled="false" class="create-ship-req_input" />
+												<DatePicker valueFormat="MM/dd/yyyy" displayFormat="MM/dd/yyyy" change="handleChange" value="{path: 'eshipjetModel>/pickupDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'MM/dd/yyyy'}}" editable="false" class="create-ship-req_input" />
 											</f:content>
 										</f:SimpleForm>
 									</VBox>

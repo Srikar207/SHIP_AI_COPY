@@ -1131,6 +1131,53 @@ body.dark-theme {
 }
 
 
+.sapUiTheme-sap_fiori_3_dark .ShipNowBtnRed .sapMBtnInner {
+  border-color: #ff6b6b !important;
+}
+
+.sapUiTheme-sap_fiori_3_dark .ShipNowBtnGreen .sapMBtnInner {
+  border-color: #6dff9a !important;
+}
+
+.ShipNowBtnRed:hover .sapMBtnInner {
+  background-color: red !important;
+  transform: scale(1.05);
+}
+
+.ShipNowBtnRed:hover .sapMBtnContent bdi {
+  color: #fff !important;
+}
+.ShipNowBtnRed .sapMBtnInner {
+  border: 1.5px solid red !important;
+  background-color: transparent !important;
+}
+
+.ShipNowBtnRed .sapMBtnContent bdi {
+  color: red !important;
+  font-weight: 600;
+}
+.ShipNowBtn .sapMBtnInner {
+  height: 44px;
+  min-width: 90px;
+  border-radius: 6px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+}
+
+.ShipNowBtnGreen .sapMBtnInner {
+  border: 1.5px solid #2ecc71 !important;
+  background-color: transparent !important;
+}
+
+.ShipNowBtnGreen .sapMBtnContent bdi {
+  color: #2ecc71 !important;
+  font-weight: 600;
+}
+
+
+
 .Ship-Now-toolbar1__button_green:hover > span {
   background-color: #4E9C2D !important;
   color: #fff !important;
