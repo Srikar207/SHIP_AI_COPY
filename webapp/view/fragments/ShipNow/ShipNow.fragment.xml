@@ -1113,20 +1113,20 @@
         class="sapUiSmallMarginTop"
         width="auto" />
 
-   <ComboBox
-    id="idPackageMat"
-    width="11rem"
-    class="create-ship-req_input sapUiTinyMarginBegin"
-    items="{eshipjetModel>/packageMaterial}"
-    selectedKey="{eshipjetModel>/selectedPackageMat}"
-    editable="{eshipjetModel>/commonValues/shipNowBtnStatus}"
-    showSecondaryValues="true">
+	<ComboBox
+		id="idPackageMat"
+		width="11rem"
+		class="create-ship-req_input sapUiTinyMarginBegin"
+		items="{eshipjetModel>/packageMaterial}"
+		selectedKey="{eshipjetModel>/selectedPackageMat}"
+		editable="{eshipjetModel>/commonValues/shipNowBtnStatus}"
+		showSecondaryValues="true">
 
-  <core:Item
-    key="{eshipjetModel>Product}"
-    text="{eshipjetModel>Product}" />
+	<core:Item
+		key="{eshipjetModel>Product}"
+		text="{eshipjetModel>Product}" />
 
-</ComboBox>
+	</ComboBox>
 
 </FlexBox>
 
