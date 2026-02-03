@@ -197,6 +197,13 @@ sap.ui.define([
             }else if(shipType === "CANC"){
                 return "Cancelled";
             }
+        },
+
+        huDimensions: function (sL, sW, sH) {
+            if (!sL || !sW || !sH) {
+                return "";
+            }
+            return `${Number(sL)} X ${Number(sW)} X ${Number(sH)}`;
         }
 	};
 });

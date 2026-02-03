@@ -221,12 +221,11 @@
 								<Label text="PGI" />
 								<ui:template>
 									<Button 
-										icon="{= ${eshipjetModel>PGI} === true ? 'sap-icon://accept' : 'sap-icon://decline'}" 
-										type="{= ${eshipjetModel>PGI} === true ? 'Success' : 'Error'}" /> 
+										icon="{= ${eshipjetModel>eShipjetPGIStatus} === 'S' ? 'sap-icon://accept' : 'sap-icon://decline'}" 
+										type="{= ${eshipjetModel>eShipjetPGIStatus} === 'S' ? 'Success' : 'Error'}" /> 
 										<Button icon="{= 
-													${eshipjetModel>Carriertype} === 'UPS' ? 'sap-icon://accept' : 
-													${eshipjetModel>Carriertype} === 'FedEx' ? 'sap-icon://decline' :
-													${eshipjetModel>Carriertype} === 'ABFS' ? 'sap-icon://lateness' : ''
+													${eshipjetModel>eShipjetPGIStatus} === 'S' ? 'sap-icon://accept' : 
+													${eshipjetModel>eShipjetPGIStatus} === 'E' ? 'sap-icon://decline' : ''
 												}"
 												enabled="false"
 											class="greenColorForIcon ordersSmallText"
@@ -252,7 +251,8 @@
 								<ui:Column  sortProperty="DateAdded" visible="{eshipjetModel>/OrderTableData/OrderColumns/10/visible}">
 									<Label text="Ship Date-Time" />
 									<ui:template>
-										<Text text="{path: 'eshipjetModel>DateAdded', formatter: '.formatter.formatCustomDateTimeForOrders'}" wrapping="false" />
+										<!-- <Text text="{path: 'eshipjetModel>LastChangedOn', formatter: '.formatter.formatCustomDateTimeForOrders'}" wrapping="false" /> -->
+										<Text text="{path: 'eshipjetModel>LastChangedOn' }" wrapping="false" />
 									</ui:template>
 								</ui:Column>
 
