@@ -18733,11 +18733,11 @@ getOrdersHistoryShipments: function () {
                                 sETag
                             )
                             .then(function () {
-                                eshipjetModel.setProperty("/PGIStatus", "S");
-                                eshipjetModel.setProperty("/PGIMessage", "PGI Successful for Delivery");
+                                // eshipjetModel.setProperty("/PGIStatus", "S");
+                                // eshipjetModel.setProperty("/PGIMessage", "PGI Successful for Delivery");
                                 return oController._logPGIResult(
-                                    "S",
-                                    "PGI Successful for Delivery " + sDeliveryNo
+                                    eshipjetModel.getProperty("/PGIStatus"),
+                                    eshipjetModel.getProperty("/PGIMessage")
                                 );
                             }).then(function () {
                                 return oController.ApiOutboundDeliverySrvData();
@@ -18776,8 +18776,25 @@ _triggerPGIWithOData: function (sDeliveryNo, token, etag) {
                 "If-Match": etag,
                 "X-Csrf-Token": token
             },
-            success: resolve,
-            error: reject
+            success: function(oData){
+                eshipjetModel.setProperty("/PGIStatus", "S");
+                eshipjetModel.setProperty("/PGIMessage", "PGI Successful for Delivery "+sDeliveryNo);
+                resolve();
+            },
+            error: function (oError) {
+                let sMessage = "PGI failed";
+
+                try {
+                    const oErrObj = JSON.parse(oError.responseText);
+                    sMessage = oErrObj.error?.message?.value || sMessage;
+                } catch (e) {}
+
+                // sap.m.MessageBox.error(sMessage);
+                // oController.onShipNowNewPress();
+                eshipjetModel.setProperty("/PGIStatus", "E");
+                eshipjetModel.setProperty("/PGIMessage", sMessage);
+                resolve();
+            }
         });
     });
 },
