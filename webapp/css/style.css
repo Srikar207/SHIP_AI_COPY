@@ -3317,3 +3317,320 @@ html.sap-desktop .sapContrast .sapMIBar.sapMFooter-CTX, html.sap-desktop .sapCon
 .serialred{
   color: red;
 }
+
+
+
+
+
+
+/* Remove UI5 focus outline for Ghost buttons */
+.noOutlineBtn.sapMFocusable:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Remove the blue rectangle (focus pseudo element) */
+.noOutlineBtn.sapMFocusable:focus::after {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    content: "" !important;
+}
+
+
+.pgiTitle {
+    font-size: 1.5rem !important;
+    font-weight: lighter !important;
+}
+
+.pgiErrorText {
+    font-size: 1rem !important;
+}
+
+.pgiToolbar {
+    background-color: #eeeeee;
+}
+
+
+
+.toolbarWrapper {
+    position: relative;
+}
+
+/* Smooth collapse */
+.expandableToolbar {
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.billed-request-button {
+  span{
+    background-color: rgb(151, 173, 235) !important;
+    height: 20px !important;
+    border-radius: 6px !important;
+    &:hover { 
+      border-bottom: 10px solid #38608f !important;
+    }
+  }
+}
+
+.pickedUp-request-button {
+  span{
+    background-color: rgb(218, 135, 182) !important;
+    height: 20px !important;
+    border-radius: 6px !important;
+    &:hover { 
+      border-bottom: 10px solid #ab47b3 !important;
+    }
+  }
+}
+
+.delayed-request-button {
+  span{
+    background-color: rgb(255, 107, 107) !important;
+    height: 20px !important;
+    border-radius: 6px !important;
+    &:hover { 
+      border-bottom: 10px solid #f24444 !important;
+    }
+  }
+}
+
+.inTransist-request-button {
+  span{
+    background-color: rgb(237, 221, 102) !important;
+    height: 20px !important;
+    border-radius: 6px !important;
+    &:hover { 
+      border-bottom: 10px solid #cacf3a !important;
+    }
+  }
+}
+
+.delivered-request-button {
+  span{
+    background-color: rgb(62, 131, 38) !important;
+    height: 20px !important;
+    border-radius: 6px !important;
+    &:hover { 
+      border-bottom: 10px solid #2b6e2a !important;
+    }
+  }
+}
+
+.cancelled-request-button {
+  span{
+    background-color: rgb(178, 188, 190) !important;
+    height: 20px !important;
+    border-radius: 6px !important;
+    &:hover { 
+      border-bottom: 10px solid #989987 !important;
+    }
+  }
+}
+
+
+/* Arrow button */
+.expandCollapseArrow {
+    position: absolute;
+    left: 50%;
+    bottom: -16px;
+    /* transform: translateX(-50%); */
+    /* border-radius: 50%; */
+    /* background-color: #ffeb00; */
+    /* box-shadow: 0 2px 6px rgba(0,0,0,0.25); */
+    /* width: 36px;
+    height: 36px; */
+}
+
+/* Remove focus outline */
+.expandCollapseArrow:focus {
+    outline: none;
+}
+
+
+
+
+
+
+
+.shippingDocDialog .sapMDialogSection {
+    padding: 0;
+}
+
+.shippingDocHeader {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.shippingDocDialog iframe {
+    border: none;
+}
+
+.shippingDocDialog .sapMCarousel {
+    background: #ffffff;
+}
+
+.shippingDocDialog .sapMDialogFooter {
+    border-top: 1px solid #e5e5e5;
+}
+
+#idOrdersTable .sapUiTableCell {
+  display: flex;
+  align-items: center;
+}
+
+#idOrdersTable .sapUiTableCellInner {
+  display: flex;
+  align-items: center;
+  color: #6a6d70;     /* SAP standard gray */
+  font-size: 0.75rem; /* small, readable */
+}
+
+.blackIconBtn .sapMBtnIcon {
+    color: #000000 !important;
+}
+
+
+.megaAction .sapMBtnContent {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+
+
+.huPaper {
+  border: 2px dotted #000;
+  padding: 14px;
+  width: 320px;
+  background: #fff;
+}
+
+.lblBold { font-weight: bold; }
+.lblCenter { text-align: center; margin: 10px 0; }
+.lblHuge { font-size: 80px; font-weight: bold; text-align: center; }
+.tblHeader { justify-content: space-between; border-top:1px solid #000; border-bottom:1px solid #000; padding:6px 0; }
+
+
+
+.serialNumberStatusBarHeight {
+    min-height: 25px !important;
+}
+
+.serialNumberStatusBarHeight > div {
+    height: 25px !important;
+}
+
+.serialNumberStatusBarHeight > div > div {
+    height: 25px !important;
+}
+
+.serialNumberStatusBarHeight .sapMPIBar {
+    height: 25px !important;
+}
+
+.serialNumberStatusBarHeight .sapMPIText {
+    height: 25px !important;
+    line-height: 25px !important;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+
+/* Kill animation dots */
+.serialNumberStatusBarHeight .sapMPIAnimation,
+.serialNumberStatusBarHeight .sapMPIAnimationDot,
+.serialNumberStatusBarHeight .sapMPIAnimationDot1,
+.serialNumberStatusBarHeight .sapMPIAnimationDot2,
+.serialNumberStatusBarHeight .sapMPIAnimationDot3 {
+    display: none !important;
+}
+
+/* Kill state icons */
+.serialNumberStatusBarHeight .sapMPIIcon {
+    display: none !important;
+}
+
+/* Flatten internal overlays */
+.serialNumberStatusBarHeight .sapMPIOverlay {
+    display: none !important;
+}
+
+/* Make bar clean and solid */
+.serialNumberStatusBarHeight .sapMPIBar {
+    box-shadow: none !important;
+    background-image: none !important;
+}
+
+.remainingTextStyle {
+    color: #DC3545 !important;
+}
+
+.scannedTextStyle {
+    color: green !important;
+}
+
+.sapMPIBarPositive::before {
+    content: none !important;
+}
+
+.sapMPIBar::before {
+    font-family: var(--sapContent_IconFontFamily);
+    font-size: 1rem;
+    margin-left: 0.25rem;
+    position: absolute;
+    right: 0;
+}
+
+
+.serialNumberConfirmBtnStyle .sapMBtnInner {
+    width: 100px;
+    height: 30px;
+    background-color: green !important;              /* confident green */
+    border: none;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff !important;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+/* Hover = inversion psychology */
+.serialNumberConfirmBtnStyle .sapMBtnInner:hover {
+    background-color: #ffffff !important;
+    color: green !important;
+    border: 2px green !important;
+}
+
+.serialNumberClearBtnStyle .sapMBtnInner {
+    width: 100px;
+    height: 30px;
+    background-color: red !important;              /* confident green */
+    border: none;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff !important;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+/* Hover = inversion psychology */
+.serialNumberClearBtnStyle .sapMBtnInner:hover {
+    background-color: #ffffff !important;
+    color: red !important;
+    border: 2px red !important;
+}
+
+
+.sapMPIBarRemaining::before,
+.sapMPIBarRemaining::after {
+    display: none !important;
+}
+

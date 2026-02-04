@@ -4,15 +4,13 @@
     xmlns:ui="sap.ui.table" >
 
     <Dialog id="_IDGenEditSerialNumberDialog"
-            class="sapUiSmallMargin"
+            class="sapUiContentPadding"
             showHeader="false"
             contentWidth="70%"
-            contentHeight="70%"
-            verticalScrolling="false"
-            horizontalScrolling="false" >
+            contentHeight="70%" >
         
             <Toolbar>
-                <Title text="Serial Numbers" class="sapUiSmallMarginBegin" />
+                <Title text="Serial Numbers" />
                 <ToolbarSpacer />
                 <Button icon="sap-icon://decline" press="onCloseEditSerialDialog" class="Decline_Btn ship-now-decline_btn" type="Transparent" />
             </Toolbar>
@@ -21,50 +19,45 @@
             <HBox width="100%" >
                 <VBox class="sapUiSmallMargin" width="20%" >
                     <Label text="SAP Delivery Number" />
-                    <Input value="{eshipjetModel>/commonValues/sapDeliveryNumber}" class="sapUiSmallMarginBottom create-ship-req_input" />
+                    <Input value="{eshipjetModel>/commonValues/sapDeliveryNumber}" editable="false" class="sapUiSmallMarginBottom create-ship-req_input" />
                 </VBox>
-                <VBox class="sapUiSmallMargin" width="80%" >
-                    <HBox class="sapUiSmallMargin" width="80%" >
+                <VBox width="80%" >
+                    <HBox width="80%" class="sapUiTinyMarginTop" >
                         <core:Icon src="sap-icon://menu" class="sapUiTinyMarginEnd" ></core:Icon>
                         <Text text=" Serial Scan Status" ></Text>
                     </HBox>
-                    <HBox class="sapUiSmallMargin" width="80%" justifyContent="SpaceBetween" >
+                    <HBox width="80%" justifyContent="SpaceBetween" class="sapUiTinyMarginTop" >
                         <FlexBox >
                             <core:Icon src="sap-icon://multiselect-all" class="sapUiTinyMarginEnd" ></core:Icon>
-                            <Text text="Total SNs: " ></Text>
-                            <Text text="{eshipjetModel>/serialStatus/total}" />
+                            <Text text="Total SNs: {eshipjetModel>/serialNumbersInputLength}" ></Text>
                         </FlexBox>
                         
                         <FlexBox >
-                            <core:Icon src="sap-icon://message-success" class="sapUiTinyMarginEnd serialgreen" ></core:Icon>
-                            <Text text="Scanned:"  class="serialgreen"></Text>
-                            <Text text="{eshipjetModel>/serialStatus/entered}" />
+                            <core:Icon src="sap-icon://message-success" class="sapUiTinyMarginEnd scannedTextStyle" ></core:Icon>
+                            <Text text="Scanned: {eshipjetModel>/scannedInputsCount}" class="scannedTextStyle" ></Text>
                         </FlexBox>
 
                         <FlexBox >
-                            <core:Icon src="sap-icon://sys-cancel" class="sapUiTinyMarginEnd serialred" ></core:Icon>
-                            <Text text="Remaining:" class="serialred" ></Text>
-                            <Text text="{eshipjetModel>/serialStatus/remaining}" />
+                            <core:Icon src="sap-icon://sys-cancel" class="sapUiTinyMarginEnd remainingTextStyle" ></core:Icon>
+                            <Text text="Remaining: {eshipjetModel>/emptyInputsCount}" class="remainingTextStyle" ></Text>
                         </FlexBox>
                     </HBox>
-                </VBox>
-              
 
+                    <ProgressIndicator
+                        id="pi-with-animation"
+                        class="serialNumberStatusBarHeight"
+                        state="Success"
+                        displayOnly="true"
+                        percentValue="{eshipjetModel>/scannedStatus}"
+                        showValue="true" />
+                </VBox>
             </HBox>
-                   
-                   <ProgressIndicator
-    percentValue="{eshipjetModel>/serialStatus/percentage}"
-    displayValue="{eshipjetModel>/serialStatus/displayText}"
-    width="70%"
-    height="10%"
-    showValue="true"
-    state="Success"
-    class="serialProgressBar" />   
+                    
                     
 
-<HBox width="100%" justifyContent="SpaceBetween" >
+<HBox width="100%" class="sapUiSmallMarginTop" >
 
-<FlexBox width="48%" >
+<FlexBox width="50%" class="sapUiLargeMarginBegin shipnowcustomSimpleFormShadow" >
             <!-- <Table
                 inset="false"
                 items="{}" 
@@ -97,38 +90,42 @@
             </Table> -->
 
             <ui:TreeTable
-                    rows="{path:'eshipjetModel>/serialNumbersArray'}"
+                    rows="{path:'eshipjetModel>/serialDialogObject/nodes', parameters:{ arrayNames:['nodes'] }}"
                     selectionMode="None"
                     enableSelectAll="false"
-                    ariaLabelledBy="title"
-                    class="sapUiTinyMargin" >
+                    ariaLabelledBy="title" >
                 <ui:extension>
                     <OverflowToolbar style="Clear">
                         <Title id="title" text="Enter/Scan Serial Numbers" level="H2"/>
                     </OverflowToolbar>
                 </ui:extension>
                 <ui:columns>
-                    <ui:Column width="6rem">
+                    <ui:Column width="10rem">
                         <Label text="No."/>
                         <ui:template>
-                            <Text text="{eshipjetModel>rowCount}" wrapping="false" />
+                            <Text text="{eshipjetModel>id}" wrapping="false" />
                         </ui:template>
                     </ui:Column>
                     <ui:Column width="auto">
                         <Label text="Serial Numbers"/>
                         <ui:template>
-                            <Input text="{eshipjetModel>serialNumber}" wrapping="false" />
+                            <!-- <Input
+                                value="{eshipjetModel>serialNumber}"
+                                change="onSerialNumberEntered"
+                                editable="{= !${eshipjetModel>serialNumber} || ${eshipjetModel>serialNumber}.length === 0 }"/> -->
+                            <Input
+                                value="{eshipjetModel>serialNumber}"
+                                liveChange="onSerialNumberEntered"
+                                editable="{eshipjetModel>inputEditFlag}"/>
                         </ui:template>
                     </ui:Column>
                 </ui:columns>
             </ui:TreeTable>
     </FlexBox>
 
-    <FlexBox width="48%" >
+    <FlexBox width="50%" class="shipnowcustomSimpleFormShadow" >
             <Table
-                inset="false"
-                items="{}"
-                class="sapUiTinyMargin" >
+                inset="false" >
                 <headerToolbar>
                     <OverflowToolbar>
                         <content>
@@ -171,10 +168,10 @@
 
         <footer>
             <OverflowToolbar class="sapMPopoverFooter1">
-                <Button text="Cancel" press="onCloseEditSerialDialog" class="create-ship-req-footer1"  />
-                 <Button text="Clear All" press="onCloseEditSerialDialog" class="create-ship-req-footer1" />
-                 <ToolbarSpacer ></ToolbarSpacer>
-                 <Button text="Confirm" press="onCloseEditSerialDialog" class="create-ship-req-footer"  />
+                <Button text="Cancel" press="onCloseEditSerialDialog" class="serialNumberClearBtnStyle sapUiTinyMargin" />
+                <Button text="Clear All" press="onClearEditSerialDialog" class="serialNumberClearBtnStyle" />
+                <ToolbarSpacer ></ToolbarSpacer>
+                    <Button text="Confirm" press="onCloseEditSerialDialog" class="serialNumberConfirmBtnStyle" />
             </OverflowToolbar>
         </footer>
 

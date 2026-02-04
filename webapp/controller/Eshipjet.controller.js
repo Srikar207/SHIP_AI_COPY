@@ -10425,7 +10425,7 @@ getOrdersHistoryShipments: function () {
             eshipjetModel.setProperty("/commonValues/routingGuidFooter", false);
 
             eshipjetModel.setProperty("/showDarkThemeSwitch", false);
-            var oCurrObj = oSrc.getBindingContext().getObject();
+            var oCurrObj = oSrc.getBindingContext("eshipjetModel").getObject();
             var oToolPage = this.byId("toolPage");
             var oPageContainer = this.byId("pageContainer");
             oToolPage.setSideExpanded(false);
@@ -23427,12 +23427,21 @@ packParcelProducts: function () {
                 oController.onCloseBusyDialog();
                 return;
             }
+              var aRows = oTable
+                .getBinding("rows")
+                .getContexts()
+                .map(c => c.getObject())
+                .filter(oRow => oRow.DeliveryDocumentItem && oRow.DeliveryDocumentItem !== "");
             if (aValidRows.length === 1) {
                 const oRow = aValidRows[0];
 
                 if (!oRow.partialQty || parseFloat(oRow.partialQty) <= 0) {
                     sap.m.MessageBox.error("Please enter Partial Qty for the item.");
                     oController.onCloseBusyDialog();
+                    return;
+                }else if (!aRows[0].partialQty || parseFloat(aRows[0].partialQty) > 0 && aRows[0].isSerialSelected === true) {
+                    oController.onCloseBusyDialog();
+                    oController.onOpenSerialNumberDialog(aRows);
                     return;
                 }
 
@@ -25332,7 +25341,21 @@ readProductPlant: function () {
         },
 
 
-          onOpenSerialNumberDialog:function(qty){
+onOrdersToggleExpand: function () {
+            var eshipjetModel = this.getOwnerComponent().getModel("eshipjetModel");
+            var bExpanded = eshipjetModel.getProperty("/isExpandOrdersToolBar");
+            const oTable = this.byId("idOrdersTable");
+            if( bExpanded === true ){
+                oTable.setVisibleRowCount(15);
+            }else if( bExpanded === false ){
+                oTable.setVisibleRowCount(12);
+            }
+            eshipjetModel.setProperty("/isExpandOrdersToolBar", !bExpanded);
+        },
+
+
+
+        onOpenSerialNumberDialog:function(aRows){
             var oView = this.getView();
             if (!this.byId("_IDGenEditSerialNumberDialog")) {
                 Fragment.load({
@@ -25347,16 +25370,111 @@ readProductPlant: function () {
                 this.byId("_IDGenEditSerialNumberDialog").open();
             }
 
-            var serialNumbersArray = [];
-            for(var i=0; i<qty; i++){
-                serialNumbersArray.push({"rowCount": i+1, "serialNumber": ""});
+            const qty = Number(aRows[0].partialQty);
+            const serialDialogObject = {
+                nodes: [{
+                    id: aRows[0].DeliveryDocumentItem,
+                    serialNumber: aRows[0].Material,
+                    inputEditFlag: false,
+                    nodes: Array.from({ length: qty }, (_, i) => ({
+                        id: i + 1,
+                        serialNumber: "",
+                        inputEditFlag: true,
+                    }))
+                }]
             };
-            eshipjetModel.setProperty("/serialNumbersArray", serialNumbersArray);
+
+            var inputsArray = serialDialogObject.nodes[0].nodes;
+            eshipjetModel.setProperty("/serialDialogObject", serialDialogObject);
+            eshipjetModel.setProperty("/serialNumbersInputLength", inputsArray.length);
+            var devidedvalue = 100/inputsArray.length;
+            eshipjetModel.setProperty("/devidedvalue", devidedvalue);
+            var emptyInputsCount = 0;
+            var scannedInputsCount = 0;
+            for(var i=0; i<inputsArray.length; i++){
+                if(inputsArray[i].serialNumber === ""){
+                    emptyInputsCount += 1;
+                }else{
+                    scannedInputsCount += 1;
+                }
+            }
+            eshipjetModel.setProperty("/emptyInputsCount", emptyInputsCount);
+            eshipjetModel.setProperty("/scannedInputsCount", scannedInputsCount);
+            var scannedStatus = scannedInputsCount * devidedvalue;
+            eshipjetModel.setProperty("/scannedStatus", scannedStatus);
         },
 
         onCloseEditSerialDialog: function () {
             this.byId("_IDGenEditSerialNumberDialog").close();
         },
+
+        onClearEditSerialDialog:function(){
+            var serialDialogObject = eshipjetModel.getProperty("/serialDialogObject");
+            var inputsArray = serialDialogObject.nodes[0].nodes;
+            for(var i=0; i<inputsArray.length; i++){
+                inputsArray[i].serialNumber = ""
+            }
+            eshipjetModel.setProperty("/emptyInputsCount", inputsArray.length);
+            eshipjetModel.setProperty("/scannedInputsCount", 0);
+            eshipjetModel.setProperty("/scannedStatus", 0);
+        },
+
+        onSerialNumberEntered:function(oEvent){
+            var oInput = oEvent.getSource();
+            var sValue = oEvent.getParameter("value") || "";
+
+            // Allow only A–Z, a–z, 0–9
+            var cleanValue = sValue.replace(/[^a-zA-Z0-9]/g, "");
+
+            if (cleanValue !== sValue) {
+                oInput.setValue(cleanValue);
+            }
+
+            var currentObj = oEvent.getSource().getBindingContext("eshipjetModel").getObject();
+            var serialDialogObject = eshipjetModel.getProperty("/serialDialogObject");
+            var inputsArray = serialDialogObject.nodes[0].nodes;
+            var emptyInputsCount = 0;
+            var scannedInputsCount = 0;
+            for(var i=0; i<inputsArray.length; i++){
+                if(currentObj.id === inputsArray[i].id && oEvent.mParameters.value !== ""){
+                    scannedInputsCount += 1;
+                }else if(currentObj.id !== inputsArray[i].id && inputsArray[i].serialNumber !== ""){
+                    scannedInputsCount += 1;
+                }else{
+                    emptyInputsCount += 1;
+                }
+            }
+            eshipjetModel.setProperty("/emptyInputsCount", emptyInputsCount);
+            eshipjetModel.setProperty("/scannedInputsCount", scannedInputsCount);
+            var devidedvalue = eshipjetModel.getProperty("/devidedvalue", devidedvalue);
+            var scannedStatus = scannedInputsCount * devidedvalue;
+            eshipjetModel.setProperty("/scannedStatus", scannedStatus);
+        },
+        //   onOpenSerialNumberDialog:function(qty){
+        //     var oView = this.getView();
+        //     if (!this.byId("_IDGenEditSerialNumberDialog")) {
+        //         Fragment.load({
+        //             id: oView.getId(),
+        //             name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.EditSerialNumberDialog",
+        //             controller: this
+        //         }).then(function (oSerialNumberDialog) {
+        //             oView.addDependent(oSerialNumberDialog);
+        //             oSerialNumberDialog.open();
+        //         });
+        //     } else {
+        //         this.byId("_IDGenEditSerialNumberDialog").open();
+        //     }
+
+        //     var serialNumbersArray = [];
+        //     for(var i=0; i<qty; i++){
+        //         serialNumbersArray.push({"rowCount": i+1, "serialNumber": ""});
+        //     };
+        //     eshipjetModel.setProperty("/serialNumbersArray", serialNumbersArray);
+        // },
+
+        // onCloseEditSerialDialog: function () {
+        //     this.byId("_IDGenEditSerialNumberDialog").close();
+        // },
 
         
     });
