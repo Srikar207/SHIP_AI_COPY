@@ -23341,6 +23341,10 @@ packParcelProducts: function () {
                     sap.m.MessageBox.error("Please enter Partial Qty for the item.");
                     oController.onCloseBusyDialog();
                     return;
+                }else if (!aRows[0].partialQty || parseFloat(aRows[0].partialQty) > 0 && aRows[0].isSerialSelected === true) {
+                    oController.onCloseBusyDialog();
+                    oController.onOpenSerialNumberDialog(aRows);
+                    return;
                 }
 
                 aSelectedIndices = [0];
