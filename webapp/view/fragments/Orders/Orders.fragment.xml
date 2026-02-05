@@ -252,7 +252,7 @@
 									<Label text="Ship Date-Time" />
 									<ui:template>
 										<!-- <Text text="{path: 'eshipjetModel>LastChangedOn', formatter: '.formatter.formatCustomDateTimeForOrders'}" wrapping="false" /> -->
-										<Text text="{path: 'eshipjetModel>LastChangedOn' }" wrapping="false" />
+										<Text text="{path: 'eshipjetModel>LastChangedDate' }" wrapping="false" />
 									</ui:template>
 								</ui:Column>
 

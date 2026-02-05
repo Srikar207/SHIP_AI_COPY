@@ -18,9 +18,9 @@
 			<cells>	
 			  	<Text text="{eshipjetModel>Vbeln}" class="customObjectStatus"  width="auto"  />
 				<Text text="{eshipjetModel>Plant}"  width="3rem" class="firebrickColor" ></Text>
-				<Text text="{eshipjetModel>LastChangedBy}"  width="auto" class="namecolorrc" ></Text>
+				<Text text="{eshipjetModel>LastChangedUser}"  width="auto" class="namecolorrc" ></Text>
                 <!-- <Text text="{ path: 'eshipjetModel>LastChangedOn', formatter: '.formatter.formatCustomDateTimeForRecentShipments' }"  width="auto" /> -->
-				<Text text="{ path: 'eshipjetModel>LastChangedOn'}"  width="auto" />
+				<Text text="{ path: 'eshipjetModel>LastChangedDate'}"  width="auto" />
                 <!-- <Text text="{eshipjetModel>Company}"  wrapping="false" />	 -->
                 <Text text="{eshipjetModel>Carriertype}"  width="auto" class="carriercolortext" />
 			</cells>
