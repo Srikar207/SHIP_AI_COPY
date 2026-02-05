@@ -90,7 +90,14 @@
             </Table> -->
 
             <ui:TreeTable
-                    rows="{path:'eshipjetModel>/serialDialogObject/nodes', parameters:{ arrayNames:['nodes'] }}"
+                    rows="{
+                        path:'eshipjetModel>/serialDialogObject/nodes',
+                        parameters:{
+                            arrayNames:['nodes'],
+                            numberOfExpandedLevels: 99
+                        }
+                    }"
+                    id="idSerialDialogNodes"
                     selectionMode="None"
                     enableSelectAll="false"
                     ariaLabelledBy="title" >
@@ -171,7 +178,7 @@
                 <Button text="Cancel" press="onCloseEditSerialDialog" class="serialNumberClearBtnStyle sapUiTinyMargin" />
                 <Button text="Clear All" press="onClearEditSerialDialog" class="serialNumberClearBtnStyle" />
                 <ToolbarSpacer ></ToolbarSpacer>
-                    <Button text="Confirm" press="onCloseEditSerialDialog" class="serialNumberConfirmBtnStyle" />
+                    <Button text="Confirm" press="onPackItemsWithOutEWM" class="serialNumberConfirmBtnStyle" />
             </OverflowToolbar>
         </footer>
 
