@@ -3187,8 +3187,8 @@ formatNumberForSAP: function (val) {
                         ShippingDocumentDescription: doc.docType || "",
                         ShippingDocumentType: doc.docType || "",
 
-                        LastChangedOn: new Date().toISOString().split("T")[0],
-                        LastChangedBy: eshipjetModel.getProperty("/userName") || "SYSTEM"
+                        LastChangedDate: new Date().toISOString().split("T")[0],
+                        LastChangedUser: eshipjetModel.getProperty("/userName") || "SYSTEM"
                     };
 
                     aBulkItems.push(oItem);
