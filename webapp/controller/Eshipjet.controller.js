@@ -18733,11 +18733,11 @@ getOrdersHistoryShipments: function () {
                                 sETag
                             )
                             .then(function () {
-                                // eshipjetModel.setProperty("/PGIStatus", "S");
-                                // eshipjetModel.setProperty("/PGIMessage", "PGI Successful for Delivery");
+                                eshipjetModel.setProperty("/PGIStatus", "S");
+                                eshipjetModel.setProperty("/PGIMessage", "PGI Successful for Delivery");
                                 return oController._logPGIResult(
-                                    eshipjetModel.getProperty("/PGIStatus"),
-                                    eshipjetModel.getProperty("/PGIMessage")
+                                    "S",
+                                    "PGI Successful for Delivery " + sDeliveryNo
                                 );
                             }).then(function () {
                                 return oController.ApiOutboundDeliverySrvData();
@@ -18776,25 +18776,8 @@ _triggerPGIWithOData: function (sDeliveryNo, token, etag) {
                 "If-Match": etag,
                 "X-Csrf-Token": token
             },
-            success: function(oData){
-                eshipjetModel.setProperty("/PGIStatus", "S");
-                eshipjetModel.setProperty("/PGIMessage", "PGI Successful for Delivery "+sDeliveryNo);
-                resolve();
-            },
-            error: function (oError) {
-                let sMessage = "PGI failed";
-
-                try {
-                    const oErrObj = JSON.parse(oError.responseText);
-                    sMessage = oErrObj.error?.message?.value || sMessage;
-                } catch (e) {}
-
-                // sap.m.MessageBox.error(sMessage);
-                // oController.onShipNowNewPress();
-                eshipjetModel.setProperty("/PGIStatus", "E");
-                eshipjetModel.setProperty("/PGIMessage", sMessage);
-                resolve();
-            }
+            success: resolve,
+            error: reject
         });
     });
 },
@@ -21777,6 +21760,79 @@ readPGIErrorLog: function () {
             });
         },
 
+  _readManifestBulkForDelivery: function () {
+
+    const ManifestModel = this.getOwnerComponent().getModel("ManifestModel");
+    const eshipjetModel = this.getOwnerComponent().getModel("eshipjetModel");
+
+    const vbeln = eshipjetModel
+        .getProperty("/commonValues/sapDeliveryNumber")
+        .padStart(10, "0");
+
+    return new Promise((resolve, reject) => {
+        ManifestModel.read("/Manifest_BulkSet", {
+            filters: [
+                new sap.ui.model.Filter("Vbeln", sap.ui.model.FilterOperator.EQ, vbeln)
+            ],
+            success: oData => resolve(oData.results || []),
+            error: reject
+        });
+    });
+},
+updateManifestOnVoid: async function () {
+
+    const ManifestModel = this.getOwnerComponent().getModel("ManifestModel");
+    const eshipjetModel = this.getOwnerComponent().getModel("eshipjetModel");
+
+    const user = eshipjetModel.getProperty("/userName") || "SYSTEM";
+
+    const oDate = new Date();
+    const sDate = oDate.toISOString().split("T")[0];
+    const sTime = oDate.toTimeString().split(" ")[0];
+
+    this.onOpenBusyDialog();
+
+    try {
+        const aRows = await this._readManifestBulkForDelivery();
+
+        if (!aRows.length) {
+            throw new Error("No Manifest records found");
+        }
+
+        aRows.forEach(row => {
+
+            const sPath =
+                `/Manifest_BulkSet(GUID='${row.GUID}',Vbeln='${row.Vbeln}')`;
+
+            ManifestModel.update(
+                sPath,
+                {
+                    ShipStatus: "Voided",
+                    eShipjetPickStatus: "CANC",
+
+                    CancelDate: sDate,
+                    CancelTime: sTime,
+
+                    LastChangedDate: sDate,
+                    LastChangedTime: sTime,
+                    LastChangedUser: user
+                },
+                { merge: true }
+            );
+        });
+
+        sap.m.MessageToast.show("Manifest void updated successfully");
+
+    } catch (e) {
+        sap.m.MessageBox.error("Manifest void update failed");
+    }
+
+    this.onCloseBusyDialog();
+},
+
+
+
+
 
         onShipNowVoidPress: async function () {
             const m = this.getOwnerComponent().getModel("eshipjetModel");
@@ -21813,6 +21869,10 @@ readPGIErrorLog: function () {
                 contentType: "application/json",
                 data: JSON.stringify(payload),
                 success: (oData) => {
+
+                    this.updateManifestOnVoid();
+                    this.onCancelUpdateToManifestHeaderSet("CANC");
+                    this.onCloseBusyDialog();
                     oController.onCancelUpdateToManifestHeaderSet("CANC");
                     oController.onCloseBusyDialog();
                     // if(oData.status === "Success"){
@@ -23247,67 +23307,9 @@ packParcelProducts: function () {
 
 
         onHUItemsCreatePress: function () {
-            var oTable = this.byId("idShipNowPackTable");
-            var aSelectedIndices = oTable.getSelectedIndices();
-            var aRows = oTable.getBinding("rows").getContexts().map(c => c.getObject());
-            var CreateHUSrvModel = this.getOwnerComponent().getModel("CreateHUSrvModel");
-            var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData");
-            var selectedPackageMat = eshipjetModel.getProperty("/selectedPackageMat");
-
-            const aValidRows = aRows.filter(row =>
-                row && row.ActualDeliveryQuantity // or any real business key
-            );
-
-            if(selectedPackageMat === ""){
-                sap.m.MessageBox.error("Please Select Package Material.");
-                oController.onCloseBusyDialog();
-                return;
-            }
-            if (aValidRows.length === 1) {
-                const oRow = aValidRows[0];
-
-                if (!oRow.partialQty || parseFloat(oRow.partialQty) <= 0) {
-                    sap.m.MessageBox.error("Please enter Partial Qty for the item.");
-                    oController.onCloseBusyDialog();
-                    return;
-                }
-
-                aSelectedIndices = [0];
-            } else {
-                if (aSelectedIndices.length === 0) {
-                    sap.m.MessageBox.error("Please select at least one row.");
-                    oController.onCloseBusyDialog();
-                    return;
-                }
-
-                for (let i of aSelectedIndices) {
-                    const oRow = aValidRows[i];
-                    if (!oRow?.partialQty || parseFloat(oRow.partialQty) <= 0) {
-                        sap.m.MessageBox.error("Please enter Partial Qty for all selected items.");
-                        oController.onCloseBusyDialog();
-                        return;
-                    }
-                }
-            }
-            if(eshipjetModel.getProperty("/commonValues/heightOfDimensions") === "" || eshipjetModel.getProperty("/commonValues/widthOfDimensions") === "" || eshipjetModel.getProperty("/commonValues/lengthOfDimensions") === ""){
-                sap.m.MessageBox.error("Please Enter Dimentions.");
-                oController.onCloseBusyDialog();
-                return;
-            }
             var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData");
             if(GetDeliveryData.Warehouse === ""){
-                var oTable = this.byId("idShipNowPackTable");
-                var aRows = oTable.getBinding("rows").getContexts().map(c => c.getObject());
-                const aValidRows = aRows.filter(row =>
-                    row && row.ActualDeliveryQuantity
-                );
-                if (!aValidRows[0].partialQty || parseFloat(aValidRows[0].partialQty) > 0 && aValidRows[0].NumberOfSerialNumbers > 0) {
-                    oController.onCloseBusyDialog();
-                    oController.onOpenSerialNumberDialog(aValidRows);
-                    return;
-                }else{
-                    oController.onPackItemsWithOutEWM();
-                }
+                oController.onPackItemsWithOutEWM();
             }else{
                 oController.onPackItemsWithEWM();
             }
@@ -23416,6 +23418,10 @@ packParcelProducts: function () {
                     sap.m.MessageBox.error("Please enter Partial Qty for the item.");
                     oController.onCloseBusyDialog();
                     return;
+                }else if (!aRows[0].partialQty || parseFloat(aRows[0].partialQty) > 0 && aRows[0].isSerialSelected === true) {
+                    oController.onCloseBusyDialog();
+                    oController.onOpenSerialNumberDialog(aRows);
+                    return;
                 }
 
                 aSelectedIndices = [0];
@@ -23461,29 +23467,6 @@ packParcelProducts: function () {
                 HuItems: aHUItems
             };
 
-            if (!aValidRows[0].partialQty || parseFloat(aValidRows[0].partialQty) > 0 && aValidRows[0].NumberOfSerialNumbers > 0) {
-                var aNodes = eshipjetModel.getProperty("/serialDialogObject/nodes");
-                var aSerialData = [];
-                aNodes.forEach(function (oParent) {
-                    var sMatnr = oParent.serialNumber; // TG11
-                    (oParent.nodes || []).forEach(function (oChild) {
-                        aSerialData.push({
-                            Vbeln: GetDeliveryData.DeliveryDocument,
-                            Posnr: oParent.id,
-                            Matnr: sMatnr,
-                            Sernr: oChild.serialNumber
-                        });
-                    });
-                });
-
-                var oPayload = {
-                    Vbeln: GetDeliveryData.DeliveryDocument,
-                    Humatnr: selectedPackageMat,
-                    HuItems: aHUItems,
-                    SerialData: aSerialData
-                };
-            }
-
             CreateHUSrvModel.refreshSecurityToken(function () {
                 CreateHUSrvModel.create("/HuDataSet", oPayload, {
                     success: function (oData) {
@@ -23491,12 +23474,7 @@ packParcelProducts: function () {
                         eshipjetModel.setProperty("/commonValues/widthOfDimensions", "");
                         eshipjetModel.setProperty("/commonValues/heightOfDimensions", "");
                         eshipjetModel.setProperty("/selectedPackageMat", "");
-                        var oDialog = oController.byId("_IDGenEditSerialNumberDialog");
-                        if (oDialog && oDialog.isOpen && oDialog.isOpen()) {
-                            oDialog.close();
-                        }
                         oController.readHUData();
-                        oController.readProductPlant();
                     }.bind(this),
                     error: function (oError) {
                         eshipjetModel.setProperty("/commonValues/lengthOfDimensions", "");
@@ -23541,6 +23519,10 @@ packParcelProducts: function () {
                 if (!oRow.partialQty || parseFloat(oRow.partialQty) <= 0) {
                     sap.m.MessageBox.error("Please enter Partial Qty for the item.");
                     oController.onCloseBusyDialog();
+                    return;
+                }else if (!aRows[0].partialQty || parseFloat(aRows[0].partialQty) > 0 && aRows[0].isSerialSelected === true) {
+                    oController.onCloseBusyDialog();
+                    oController.onOpenSerialNumberDialog(aRows);
                     return;
                 }
 
@@ -25030,7 +25012,7 @@ readProductPlant: function () {
 
 
 
-onGetShipFromData: function (sPlant) {
+  onGetShipFromData: function (sPlant) {
     var oController = this;
 
     var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
@@ -25107,7 +25089,7 @@ onGetShipFromData: function (sPlant) {
             return new Promise(function (resolve, reject) {
                 GetDeliveryDataModel.read("/A_OutbDeliveryHeader('" + sDeveliveryNumber + "')", {
                     urlParameters: {
-                        "$expand": "to_DeliveryDocumentItem,to_HandlingUnitHeaderDelivery,to_HandlingUnitHeaderDelivery/to_HandlingUnitItemDelivery,to_DeliveryDocumentItem/to_HandlingUnitItemDelivery,to_DeliveryDocumentItem/to_SerialDeliveryItem"
+                        "$expand": "to_DeliveryDocumentItem,to_HandlingUnitHeaderDelivery,to_HandlingUnitHeaderDelivery/to_HandlingUnitItemDelivery,to_DeliveryDocumentItem/to_HandlingUnitItemDelivery"
                     },
                     success: function (oData) {
                         const huData = oData.to_HandlingUnitHeaderDelivery.results;
