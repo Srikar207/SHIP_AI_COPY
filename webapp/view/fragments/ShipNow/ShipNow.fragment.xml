@@ -1041,7 +1041,7 @@
 										</HBox>
 										<ui:template>
 											<HBox justifyContent="Center" alignItems="Center">
-												<CheckBox selected="{eshipjetModel>isSerialSelected}" enabled="false" select="onCheckBoxSelect"/>
+												<CheckBox selected="{eshipjetModel>isSerialSelected}" editable="false" class="greenBigCheckbox" select="onCheckBoxSelect"/>
 												<!-- <CheckBox selected="{= !!${eshipjetModel>NumberOfSerialNumbers} }" enabled="false" select="onCheckBoxSelect"/> -->
 											</HBox>
 										</ui:template>
@@ -1132,9 +1132,9 @@
 </FlexBox>
 
 									<FlexBox visible="true" >
-										<Input value="{eshipjetModel>/commonValues/lengthOfDimensions}" placeholder="L" class="create-ship-req_input sapUiTinyMarginBegin" width="3rem" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" ></Input>
-										<Input value="{eshipjetModel>/commonValues/widthOfDimensions}" placeholder="W" class="create-ship-req_input sapUiTinyMarginBegin" width="3rem" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" ></Input>
-										<Input value="{eshipjetModel>/commonValues/heightOfDimensions}" placeholder="H" class="create-ship-req_input sapUiTinyMarginBegin" width="3rem" enabled="{eshipjetModel>/commonValues/shipNowBtnStatus}" ></Input>
+										<Input value="{eshipjetModel>/commonValues/lengthOfDimensions}" placeholder="L" class="create-ship-req_input sapUiTinyMarginBegin" width="3rem" editable="{eshipjetModel>/commonValues/shipNowBtnStatus}" ></Input>
+										<Input value="{eshipjetModel>/commonValues/widthOfDimensions}" placeholder="W" class="create-ship-req_input sapUiTinyMarginBegin" width="3rem" editable="{eshipjetModel>/commonValues/shipNowBtnStatus}" ></Input>
+										<Input value="{eshipjetModel>/commonValues/heightOfDimensions}" placeholder="H" class="create-ship-req_input sapUiTinyMarginBegin" width="3rem" editable="{eshipjetModel>/commonValues/shipNowBtnStatus}" ></Input>
 									</FlexBox>
 								</HBox>
 

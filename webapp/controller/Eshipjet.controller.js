@@ -18711,7 +18711,7 @@ getOrdersHistoryShipments: function () {
             }
         },
 
-            onPostGoodsIssueWithoutEWM:function(sDeliveryNo){
+              onPostGoodsIssueWithoutEWM:function(sDeliveryNo){
                 var oController = this;
                 oController.onOpenBusyDialog();
                 
@@ -18733,11 +18733,11 @@ getOrdersHistoryShipments: function () {
                                 sETag
                             )
                             .then(function () {
-                                eshipjetModel.setProperty("/PGIStatus", "S");
-                                eshipjetModel.setProperty("/PGIMessage", "PGI Successful for Delivery");
+                                // eshipjetModel.setProperty("/PGIStatus", "S");
+                                // eshipjetModel.setProperty("/PGIMessage", "PGI Successful for Delivery");
                                 return oController._logPGIResult(
-                                    "S",
-                                    "PGI Successful for Delivery " + sDeliveryNo
+                                    eshipjetModel.getProperty("/PGIStatus"),
+                                    eshipjetModel.getProperty("/PGIMessage")
                                 );
                             }).then(function () {
                                 return oController.ApiOutboundDeliverySrvData();
@@ -18757,8 +18757,6 @@ getOrdersHistoryShipments: function () {
                 });
             },
 
-
-
 /* ============================================================
    TRIGGER PGI FUNCTION IMPORT
    ============================================================ */
@@ -18776,8 +18774,25 @@ _triggerPGIWithOData: function (sDeliveryNo, token, etag) {
                 "If-Match": etag,
                 "X-Csrf-Token": token
             },
-            success: resolve,
-            error: reject
+            success: function(oData){
+                eshipjetModel.setProperty("/PGIStatus", "S");
+                eshipjetModel.setProperty("/PGIMessage", "PGI Successful for Delivery "+sDeliveryNo);
+                resolve();
+            },
+            error: function (oError) {
+                let sMessage = "PGI failed";
+
+                try {
+                    const oErrObj = JSON.parse(oError.responseText);
+                    sMessage = oErrObj.error?.message?.value || sMessage;
+                } catch (e) {}
+
+                // sap.m.MessageBox.error(sMessage);
+                // oController.onShipNowNewPress();
+                eshipjetModel.setProperty("/PGIStatus", "E");
+                eshipjetModel.setProperty("/PGIMessage", sMessage);
+                resolve();
+            }
         });
     });
 },
@@ -21779,56 +21794,56 @@ readPGIErrorLog: function () {
         });
     });
 },
-updateManifestOnVoid: async function () {
+// updateManifestOnVoid: async function () {
 
-    const ManifestModel = this.getOwnerComponent().getModel("ManifestModel");
-    const eshipjetModel = this.getOwnerComponent().getModel("eshipjetModel");
+//     const ManifestModel = this.getOwnerComponent().getModel("ManifestModel");
+//     const eshipjetModel = this.getOwnerComponent().getModel("eshipjetModel");
 
-    const user = eshipjetModel.getProperty("/userName") || "SYSTEM";
+//     const user = eshipjetModel.getProperty("/userName") || "SYSTEM";
 
-    const oDate = new Date();
-    const sDate = oDate.toISOString().split("T")[0];
-    const sTime = oDate.toTimeString().split(" ")[0];
+//     const oDate = new Date();
+//     const sDate = oDate.toISOString().split("T")[0];
+//     const sTime = oDate.toTimeString().split(" ")[0];
 
-    this.onOpenBusyDialog();
+//     this.onOpenBusyDialog();
 
-    try {
-        const aRows = await this._readManifestBulkForDelivery();
+//     try {
+//         const aRows = await this._readManifestBulkForDelivery();
 
-        if (!aRows.length) {
-            throw new Error("No Manifest records found");
-        }
+//         if (!aRows.length) {
+//             throw new Error("No Manifest records found");
+//         }
 
-        aRows.forEach(row => {
+//         aRows.forEach(row => {
 
-            const sPath =
-                `/Manifest_BulkSet(GUID='${row.GUID}',Vbeln='${row.Vbeln}')`;
+//             const sPath =
+//                 `/Manifest_BulkSet(GUID='${row.GUID}',Vbeln='${row.Vbeln}')`;
 
-            ManifestModel.update(
-                sPath,
-                {
-                    ShipStatus: "Voided",
-                    eShipjetPickStatus: "CANC",
+//             ManifestModel.update(
+//                 sPath,
+//                 {
+//                     ShipStatus: "Voided",
+//                     eShipjetPickStatus: "CANC",
 
-                    CancelDate: sDate,
-                    CancelTime: sTime,
+//                     CancelDate: sDate,
+//                     CancelTime: sTime,
 
-                    LastChangedDate: sDate,
-                    LastChangedTime: sTime,
-                    LastChangedUser: user
-                },
-                { merge: true }
-            );
-        });
+//                     LastChangedDate: sDate,
+//                     LastChangedTime: sTime,
+//                     LastChangedUser: user
+//                 },
+//                 { merge: true }
+//             );
+//         });
 
-        sap.m.MessageToast.show("Manifest void updated successfully");
+//         sap.m.MessageToast.show("Manifest void updated successfully");
 
-    } catch (e) {
-        sap.m.MessageBox.error("Manifest void update failed");
-    }
+//     } catch (e) {
+//         sap.m.MessageBox.error("Manifest void update failed");
+//     }
 
-    this.onCloseBusyDialog();
-},
+//     this.onCloseBusyDialog();
+// },
 
 
 
@@ -21869,10 +21884,6 @@ updateManifestOnVoid: async function () {
                 contentType: "application/json",
                 data: JSON.stringify(payload),
                 success: (oData) => {
-
-                    this.updateManifestOnVoid();
-                    this.onCancelUpdateToManifestHeaderSet("CANC");
-                    this.onCloseBusyDialog();
                     oController.onCancelUpdateToManifestHeaderSet("CANC");
                     oController.onCloseBusyDialog();
                     // if(oData.status === "Success"){
@@ -21894,22 +21905,124 @@ updateManifestOnVoid: async function () {
             var ManifestModel = oController.getOwnerComponent().getModel("ManifestModel");
             var oPayload = {
                 "Vbeln": sapDeliveryNumber,
-                "CancTstamp": {
-                    ms : (
-                    (new Date().getHours() * 3600000) +
-                    (new Date().getMinutes() * 60000) +
-                    (new Date().getSeconds() * 1000) +
-                    new Date().getMilliseconds()
-                    ),
-                    __edmType : "Edm.Time"
-                }
+                // "CancTstamp": {
+                //     ms : (
+                //     (new Date().getHours() * 3600000) +
+                //     (new Date().getMinutes() * 60000) +
+                //     (new Date().getSeconds() * 1000) +
+                //     new Date().getMilliseconds()
+                //     ),
+                //     __edmType : "Edm.Time",
+
+                     "Accountnumber": "B24W72",
+                    "BillofLading": "",
+                    "CarrierDesc": "UPS",
+                    "Carriertype": "UPS",
+                    "Count": "001",
+                    "Dimensions": "10X10X10",
+                    "DiscountAmt": "100.99",
+                    "DocName": "https://eshipjet-products-dev.s3.us-east-1.amazonaws.com/80001431_1ZXXXXXXXXXXXXXXXX_PKG1.ZPL",
+                    "eShipjetPGIStatus": "S",
+                    "eShipjetPickStatus": "C",
+                    "FreightAmt": "126.24",
+                    "GUID": "387a2bae-6580-41c6-bbfc-d1974c91a796",
+                    "HandlingUnit": "300001134",
+
+                    "Label": "",
+
+                    "Mastertracking": "1ZXXXXXXXXXXXXXXXX",
+                    "PackingSlip": "https://eshipjet-products-dev.s3.us-east-1.amazonaws.com/1ZXXXXXXXXXXXXXXXX_PL.pdf",
+                    "Paymentcode": "Sender",
+                    "Plant": "1710",
+                    "Posnr": "000000",
+                    "ProductCode": "TG11",
+                    "ProductDescription": "TradGood 11PDRegTrading",
+                    "ProductQuantity": "4.0",
+                    "ProductUnitOfMeasurement": "CV",
+                    "PurchaseOrder": "80001431",
+                    "SalesOrder": "",
+                    "ServiceName": "UPS Ground",
+
+                    "ShipFromAddressLine1": "Deer Creek",
+                    "ShipFromAddressLine2": "3475",
+                    "ShipFromAddressType": "Commercial",
+                    "ShipFromCity": "Palo Alto",
+                    "ShipFromCompany": "Plant 1 US",
+                    "ShipFromContact": "Plant 1 US",
+                    "ShipFromCountry": "US",
+                    "ShipFromEmail": "noreply@sap.com",
+                    "ShipFromPhoneNumber": "(888) 464 2360",
+                    "ShipFromPostalcode": "94304-1355",
+                    "ShipFromState": "CA",
+                    "ShipMethod": "Parcel",
+
+                    "Shipperacct": "B24W72",
+                    "ShippingChargeDescription1": "Additional Handling",
+                    "ShippingCharges1": "50.75",
+                    "ShippingCharges2": "21.91",
+                    "ShippingCharges3": "0.0",
+                    "ShippingCharges4": "0.0",
+                    "ShippingCharges5": "0.0",
+                    "ShippingChargesCurrency2": "USD",
+                    "ShippingChargesCurrency3": "",
+                    "ShippingChargesCurrency4": "",
+                    "ShippingChargesCurrency5": "",
+                    "ShippingChargesDescription2": "Fuel Surcharge",
+                    "ShippingChargesDescription3": "",
+                    "ShippingChargesDescription4": "",
+                    "ShippingChargesDescription5": "",
+                    "ShippingChargesFreightId": "",
+                    "ShippingChargesSapFreightId": "",
+                    "ShippingCurrency1": "USD",
+
+                    "ShippingDocumentDescription": "ZPL",
+                    "ShippingDocumentId": "",
+                    "ShippingDocumentProvider": "UPS",
+                    "ShippingDocumentSapOutputType": "Label",
+                    "ShippingDocumentType": "ZPL",
+
+                    "ShipStatus": "Void",
+
+                    "ShipToAddressLine1": "1 SW Bowerman Dr",
+                    "ShipToAddressLine2": "3475",
+                    "ShipToAddressType": "Residential",
+                    "ShipToCity": "Beaverton",
+                    "ShipToCompany": "Nike, Inc.",
+                    "ShipToContact": "Nike, Inc.",
+                    "ShipToCountry": "US",
+                    "ShipToEmail": "info@google.com",
+                    "ShipToPhoneNumber": "(800) 344-6453",
+                    "ShipToPostalcode": "97005",
+                    "ShipToState": "OR",
+
+                    "Totalpkg": "00001",
+                    "TrackingNumber": "1ZXXXXXXXXXXXXXXXX",
+                    "Vbeln": "80001431",
+                    "MaterialNumber": "",
+
+                    "CancelDate": "2026-02-09",
+                    "CancelTime": "11:45:00",
+
+                    "CreatedDate": "2026-02-06",
+                    "CreatedTime": "06:34:51",
+                    "CreatedUserName": "SOUJANYA.T",
+
+                    "LastChangedDate": "2026-02-09",
+                    "LastChangedTime": "11:45:00",
+                    "LastChangedUser": "POSTMAN_TEST",
+
+                    "Weight": "77.0"
+                
             }
+
+            
 
             ManifestModel.update(
                 "/ManifestHeaderSet('" + sapDeliveryNumber + "')",   // entity key
                 oPayload,
                 {
-                    merge: false,      // force full state rewrite = true Void
+                    // merge: false,      // force full state rewrite = true Void
+                     method: "POST",
                     success: function () {
                         sap.m.MessageToast.show("Shipment successfully VOIDED");
                     },
@@ -21921,6 +22034,51 @@ updateManifestOnVoid: async function () {
                 }
             );
         },
+
+
+//         onCancelUpdateToManifestHeaderSet: function () {
+//     var oController = this;
+//     var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+//     var ManifestModel = oController.getOwnerComponent().getModel("ManifestModel");
+
+//     var sapDeliveryNumber = eshipjetModel.getProperty("/commonValues/sapDeliveryNumber");
+//     var sTrackingNumber   = eshipjetModel.getProperty("/commonValues/trackingNumber");
+
+//     // ✅ Minimal VOID payload (BEST PRACTICE)
+//     var oPayload = {
+//         ShipStatus: "Void",
+//         CancelDate: "2026-02-09",
+//         CancelTime: "11:45:00",
+//         LastChangedUser: "UI5_VOID"
+//     };
+
+//     // ✅ Correct composite key path
+//     var sPath =
+//         "/ManifestHeaderSet(" +
+//         "Vbeln='" + encodeURIComponent(sapDeliveryNumber) + "'," +
+//         "TrackingNumber='" + encodeURIComponent(sTrackingNumber) + "'" +
+//         ")";
+
+//     ManifestModel.update(
+//         sPath,
+//         oPayload,
+//         {
+//             merge: true,   // ✅ MERGE (NOT PATCH)
+//             success: function () {
+//                 sap.m.MessageToast.show("Shipment successfully VOIDED");
+//             },
+//             error: function (oError) {
+//                 var sMsg = "Void failed";
+//                 if (oError.responseText) {
+//                     try {
+//                         sMsg = JSON.parse(oError.responseText).error.message.value;
+//                     } catch (e) {}
+//                 }
+//                 sap.m.MessageBox.error(sMsg);
+//             }
+//         }
+//     );
+// },
 
 
         shipStstusUpdateToManifestHeaderSet: function (shipStatus) {

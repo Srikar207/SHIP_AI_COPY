@@ -3634,3 +3634,19 @@ html.sap-desktop .sapContrast .sapMIBar.sapMFooter-CTX, html.sap-desktop .sapCon
     display: none !important;
 }
 
+.sapUiSizeCompact .sapMCbBg {
+    height: 1.5rem;
+    width: 1.5rem;
+    top: 4px;
+    left: 0.5rem;
+    border-radius: 0.375rem;
+}
+.sapUiSizeCompact .sapMCbBg.sapMCbMarkChecked {
+    background-color: #2ecc71 !important;
+    border-color: #2ecc71 !important;
+}
+.sapUiSizeCompact .sapMCbBg.sapMCbMarkChecked::before {
+    font-size: 1.25rem;
+    color: #ffffff !important;
+    margin-top: 4px;
+}
