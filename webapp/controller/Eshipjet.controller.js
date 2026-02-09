@@ -23307,9 +23307,67 @@ packParcelProducts: function () {
 
 
         onHUItemsCreatePress: function () {
+            var oTable = this.byId("idShipNowPackTable");
+            var aSelectedIndices = oTable.getSelectedIndices();
+            var aRows = oTable.getBinding("rows").getContexts().map(c => c.getObject());
+            var CreateHUSrvModel = this.getOwnerComponent().getModel("CreateHUSrvModel");
+            var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData");
+            var selectedPackageMat = eshipjetModel.getProperty("/selectedPackageMat");
+
+            const aValidRows = aRows.filter(row =>
+                row && row.ActualDeliveryQuantity // or any real business key
+            );
+
+            if(selectedPackageMat === ""){
+                sap.m.MessageBox.error("Please Select Package Material.");
+                oController.onCloseBusyDialog();
+                return;
+            }
+            if (aValidRows.length === 1) {
+                const oRow = aValidRows[0];
+
+                if (!oRow.partialQty || parseFloat(oRow.partialQty) <= 0) {
+                    sap.m.MessageBox.error("Please enter Partial Qty for the item.");
+                    oController.onCloseBusyDialog();
+                    return;
+                }
+
+                aSelectedIndices = [0];
+            } else {
+                if (aSelectedIndices.length === 0) {
+                    sap.m.MessageBox.error("Please select at least one row.");
+                    oController.onCloseBusyDialog();
+                    return;
+                }
+
+                for (let i of aSelectedIndices) {
+                    const oRow = aValidRows[i];
+                    if (!oRow?.partialQty || parseFloat(oRow.partialQty) <= 0) {
+                        sap.m.MessageBox.error("Please enter Partial Qty for all selected items.");
+                        oController.onCloseBusyDialog();
+                        return;
+                    }
+                }
+            }
+            if(eshipjetModel.getProperty("/commonValues/heightOfDimensions") === "" || eshipjetModel.getProperty("/commonValues/widthOfDimensions") === "" || eshipjetModel.getProperty("/commonValues/lengthOfDimensions") === ""){
+                sap.m.MessageBox.error("Please Enter Dimentions.");
+                oController.onCloseBusyDialog();
+                return;
+            }
             var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData");
             if(GetDeliveryData.Warehouse === ""){
-                oController.onPackItemsWithOutEWM();
+                var oTable = this.byId("idShipNowPackTable");
+                var aRows = oTable.getBinding("rows").getContexts().map(c => c.getObject());
+                const aValidRows = aRows.filter(row =>
+                    row && row.ActualDeliveryQuantity
+                );
+                if (!aValidRows[0].partialQty || parseFloat(aValidRows[0].partialQty) > 0 && aValidRows[0].isSerialSelected > 0) {
+                    oController.onCloseBusyDialog();
+                    oController.onOpenSerialNumberDialog(aValidRows);
+                    return;
+                }else{
+                    oController.onPackItemsWithOutEWM();
+                }
             }else{
                 oController.onPackItemsWithEWM();
             }
@@ -23418,10 +23476,6 @@ packParcelProducts: function () {
                     sap.m.MessageBox.error("Please enter Partial Qty for the item.");
                     oController.onCloseBusyDialog();
                     return;
-                }else if (!aRows[0].partialQty || parseFloat(aRows[0].partialQty) > 0 && aRows[0].isSerialSelected === true) {
-                    oController.onCloseBusyDialog();
-                    oController.onOpenSerialNumberDialog(aRows);
-                    return;
                 }
 
                 aSelectedIndices = [0];
@@ -23467,6 +23521,29 @@ packParcelProducts: function () {
                 HuItems: aHUItems
             };
 
+            if (!aValidRows[0].partialQty || parseFloat(aValidRows[0].partialQty) > 0 && aValidRows[0].isSerialSelected > 0) {
+                var aNodes = eshipjetModel.getProperty("/serialDialogObject/nodes");
+                var aSerialData = [];
+                aNodes.forEach(function (oParent) {
+                    var sMatnr = oParent.serialNumber; // TG11
+                    (oParent.nodes || []).forEach(function (oChild) {
+                        aSerialData.push({
+                            Vbeln: GetDeliveryData.DeliveryDocument,
+                            Posnr: oParent.id,
+                            Matnr: sMatnr,
+                            Sernr: oChild.serialNumber
+                        });
+                    });
+                });
+
+                var oPayload = {
+                    Vbeln: GetDeliveryData.DeliveryDocument,
+                    Humatnr: selectedPackageMat,
+                    HuItems: aHUItems,
+                    SerialData: aSerialData
+                };
+            }
+
             CreateHUSrvModel.refreshSecurityToken(function () {
                 CreateHUSrvModel.create("/HuDataSet", oPayload, {
                     success: function (oData) {
@@ -23474,7 +23551,12 @@ packParcelProducts: function () {
                         eshipjetModel.setProperty("/commonValues/widthOfDimensions", "");
                         eshipjetModel.setProperty("/commonValues/heightOfDimensions", "");
                         eshipjetModel.setProperty("/selectedPackageMat", "");
+                        var oDialog = oController.byId("_IDGenEditSerialNumberDialog");
+                        if (oDialog && oDialog.isOpen && oDialog.isOpen()) {
+                            oDialog.close();
+                        }
                         oController.readHUData();
+                        oController.readProductPlant();
                     }.bind(this),
                     error: function (oError) {
                         eshipjetModel.setProperty("/commonValues/lengthOfDimensions", "");
