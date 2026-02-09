@@ -23721,7 +23721,7 @@ packParcelProducts: function () {
                             oDialog.close();
                         }
                         oController.readHUData();
-                        oController.readProductPlant();
+                        
                     }.bind(this),
                     error: function (oError) {
                         eshipjetModel.setProperty("/commonValues/lengthOfDimensions", "");
@@ -25041,7 +25041,7 @@ AddCarrierCancelDialog: function() {
         // Fetch ShipFrom, HU data, carrier list
         await oController.onGetShipFromData(GetDeliveryData.ShippingPoint);
         await oController.readHUData();
-        await oController.readProductPlant();
+        // await oController.readProductPlant();
         // await oController.onGetCarriersDropDownData();
 
           
@@ -25380,6 +25380,7 @@ readProductPlant: function () {
                         eshipjetModel.setProperty("/totalHUsWeight", totalHUsWeight);
 
                         console.log("Header + Items + HUs:", oData);
+                        oController.readProductPlant();
                         oController.onPackSectionEmptyRows();
                         oController.onCloseBusyDialog();
                         resolve(oData);
