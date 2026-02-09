@@ -25566,6 +25566,7 @@ onOrdersToggleExpand: function () {
             var scannedStatus = scannedInputsCount * devidedvalue;
             eshipjetModel.setProperty("/scannedStatus", scannedStatus);
         },
+        
 
         onCloseEditSerialDialog: function () {
             this.byId("_IDGenEditSerialNumberDialog").close();
@@ -25612,32 +25613,7 @@ onOrdersToggleExpand: function () {
             var devidedvalue = eshipjetModel.getProperty("/devidedvalue", devidedvalue);
             var scannedStatus = scannedInputsCount * devidedvalue;
             eshipjetModel.setProperty("/scannedStatus", scannedStatus);
-        },
-        //   onOpenSerialNumberDialog:function(qty){
-        //     var oView = this.getView();
-        //     if (!this.byId("_IDGenEditSerialNumberDialog")) {
-        //         Fragment.load({
-        //             id: oView.getId(),
-        //             name: "com.eshipjetcopy.zeshipjetcopy.view.fragments.ShipNow.EditSerialNumberDialog",
-        //             controller: this
-        //         }).then(function (oSerialNumberDialog) {
-        //             oView.addDependent(oSerialNumberDialog);
-        //             oSerialNumberDialog.open();
-        //         });
-        //     } else {
-        //         this.byId("_IDGenEditSerialNumberDialog").open();
-        //     }
-
-        //     var serialNumbersArray = [];
-        //     for(var i=0; i<qty; i++){
-        //         serialNumbersArray.push({"rowCount": i+1, "serialNumber": ""});
-        //     };
-        //     eshipjetModel.setProperty("/serialNumbersArray", serialNumbersArray);
-        // },
-
-        // onCloseEditSerialDialog: function () {
-        //     this.byId("_IDGenEditSerialNumberDialog").close();
-        // },
+        }
 
         
     });
