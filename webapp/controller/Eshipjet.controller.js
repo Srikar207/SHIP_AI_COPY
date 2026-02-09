@@ -22080,6 +22080,13 @@ readPGIErrorLog: function () {
 //     );
 // },
 
+onOnlyNumbers: function (oEvent) {
+    let sValue = oEvent.getParameter("value");
+    let sFiltered = sValue.replace(/[^0-9]/g, "");
+    oEvent.getSource().setValue(sFiltered);
+},
+
+
 
         shipStstusUpdateToManifestHeaderSet: function (shipStatus) {
             var amount, Discountamt, Fuel;
