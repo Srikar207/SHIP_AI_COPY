@@ -22089,11 +22089,7 @@ readPGIErrorLog: function () {
 //     );
 // },
 
-onOnlyNumbers: function (oEvent) {
-    let sValue = oEvent.getParameter("value");
-    let sFiltered = sValue.replace(/[^0-9]/g, "");
-    oEvent.getSource().setValue(sFiltered);
-},
+
 
 
 
@@ -25052,7 +25048,7 @@ AddCarrierCancelDialog: function() {
         // Fetch ShipFrom, HU data, carrier list
         await oController.onGetShipFromData(GetDeliveryData.ShippingPoint);
         await oController.readHUData();
-        // await oController.readProductPlant();
+        await oController.readProductPlant();
         // await oController.onGetCarriersDropDownData();
 
           
@@ -25391,7 +25387,6 @@ readProductPlant: function () {
                         eshipjetModel.setProperty("/totalHUsWeight", totalHUsWeight);
 
                         console.log("Header + Items + HUs:", oData);
-                        oController.readProductPlant();
                         oController.onPackSectionEmptyRows();
                         oController.onCloseBusyDialog();
                         resolve(oData);
@@ -25790,7 +25785,14 @@ onOrdersToggleExpand: function () {
             var devidedvalue = eshipjetModel.getProperty("/devidedvalue", devidedvalue);
             var scannedStatus = scannedInputsCount * devidedvalue;
             eshipjetModel.setProperty("/scannedStatus", scannedStatus);
-        }
+        },
+
+
+        onOnlyNumbers: function (oEvent) {
+            let sValue = oEvent.getParameter("value");
+            let sFiltered = sValue.replace(/[^0-9]/g, "");
+            oEvent.getSource().setValue(sFiltered);
+        },
 
         
     });
