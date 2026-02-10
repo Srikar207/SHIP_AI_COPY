@@ -1355,7 +1355,7 @@ sap.ui.define([
             var oCurrObj = oEvent.getSource().getBindingContext("eshipjetModel").getObject();
             var oPayload = {
                 "Vbeln": oCurrObj.DeliveryDocument,
-                "HuNo": "00000000000" + oCurrObj.HandlingUnitExternalId,
+                "HuNo": oCurrObj.HandlingUnitExternalId,
                 "PackItems": [
                         {
                             "Vbeln": oCurrObj.DeliveryDocument
@@ -2878,9 +2878,9 @@ getManifestHeaderForTodaysShipmentCount: function () {
 
             // Filter entries created today
             const todaysShipments = (response.results || []).filter(item => {
-                if (!item.LastChangedOn) return false;
+                if (!item.LastChangedDate) return false;
 
-                const dateObj = oController._formatSAPDate(item.LastChangedOn);
+                const dateObj = oController._formatSAPDate(item.LastChangedDate);
                 if (!dateObj) return false;
 
                 dateObj.setHours(0, 0, 0, 0);
@@ -3441,8 +3441,8 @@ formatNumberForSAP: function (val) {
                         ShippingDocumentDescription: doc.docType || "",
                         ShippingDocumentType: doc.docType || "",
 
-                        LastChangedOn: new Date().toISOString().split("T")[0],
-                        LastChangedBy: eshipjetModel.getProperty("/userName") || "SYSTEM"
+                        LastChangedDate: new Date().toISOString().split("T")[0],
+                        LastChangedUser: eshipjetModel.getProperty("/userName") || "SYSTEM"
                     };
                     aBulkItems.push(oItem);
                 });
@@ -4423,7 +4423,14 @@ onShippingDocumentsViewPress: async function (oEvent) {
                 ManifestSrvModel.read("/Manifest_detSet", {
                     success: function (oData) {
                         const aFilteredResults = oData.results.filter(item => item.Vbeln === sDeveliveryNumber);
-                        console.log("Manifest_detSet Success:", oData);
+                        
+                        const dimensions = aFilteredResults[0].Dimensions;
+                        const [length, width, height] = dimensions.split("X").map(Number);
+                        eshipjetModel.setProperty("/commonValues/lengthOfDimensions", length);
+                        eshipjetModel.setProperty("/commonValues/widthOfDimensions", width);
+                        eshipjetModel.setProperty("/commonValues/heightOfDimensions", height);
+
+                        eshipjetModel.setProperty("/selectedPackageMat", aFilteredResults[0].MaterialNumber);
 
                         if (!aFilteredResults || aFilteredResults.length === 0) {
                             // MessageToast.show("No Manifest data found for delivery " + sDeveliveryNumber);
@@ -4875,6 +4882,8 @@ onShippingDocumentsViewPress: async function (oEvent) {
                     if(oData && oData.results && oData.results.length > 0){
                         var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
                         // eshipjetModel.setProperty("/HandlingUnitItems",oData.results);
+                        eshipjetModel.setProperty("/HandlingUnitsLength", oData.results.length);
+ 
                         var aProductTableData = eshipjetModel.getProperty("/to_DeliveryDocumentItem");
                         aProductTableData.forEach(function(obj, idx){
                             if(obj.DeliveryDocumentItem !== undefined){
@@ -23721,7 +23730,9 @@ packParcelProducts: function () {
                             oDialog.close();
                         }
                         oController.readHUData();
-                        
+                        if(oData.Msgty === "E"){
+                            sap.m.MessageBox.error("Please Enter Unique Serial Number.");
+                        }
                     }.bind(this),
                     error: function (oError) {
                         eshipjetModel.setProperty("/commonValues/lengthOfDimensions", "");
