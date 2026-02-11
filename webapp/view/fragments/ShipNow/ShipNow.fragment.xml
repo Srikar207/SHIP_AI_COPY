@@ -1131,11 +1131,11 @@
 
 </FlexBox>
 
-									<FlexBox visible="true" >
+									<!-- <FlexBox visible="true" >
 										<Input value="{eshipjetModel>/commonValues/lengthOfDimensions}" placeholder="L" class="create-ship-req_input sapUiTinyMarginBegin" width="3rem" liveChange="onOnlyNumbers" editable="{eshipjetModel>/commonValues/shipNowBtnStatus}" ></Input>
 										<Input value="{eshipjetModel>/commonValues/widthOfDimensions}" placeholder="W" class="create-ship-req_input sapUiTinyMarginBegin" width="3rem" liveChange="onOnlyNumbers" editable="{eshipjetModel>/commonValues/shipNowBtnStatus}" ></Input>
 										<Input value="{eshipjetModel>/commonValues/heightOfDimensions}" placeholder="H" class="create-ship-req_input sapUiTinyMarginBegin" width="3rem" liveChange="onOnlyNumbers" editable="{eshipjetModel>/commonValues/shipNowBtnStatus}" ></Input>
-									</FlexBox>
+									</FlexBox> -->
 								</HBox>
 
 								<HBox height="3rem" width="37%" class="whiteBackground sapUiTinyMarginEnd" alignItems="Center" justifyContent="SpaceBetween" >
@@ -1218,12 +1218,7 @@
 									</HBox>
 									<ui:template>
 									<HBox justifyContent="End" alignItems="End">
-										<!-- <Text 
-											text="{= parseInt(${eshipjetModel>HandlingUnitLength}) + ' X ' 
-													+ parseInt(${eshipjetModel>HandlingUnitWidth}) + ' X ' 
-													+ parseInt(${eshipjetModel>HandlingUnitHeight}) }" 
-											visible="{= ${eshipjetModel>HandlingUnitExternalId} > 0 }"
-											wrapping="false" /> -->
+										<!-- <Text text="{eshipjetModel>Dimensions}" wrapping="false" /> -->
 										<Text
 											text="{
 												parts: [
