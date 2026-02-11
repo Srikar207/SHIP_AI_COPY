@@ -1354,11 +1354,11 @@ sap.ui.define([
             oController.onOpenBusyDialog();
             var oCurrObj = oEvent.getSource().getBindingContext("eshipjetModel").getObject();
             var oPayload = {
-                "Vbeln": eshipjetModel.getProperty("/commonValues/sapDeliveryNumber"),
+                "Vbeln": oCurrObj.DeliveryDocument,
                 "HuNo": oCurrObj.HandlingUnitExternalId,
                 "PackItems": [
                         {
-                            "Vbeln": eshipjetModel.getProperty("/commonValues/sapDeliveryNumber")
+                            "Vbeln": oCurrObj.DeliveryDocument
                         }
                     ]
                 }
@@ -1372,13 +1372,7 @@ sap.ui.define([
                     },
                     success:function(oData){
                         // oController.readProductsData(oCurrObj.DeliveryDocument);
-                        var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData");
-                        if(GetDeliveryData.Warehouse === ""){
-                            oController.readHUData();
-                        }else{
-                            oController.getHandlingUnit(eshipjetModel.getProperty("/commonValues/sapDeliveryNumber"));
-                        }
-
+                        oController.readHUData();
                         // oController.onCloseBusyDialog();
                     },
                     error:function(oError){
@@ -2986,7 +2980,7 @@ formatNumberForSAP: function (val) {
                 var oController = this;
                 var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
                 var ManifestModel = oController.getOwnerComponent().getModel("ManifestModel");
-                var selectedPackageMat = eshipjetModel.getProperty("/selectedPackageMat") || "CARTON BOX";
+                var selectedPackageMat = eshipjetModel.getProperty("/selectedPackageMat") || "";
 
                 var ShipNowResponse = eshipjetModel.getProperty("/ShipNowPostResponse");
                 var status = eshipjetModel.getProperty("/PGIStatus");
@@ -3110,7 +3104,7 @@ formatNumberForSAP: function (val) {
                         Shipperacct: ShipNowResponse?.CarrierDetails?.ShippingAccount,
                         Accountnumber: ShipNowResponse?.CarrierDetails?.ShippingAccount,
 
-                        Dimensions: ShipNowResponse.Packages[0]?.Dimension || "10X10X10",
+                        Dimensions: ShipNowResponse?.Dimension || "10X10X10",
 
                         FreightAmt: FreightAmt,
                         DiscountAmt: DiscountAmt,
@@ -3196,6 +3190,7 @@ formatNumberForSAP: function (val) {
                         LastChangedDate: new Date().toISOString().split("T")[0],
                         LastChangedUser: eshipjetModel.getProperty("/userName") || "SYSTEM"
                     };
+
                     aBulkItems.push(oItem);
                 });
 
@@ -3205,6 +3200,7 @@ formatNumberForSAP: function (val) {
                     GUID: eshipjetModel.getProperty("/GU_ID"),
                     Vbeln: sapDeliveryNumber,
                     
+
                     ManifestSingleToBulk: aBulkItems   // 🔥 Deep Entity
                 };
 
@@ -3214,15 +3210,22 @@ formatNumberForSAP: function (val) {
 
                 ManifestModel.create("/Manifest_detSet", oDeepPayload, {
                     success: function (oData) {
+
                         // sap.m.MessageToast.show("Manifest created successfully");
+
                         oController.getManifestHeaderForTodaysShipmentCount();
                         oController.onShipNowNewPress();
+
+                        oController.onCloseBusyDialog();
                     },
                     error: function (oError) {
+
                         var errMsg = "Manifest creation failed";
+
                         try {
                             errMsg = JSON.parse(oError.responseText).error.message.value;
                         } catch (e) {}
+
                         sap.m.MessageBox.error(errMsg);
                         oController.onCloseBusyDialog();
                     }
@@ -3234,7 +3237,7 @@ formatNumberForSAP: function (val) {
                 var oController = this;
                 var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
                 var ManifestModel = oController.getOwnerComponent().getModel("ManifestModel");
-                var selectedPackageMat = eshipjetModel.getProperty("/selectedPackageMat") || "EWMS4-WBTRO00";
+                var selectedPackageMat = eshipjetModel.getProperty("/selectedPackageMat") || "";
 
 
                 var ShipNowResponse = eshipjetModel.getProperty("/ShipNowPostResponse");
@@ -4908,11 +4911,6 @@ onShippingDocumentsViewPress: async function (oEvent) {
                             };
 
                             var allHUsArray = oData.results.map(function (r) {
-                                const dimensions = r.Dimensions;
-                                const [length, width, height] = dimensions
-                                    .split("X")
-                                    .map(val => parseFloat(val));
-
                                 return {
                                     HandlingUnitExternalId : r.Hunumber,
                                     CreatedByUser      : r.CreatedByUser || "",
@@ -4923,10 +4921,7 @@ onShippingDocumentsViewPress: async function (oEvent) {
                                     Material       : r.Delmatnr,
                                     MaterialName       : r.Maktx,
                                     HandlingUnitQuantity  : r.Qty,
-                                    HandlingUnitQuantityUnit : r.Meins,
-                                    HandlingUnitLength : length,
-                                    HandlingUnitWidth : width,
-                                    HandlingUnitHeight : height
+                                    HandlingUnitQuantityUnit : r.Meins
                                 };
                             });
 
@@ -5395,14 +5390,14 @@ onShippingDocumentsViewPress: async function (oEvent) {
                     return;
                 }
                 
-                // if(eshipjetModel.getProperty("/commonValues/heightOfDimensions") === "" || eshipjetModel.getProperty("/commonValues/widthOfDimensions") === "" || eshipjetModel.getProperty("/commonValues/lengthOfDimensions") === ""){
-                //     sap.m.MessageBox.error("Please Enter Dimentions.");
-                //     return;
-                // }
+                if(eshipjetModel.getProperty("/commonValues/heightOfDimensions") === "" || eshipjetModel.getProperty("/commonValues/widthOfDimensions") === "" || eshipjetModel.getProperty("/commonValues/lengthOfDimensions") === ""){
+                    sap.m.MessageBox.error("Please Enter Dimentions.");
+                    return;
+                }
 
                 oController.onOpenBusyDialog();
 
-                // var Dimensions = eshipjetModel.getProperty("/commonValues/lengthOfDimensions") +"X"+ eshipjetModel.getProperty("/commonValues/widthOfDimensions") +"X"+ eshipjetModel.getProperty("/commonValues/heightOfDimensions");
+                var Dimensions = eshipjetModel.getProperty("/commonValues/lengthOfDimensions") +"X"+ eshipjetModel.getProperty("/commonValues/widthOfDimensions") +"X"+ eshipjetModel.getProperty("/commonValues/heightOfDimensions");
                 var aHUItems = validItems.map(function (iIndex) {
 
                     return {
@@ -5410,7 +5405,8 @@ onShippingDocumentsViewPress: async function (oEvent) {
                         Posnr: "000010",
                         Matnr: iIndex.Material,
                         Qty: iIndex.BalanceQty.toString(),
-                        Humatnr: selectedPackageMat
+                        Humatnr: selectedPackageMat,
+                        Dimensions: Dimensions
                     };
                 });
 
@@ -5495,7 +5491,7 @@ onShippingDocumentsViewPress: async function (oEvent) {
 
             oController.getHandlingUnit(sapDeliveryNumber);
             oController.onCloseBusyDialog();
-            // sap.m.MessageToast.show("All items packed successfully");
+            sap.m.MessageToast.show("All items packed successfully");
         },
         error: function (oError) {
             var errMsg = new DOMParser()
@@ -18724,7 +18720,7 @@ getOrdersHistoryShipments: function () {
             }
         },
 
-              onPostGoodsIssueWithoutEWM: function(sDeliveryNo){
+              onPostGoodsIssueWithoutEWM:function(sDeliveryNo){
                 var oController = this;
                 oController.onOpenBusyDialog();
                 
@@ -18753,9 +18749,7 @@ getOrdersHistoryShipments: function () {
                                     eshipjetModel.getProperty("/PGIMessage")
                                 );
                             }).then(function () {
-                                setTimeout(() => {
-                                    return oController.ApiOutboundDeliverySrvData();
-                                }, 3000)
+                                return oController.ApiOutboundDeliverySrvData();
                             })
                             .then(function () {
                                 oController.onManifestCreatePress();
@@ -23586,11 +23580,11 @@ packParcelProducts: function () {
                     }
                 }
             }
-            // if(eshipjetModel.getProperty("/commonValues/heightOfDimensions") === "" || eshipjetModel.getProperty("/commonValues/widthOfDimensions") === "" || eshipjetModel.getProperty("/commonValues/lengthOfDimensions") === ""){
-            //     sap.m.MessageBox.error("Please Enter Dimentions.");
-            //     oController.onCloseBusyDialog();
-            //     return;
-            // }
+            if(eshipjetModel.getProperty("/commonValues/heightOfDimensions") === "" || eshipjetModel.getProperty("/commonValues/widthOfDimensions") === "" || eshipjetModel.getProperty("/commonValues/lengthOfDimensions") === ""){
+                sap.m.MessageBox.error("Please Enter Dimentions.");
+                oController.onCloseBusyDialog();
+                return;
+            }
             var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData");
             if(GetDeliveryData.Warehouse === ""){
                 var oTable = this.byId("idShipNowPackTable");
@@ -23732,12 +23726,12 @@ packParcelProducts: function () {
                     }
                 }
             }
-            // if(eshipjetModel.getProperty("/commonValues/heightOfDimensions") === "" || eshipjetModel.getProperty("/commonValues/widthOfDimensions") === "" || eshipjetModel.getProperty("/commonValues/lengthOfDimensions") === ""){
-            //     sap.m.MessageBox.error("Please Enter Dimentions.");
-            //     oController.onCloseBusyDialog();
-            //     return;
-            // }
-            // var Dimensions = eshipjetModel.getProperty("/commonValues/lengthOfDimensions") +"X"+ eshipjetModel.getProperty("/commonValues/widthOfDimensions") +"X"+ eshipjetModel.getProperty("/commonValues/heightOfDimensions");
+            if(eshipjetModel.getProperty("/commonValues/heightOfDimensions") === "" || eshipjetModel.getProperty("/commonValues/widthOfDimensions") === "" || eshipjetModel.getProperty("/commonValues/lengthOfDimensions") === ""){
+                sap.m.MessageBox.error("Please Enter Dimentions.");
+                oController.onCloseBusyDialog();
+                return;
+            }
+            var Dimensions = eshipjetModel.getProperty("/commonValues/lengthOfDimensions") +"X"+ eshipjetModel.getProperty("/commonValues/widthOfDimensions") +"X"+ eshipjetModel.getProperty("/commonValues/heightOfDimensions");
             var aHUItems = aSelectedIndices.map(function (iIndex) {
                 var oObj = oTable.getContextByIndex(iIndex)
                                 .getObject();
@@ -23748,7 +23742,7 @@ packParcelProducts: function () {
                     Matnr: oObj.Material,
                     Qty: oObj.partialQty,
                     Humatnr: selectedPackageMat,
-                    // Dimensions: Dimensions
+                    Dimensions: Dimensions
                 };
             });
 
