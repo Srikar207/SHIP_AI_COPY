@@ -4423,7 +4423,7 @@ onShippingDocumentsViewPress: async function (oEvent) {
                 ManifestSrvModel.read("/Manifest_detSet", {
                     success: function (oData) {
                         const aFilteredResults = oData.results.filter(item => item.Vbeln === sDeveliveryNumber);
-                        
+                        eshipjetModel.setProperty("/ManifestResponce", aFilteredResults);
                         const dimensions = aFilteredResults[0].Dimensions;
                         const [length, width, height] = dimensions.split("X").map(Number);
                         eshipjetModel.setProperty("/commonValues/lengthOfDimensions", length);
@@ -21893,7 +21893,7 @@ readPGIErrorLog: function () {
                 contentType: "application/json",
                 data: JSON.stringify(payload),
                 success: (oData) => {
-                    oController.onCancelUpdateToManifestHeaderSet("CANC");
+                    oController.onCreateManifestFromManifestData();
                     oController.onCloseBusyDialog();
                     // if(oData.status === "Success"){
                     //     oController.shipStstusUpdateToManifestHeaderSet("CANC");
@@ -21909,140 +21909,201 @@ readPGIErrorLog: function () {
             });
         },
 
-        onCancelUpdateToManifestHeaderSet:function(){
-            var sapDeliveryNumber = eshipjetModel.getProperty("/commonValues/sapDeliveryNumber");
-            var ManifestModel = oController.getOwnerComponent().getModel("ManifestModel");
-            var oPayload = {
-                "Vbeln": sapDeliveryNumber,
-                // "CancTstamp": {
-                //     ms : (
-                //     (new Date().getHours() * 3600000) +
-                //     (new Date().getMinutes() * 60000) +
-                //     (new Date().getSeconds() * 1000) +
-                //     new Date().getMilliseconds()
-                //     ),
-                //     __edmType : "Edm.Time",
+        _getCancelDateTime: function () {
+    const oNow = new Date();
 
-                     "Accountnumber": "B24W72",
-                    "BillofLading": "",
-                    "CarrierDesc": "UPS",
-                    "Carriertype": "UPS",
-                    "Count": "001",
-                    "Dimensions": "10X10X10",
-                    "DiscountAmt": "100.99",
-                    "DocName": "https://eshipjet-products-dev.s3.us-east-1.amazonaws.com/80001431_1ZXXXXXXXXXXXXXXXX_PKG1.ZPL",
-                    "eShipjetPGIStatus": "S",
-                    "eShipjetPickStatus": "C",
-                    "FreightAmt": "126.24",
-                    "GUID": "387a2bae-6580-41c6-bbfc-d1974c91a796",
-                    "HandlingUnit": "300001134",
+    const pad = (n) => n.toString().padStart(2, "0");
 
-                    "Label": "",
+    const CancelDate =
+        oNow.getFullYear().toString() +
+        pad(oNow.getMonth() + 1) +
+        pad(oNow.getDate());
 
-                    "Mastertracking": "1ZXXXXXXXXXXXXXXXX",
-                    "PackingSlip": "https://eshipjet-products-dev.s3.us-east-1.amazonaws.com/1ZXXXXXXXXXXXXXXXX_PL.pdf",
-                    "Paymentcode": "Sender",
-                    "Plant": "1710",
-                    "Posnr": "000000",
-                    "ProductCode": "TG11",
-                    "ProductDescription": "TradGood 11PDRegTrading",
-                    "ProductQuantity": "4.0",
-                    "ProductUnitOfMeasurement": "CV",
-                    "PurchaseOrder": "80001431",
-                    "SalesOrder": "",
-                    "ServiceName": "UPS Ground",
+    const CancelTime =
+        pad(oNow.getHours()) +
+        pad(oNow.getMinutes()) +
+        pad(oNow.getSeconds());
 
-                    "ShipFromAddressLine1": "Deer Creek",
-                    "ShipFromAddressLine2": "3475",
-                    "ShipFromAddressType": "Commercial",
-                    "ShipFromCity": "Palo Alto",
-                    "ShipFromCompany": "Plant 1 US",
-                    "ShipFromContact": "Plant 1 US",
-                    "ShipFromCountry": "US",
-                    "ShipFromEmail": "noreply@sap.com",
-                    "ShipFromPhoneNumber": "(888) 464 2360",
-                    "ShipFromPostalcode": "94304-1355",
-                    "ShipFromState": "CA",
-                    "ShipMethod": "Parcel",
+    return { CancelDate, CancelTime };
+},
 
-                    "Shipperacct": "B24W72",
-                    "ShippingChargeDescription1": "Additional Handling",
-                    "ShippingCharges1": "50.75",
-                    "ShippingCharges2": "21.91",
-                    "ShippingCharges3": "0.0",
-                    "ShippingCharges4": "0.0",
-                    "ShippingCharges5": "0.0",
-                    "ShippingChargesCurrency2": "USD",
-                    "ShippingChargesCurrency3": "",
-                    "ShippingChargesCurrency4": "",
-                    "ShippingChargesCurrency5": "",
-                    "ShippingChargesDescription2": "Fuel Surcharge",
-                    "ShippingChargesDescription3": "",
-                    "ShippingChargesDescription4": "",
-                    "ShippingChargesDescription5": "",
-                    "ShippingChargesFreightId": "",
-                    "ShippingChargesSapFreightId": "",
-                    "ShippingCurrency1": "USD",
 
-                    "ShippingDocumentDescription": "ZPL",
-                    "ShippingDocumentId": "",
-                    "ShippingDocumentProvider": "UPS",
-                    "ShippingDocumentSapOutputType": "Label",
-                    "ShippingDocumentType": "ZPL",
+    onCreateManifestFromManifestData: function () {
+    var oController = this;
+    var eshipjetModel = oController.getOwnerComponent().getModel("eshipjetModel");
+    var manifestData = eshipjetModel.getProperty("/ManifestResponce");
+    var ManifestModel = oController.getOwnerComponent().getModel("ManifestModel");
 
-                    "ShipStatus": "Void",
+    /* ---------------- BASIC DATA ---------------- */
+    var sapDeliveryNumber = eshipjetModel.getProperty("/commonValues/sapDeliveryNumber");
+    var selectedPackageMat = eshipjetModel.getProperty("/selectedPackageMat") || "";
+    var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData") || {};
+    var labelDocs = eshipjetModel.getProperty("/shippingDocuments") || [];
 
-                    "ShipToAddressLine1": "1 SW Bowerman Dr",
-                    "ShipToAddressLine2": "3475",
-                    "ShipToAddressType": "Residential",
-                    "ShipToCity": "Beaverton",
-                    "ShipToCompany": "Nike, Inc.",
-                    "ShipToContact": "Nike, Inc.",
-                    "ShipToCountry": "US",
-                    "ShipToEmail": "info@google.com",
-                    "ShipToPhoneNumber": "(800) 344-6453",
-                    "ShipToPostalcode": "97005",
-                    "ShipToState": "OR",
 
-                    "Totalpkg": "00001",
-                    "TrackingNumber": "1ZXXXXXXXXXXXXXXXX",
-                    "Vbeln": "80001431",
-                    "MaterialNumber": "",
 
-                    "CancelDate": "2026-02-09",
-                    "CancelTime": "11:45:00",
+    // Cancel date and time helper
+    const { CancelDate, CancelTime } = this._getCancelDateTime();
 
-                    "CreatedDate": "2026-02-06",
-                    "CreatedTime": "06:34:51",
-                    "CreatedUserName": "SOUJANYA.T",
+    var aBulkItems = [];
 
-                    "LastChangedDate": "2026-02-09",
-                    "LastChangedTime": "11:45:00",
-                    "LastChangedUser": "POSTMAN_TEST",
+    /* ---------------- BUILD BULK ITEMS ---------------- */
+    labelDocs.forEach(function (doc, i) {
 
-                    "Weight": "77.0"
-                
-            }
+        var manifestRow = manifestData[i] || {};
 
-            
+        var oItem = {
 
-            ManifestModel.update(
-                "/ManifestHeaderSet('" + sapDeliveryNumber + "')",   // entity key
-                oPayload,
-                {
-                    // merge: false,      // force full state rewrite = true Void
-                     method: "POST",
-                    success: function () {
-                        sap.m.MessageToast.show("Shipment successfully VOIDED");
-                    },
-                    error: function (oError) {
-                        sap.m.MessageBox.error(
-                            JSON.parse(oError.responseText).error.message.value
-                        );
-                    }
-                }
-            );
+            /* -------- KEYS -------- */
+            Vbeln: sapDeliveryNumber,
+            GUID: manifestRow.GUID,
+            Count: (i + 1).toString().padStart(3, "0"),
+
+            Plant: manifestRow.Plant || GetDeliveryData.ShippingPoint || "",
+            Posnr: manifestRow.Posnr || "000000",
+
+            /* -------- HANDLING UNIT -------- */
+            HandlingUnit: manifestRow.HandlingUnit || "",
+            Weight: manifestRow.Weight
+                ? Number(manifestRow.Weight).toFixed(2)
+                : "0.00",
+            Dimensions: manifestRow.Dimensions || "10X10X10",
+
+            /* -------- CARRIER -------- */
+            Carriertype: manifestRow.Carriertype || "",
+            CarrierDesc: manifestRow.CarrierDesc || "",
+            ServiceName: manifestRow.ServiceName || "",
+            ShipMethod: manifestRow.ShipMethod || "",
+
+            /* -------- PAYMENT -------- */
+            Paymentcode: manifestRow.Paymentcode || "",
+            Shipperacct: manifestRow.Shipperacct || "",
+            Accountnumber: manifestRow.Accountnumber || "",
+
+            /* -------- FREIGHT -------- */
+            FreightAmt: manifestRow.FreightAmt
+                ? Number(manifestRow.FreightAmt).toFixed(2)
+                : "0.00",
+            DiscountAmt: manifestRow.DiscountAmt
+                ? Number(manifestRow.DiscountAmt).toFixed(2)
+                : "0.00",
+
+            /* -------- SHIPPING CHARGES -------- */
+            ShippingChargeDescription1: manifestRow.ShippingChargeDescription1 || "",
+            ShippingCharges1: manifestRow.ShippingCharges1 || "0.00",
+            ShippingCurrency1: manifestRow.ShippingCurrency1 || "",
+
+            ShippingChargesDescription2: manifestRow.ShippingChargesDescription2 || "",
+            ShippingCharges2: manifestRow.ShippingCharges2 || "0.00",
+            ShippingChargesCurrency2: manifestRow.ShippingChargesCurrency2 || "",
+
+            ShippingChargesDescription3: manifestRow.ShippingChargesDescription3 || "",
+            ShippingCharges3: manifestRow.ShippingCharges3 || "0.00",
+            ShippingChargesCurrency3: manifestRow.ShippingChargesCurrency3 || "",
+
+            ShippingChargesDescription4: manifestRow.ShippingChargesDescription4 || "",
+            ShippingCharges4: manifestRow.ShippingCharges4 || "0.00",
+            ShippingChargesCurrency4: manifestRow.ShippingChargesCurrency4 || "",
+
+            ShippingChargesDescription5: manifestRow.ShippingChargesDescription5 || "",
+            ShippingCharges5: manifestRow.ShippingCharges5 || "0.00",
+            ShippingChargesCurrency5: manifestRow.ShippingChargesCurrency5 || "",
+
+            /* -------- STATUS -------- */
+            eShipjetPGIStatus: manifestRow.eShipjetPGIStatus || "",
+            eShipjetPickStatus: manifestRow.eShipjetPickStatus || "C",
+            ShipStatus: "CANC",            // void/cancel
+            CancelDate: CancelDate || "",  // EXT field
+            CancelTime: CancelTime || "",  // EXT field
+
+            /* -------- DOCUMENTS -------- */
+            PackingSlip: manifestRow.PackingSlip || "",
+            DocName: doc.docName || "",
+            Label: doc.encodedLabel || "",
+            BillofLading: manifestRow.BillofLading || "",
+
+            /* -------- TRACKING -------- */
+            Mastertracking: manifestRow.Mastertracking || "",
+            TrackingNumber: manifestRow.TrackingNumber || "",
+
+            /* -------- ORDERS -------- */
+            PurchaseOrder: manifestRow.PurchaseOrder || sapDeliveryNumber,
+            SalesOrder: manifestRow.SalesOrder || "",
+
+            /* -------- SHIP FROM -------- */
+            ShipFromContact: manifestRow.ShipFromContact || "",
+            ShipFromCompany: manifestRow.ShipFromCompany || "",
+            ShipFromAddressLine1: manifestRow.ShipFromAddressLine1 || "",
+            ShipFromAddressLine2: manifestRow.ShipFromAddressLine2 || "",
+            ShipFromCity: manifestRow.ShipFromCity || "",
+            ShipFromState: manifestRow.ShipFromState || "",
+            ShipFromCountry: manifestRow.ShipFromCountry || "",
+            ShipFromPostalcode: manifestRow.ShipFromPostalcode || "",
+            ShipFromEmail: manifestRow.ShipFromEmail || "",
+            ShipFromPhoneNumber: manifestRow.ShipFromPhoneNumber || "",
+            ShipFromAddressType: manifestRow.ShipFromAddressType || "",
+
+            /* -------- SHIP TO -------- */
+            ShipToContact: manifestRow.ShipToContact || "",
+            ShipToCompany: manifestRow.ShipToCompany || "",
+            ShipToAddressLine1: manifestRow.ShipToAddressLine1 || "",
+            ShipToAddressLine2: manifestRow.ShipToAddressLine2 || "",
+            ShipToCity: manifestRow.ShipToCity || "",
+            ShipToState: manifestRow.ShipToState || "",
+            ShipToCountry: manifestRow.ShipToCountry || "",
+            ShipToPostalcode: manifestRow.ShipToPostalcode || "",
+            ShipToEmail: manifestRow.ShipToEmail || "",
+            ShipToPhoneNumber: manifestRow.ShipToPhoneNumber || "",
+            ShipToAddressType: manifestRow.ShipToAddressType || "",
+
+            /* -------- PRODUCT -------- */
+            ProductCode: manifestRow.ProductCode || "",
+            ProductDescription: manifestRow.ProductDescription || "",
+            ProductQuantity: manifestRow.ProductQuantity || "0",
+            ProductUnitOfMeasurement: manifestRow.ProductUnitOfMeasurement || "",
+
+            /* -------- PACKAGE -------- */
+            Totalpkg: manifestRow.Totalpkg || "00001",
+            MaterialNumber: manifestRow.MaterialNumber || selectedPackageMat,
+
+            /* -------- DOCUMENT META -------- */
+            ShippingDocumentProvider: doc.docProvider || "",
+            ShippingDocumentSapOutputType: doc.contentType || "",
+            ShippingDocumentDescription: doc.docType || "",
+            ShippingDocumentType: doc.docType || "",
+
+            /* -------- AUDIT -------- */
+            LastChangedDate: new Date().toISOString().split("T")[0],
+            LastChangedUser: eshipjetModel.getProperty("/userName") || "SYSTEM"
+        };
+
+        aBulkItems.push(oItem);
+    });
+
+    /* ---------------- HEADER PAYLOAD ---------------- */
+    var oDeepPayload = {
+        GUID: manifestData[0].GUID,
+        Vbeln: sapDeliveryNumber,
+        ManifestSingleToBulk: aBulkItems
+    };
+
+    /* ---------------- CREATE CALL ---------------- */
+    oController.onOpenBusyDialog();
+
+    ManifestModel.create("/Manifest_detSet", oDeepPayload, {
+        success: function () {
+            sap.m.MessageToast.show("Manifest voided successfully");
+            oController.onCloseBusyDialog();
         },
+        error: function (oError) {
+            sap.m.MessageBox.error("Failed to void manifest");
+            console.error(oError);
+            oController.onCloseBusyDialog();
+        }
+    });
+},
+
+
 
 
 //         onCancelUpdateToManifestHeaderSet: function () {
@@ -25387,6 +25448,7 @@ readProductPlant: function () {
                         eshipjetModel.setProperty("/totalHUsWeight", totalHUsWeight);
 
                         console.log("Header + Items + HUs:", oData);
+                         oController.readProductPlant();
                         oController.onPackSectionEmptyRows();
                         oController.onCloseBusyDialog();
                         resolve(oData);
