@@ -5507,7 +5507,6 @@ onShippingDocumentsViewPress: async function (oEvent) {
 
             oController.getHandlingUnit(sapDeliveryNumber);
             oController.onCloseBusyDialog();
-            sap.m.MessageToast.show("All items packed successfully");
         },
         error: function (oError) {
             var errMsg = new DOMParser()
