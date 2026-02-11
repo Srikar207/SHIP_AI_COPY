@@ -5406,14 +5406,14 @@ onShippingDocumentsViewPress: async function (oEvent) {
                     return;
                 }
                 
-                if(eshipjetModel.getProperty("/commonValues/heightOfDimensions") === "" || eshipjetModel.getProperty("/commonValues/widthOfDimensions") === "" || eshipjetModel.getProperty("/commonValues/lengthOfDimensions") === ""){
-                    sap.m.MessageBox.error("Please Enter Dimentions.");
-                    return;
-                }
+                // if(eshipjetModel.getProperty("/commonValues/heightOfDimensions") === "" || eshipjetModel.getProperty("/commonValues/widthOfDimensions") === "" || eshipjetModel.getProperty("/commonValues/lengthOfDimensions") === ""){
+                //     sap.m.MessageBox.error("Please Enter Dimentions.");
+                //     return;
+                // }
 
                 oController.onOpenBusyDialog();
 
-                var Dimensions = eshipjetModel.getProperty("/commonValues/lengthOfDimensions") +"X"+ eshipjetModel.getProperty("/commonValues/widthOfDimensions") +"X"+ eshipjetModel.getProperty("/commonValues/heightOfDimensions");
+                // var Dimensions = eshipjetModel.getProperty("/commonValues/lengthOfDimensions") +"X"+ eshipjetModel.getProperty("/commonValues/widthOfDimensions") +"X"+ eshipjetModel.getProperty("/commonValues/heightOfDimensions");
                 var aHUItems = validItems.map(function (iIndex) {
 
                     return {
@@ -5422,7 +5422,7 @@ onShippingDocumentsViewPress: async function (oEvent) {
                         Matnr: iIndex.Material,
                         Qty: iIndex.BalanceQty.toString(),
                         Humatnr: selectedPackageMat,
-                        Dimensions: Dimensions
+                        // Dimensions: Dimensions
                     };
                 });
 
@@ -23600,11 +23600,11 @@ packParcelProducts: function () {
                     }
                 }
             }
-            if(eshipjetModel.getProperty("/commonValues/heightOfDimensions") === "" || eshipjetModel.getProperty("/commonValues/widthOfDimensions") === "" || eshipjetModel.getProperty("/commonValues/lengthOfDimensions") === ""){
-                sap.m.MessageBox.error("Please Enter Dimentions.");
-                oController.onCloseBusyDialog();
-                return;
-            }
+            // if(eshipjetModel.getProperty("/commonValues/heightOfDimensions") === "" || eshipjetModel.getProperty("/commonValues/widthOfDimensions") === "" || eshipjetModel.getProperty("/commonValues/lengthOfDimensions") === ""){
+            //     sap.m.MessageBox.error("Please Enter Dimentions.");
+            //     oController.onCloseBusyDialog();
+            //     return;
+            // }
             var GetDeliveryData = eshipjetModel.getProperty("/GetDeliveryData");
             if(GetDeliveryData.Warehouse === ""){
                 var oTable = this.byId("idShipNowPackTable");
@@ -25129,7 +25129,7 @@ AddCarrierCancelDialog: function() {
         // Fetch ShipFrom, HU data, carrier list
         await oController.onGetShipFromData(GetDeliveryData.ShippingPoint);
         await oController.readHUData();
-        await oController.readProductPlant();
+        // await oController.readProductPlant();
         // await oController.onGetCarriersDropDownData();
 
           
