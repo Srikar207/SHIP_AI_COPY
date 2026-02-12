@@ -178,7 +178,8 @@
                 <Button text="Cancel" press="onCloseEditSerialDialog" class="serialNumberClearBtnStyle sapUiTinyMargin" />
                 <Button text="Clear All" press="onClearEditSerialDialog" class="serialNumberClearBtnStyle" />
                 <ToolbarSpacer ></ToolbarSpacer>
-                    <Button text="Confirm" press="onPackItemsWithOutEWM" class="serialNumberConfirmBtnStyle" />
+                    <!-- <Button text="Confirm" press="onPackItemsWithOutEWM" class="serialNumberConfirmBtnStyle" /> -->
+                    <Button text="Confirm" press="onConfirmSerialDialog" class="serialNumberConfirmBtnStyle" />
             </OverflowToolbar>
         </footer>
 

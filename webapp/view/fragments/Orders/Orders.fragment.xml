@@ -266,7 +266,7 @@
 								<ui:Column sortProperty="DeliveryStatus" visible="{eshipjetModel>/OrderTableData/OrderColumns/12/visible}">
 								<Label text="Status" />
 								<ui:template>
-									<Text text="Shipped"  wrapping="false" class="greenColorForIcon " /> 
+									<Text text="{eshipjetModel>Shipprocess}"  wrapping="false" class="greenColorForIcon " /> 
 									<!-- <Text text="{path: 'eshipjetModel>Shipprocess', formatter: '.formatter.formatShipmentType'}" wrapping="false" class="greenColorForIcon ordersSmallText" /> -->
 								</ui:template>
 								</ui:Column>
