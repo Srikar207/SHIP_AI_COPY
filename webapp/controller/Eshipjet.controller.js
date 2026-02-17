@@ -5647,15 +5647,11 @@ onShippingDocumentsViewPress: async function (oEvent) {
     var CreateHUSrvModel = this.getOwnerComponent().getModel("CreateHUSrvModel");
 
     var selectedPackageMat = eshipjetModel.getProperty("/selectedPackageMat");
-    if (!selectedPackageMat) {
-        sap.m.MessageBox.warning("Please select Package Material");
-        return;
-    }
 
+    // ✅ EXACT SAME QTY SOURCE AS WITHOUT-EWM
     var sapDeliveryNumber = eshipjetModel.getProperty("/commonValues/sapDeliveryNumber");
     var items = eshipjetModel.getProperty("/to_DeliveryDocumentItem") || [];
 
-    // ✅ EXACT SAME QTY SOURCE AS WITHOUT-EWM
     var totalQty = 0;
     for (var i = 0; i < items.length; i++) {
         if (items[i].BalanceQty && Number(items[i].BalanceQty) > 0) {
@@ -5668,6 +5664,12 @@ onShippingDocumentsViewPress: async function (oEvent) {
         return;
     }
 
+    if (!selectedPackageMat) {
+        sap.m.MessageBox.warning("Please select Package Material");
+        return;
+    }
+
+    
     oController.onOpenBusyDialog();
 
     // 🔵 SINGLE EWM CALL = ONE HU
@@ -5677,7 +5679,7 @@ onShippingDocumentsViewPress: async function (oEvent) {
         Qty: totalQty.toString(),   // ✅ BalanceQty ONLY
         Itemno: "10"
     }, {
-        success: function () {
+        success: function (oData) {
 
             // Notes (optional)
             // var Notes = eshipjetModel.getProperty("/Notes") || [];
@@ -18910,9 +18912,11 @@ onShippingDocumentsViewPress: async function (oEvent) {
                     return oController._logPGIResult(oData.Msgtyp, oData.Message1)
                         .then(function () {
                             if (oData.Msgtyp === "S" || oData.Msgtyp === "E") {
-                                return oController.ApiOutboundDeliverySrvData();
+                                setTimeout(() => {
+                                    return oController.ApiOutboundDeliverySrvData();
+                                }, 3000)
                             }
-                            return Promise.reject("PGI failed");
+                            // return Promise.reject("PGI failed");
                         })
                         .then(function () {
                             oController.onManifestCreatePress();

@@ -567,8 +567,8 @@
 
 		<OverflowToolbar class="eship-footer1 ship-now-footer" visible="{eshipjetModel>/commonValues/shipNowViewFooter}">
 			<HBox>
-				<Text text="SAP User ID : " class="todayscss sapUiTinyMarginEnd sapUiSmallMarginBegin" />
-				<Text text="{eshipjetModel>/userName}" class="greenTexttoday" />
+				<Text text="SAP User ID : " class="todayscss sapUiTinyMarginEnd sapUiSmallMarginBegin bigText" />
+				<Text text="{eshipjetModel>/userName}" class="greenTexttoday bigText" />
 				<!-- <Text text="{eshipjetModel>/TodayShipmentsLength}" class="todayscssNumber sapUiTinyMarginBegin " /> -->
 			</HBox>
 
